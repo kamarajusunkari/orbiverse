@@ -1,21 +1,14 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { servicesData, CATEGORIES_LIST, ServiceCategoryKey } from "@/data/services";
+import { servicesData, CATEGORIES_LIST } from "@/data/services";
 import { ArrowRight, Check, XCircle, Sparkles, ExternalLink, ArrowUpRight, Layers } from "lucide-react";
 
 export default function ServicesPage() {
-  const [activeCategory, setActiveCategory] = useState<"all" | ServiceCategoryKey>("all");
-
-  const filteredServices =
-    activeCategory === "all"
-      ? servicesData
-      : servicesData.filter((s) => s.categoryKey === activeCategory);
-
   return (
     <>
       <Navbar />
@@ -61,67 +54,34 @@ export default function ServicesPage() {
           </div>
         </section>
 
-        {/* CATEGORY FILTER BAR (STICKY) */}
-        <section className="sticky top-20 z-40 bg-[var(--bg-color)]/95 backdrop-blur-md border-b border-[var(--border-color)] py-4">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap items-center gap-2">
-            <button
-              onClick={() => setActiveCategory("all")}
-              className={`px-4 py-2 rounded-full text-xs font-bold transition-all cursor-pointer ${
-                activeCategory === "all"
-                  ? "bg-[#101b96] text-white shadow-xs dark:bg-[#7d8eff] dark:text-black"
-                  : "bg-[var(--surface-alt)] text-[var(--text-muted)] hover:text-[var(--text-main)]"
-              }`}
-            >
-              All Services ({servicesData.length})
-            </button>
-
-            {CATEGORIES_LIST.map((cat) => {
-              const count = servicesData.filter((s) => s.categoryKey === cat.key).length;
-              const isActive = activeCategory === cat.key;
-              return (
-                <button
-                  key={cat.key}
-                  onClick={() => setActiveCategory(cat.key)}
-                  className={`px-4 py-2 rounded-full text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
-                    isActive
-                      ? "bg-[#101b96] text-white shadow-xs dark:bg-[#7d8eff] dark:text-black"
-                      : "bg-[var(--surface-alt)] text-[var(--text-muted)] hover:text-[var(--text-main)]"
-                  }`}
-                >
-                  <span>{cat.label}</span>
-                  <span className={`text-[10px] px-1.5 py-0.2 rounded-full ${
-                    isActive ? "bg-white/20 text-white dark:text-black dark:bg-black/20" : "bg-neutral-200/70 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400"
-                  }`}>
-                    {count}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
-        </section>
-
-        {/* SERVICES LIST (CATEGORY-WISE) */}
-        <section className="py-16">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+        {/* SERVICES LIST (CATEGORY-WISE: HEADING -> CARDS -> NEXT HEADING -> CARDS) */}
+        <section className="py-20 sm:py-28">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24 sm:space-y-32">
             
-            {/* When viewing All or a specific category, render category headers */}
-            {CATEGORIES_LIST.filter(cat => activeCategory === "all" || activeCategory === cat.key).map((category) => {
+            {CATEGORIES_LIST.map((category, catIndex) => {
               const categoryServices = servicesData.filter((s) => s.categoryKey === category.key);
               if (categoryServices.length === 0) return null;
 
               return (
-                <div key={category.key} className="space-y-8">
-                  {/* Category Section Header */}
-                  <div className="pb-4 border-b border-[var(--border-color)] flex flex-col sm:flex-row sm:items-end justify-between gap-2">
+                <div key={category.key} id={`category-${category.key}`} className="scroll-mt-28">
+                  {/* Category-Wise Heading Banner */}
+                  <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-6 mb-10 sm:mb-12 border-b-2 border-neutral-200 dark:border-neutral-800">
                     <div>
-                      <span className="text-xs font-mono font-bold tracking-widest uppercase text-[#101b96] dark:text-[#7d8eff] block mb-1">
-                        {category.badge}
-                      </span>
-                      <h2 className="text-2xl sm:text-3xl font-black text-[var(--text-main)]">
+                      <div className="flex items-center gap-2.5 mb-2.5">
+                        <span className="font-mono font-black text-xs sm:text-sm text-[#101b96] dark:text-[#7d8eff] tracking-wider">
+                          ( 0{catIndex + 1} )
+                        </span>
+                        <span className="inline-block px-3 py-0.5 rounded-full text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider bg-blue-50 dark:bg-blue-950/80 text-[#101b96] dark:text-[#93c5fd] border border-blue-200/60 dark:border-blue-800/60">
+                          {category.badge}
+                        </span>
+                      </div>
+
+                      <h2 className="font-heading font-black text-2xl sm:text-4xl text-[var(--text-main)] tracking-tight">
                         {category.label}
                       </h2>
                     </div>
-                    <p className="text-xs sm:text-sm text-[var(--text-muted)]">
+
+                    <p className="text-xs sm:text-sm font-medium text-[var(--text-muted)] max-w-md leading-relaxed">
                       {category.tagline} ({categoryServices.length} {categoryServices.length === 1 ? 'service' : 'services'})
                     </p>
                   </div>
