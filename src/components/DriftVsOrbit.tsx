@@ -8,7 +8,7 @@ export default function DriftVsOrbit() {
 
   return (
     <div className="w-full py-12">
-      <div className="text-center max-w-3xl mx-auto mb-10">
+      <div className="text-center max-w-3xl mx-auto mb-10 reveal-fade-up">
         <span className="text-xs font-bold tracking-widest uppercase text-[var(--accent-light)] mb-2 inline-block">
           The Fundamental Shift
         </span>
@@ -52,7 +52,7 @@ export default function DriftVsOrbit() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
         {/* DRIFT CARD */}
         {(activeTab === "both" || activeTab === "drift") && (
-          <div className="border border-red-200 dark:border-red-950/60 bg-red-50/20 dark:bg-red-950/10 rounded-2xl p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden transition-all">
+          <div className="border border-red-200 dark:border-red-950/60 bg-red-50/20 dark:bg-red-950/10 rounded-2xl p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden transition-all reveal-fade-right delay-100">
             <div className="absolute top-4 right-4 px-2.5 py-1 rounded-md bg-red-100 dark:bg-red-900/40 text-red-700 dark:text-red-300 text-[11px] font-bold tracking-wider uppercase">
               How most brands run it
             </div>
@@ -107,7 +107,7 @@ export default function DriftVsOrbit() {
 
         {/* ORBIT CARD */}
         {(activeTab === "both" || activeTab === "orbit") && (
-          <div className="border-2 border-[var(--accent-light)] bg-[var(--surface)] rounded-2xl p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden shadow-lg transition-all">
+          <div className="border-2 border-[var(--accent-light)] bg-[var(--surface)] rounded-2xl p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden shadow-lg transition-all reveal-fade-left delay-200">
             <div className="absolute top-4 right-4 px-2.5 py-1 rounded-md bg-[var(--accent-light)] text-white text-[11px] font-bold tracking-wider uppercase flex items-center gap-1">
               <Sparkles className="w-3 h-3" />
               How Orbiverse runs it

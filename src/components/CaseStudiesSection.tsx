@@ -207,7 +207,7 @@ export default function CaseStudiesSection() {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-indigo-500/5 dark:bg-indigo-500/10 rounded-full blur-[120px] pointer-events-none" />
 
       {/* Section Header */}
-      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 mb-12 sm:mb-16 text-center">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 mb-12 sm:mb-16 text-center reveal-fade-up">
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#f3eeff] dark:bg-[#231b44] text-[#6d28d9] dark:text-[#c4b5fd] text-xs font-semibold mb-4 border border-[#e9d5ff]/60 dark:border-[#4c1d95]/40 shadow-2xs">
           <Sparkles className="w-3.5 h-3.5 text-[#10b981]" />
           <span>PROVEN IMPACT &amp; CASE STUDIES</span>
@@ -219,7 +219,7 @@ export default function CaseStudiesSection() {
             Delivers Results
           </span>
         </h2>
-        <p className="text-base sm:text-lg text-[var(--text-muted)] max-w-2xl mx-auto mt-4">
+        <p className="text-base sm:text-lg text-[var(--text-muted)] max-w-2xl mx-auto mt-4 reveal-fade-up delay-100">
           Click any card to inspect full architecture blueprints, conversion strategies, and verified enterprise metrics.
         </p>
       </div>
@@ -227,7 +227,7 @@ export default function CaseStudiesSection() {
       {/* ==================================================================== */}
       {/* DESKTOP INFINITE CONTINUOUS MARQUEE CAROUSEL                         */}
       {/* ==================================================================== */}
-      <div className="hidden md:flex w-full overflow-hidden relative items-center py-4">
+      <div className="hidden md:flex w-full overflow-hidden relative items-center py-4 reveal-fade-in delay-200">
         {/* Left & Right Edge Fades */}
         <div className="absolute top-0 bottom-0 left-0 w-32 bg-gradient-to-r from-[var(--bg-color)] to-transparent z-10 pointer-events-none" />
         <div className="absolute top-0 bottom-0 right-0 w-32 bg-gradient-to-l from-[var(--bg-color)] to-transparent z-10 pointer-events-none" />

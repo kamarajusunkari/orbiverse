@@ -1,14 +1,88 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight, CheckCircle2, Sparkles, Layers } from "lucide-react";
-import { servicesData, CATEGORIES_LIST, ServiceItem } from "@/data/services";
+import { ArrowUpRight, Sparkles, Layers, ArrowRight } from "lucide-react";
+
+export interface BenefitCard {
+  number: string;
+  title: string;
+  desc: string;
+  image: string;
+  ctaHref: string;
+}
+
+// 1. EXACT BENEFIT CARDS FROM USER REFERENCE SCREENSHOT
+const PARTNER_BENEFITS: BenefitCard[] = [
+  {
+    number: "01",
+    title: "Hit sustainability targets",
+    desc: "This is a complete, comprehensive service. We manage the whole process end-to-end to deliver a future-focused solution. From initial design to ongoing operation and customer service.",
+    image: "/bdb38855-3775-42ba-8d23-f32c41f2e827.webp",
+    ctaHref: "/drift-audit",
+  },
+  {
+    number: "02",
+    title: "Generate revenue",
+    desc: "We understand this is a significant investment for you. Our expert team will go the extra mile to successfully monetise your parking infrastructure, giving visibility on how you achieve a return on your investment.",
+    image: "/who we are.webp",
+    ctaHref: "/drift-audit",
+  },
+  {
+    number: "03",
+    title: "Entice more customers",
+    desc: "Our guidance around hardware choices ensures you only pay once for your investment. We will use all our experience to help you minimise your initial capital outlay. This includes working to secure government grant funding, bringing you closer to your long-term sustainable goals.",
+    image: "/679b7310-0afd-42d1-953b-94209bbf2c6f.png",
+    ctaHref: "/drift-audit",
+  },
+];
+
+// 2. FLAGSHIP SERVICES CARDS (MATCHING SAME CLEAN SCREENSHOT LAYOUT)
+const FLAGSHIP_SERVICES: BenefitCard[] = [
+  {
+    number: "01",
+    title: "Performance Marketing & Paid Ads",
+    desc: "We construct data-driven ad campaigns across Google Search, Meta (Instagram & Facebook), YouTube, and LinkedIn. Every dollar of ad spend is measured on one metric: net pipeline revenue.",
+    image: "/bdb38855-3775-42ba-8d23-f32c41f2e827.webp",
+    ctaHref: "/drift-audit",
+  },
+  {
+    number: "02",
+    title: "Conversion Rate Optimization (CRO)",
+    desc: "We diagnose friction across your entire checkout and lead funnel. Through high-converting landing page engineering and multi-variant A/B copy tests, we turn more traffic into reliable revenue.",
+    image: "/who we are.webp",
+    ctaHref: "/drift-audit",
+  },
+  {
+    number: "03",
+    title: "Technical SEO & Organic Search Authority",
+    desc: "Every customer who finds you on Google search is one you didn't pay a click for. Core Web Vitals audits, high-intent keyword capture, and authoritative backlink architectures for durable search dominance.",
+    image: "/679b7310-0afd-42d1-953b-94209bbf2c6f.png",
+    ctaHref: "/drift-audit",
+  },
+  {
+    number: "04",
+    title: "Brand Positioning & High-Velocity Creative Engine",
+    desc: "Positioning, messaging, and viral short-form creative batches tested weekly. Deploy scroll-stopping hooks and high-converting copy that give customers an unmistakable reason to choose you.",
+    image: "/158bb487-34c7-4e8d-a53f-b72845659451.webp",
+    ctaHref: "/drift-audit",
+  },
+  {
+    number: "05",
+    title: "Autonomous AI & CRM Pipeline Velocity",
+    desc: "Speed to lead is everything. We integrate autonomous AI lead-qualification workflows, instant WhatsApp/SMS notification triggers, and unified attribution dashboards for zero human lag.",
+    image: "/case study (8).png",
+    ctaHref: "/drift-audit",
+  },
+];
 
 export default function ServicesStackSection() {
   const containerRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [activeTab, setActiveTab] = useState<"benefits" | "services">("benefits");
+
+  const activeCards = activeTab === "benefits" ? PARTNER_BENEFITS : FLAGSHIP_SERVICES;
 
   // Smooth scroll depth: dynamically adjusts scale and brightness of pinned cards
   useEffect(() => {
@@ -27,10 +101,10 @@ export default function ServicesStackSection() {
               const cardRect = card.getBoundingClientRect();
 
               // When the next card stacks over this card, scale it down slightly
-              if (nextCardRect.top <= cardRect.top + 70) {
-                const overlap = Math.max(0, Math.min(1, (cardRect.top + 70 - nextCardRect.top) / 300));
+              if (nextCardRect.top <= cardRect.top + 60) {
+                const overlap = Math.max(0, Math.min(1, (cardRect.top + 60 - nextCardRect.top) / 260));
                 const scale = 1 - overlap * 0.045;
-                const brightness = 1 - overlap * 0.08;
+                const brightness = 1 - overlap * 0.07;
                 card.style.transform = `scale(${scale})`;
                 card.style.filter = `brightness(${brightness})`;
               } else {
@@ -48,7 +122,7 @@ export default function ServicesStackSection() {
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [activeTab]);
 
   return (
     <section
@@ -59,162 +133,115 @@ export default function ServicesStackSection() {
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* ==================================================================== */}
-        {/* MAIN SECTION HEADER (MATCHING USER REFERENCE DESIGN)                 */}
+        {/* SECTION HEADER (EXACT 1:1 MATCH TO USER REFERENCE SCREENSHOT)        */}
         {/* ==================================================================== */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16 sm:mb-20 pb-8 border-b border-neutral-200/80 dark:border-neutral-800/80">
-          <div>
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-blue-50 dark:bg-blue-950/60 text-[#101b96] dark:text-[#93c5fd] border border-blue-200/60 dark:border-blue-800/60 mb-3">
-              <Layers className="w-3.5 h-3.5" />
-              <span>Full-Stack Capabilities · 5 Core Disciplines</span>
-            </div>
-            <h2 className="font-heading font-black tracking-[-0.035em] text-3xl sm:text-4xl lg:text-[46px] text-neutral-900 dark:text-white leading-[1.12]">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 sm:mb-16 pb-8 border-b border-neutral-200 dark:border-neutral-800">
+          <div className="reveal-fade-right">
+            <h2 className="font-heading font-black tracking-[-0.03em] text-3xl sm:text-4xl lg:text-[46px] text-neutral-900 dark:text-white leading-[1.14]">
               Enjoy all these benefits<br className="hidden sm:inline" /> when you partner with us.
             </h2>
+
+            {/* Subtle Tab Switcher: Partner Benefits (Reference) vs Flagship Services */}
+            <div className="flex items-center gap-2 mt-4">
+              <button
+                onClick={() => setActiveTab("benefits")}
+                className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all ${
+                  activeTab === "benefits"
+                    ? "bg-[#101b96] text-white shadow-xs"
+                    : "bg-neutral-100 dark:bg-white/10 text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white"
+                }`}
+              >
+                Partner Benefits (3)
+              </button>
+              <button
+                onClick={() => setActiveTab("services")}
+                className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all ${
+                  activeTab === "services"
+                    ? "bg-[#101b96] text-white shadow-xs"
+                    : "bg-neutral-100 dark:bg-white/10 text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white"
+                }`}
+              >
+                Flagship Services (5)
+              </button>
+            </div>
           </div>
 
-          <div className="flex flex-col items-start md:items-end justify-end flex-shrink-0">
+          <div className="flex flex-col items-start md:items-end justify-end flex-shrink-0 reveal-fade-left delay-100">
             <Link
               href="/drift-audit"
-              className="inline-flex items-center gap-1.5 text-sm sm:text-base font-bold text-neutral-900 dark:text-white border-b-2 border-neutral-900 dark:border-white pb-0.5 hover:text-[#101b96] dark:hover:text-[#7d8eff] hover:border-[#101b96] dark:hover:border-[#7d8eff] transition-all group"
+              className="inline-flex items-center gap-1.5 text-sm sm:text-base font-bold text-neutral-900 dark:text-white underline underline-offset-8 decoration-neutral-900 dark:decoration-white hover:text-[#101b96] dark:hover:text-[#7d8eff] hover:decoration-[#101b96] dark:hover:decoration-[#7d8eff] transition-all group"
             >
               <span>Ready to get started? Contact us</span>
-              <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </Link>
           </div>
         </div>
 
         {/* ==================================================================== */}
-        {/* CATEGORY-WISE SECTIONS: CATEGORY HEADING -> CARDS -> NEXT CATEGORY   */}
+        {/* STACKING CARDS CONTAINER (MATCHING REFERENCE ROW LAYOUT & STACK DEPTH) */}
         {/* ==================================================================== */}
-        <div className="space-y-24 sm:space-y-32">
-          {CATEGORIES_LIST.map((category, catIndex) => {
-            const categoryServices = servicesData.filter((s) => s.categoryKey === category.key);
-            if (categoryServices.length === 0) return null;
+        <div className="relative flex flex-col gap-6 sm:gap-8 pb-12">
+          {activeCards.map((item, idx) => {
+            const topOffset = 100 + idx * 30;
+            const delayClass = idx === 0 ? "delay-100" : idx === 1 ? "delay-200" : idx === 2 ? "delay-300" : "delay-400";
 
             return (
               <div
-                key={category.key}
-                id={`cat-${category.key}`}
-                className="scroll-mt-28"
+                key={item.number + item.title}
+                ref={(el) => {
+                  cardRefs.current[idx] = el;
+                }}
+                style={{
+                  top: `calc(${topOffset}px)`,
+                  zIndex: 10 + idx,
+                }}
+                className={`sticky rounded-2xl sm:rounded-3xl bg-white dark:bg-[#0c0a1d] border border-neutral-200/90 dark:border-neutral-800/90 p-6 sm:p-8 lg:p-10 shadow-[0_4px_24px_rgba(0,0,0,0.05)] dark:shadow-[0_12px_40px_rgba(0,0,0,0.6)] hover:shadow-xl transition-all duration-300 group reveal-fade-up ${delayClass}`}
               >
-                {/* 1. Category-Wise Heading Banner */}
-                <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-6 mb-8 sm:mb-12 border-b-2 border-neutral-200 dark:border-neutral-800">
-                  <div>
-                    <div className="flex items-center gap-2.5 mb-2.5">
-                      <span className="font-mono font-black text-xs sm:text-sm text-[#101b96] dark:text-[#7d8eff] tracking-wider">
-                        ( 0{catIndex + 1} )
-                      </span>
-                      <span className="inline-block px-3 py-0.5 rounded-full text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider bg-blue-50 dark:bg-blue-950/80 text-[#101b96] dark:text-[#93c5fd] border border-blue-200/60 dark:border-blue-800/60">
-                        {category.badge}
-                      </span>
-                    </div>
-
-                    <h3 className="font-heading font-black text-2xl sm:text-3xl lg:text-4xl text-neutral-900 dark:text-white tracking-tight">
-                      {category.label}
-                    </h3>
+                <div className="flex flex-col md:flex-row items-start md:items-center gap-6 sm:gap-8 lg:gap-14">
+                  
+                  {/* Left: Thumbnail Image (Exact Reference Proportions & Radius) */}
+                  <div className="relative w-full sm:w-48 md:w-56 lg:w-64 h-44 sm:h-36 md:h-40 rounded-2xl overflow-hidden shadow-xs border border-neutral-200/80 dark:border-white/10 flex-shrink-0 reveal-fade-right delay-150">
+                    <Image
+                      src={item.image}
+                      alt={item.title}
+                      fill
+                      className="object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
+                      sizes="(max-width: 768px) 100vw, 260px"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
                   </div>
 
-                  <p className="text-xs sm:text-sm font-medium text-neutral-600 dark:text-neutral-400 max-w-lg leading-relaxed">
-                    {category.tagline}
-                  </p>
-                </div>
+                  {/* Middle: Step Number (Large, Clean Font) */}
+                  <div className="flex-shrink-0 flex items-center md:px-2 reveal-scale-up delay-200">
+                    <span className="font-mono font-bold text-3xl sm:text-4xl lg:text-[44px] text-neutral-900 dark:text-white tracking-tight">
+                      {item.number}
+                    </span>
+                  </div>
 
-                {/* 2. Stacking Cards for this Category */}
-                <div className="relative flex flex-col gap-8 sm:gap-10">
-                  {categoryServices.map((service, cardIdx) => {
-                    // Global index for ref tracking
-                    const globalIdx = servicesData.findIndex((s) => s.id === service.id);
-                    // Sticky top offset relative to header
-                    const topOffset = 100 + cardIdx * 28;
+                  {/* Right: Content (Clean Title & Description Matching Screenshot) */}
+                  <div className="flex-1 flex flex-col justify-center reveal-fade-left delay-200">
+                    <h3 className="font-heading font-bold text-xl sm:text-2xl lg:text-[28px] text-neutral-900 dark:text-white tracking-tight leading-snug">
+                      {item.title}
+                    </h3>
+                    <p className="text-sm sm:text-base text-neutral-600 dark:text-neutral-400 leading-relaxed font-normal mt-2.5 max-w-2xl">
+                      {item.desc}
+                    </p>
+                  </div>
 
-                    return (
-                      <div
-                        key={service.id}
-                        ref={(el) => {
-                          cardRefs.current[globalIdx] = el;
-                        }}
-                        style={{
-                          top: `calc(${topOffset}px)`,
-                          zIndex: 10 + cardIdx,
-                        }}
-                        className="sticky rounded-3xl sm:rounded-[36px] bg-white dark:bg-[#0c0a1d] border border-neutral-200/90 dark:border-neutral-800/90 p-6 sm:p-8 lg:p-10 shadow-[0_-12px_36px_rgba(0,0,0,0.06)] dark:shadow-[0_-20px_50px_rgba(0,0,0,0.65)] hover:shadow-2xl transition-all duration-300 group"
-                      >
-                        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-10 items-center">
-                          
-                          {/* Left: Thumbnail Image */}
-                          <div className="md:col-span-4 lg:col-span-3.5 relative w-full h-48 sm:h-56 lg:h-60 rounded-2xl overflow-hidden shadow-sm border border-neutral-200/80 dark:border-white/10 flex-shrink-0">
-                            <Image
-                              src={service.image}
-                              alt={service.title}
-                              fill
-                              className="object-cover object-center group-hover:scale-106 transition-transform duration-700 ease-out"
-                              sizes="(max-width: 768px) 100vw, 360px"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent pointer-events-none" />
-                          </div>
-
-                          {/* Middle: Step Number */}
-                          <div className="md:col-span-1.5 flex items-center md:justify-center">
-                            <span className="font-mono font-black text-3xl sm:text-4xl lg:text-5xl text-neutral-900 dark:text-white tracking-tight">
-                              {service.number}
-                            </span>
-                          </div>
-
-                          {/* Right: Content & Action */}
-                          <div className="md:col-span-6.5 lg:col-span-7 flex flex-col justify-between">
-                            <div>
-                              {/* Category Badge */}
-                              <div className="flex items-center gap-2 mb-2">
-                                <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-[#101b96] dark:text-[#93c5fd]">
-                                  {service.categoryLabel}
-                                </span>
-                              </div>
-
-                              <div className="flex items-center justify-between gap-4">
-                                <h4 className="font-heading font-black text-2xl sm:text-3xl text-neutral-900 dark:text-white tracking-tight leading-snug">
-                                  {service.title}
-                                </h4>
-                                
-                                <Link
-                                  href={service.ctaHref}
-                                  className="w-10 h-10 rounded-full bg-neutral-100 dark:bg-white/10 hover:bg-[#101b96] hover:text-white dark:hover:bg-[#7d8eff] dark:hover:text-black flex items-center justify-center flex-shrink-0 text-neutral-700 dark:text-neutral-200 transition-all duration-300 group/btn"
-                                  aria-label={`Learn more about ${service.title}`}
-                                >
-                                  <ArrowUpRight className="w-5 h-5 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
-                                </Link>
-                              </div>
-
-                              <p className="text-xs sm:text-sm font-semibold text-[#2563eb] dark:text-[#60a5fa] mt-1.5">
-                                {service.subtitle}
-                              </p>
-
-                              <p className="text-sm sm:text-[15px] text-neutral-600 dark:text-neutral-400 leading-relaxed font-normal mt-3 max-w-2xl">
-                                {service.desc}
-                              </p>
-                            </div>
-
-                            {/* Deliverable Tags Row */}
-                            <div className="flex flex-wrap gap-2 mt-5 pt-4 border-t border-neutral-100 dark:border-white/5">
-                              {service.deliverables.map((item, i) => (
-                                <span
-                                  key={i}
-                                  className="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1 rounded-full bg-neutral-100 dark:bg-white/5 text-neutral-700 dark:text-neutral-300"
-                                >
-                                  <CheckCircle2 className="w-3.5 h-3.5 text-[#10b981]" />
-                                  <span>{item}</span>
-                                </span>
-                              ))}
-                            </div>
-                          </div>
-
-                        </div>
-                      </div>
-                    );
-                  })}
                 </div>
               </div>
             );
           })}
+        </div>
+
+        {/* BOTTOM LINK: VIEW COMPLETE 15 SERVICES ORGANIZED CATEGORY-WISE */}
+        <div className="mt-8 text-center reveal-fade-up delay-200">
+          <Link
+            href="/services"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold border border-neutral-300 dark:border-neutral-700 text-neutral-900 dark:text-white hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors shadow-2xs"
+          >
+            <span>Explore all 15 services organized by category</span>
+            <ArrowRight className="w-4 h-4" />
+          </Link>
         </div>
 
       </div>

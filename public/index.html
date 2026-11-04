@@ -1357,6 +1357,66 @@
       background: rgba(255,255,255,0.06);
     }
 
+    /* ====================================================================
+       SCROLL REVEAL ENTRANCE ANIMATIONS (FADE UP, FADE LEFT, FADE RIGHT, SCALE)
+       ==================================================================== */
+    .reveal-fade-up {
+      opacity: 0;
+      transform: translate3d(0, 36px, 0);
+      transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+      backface-visibility: hidden;
+    }
+    .reveal-fade-left {
+      opacity: 0;
+      transform: translate3d(40px, 0, 0);
+      transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+      backface-visibility: hidden;
+    }
+    .reveal-fade-right {
+      opacity: 0;
+      transform: translate3d(-40px, 0, 0);
+      transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+      backface-visibility: hidden;
+    }
+    .reveal-scale-up {
+      opacity: 0;
+      transform: scale(0.94) translate3d(0, 24px, 0);
+      transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+      backface-visibility: hidden;
+    }
+    .reveal-fade-in {
+      opacity: 0;
+      transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity;
+    }
+    .reveal-fade-up.is-visible,
+    .reveal-fade-left.is-visible,
+    .reveal-fade-right.is-visible,
+    .reveal-scale-up.is-visible,
+    .reveal-fade-in.is-visible {
+      opacity: 1 !important;
+      transform: translate3d(0, 0, 0) scale(1) !important;
+    }
+    .delay-75 { transition-delay: 75ms !important; }
+    .delay-100 { transition-delay: 100ms !important; }
+    .delay-150 { transition-delay: 150ms !important; }
+    .delay-200 { transition-delay: 200ms !important; }
+    .delay-250 { transition-delay: 250ms !important; }
+    .delay-300 { transition-delay: 300ms !important; }
+    .delay-400 { transition-delay: 400ms !important; }
+    .delay-500 { transition-delay: 500ms !important; }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal-fade-up, .reveal-fade-left, .reveal-fade-right, .reveal-scale-up, .reveal-fade-in {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -1645,401 +1705,86 @@
     </section>
 
     <!-- ====================================================================
-         SECTION: SERVICES STACKING CARDS (CATEGORY-WISE HEADING & CARDS)
+         SECTION: SERVICES STACKING CARDS (MATCHING REFERENCE SCREENSHOT)
          ==================================================================== -->
     <section class="services-stack-section" id="services">
       <div class="about-container">
         
-        <!-- Main Header -->
-        <div class="services-stack-header">
+        <!-- Main Header (Exact 1:1 Reference Screenshot Layout) -->
+        <div class="services-stack-header reveal-fade-up">
           <div>
-            <div style="display: inline-flex; align-items: center; gap: 8px; padding: 4px 14px; border-radius: 999px; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; background: rgba(16, 27, 150, 0.08); color: #101b96; margin-bottom: 12px; border: 1px solid rgba(16, 27, 150, 0.15);">
-              <span>⚡ FULL-STACK CAPABILITIES · 5 CORE DISCIPLINES</span>
-            </div>
             <h2 class="services-stack-title-h2">
               Enjoy all these benefits<br>when you partner with us.
             </h2>
           </div>
           <div>
-            <a href="/drift-audit" class="services-stack-link">
+            <a href="/drift-audit" class="services-stack-link reveal-fade-left delay-100">
               <span>Ready to get started? Contact us</span>
-              <span>↗</span>
             </a>
           </div>
         </div>
 
-        <!-- CATEGORY-WISE SECTIONS: HEADING -> CARDS -> NEXT HEADING -> CARDS -->
-        <div style="display: flex; flex-direction: column; gap: 96px;">
+        <!-- STACKING CARDS CONTAINER (1:1 SCREENSHOT CARDS & STACK ANIMATION) -->
+        <div class="services-stack-container">
 
-          <!-- ================= CATEGORY 01 ================= -->
-          <div class="service-category-block" id="cat-paid-media">
-            <div class="service-cat-heading-row">
+          <!-- Card 01 -->
+          <div class="service-stack-card reveal-fade-up delay-100" style="top: 100px; z-index: 11;">
+            <div class="service-stack-card-inner">
+              <div class="service-stack-img-wrap">
+                <img src="/bdb38855-3775-42ba-8d23-f32c41f2e827.webp" alt="Hit sustainability targets" loading="lazy" />
+              </div>
+              <div class="service-stack-num">01</div>
               <div>
-                <div class="cat-pill-row">
-                  <span class="cat-num-pill">( 01 )</span>
-                  <span class="service-cat-badge">PAID MEDIA &amp; PPC</span>
-                </div>
-                <h3 class="service-cat-title">Paid Media &amp; PPC</h3>
-              </div>
-              <p class="service-cat-tagline">High-ROAS Ad Campaigns, Conversion Funnels &amp; Scaling</p>
-            </div>
-            
-            <div class="services-stack-container">
-              <!-- Card 01 -->
-              <div class="service-stack-card" style="top: 100px; z-index: 11;">
-                <div class="service-stack-card-inner">
-                  <div class="service-stack-img-wrap">
-                    <img src="/bdb38855-3775-42ba-8d23-f32c41f2e827.webp" alt="Performance Marketing" loading="lazy" />
-                  </div>
-                  <div class="service-stack-num">01</div>
-                  <div>
-                    <span class="service-cat-badge">PAID MEDIA &amp; PPC</span>
-                    <h4 class="service-stack-title">Performance Marketing &amp; Paid Ads</h4>
-                    <div class="service-stack-sub">Turn cold traffic into high-intent buyers with verified ROAS</div>
-                    <p class="service-stack-desc">
-                      We construct data-driven ad campaigns across Google Search, Meta (Instagram &amp; Facebook), YouTube, and LinkedIn. Every dollar of ad spend is measured on one metric: net pipeline revenue.
-                    </p>
-                    <div class="service-stack-tags">
-                      <span class="service-tag">✓ Google Search &amp; Shopping</span>
-                      <span class="service-tag">✓ Meta Scaling</span>
-                      <span class="service-tag">✓ Precision Retargeting</span>
-                      <span class="service-tag">✓ Verified ROAS</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Card 02 -->
-              <div class="service-stack-card" style="top: 128px; z-index: 12;">
-                <div class="service-stack-card-inner">
-                  <div class="service-stack-img-wrap">
-                    <img src="/who we are.webp" alt="CRO & Funnels" loading="lazy" />
-                  </div>
-                  <div class="service-stack-num">02</div>
-                  <div>
-                    <span class="service-cat-badge">PAID MEDIA &amp; PPC</span>
-                    <h4 class="service-stack-title">Conversion Rate Optimization (CRO)</h4>
-                    <div class="service-stack-sub">A faster page with a clearer offer improves every channel at once</div>
-                    <p class="service-stack-desc">
-                      We diagnose friction across your entire checkout and lead funnel. Through high-converting landing page engineering, multi-variant A/B copy tests, and behavioral heatmaps, we turn more of your existing traffic into revenue.
-                    </p>
-                    <div class="service-stack-tags">
-                      <span class="service-tag">✓ Landing Page Engineering</span>
-                      <span class="service-tag">✓ A/B Split Testing</span>
-                      <span class="service-tag">✓ Frictionless UI/UX</span>
-                      <span class="service-tag">✓ Heatmap Audits</span>
-                    </div>
-                  </div>
-                </div>
+                <h3 class="service-stack-title">Hit sustainability targets</h3>
+                <p class="service-stack-desc">
+                  This is a complete, comprehensive service. We manage the whole process end-to-end to deliver a future-focused solution. From initial design to ongoing operation and customer service.
+                </p>
               </div>
             </div>
           </div>
 
-          <!-- ================= CATEGORY 02 ================= -->
-          <div class="service-category-block" id="cat-development">
-            <div class="service-cat-heading-row">
+          <!-- Card 02 -->
+          <div class="service-stack-card reveal-fade-up delay-200" style="top: 130px; z-index: 12;">
+            <div class="service-stack-card-inner">
+              <div class="service-stack-img-wrap">
+                <img src="/who we are.webp" alt="Generate revenue" loading="lazy" />
+              </div>
+              <div class="service-stack-num">02</div>
               <div>
-                <div class="cat-pill-row">
-                  <span class="cat-num-pill">( 02 )</span>
-                  <span class="service-cat-badge">WEB &amp; SOFTWARE DEV</span>
-                </div>
-                <h3 class="service-cat-title">Web &amp; Software Development</h3>
-              </div>
-              <p class="service-cat-tagline">Custom Web Apps, Headless E-Commerce &amp; Enterprise Cloud Infrastructure</p>
-            </div>
-            
-            <div class="services-stack-container">
-              <!-- Card 03 -->
-              <div class="service-stack-card" style="top: 100px; z-index: 11;">
-                <div class="service-stack-card-inner">
-                  <div class="service-stack-img-wrap">
-                    <img src="/case study (4).png" alt="Web & Mobile App Development" loading="lazy" />
-                  </div>
-                  <div class="service-stack-num">03</div>
-                  <div>
-                    <span class="service-cat-badge">WEB &amp; SOFTWARE DEV</span>
-                    <h4 class="service-stack-title">Web &amp; Mobile App Development</h4>
-                    <div class="service-stack-sub">Scalable, secure digital products built for millions of concurrent users</div>
-                    <p class="service-stack-desc">
-                      From custom SaaS platforms to native mobile apps (iOS &amp; Android) and high-concurrency portals, our software engineering team builds robust, fault-tolerant digital architectures.
-                    </p>
-                    <div class="service-stack-tags">
-                      <span class="service-tag">✓ Full-Stack Next.js &amp; React</span>
-                      <span class="service-tag">✓ iOS &amp; Android Apps</span>
-                      <span class="service-tag">✓ Microservice APIs</span>
-                      <span class="service-tag">✓ CI/CD Pipelines</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Card 04 -->
-              <div class="service-stack-card" style="top: 128px; z-index: 12;">
-                <div class="service-stack-card-inner">
-                  <div class="service-stack-img-wrap">
-                    <img src="/case study (2).png" alt="E-Commerce & Digital Storefronts" loading="lazy" />
-                  </div>
-                  <div class="service-stack-num">04</div>
-                  <div>
-                    <span class="service-cat-badge">WEB &amp; SOFTWARE DEV</span>
-                    <h4 class="service-stack-title">E-Commerce &amp; Digital Storefronts</h4>
-                    <div class="service-stack-sub">High-speed transactional storefronts engineered for maximum order value</div>
-                    <p class="service-stack-desc">
-                      We engineer headless Shopify and custom Next.js e-commerce platforms featuring instant search, automated inventory sync, personalized product recommendations, and 1-click checkouts.
-                    </p>
-                    <div class="service-stack-tags">
-                      <span class="service-tag">✓ Headless Shopify Stores</span>
-                      <span class="service-tag">✓ 1-Click Checkouts</span>
-                      <span class="service-tag">✓ AI Recommendation Engines</span>
-                      <span class="service-tag">✓ Inventory ERP Sync</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Card 05 -->
-              <div class="service-stack-card" style="top: 156px; z-index: 13;">
-                <div class="service-stack-card-inner">
-                  <div class="service-stack-img-wrap">
-                    <img src="/case study.png" alt="Enterprise Cloud & DevOps" loading="lazy" />
-                  </div>
-                  <div class="service-stack-num">05</div>
-                  <div>
-                    <span class="service-cat-badge">WEB &amp; SOFTWARE DEV</span>
-                    <h4 class="service-stack-title">Enterprise Cloud &amp; DevOps</h4>
-                    <div class="service-stack-sub">Multi-region cloud infrastructure, serverless scale, and zero downtime</div>
-                    <p class="service-stack-desc">
-                      We configure, manage, and harden AWS and Google Cloud environments with automated container orchestration, auto-scaling clusters, and continuous deployment pipelines.
-                    </p>
-                    <div class="service-stack-tags">
-                      <span class="service-tag">✓ AWS &amp; Google Cloud</span>
-                      <span class="service-tag">✓ Docker &amp; Kubernetes</span>
-                      <span class="service-tag">✓ DDoS &amp; CDN Hardening</span>
-                      <span class="service-tag">✓ Zero Downtime Deployments</span>
-                    </div>
-                  </div>
-                </div>
+                <h3 class="service-stack-title">Generate revenue</h3>
+                <p class="service-stack-desc">
+                  We understand this is a significant investment for you. Our expert team will go the extra mile to successfully monetise your parking infrastructure, giving visibility on how you achieve a return on your investment.
+                </p>
               </div>
             </div>
           </div>
 
-          <!-- ================= CATEGORY 03 ================= -->
-          <div class="service-category-block" id="cat-seo">
-            <div class="service-cat-heading-row">
+          <!-- Card 03 -->
+          <div class="service-stack-card reveal-fade-up delay-300" style="top: 160px; z-index: 13;">
+            <div class="service-stack-card-inner">
+              <div class="service-stack-img-wrap">
+                <img src="/679b7310-0afd-42d1-953b-94209bbf2c6f.png" alt="Entice more customers" loading="lazy" />
+              </div>
+              <div class="service-stack-num">03</div>
               <div>
-                <div class="cat-pill-row">
-                  <span class="cat-num-pill">( 03 )</span>
-                  <span class="service-cat-badge">SEARCH ENGINE OPTIMIZATION</span>
-                </div>
-                <h3 class="service-cat-title">Search &amp; Organic Growth</h3>
-              </div>
-              <p class="service-cat-tagline">High-Intent Keyword Dominance, Core Web Vitals &amp; Local Maps</p>
-            </div>
-            
-            <div class="services-stack-container">
-              <!-- Card 06 -->
-              <div class="service-stack-card" style="top: 100px; z-index: 11;">
-                <div class="service-stack-card-inner">
-                  <div class="service-stack-img-wrap">
-                    <img src="/679b7310-0afd-42d1-953b-94209bbf2c6f.png" alt="SEO" loading="lazy" />
-                  </div>
-                  <div class="service-stack-num">06</div>
-                  <div>
-                    <span class="service-cat-badge">SEARCH ENGINE OPTIMIZATION</span>
-                    <h4 class="service-stack-title">Technical SEO &amp; Organic Authority</h4>
-                    <div class="service-stack-sub">Capture commercial search intent and lower blended CAC</div>
-                    <p class="service-stack-desc">
-                      Every customer who finds you on Google search is one you didn't pay a click for. We combine technical Core Web Vitals audits, high-intent keyword capture, and authoritative backlink architectures to secure durable search dominance.
-                    </p>
-                    <div class="service-stack-tags">
-                      <span class="service-tag">✓ Core Web Vitals Fixes</span>
-                      <span class="service-tag">✓ Commercial Keyword Capture</span>
-                      <span class="service-tag">✓ Programmatic SEO</span>
-                      <span class="service-tag">✓ Authority Backlinks</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Card 07 -->
-              <div class="service-stack-card" style="top: 128px; z-index: 12;">
-                <div class="service-stack-card-inner">
-                  <div class="service-stack-img-wrap">
-                    <img src="/case study (6).png" alt="Local Search & Multi-Location SEO" loading="lazy" />
-                  </div>
-                  <div class="service-stack-num">07</div>
-                  <div>
-                    <span class="service-cat-badge">SEARCH ENGINE OPTIMIZATION</span>
-                    <h4 class="service-stack-title">Local Search &amp; Multi-Location SEO</h4>
-                    <div class="service-stack-sub">Dominate Google Maps 3-Pack and capture high-intent localized searchers</div>
-                    <p class="service-stack-desc">
-                      For healthcare clinics, dental networks, retail chains, and regional brands, we optimize Google Business Profiles and local citation clusters to dominate local maps and nearby searches.
-                    </p>
-                    <div class="service-stack-tags">
-                      <span class="service-tag">✓ Google Maps 3-Pack</span>
-                      <span class="service-tag">✓ Multi-Location Sync</span>
-                      <span class="service-tag">✓ Review Automation Loops</span>
-                      <span class="service-tag">✓ Local Phone Call Tracking</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- ================= CATEGORY 04 ================= -->
-          <div class="service-category-block" id="cat-brand">
-            <div class="service-cat-heading-row">
-              <div>
-                <div class="cat-pill-row">
-                  <span class="cat-num-pill">( 04 )</span>
-                  <span class="service-cat-badge">BRANDING &amp; CREATIVE ENGINE</span>
-                </div>
-                <h3 class="service-cat-title">Brand &amp; Creative Content</h3>
-              </div>
-              <p class="service-cat-tagline">Positioning, Viral Short-Form Video Reels &amp; Influencer Marketing</p>
-            </div>
-            
-            <div class="services-stack-container">
-              <!-- Card 08 -->
-              <div class="service-stack-card" style="top: 100px; z-index: 11;">
-                <div class="service-stack-card-inner">
-                  <div class="service-stack-img-wrap">
-                    <img src="/about-illustration.png" alt="Brand Strategy & Visual Identity" loading="lazy" />
-                  </div>
-                  <div class="service-stack-num">08</div>
-                  <div>
-                    <span class="service-cat-badge">BRANDING &amp; CREATIVE ENGINE</span>
-                    <h4 class="service-stack-title">Brand Strategy &amp; Visual Identity</h4>
-                    <div class="service-stack-sub">Give people an unmistakable reason to choose you over every alternative</div>
-                    <p class="service-stack-desc">
-                      Positioning, messaging, naming, and visual identity designed to establish unmistakable market differentiation so every marketing dollar you spend starts with a massive trust advantage.
-                    </p>
-                    <div class="service-stack-tags">
-                      <span class="service-tag">✓ Market Positioning</span>
-                      <span class="service-tag">✓ Core Messaging Framework</span>
-                      <span class="service-tag">✓ Complete Visual Systems</span>
-                      <span class="service-tag">✓ Brand Guidelines</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Card 09 -->
-              <div class="service-stack-card" style="top: 128px; z-index: 12;">
-                <div class="service-stack-card-inner">
-                  <div class="service-stack-img-wrap">
-                    <img src="/158bb487-34c7-4e8d-a53f-b72845659451.webp" alt="Creative Engine & Video Reels" loading="lazy" />
-                  </div>
-                  <div class="service-stack-num">09</div>
-                  <div>
-                    <span class="service-cat-badge">BRANDING &amp; CREATIVE ENGINE</span>
-                    <h4 class="service-stack-title">Creative Engine &amp; Viral Video Reels</h4>
-                    <div class="service-stack-sub">High-velocity creative batches tested every single month to stop the scroll</div>
-                    <p class="service-stack-desc">
-                      Positioning, messaging, and high-velocity creative batches tested every single month. We deploy viral short-form video reels, conversion copywriting, and static hooks designed to stop the scroll and build lasting brand authority.
-                    </p>
-                    <div class="service-stack-tags">
-                      <span class="service-tag">✓ Monthly Creative Batches</span>
-                      <span class="service-tag">✓ Viral Video Reels &amp; TikToks</span>
-                      <span class="service-tag">✓ Conversion Copywriting</span>
-                      <span class="service-tag">✓ Winner Scaling</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Card 10 -->
-              <div class="service-stack-card" style="top: 156px; z-index: 13;">
-                <div class="service-stack-card-inner">
-                  <div class="service-stack-img-wrap">
-                    <img src="/eeff8f20-2abc-44ff-a060-11707deac2ea.webp" alt="Social Media & Influencer Marketing" loading="lazy" />
-                  </div>
-                  <div class="service-stack-num">10</div>
-                  <div>
-                    <span class="service-cat-badge">BRANDING &amp; CREATIVE ENGINE</span>
-                    <h4 class="service-stack-title">Social Media &amp; Influencer Marketing</h4>
-                    <div class="service-stack-sub">Borrow trusted creator audiences and scale authentic community engagement</div>
-                    <p class="service-stack-desc">
-                      We manage organic social channels and orchestrate performance-backed creator partnerships. Every influencer campaign is tracked to sales, with top creator assets whitelisted directly into paid ads.
-                    </p>
-                    <div class="service-stack-tags">
-                      <span class="service-tag">✓ Sales-Aligned Content Calendars</span>
-                      <span class="service-tag">✓ Creator Vetting &amp; Contracts</span>
-                      <span class="service-tag">✓ Tracked Affiliate Codes</span>
-                      <span class="service-tag">✓ Influencer Whitelisting</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- ================= CATEGORY 05 ================= -->
-          <div class="service-category-block" id="cat-ai-analytics">
-            <div class="service-cat-heading-row">
-              <div>
-                <div class="cat-pill-row">
-                  <span class="cat-num-pill">( 05 )</span>
-                  <span class="service-cat-badge">AI AUTOMATION &amp; ATTRIBUTION</span>
-                </div>
-                <h3 class="service-cat-title">Autonomous AI &amp; Analytics</h3>
-              </div>
-              <p class="service-cat-tagline">Speed-to-Lead AI Bots (&lt;60s), CRM Pipelines &amp; Drift Revenue Audits</p>
-            </div>
-            
-            <div class="services-stack-container">
-              <!-- Card 11 -->
-              <div class="service-stack-card" style="top: 100px; z-index: 11;">
-                <div class="service-stack-card-inner">
-                  <div class="service-stack-img-wrap">
-                    <img src="/case study (8).png" alt="Autonomous AI & CRM Tracking" loading="lazy" />
-                  </div>
-                  <div class="service-stack-num">11</div>
-                  <div>
-                    <span class="service-cat-badge">AI AUTOMATION &amp; ATTRIBUTION</span>
-                    <h4 class="service-stack-title">Autonomous AI &amp; CRM Tracking</h4>
-                    <div class="service-stack-sub">Eliminate manual lead follow-up and close deals faster with instant AI workflows</div>
-                    <p class="service-stack-desc">
-                      Speed to lead is everything. We integrate autonomous AI lead-qualification bots, instant WhatsApp/SMS notification workflows, and unified attribution dashboards so your sales pipeline moves at lightning speed without human lag.
-                    </p>
-                    <div class="service-stack-tags">
-                      <span class="service-tag">✓ Autonomous AI Qualifiers</span>
-                      <span class="service-tag">✓ Instant WhatsApp/SMS</span>
-                      <span class="service-tag">✓ CRM Sync</span>
-                      <span class="service-tag">✓ Attribution Dashboards</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Card 12 -->
-              <div class="service-stack-card" style="top: 128px; z-index: 12;">
-                <div class="service-stack-card-inner">
-                  <div class="service-stack-img-wrap">
-                    <img src="/2d9b0edc-3651-4bae-b2e7-1d024722e466.webp" alt="Tracking, Attribution & Drift Audits" loading="lazy" />
-                  </div>
-                  <div class="service-stack-num">12</div>
-                  <div>
-                    <span class="service-cat-badge">AI AUTOMATION &amp; ATTRIBUTION</span>
-                    <h4 class="service-stack-title">Tracking, Attribution &amp; Drift Audits</h4>
-                    <div class="service-stack-sub">The bedrock of all growth: trace every rupee of revenue to its exact source</div>
-                    <p class="service-stack-desc">
-                      We diagnose where ad spend is leaking across your funnel. Every client starts with pristine server-side tracking (GA4, CAPI) so no growth decision is ever made on guesswork or broken data.
-                    </p>
-                    <div class="service-stack-tags">
-                      <span class="service-tag">✓ Server-Side Meta CAPI</span>
-                      <span class="service-tag">✓ Google Analytics 4 &amp; GTM</span>
-                      <span class="service-tag">✓ Enhanced Conversions</span>
-                      <span class="service-tag">✓ Drift Revenue Audits</span>
-                    </div>
-                  </div>
-                </div>
+                <h3 class="service-stack-title">Entice more customers</h3>
+                <p class="service-stack-desc">
+                  Our guidance around hardware choices ensures you only pay once for your investment. We will use all our experience to help you minimise your initial capital outlay. This includes working to secure government grant funding, bringing you closer to your long-term sustainable goals.
+                </p>
               </div>
             </div>
           </div>
 
         </div>
+
+        <!-- Bottom Link to Full Services Catalog -->
+        <div style="text-align: center; margin-top: 36px;" class="reveal-fade-up delay-200">
+          <a href="/services.html" style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 28px; border-radius: 999px; font-size: 14px; font-weight: 700; border: 1px solid var(--border-color); color: var(--text-main); text-decoration: none; background: var(--surface);">
+            <span>Explore all 15 services organized by category</span>
+            <span>→</span>
+          </a>
+        </div>
+
       </div>
     </section>
 
@@ -2383,6 +2128,28 @@
       }, { threshold: 0.15 });
       aboutObserver.observe(aboutSection);
       setTimeout(() => aboutSection.classList.add('in-view'), 1600);
+    }
+
+    // Scroll Reveal IntersectionObserver for hardware-accelerated entrance animations
+    const revealElements = document.querySelectorAll('.reveal-fade-up, .reveal-fade-left, .reveal-fade-right, .reveal-scale-up, .reveal-fade-in');
+    if ('IntersectionObserver' in window) {
+      const revealObserver = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+      revealElements.forEach(el => revealObserver.observe(el));
+      
+      // Fallback: reveal any remaining elements after 1.8s
+      setTimeout(() => {
+        revealElements.forEach(el => el.classList.add('is-visible'));
+      }, 1800);
+    } else {
+      revealElements.forEach(el => el.classList.add('is-visible'));
     }
   </script>
 </body>

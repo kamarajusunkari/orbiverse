@@ -78,7 +78,7 @@ export default function ProcessSection() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           
           {/* Left Column: Sticky Process Heading */}
-          <div className="lg:col-span-5 lg:sticky lg:top-28">
+          <div className="lg:col-span-5 lg:sticky lg:top-28 reveal-fade-right">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#f3eeff] dark:bg-[#231b44] text-[#6d28d9] dark:text-[#c4b5fd] text-xs font-semibold mb-4 border border-[#e9d5ff]/60 dark:border-[#4c1d95]/40 shadow-2xs">
               <Sparkles className="w-3.5 h-3.5 text-[#10b981]" />
               <span>THE ORBIVERSE METHODOLOGY</span>
@@ -106,12 +106,14 @@ export default function ProcessSection() {
 
           {/* Right Column: 5 Process Steps */}
           <div className="lg:col-span-7 flex flex-col gap-6">
-            {STEPS_DATA.map((step) => (
-              <div
-                key={step.stepNum}
-                className="rounded-3xl p-6 sm:p-8 bg-white dark:bg-[#110e24] border border-neutral-200/90 dark:border-neutral-800 shadow-xs hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
-              >
-                <div className="flex items-start justify-between gap-4 mb-4">
+            {STEPS_DATA.map((step, idx) => {
+              const delayClass = idx === 0 ? "delay-100" : idx === 1 ? "delay-200" : idx === 2 ? "delay-300" : idx === 3 ? "delay-400" : "delay-500";
+              return (
+                <div
+                  key={step.stepNum}
+                  className={`rounded-3xl p-6 sm:p-8 bg-white dark:bg-[#110e24] border border-neutral-200/90 dark:border-neutral-800 shadow-xs hover:shadow-xl hover:-translate-y-1 transition-all duration-300 reveal-fade-left ${delayClass}`}
+                >
+                  <div className="flex items-start justify-between gap-4 mb-4">
                   <div>
                     <span className="text-xs font-bold uppercase tracking-wider text-[#2563eb] dark:text-[#60a5fa]">
                       Phase {step.stepNum}
@@ -149,8 +151,9 @@ export default function ProcessSection() {
                   ))}
                 </div>
               </div>
-            ))}
-          </div>
+            );
+          })}
+        </div>
 
         </div>
       </div>

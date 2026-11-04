@@ -197,3 +197,81 @@ h1, h2, h3, h4, .font-heading {
 .animate-preload-count-out {
   animation: preload-count-out 0.75s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
+
+/* ==========================================================================
+   SCROLL REVEAL ENTRANCE ANIMATIONS (FADE UP, FADE LEFT, FADE RIGHT, SCALE UP)
+   ========================================================================== */
+
+.reveal-fade-up {
+  opacity: 0;
+  transform: translate3d(0, 36px, 0);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+  backface-visibility: hidden;
+}
+
+.reveal-fade-left {
+  opacity: 0;
+  transform: translate3d(40px, 0, 0);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+  backface-visibility: hidden;
+}
+
+.reveal-fade-right {
+  opacity: 0;
+  transform: translate3d(-40px, 0, 0);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+  backface-visibility: hidden;
+}
+
+.reveal-scale-up {
+  opacity: 0;
+  transform: scale(0.94) translate3d(0, 24px, 0);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+  backface-visibility: hidden;
+}
+
+.reveal-fade-in {
+  opacity: 0;
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity;
+}
+
+/* When element scrolls into viewport */
+.reveal-fade-up.is-visible,
+.reveal-fade-left.is-visible,
+.reveal-fade-right.is-visible,
+.reveal-scale-up.is-visible,
+.reveal-fade-in.is-visible {
+  opacity: 1 !important;
+  transform: translate3d(0, 0, 0) scale(1) !important;
+}
+
+/* Staggered Delay Classes */
+.delay-75 { transition-delay: 75ms !important; }
+.delay-100 { transition-delay: 100ms !important; }
+.delay-150 { transition-delay: 150ms !important; }
+.delay-200 { transition-delay: 200ms !important; }
+.delay-250 { transition-delay: 250ms !important; }
+.delay-300 { transition-delay: 300ms !important; }
+.delay-400 { transition-delay: 400ms !important; }
+.delay-500 { transition-delay: 500ms !important; }
+.delay-600 { transition-delay: 600ms !important; }
+.delay-700 { transition-delay: 700ms !important; }
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  .reveal-fade-up,
+  .reveal-fade-left,
+  .reveal-fade-right,
+  .reveal-scale-up,
+  .reveal-fade-in {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+

@@ -65,7 +65,7 @@ export default function Home() {
           </div>
           <div className="absolute -right-20 -bottom-20 w-96 h-96 rounded-full bg-[#5b3bd1]/20 blur-3xl pointer-events-none" />
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-8">
-            <div className="flex items-center gap-6">
+            <div className="flex items-center gap-6 reveal-fade-right">
               <div className="w-16 h-16 rounded-2xl bg-white/10 p-2 flex items-center justify-center flex-shrink-0 border border-white/20">
                 <Image
                   src="/logo.png"
@@ -83,7 +83,7 @@ export default function Home() {
 
             <Link
               href="/drift-audit"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold bg-white text-[#0b0826] hover:bg-neutral-100 transition-colors flex-shrink-0"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold bg-white text-[#0b0826] hover:bg-neutral-100 transition-colors flex-shrink-0 reveal-fade-left delay-100"
             >
               See our reporting framework
               <ArrowRight className="w-4 h-4" />
@@ -94,7 +94,7 @@ export default function Home() {
         {/* THE ORBIT METHOD (OUR APPROACH) */}
         <section id="approach" className="py-20 border-t border-[var(--border-color)] bg-[var(--surface)]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center max-w-3xl mx-auto mb-16">
+            <div className="text-center max-w-3xl mx-auto mb-16 reveal-fade-up">
               <span className="text-xs font-bold tracking-widest uppercase text-[var(--accent-light)] mb-2 block">
                 OUR APPROACH
               </span>
@@ -107,7 +107,7 @@ export default function Home() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
-              <div className="border border-[var(--border-color)] bg-[var(--card-bg)] rounded-xl p-6 relative">
+              <div className="border border-[var(--border-color)] bg-[var(--card-bg)] rounded-xl p-6 relative reveal-fade-up delay-100">
                 <span className="text-xs font-mono font-bold text-[var(--accent-light)] block mb-4">
                   (01)
                 </span>
@@ -119,7 +119,7 @@ export default function Home() {
                 </p>
               </div>
 
-              <div className="border border-[var(--border-color)] bg-[var(--card-bg)] rounded-xl p-6 relative">
+              <div className="border border-[var(--border-color)] bg-[var(--card-bg)] rounded-xl p-6 relative reveal-fade-up delay-200">
                 <span className="text-xs font-mono font-bold text-[var(--accent-light)] block mb-4">
                   (02)
                 </span>
@@ -131,7 +131,7 @@ export default function Home() {
                 </p>
               </div>
 
-              <div className="border border-[var(--border-color)] bg-[var(--card-bg)] rounded-xl p-6 relative">
+              <div className="border border-[var(--border-color)] bg-[var(--card-bg)] rounded-xl p-6 relative reveal-fade-up delay-300">
                 <span className="text-xs font-mono font-bold text-[var(--accent-light)] block mb-4">
                   (03)
                 </span>
@@ -143,7 +143,7 @@ export default function Home() {
                 </p>
               </div>
 
-              <div className="border border-[var(--border-color)] bg-[var(--card-bg)] rounded-xl p-6 relative">
+              <div className="border border-[var(--border-color)] bg-[var(--card-bg)] rounded-xl p-6 relative reveal-fade-up delay-400">
                 <span className="text-xs font-mono font-bold text-[var(--accent-light)] block mb-4">
                   (04)
                 </span>
@@ -158,7 +158,7 @@ export default function Home() {
 
             {/* Three Verdicts Sub-block */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-              <div className="p-5 rounded-lg border border-red-200 dark:border-red-900/40 bg-red-50/30 dark:bg-red-950/10">
+              <div className="p-5 rounded-lg border border-red-200 dark:border-red-900/40 bg-red-50/30 dark:bg-red-950/10 reveal-fade-right delay-200">
                 <span className="text-sm font-bold text-red-600 dark:text-red-400 block mb-1">
                   Cut
                 </span>
@@ -167,7 +167,7 @@ export default function Home() {
                 </p>
               </div>
 
-              <div className="p-5 rounded-lg border border-amber-200 dark:border-amber-900/40 bg-amber-50/30 dark:bg-amber-950/10">
+              <div className="p-5 rounded-lg border border-amber-200 dark:border-amber-900/40 bg-amber-50/30 dark:bg-amber-950/10 reveal-fade-up delay-300">
                 <span className="text-sm font-bold text-amber-600 dark:text-amber-400 block mb-1">
                   Keep
                 </span>
@@ -176,7 +176,7 @@ export default function Home() {
                 </p>
               </div>
 
-              <div className="p-5 rounded-lg border border-emerald-200 dark:border-emerald-900/40 bg-emerald-50/30 dark:bg-emerald-950/10">
+              <div className="p-5 rounded-lg border border-emerald-200 dark:border-emerald-900/40 bg-emerald-50/30 dark:bg-emerald-950/10 reveal-fade-left delay-400">
                 <span className="text-sm font-bold text-emerald-600 dark:text-emerald-400 block mb-1">
                   Double
                 </span>
@@ -409,22 +409,24 @@ export default function Home() {
         {/* BOTTOM CTA BANNER */}
         <section className="py-20 bg-gradient-to-br from-[#120a3b] via-[#09071a] to-[#07060f] text-white border-t border-[var(--border-color)] relative overflow-hidden text-center">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <span className="text-xs font-bold uppercase tracking-widest text-indigo-300 mb-3 block">
+            <span className="text-xs font-bold uppercase tracking-widest text-indigo-300 mb-3 block reveal-fade-up">
               FIND OUT WHERE YOUR BUDGET IS DRIFTING
             </span>
-            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold mb-6 tracking-tight">
+            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold mb-6 tracking-tight reveal-fade-up delay-100">
               Book your free Drift Audit →
             </h2>
-            <p className="text-sm sm:text-base text-indigo-200/80 max-w-xl mx-auto mb-8">
+            <p className="text-sm sm:text-base text-indigo-200/80 max-w-xl mx-auto mb-8 reveal-fade-up delay-200">
               30 minutes. We inspect your Meta & Google ad accounts, tracking architecture and site speed before the call. No sales decks, just real numbers.
             </p>
-            <Link
-              href="/drift-audit"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-base font-semibold bg-white text-[#120a3b] hover:bg-neutral-100 transition-all shadow-xl hover:scale-105"
-            >
-              Claim your 30-min audit now
-              <ArrowRight className="w-5 h-5" />
-            </Link>
+            <div className="reveal-scale-up delay-300 inline-block">
+              <Link
+                href="/drift-audit"
+                className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-base font-semibold bg-white text-[#120a3b] hover:bg-neutral-100 transition-all shadow-xl hover:scale-105"
+              >
+                Claim your 30-min audit now
+                <ArrowRight className="w-5 h-5" />
+              </Link>
+            </div>
           </div>
         </section>
         </div>

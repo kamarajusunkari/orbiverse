@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import ScrollRevealInit from "@/components/ScrollRevealInit";
 
 export const metadata: Metadata = {
   title: "Orbiverse — Performance-Led Growth Agency | We Bring Marketing Into Orbit",
@@ -29,6 +30,7 @@ export default function RootLayout({
         suppressHydrationWarning
         className="min-h-screen flex flex-col antialiased selection:bg-[#5b3bd1] selection:text-white transition-colors duration-300"
       >
+        <ScrollRevealInit />
         {children}
       </body>
     </html>

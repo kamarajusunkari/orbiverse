@@ -42,7 +42,7 @@ export default function FAQAccordion() {
   return (
     <section className="py-20 border-t border-[var(--border-color)] bg-[var(--surface)]">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
+        <div className="text-center mb-12 reveal-fade-up">
           <span className="text-xs font-bold tracking-widest uppercase text-[var(--accent-light)] mb-2 block">
             Clear Answers
           </span>
@@ -54,8 +54,19 @@ export default function FAQAccordion() {
         <div className="divide-y divide-[var(--border-color)] border-y border-[var(--border-color)]">
           {faqs.map((faq, index) => {
             const isOpen = openIndex === index;
+            const delayClass =
+              index === 0
+                ? "delay-100"
+                : index === 1
+                ? "delay-150"
+                : index === 2
+                ? "delay-200"
+                : index === 3
+                ? "delay-250"
+                : "delay-300";
+
             return (
-              <div key={index} className="py-5">
+              <div key={index} className={`py-5 reveal-fade-up ${delayClass}`}>
                 <button
                   onClick={() => setOpenIndex(isOpen ? null : index)}
                   className="w-full flex items-center justify-between text-left font-semibold text-base sm:text-lg text-[var(--text-main)] hover:text-[var(--accent-light)] transition-colors cursor-pointer gap-4"

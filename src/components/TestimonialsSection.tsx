@@ -200,7 +200,7 @@ export default function TestimonialsSection() {
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
-        <div className="text-center mb-14 sm:mb-18">
+        <div className="text-center mb-14 sm:mb-18 reveal-fade-up">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#f3eeff] dark:bg-[#231b44] text-[#6d28d9] dark:text-[#c4b5fd] text-xs font-semibold mb-4 border border-[#e9d5ff]/60 dark:border-[#4c1d95]/40 shadow-2xs">
             <Sparkles className="w-3.5 h-3.5 text-[#10b981]" />
             <span>CLIENT REVIEWS &amp; VERIFIED IMPACT</span>
@@ -209,7 +209,7 @@ export default function TestimonialsSection() {
           <h2 className="font-heading font-black tracking-[-0.035em] text-3xl sm:text-4xl lg:text-5xl text-[var(--text-main)] leading-tight">
             What They&apos;re Saying
           </h2>
-          <p className="text-base sm:text-lg text-[var(--text-muted)] max-w-2xl mx-auto mt-4">
+          <p className="text-base sm:text-lg text-[var(--text-muted)] max-w-2xl mx-auto mt-4 reveal-fade-up delay-100">
             Hear from founders, COOs, and growth leaders who turned marketing drift into predictable revenue orbit.
           </p>
         </div>
@@ -223,7 +223,7 @@ export default function TestimonialsSection() {
           <div className="absolute bottom-0 left-0 right-0 h-28 bg-gradient-to-t from-[var(--surface)] to-transparent z-20 pointer-events-none" />
 
           {/* COLUMN 1 */}
-          <div className="overflow-hidden relative h-full group/col">
+          <div className="overflow-hidden relative h-full group/col reveal-fade-right delay-100">
             <div className="flex flex-col gap-6 animate-v-scroll-1 group-hover/col:[animation-play-state:paused]">
               {[...COLUMN_1, ...COLUMN_1].map((item, idx) => (
                 <RenderCard item={item} key={`c1-${idx}`} />
@@ -232,7 +232,7 @@ export default function TestimonialsSection() {
           </div>
 
           {/* COLUMN 2 */}
-          <div className="overflow-hidden relative h-full group/col">
+          <div className="overflow-hidden relative h-full group/col reveal-fade-up delay-200">
             <div className="flex flex-col gap-6 animate-v-scroll-2 group-hover/col:[animation-play-state:paused]">
               {[...COLUMN_2, ...COLUMN_2].map((item, idx) => (
                 <RenderCard item={item} key={`c2-${idx}`} />
@@ -241,7 +241,7 @@ export default function TestimonialsSection() {
           </div>
 
           {/* COLUMN 3 */}
-          <div className="overflow-hidden relative h-full group/col">
+          <div className="overflow-hidden relative h-full group/col reveal-fade-left delay-300">
             <div className="flex flex-col gap-6 animate-v-scroll-3 group-hover/col:[animation-play-state:paused]">
               {[...COLUMN_3, ...COLUMN_3].map((item, idx) => (
                 <RenderCard item={item} key={`c3-${idx}`} />
