@@ -1,0 +1,2072 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Orbiverse — Performance-Led Growth Agency</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-color: #ffffff;
+      --text-main: #0d0c15;
+      --text-muted: #5e5a75;
+      --border-color: #e5e3f0;
+      --accent: #101b96;
+      --accent-hover: #0c1575;
+      --orbit-ring: #7d8eff;
+      --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+      --font-heading: 'Poppins', 'Inter', sans-serif;
+    }
+
+    [data-theme="dark"] {
+      --bg-color: #07060f;
+      --text-main: #f3f1ff;
+      --text-muted: #9f9ab8;
+      --border-color: #211c3a;
+      --accent: #7d8eff;
+      --accent-hover: #96a5ff;
+      --orbit-ring: #6a7be8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%;
+      min-height: 100%;
+      background: var(--bg-color);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: clip;
+      transition: background-color .3s ease, color .3s ease;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* ====================================================================
+       1. PRELOADER & LOGO GLIDE ANIMATION
+       ==================================================================== */
+    .preloader-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: opacity .7s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .preloader-overlay.is-hidden {
+      opacity: 0;
+      pointer-events-none;
+    }
+
+    .preloader-glow {
+      position: absolute;
+      width: 520px;
+      height: 520px;
+      border-radius: 50%;
+      background: rgba(16, 27, 150, 0.08);
+      filter: blur(120px);
+      pointer-events-none;
+    }
+
+    .floating-logo {
+      position: fixed;
+      z-index: 101;
+      width: 135px;
+      height: 135px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      transition: all 1.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .floating-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      filter: brightness(1.15) drop-shadow(0 0 25px rgba(59, 130, 246, 0.65));
+    }
+
+    .floating-logo.is-docked {
+      top: 24px;
+      left: calc(max(24px, (100vw - 1400px) / 2 + 52px));
+      transform: translate(0, 0);
+      width: 48px;
+      height: 48px;
+      opacity: 1;
+    }
+
+    .preloader-counter {
+      position: relative;
+      z-index: 102;
+      margin-top: 210px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-family: monospace;
+      font-size: 38px;
+      font-weight: 600;
+      color: #0d0c15;
+      letter-spacing: -0.03em;
+      transition: opacity .6s ease, transform .6s ease, filter .6s ease;
+    }
+    .preloader-counter .percent {
+      font-size: 22px;
+      color: #8e8ba5;
+      margin-left: 3px;
+    }
+    .preloader-bar-wrap {
+      width: 260px;
+      height: 7px;
+      border-radius: 9999px;
+      background: rgba(0, 0, 0, 0.06);
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      margin-top: 14px;
+      overflow: hidden;
+      padding: 1px;
+    }
+    .preloader-bar-fill {
+      height: 100%;
+      border-radius: 9999px;
+      background: linear-gradient(90deg, #1d4ed8, #3b82f6, #60a5fa);
+      box-shadow: 0 0 12px rgba(96, 165, 250, 0.9);
+      width: 0%;
+      transition: width 0.08s ease-out;
+    }
+    .preloader-counter.is-fading {
+      opacity: 0;
+      filter: blur(8px);
+      transform: translateY(-24px);
+    }
+
+    /* ====================================================================
+       2. STICKY FLOATING HEADER (1400PX CONTAINER DUAL-STATE)
+       ==================================================================== */
+    .header-wrap {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      padding: 18px 20px 8px;
+      pointer-events: none;
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    body:not(.intro-ready) .header-wrap {
+      opacity: 0;
+      transform: translateY(-16px);
+    }
+
+    .header-bar {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 12px 24px;
+      border-radius: 9999px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      pointer-events: auto;
+      transition: all .3s ease;
+      background: transparent;
+      border: 1px solid transparent;
+    }
+
+    /* Sticky state (on scroll) */
+    .header-bar.is-sticky {
+      background: rgba(255, 255, 255, 0.78);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-color: var(--border-color);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+    }
+    [data-theme="dark"] .header-bar.is-sticky {
+      background: rgba(8, 6, 20, 0.78);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+    }
+
+    .header-logo {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-family: var(--font-heading);
+      font-weight: 900;
+      font-size: 22px;
+      color: var(--text-main);
+      z-index: 10;
+    }
+    .header-logo-icon {
+      width: 52px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity .3s ease;
+    }
+    body.logo-settled .header-logo-icon {
+      opacity: 1;
+    }
+    .header-logo-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    /* Center Nav Pill */
+    .header-nav {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 5px 8px;
+      border-radius: 9999px;
+      transition: all .3s ease;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      background: rgba(0, 0, 0, 0.03);
+      backdrop-filter: blur(12px);
+    }
+    [data-theme="dark"] .header-nav {
+      border-color: rgba(255, 255, 255, 0.18);
+      background: rgba(255, 255, 255, 0.07);
+    }
+
+    /* When sticky, outer header already has glassmorphism, so center menu drops its border */
+    .header-bar.is-sticky .header-nav {
+      border-color: transparent;
+      background: transparent;
+      backdrop-filter: none;
+    }
+
+    .nav-link {
+      padding: 6px 18px;
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--text-muted);
+      border-radius: 9999px;
+      transition: all .2s ease;
+    }
+    .nav-link:hover {
+      color: var(--text-main);
+      background: rgba(0, 0, 0, 0.04);
+    }
+    [data-theme="dark"] .nav-link:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+    .nav-link.active {
+      color: var(--text-main);
+      font-weight: 600;
+      background: rgba(0, 0, 0, 0.05);
+    }
+    [data-theme="dark"] .nav-link.active {
+      background: rgba(255, 255, 255, 0.18);
+    }
+
+    /* Right CTA */
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      z-index: 10;
+    }
+
+    .theme-toggle {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      background: rgba(255, 255, 255, 0.8);
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all .2s ease;
+    }
+    [data-theme="dark"] .theme-toggle {
+      border-color: rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .cta-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 20px;
+      border-radius: 9999px;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--text-main);
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+      transition: all .2s ease;
+    }
+    [data-theme="dark"] .cta-pill {
+      border-color: rgba(255, 255, 255, 0.22);
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+    }
+    .cta-pill:hover {
+      background: #101b96;
+      color: #fff;
+      border-color: #101b96;
+      transform: scale(1.02);
+    }
+
+    /* ====================================================================
+       3. NEW HERO SECTION (MATCHING REFERENCE IMAGE)
+       ==================================================================== */
+    .hero-section {
+      position: sticky;
+      top: 0;
+      z-index: 0;
+      width: 100%;
+      height: 100vh;
+      height: 100dvh;
+      min-height: 640px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 120px 24px 60px;
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity .8s cubic-bezier(0.16, 1, 0.3, 1), transform .8s cubic-bezier(0.16, 1, 0.3, 1);
+      overflow: hidden;
+    }
+    body.intro-ready .hero-section {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Celestial Orb Background */
+    .hero-bg-wrap {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .hero-bg-img-wrap {
+      width: 100%;
+      height: 100%;
+      animation: celestial-drift 18s ease-in-out infinite;
+      transform-origin: center bottom;
+      will-change: transform;
+    }
+    .hero-bg-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center bottom;
+      filter: brightness(1.02) contrast(1.02);
+    }
+    .hero-bg-radial-veil {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 35%, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 0.35) 60%, transparent 100%);
+      pointer-events: none;
+      transition: background .3s ease;
+    }
+    [data-theme="dark"] .hero-bg-radial-veil {
+      background: radial-gradient(circle at 50% 35%, rgba(7, 6, 15, 0.8) 0%, rgba(7, 6, 15, 0.4) 60%, transparent 100%);
+    }
+    .hero-bg-bottom-veil {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 120px;
+      background: linear-gradient(to top, var(--bg-color) 0%, rgba(255,255,255,0) 100%);
+    }
+    [data-theme="dark"] .hero-bg-bottom-veil {
+      background: linear-gradient(to top, var(--bg-color) 0%, rgba(7,6,15,0) 100%);
+    }
+
+    @keyframes celestial-drift {
+      0%, 100% {
+        transform: scale(1) translate3d(0, 0, 0);
+      }
+      50% {
+        transform: scale(1.025) translate3d(0, -8px, 0);
+      }
+    }
+
+    .hero-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      width: 100%;
+      position: relative;
+      z-index: 10;
+    }
+
+    .hero-content {
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transform-origin: center top;
+      will-change: transform, opacity;
+      transition: transform 0.05s ease-out, opacity 0.05s ease-out;
+    }
+
+    /* Big Headline: STRICTLY TWO LINES, CENTERED */
+    .hero-title {
+      font-family: var(--font-heading);
+      font-weight: 900;
+      font-size: clamp(24px, 4.8vw, 84px);
+      line-height: 1.05;
+      letter-spacing: -0.035em;
+      margin-bottom: 24px;
+      width: 100%;
+      text-align: center;
+    }
+    .hero-title .line-1 {
+      color: #0d0c15;
+      display: block;
+      white-space: nowrap;
+    }
+    [data-theme="dark"] .hero-title .line-1 {
+      color: #ffffff;
+    }
+    .hero-title .line-2 {
+      color: #101b96;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      white-space: nowrap;
+      margin-top: 6px;
+      text-align: center;
+    }
+    [data-theme="dark"] .hero-title .line-2 {
+      color: #7d8eff;
+    }
+
+    /* Real Animated Orbit SVG around "orbit." */
+    .orbit-target {
+      position: relative;
+      display: inline-block;
+      white-space: nowrap;
+    }
+    .orbit-ellipse-svg {
+      position: absolute;
+      top: -16px;
+      bottom: -16px;
+      left: -20px;
+      right: -20px;
+      width: calc(100% + 40px);
+      height: calc(100% + 32px);
+      pointer-events: none;
+      transform: rotate(-2deg);
+      overflow: visible;
+    }
+
+    @keyframes orbit-beam {
+      0% { stroke-dashoffset: 0; }
+      100% { stroke-dashoffset: -490; }
+    }
+    .animate-orbit-beam {
+      animation: orbit-beam 3.8s linear infinite;
+    }
+
+    /* Badge: ● Performance-led growth agency */
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 14px;
+      border-radius: 9999px;
+      border: 1px solid #dcd9ea;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(8px);
+      font-size: 13.5px;
+      font-weight: 500;
+      color: #5e5a75;
+      margin-bottom: 24px;
+    }
+    [data-theme="dark"] .hero-badge {
+      border-color: #2b254a;
+      background: rgba(255, 255, 255, 0.04);
+      color: #a8a4c2;
+    }
+    .hero-badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #101b96;
+    }
+    [data-theme="dark"] .hero-badge-dot {
+      background: #7d8eff;
+    }
+
+    /* Subtext */
+    .hero-body {
+      font-size: clamp(16px, 1.8vw, 19px);
+      line-height: 1.6;
+      color: var(--text-muted);
+      margin-bottom: 36px;
+      max-width: 640px;
+      text-align: center;
+    }
+    .hero-body strong {
+      color: var(--text-main);
+      font-weight: 700;
+    }
+
+    /* Buttons row */
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 28px;
+      border-radius: 12px;
+      background: #101b96;
+      color: #fff;
+      font-size: 15.5px;
+      font-weight: 600;
+      transition: all .2s ease;
+      box-shadow: 0 4px 14px rgba(16, 27, 150, 0.25);
+    }
+    .btn-primary:hover {
+      background: #0c1575;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(16, 27, 150, 0.35);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 15.5px;
+      font-weight: 600;
+      color: var(--text-main);
+      transition: all .2s ease;
+    }
+    .btn-secondary:hover {
+      color: #101b96;
+    }
+    .btn-secondary .arrow {
+      transition: transform .2s ease;
+    }
+    .btn-secondary:hover .arrow {
+      transform: translateY(2px);
+    }
+
+    @media (max-width: 768px) {
+      .header-nav { display: none; }
+      .hero-section { padding-top: 130px; }
+      .hero-title { font-size: 40px; }
+      .floating-logo.is-docked {
+        top: 20px;
+        left: 20px;
+      }
+    }
+  
+    /* ====================================================================
+       ABOUT US SECTION (SECTION 2 - MATCHING REFERENCE MOCKUP)
+       ==================================================================== */
+    .about-section {
+      position: relative;
+      z-index: 10;
+      padding: 96px 24px;
+      background: var(--bg-color);
+      border-top: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+      border-top-left-radius: 48px;
+      border-top-right-radius: 48px;
+      box-shadow: 0 -25px 60px rgba(0, 0, 0, 0.12);
+      transition: background-color .3s ease;
+    }
+    [data-theme="dark"] .about-section {
+      box-shadow: 0 -30px 70px rgba(0, 0, 0, 0.65);
+    }
+    .about-container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .about-header {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 56px;
+      align-items: stretch;
+      margin-bottom: 64px;
+    }
+    .about-col-left, .about-col-right {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+    }
+    .about-title-reveal-line {
+      display: block;
+      overflow: hidden;
+      padding-bottom: 4px;
+    }
+    .about-title-reveal-line span {
+      display: block;
+      transform: translateY(115%);
+      opacity: 0;
+      transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.9s ease;
+    }
+    .about-section.in-view .about-title-reveal-line span {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    .about-section.in-view .about-title-reveal-line:nth-child(2) span {
+      transition-delay: 0.15s;
+    }
+    .about-desc {
+      font-size: clamp(15px, 1.3vw, 17px);
+      line-height: 1.65;
+      color: var(--text-muted);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease 0.2s, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
+    }
+    .about-section.in-view .about-desc {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .about-ctas {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-top: 32px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease 0.3s, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s;
+    }
+    .about-section.in-view .about-ctas {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    @media (max-width: 991px) {
+      .about-header {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+    }
+    .about-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      background: #f3eeff;
+      border: 1px solid rgba(233, 213, 255, 0.8);
+      color: #6d28d9;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+    [data-theme="dark"] .about-badge {
+      background: #231b44;
+      border-color: rgba(76, 29, 149, 0.4);
+      color: #c4b5fd;
+    }
+    .about-title {
+      font-family: var(--font-heading);
+      font-size: clamp(32px, 3.8vw, 54px);
+      font-weight: 900;
+      line-height: 1.08;
+      letter-spacing: -0.035em;
+      color: var(--text-main);
+    }
+    .about-desc {
+      font-size: clamp(15px, 1.3vw, 17px);
+      line-height: 1.65;
+      color: var(--text-muted);
+      margin-bottom: 28px;
+    }
+    .about-ctas {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .btn-learn-more {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
+      border-radius: 9999px;
+      background: #0a0f29;
+      color: #ffffff;
+      font-size: 14.5px;
+      font-weight: 600;
+      transition: all .2s ease;
+      box-shadow: 0 2px 8px rgba(10, 15, 41, 0.15);
+    }
+    [data-theme="dark"] .btn-learn-more {
+      background: #ffffff;
+      color: #0a0f29;
+    }
+    .btn-learn-more:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(10, 15, 41, 0.25);
+    }
+    .arrow-accent {
+      color: #84cc16;
+      font-size: 16px;
+      font-weight: 800;
+    }
+    [data-theme="dark"] .arrow-accent {
+      color: #65a30d;
+    }
+    .btn-video-play {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #111827;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+      transition: all .2s ease;
+    }
+    [data-theme="dark"] .btn-video-play {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.15);
+      color: #ffffff;
+    }
+    .btn-video-play:hover {
+      transform: scale(1.08);
+      background: #f9fafb;
+    }
+
+    /* 5-CARDS SHOWCASE GRID */
+    .about-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 20px;
+      align-items: stretch;
+    }
+    @media (max-width: 1200px) {
+      .about-cards-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    @media (max-width: 768px) {
+      .about-cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (max-width: 520px) {
+      .about-cards-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .about-card {
+      border-radius: 24px;
+      padding: 26px;
+      min-height: 290px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      opacity: 0;
+      transform: translateY(40px) scale(0.96);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+      cursor: pointer;
+    }
+    .about-section.in-view .about-card {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    .about-section.in-view .about-card:nth-child(1) { transition-delay: 0.2s; }
+    .about-section.in-view .about-card:nth-child(2) { transition-delay: 0.32s; }
+    .about-section.in-view .about-card:nth-child(3) { transition-delay: 0.44s; }
+    .about-section.in-view .about-card:nth-child(4) { transition-delay: 0.56s; }
+    .about-section.in-view .about-card:nth-child(5) { transition-delay: 0.68s; }
+
+    .about-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+    }
+    .about-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .about-card-img:hover img {
+      transform: scale(1.08);
+    }
+    .about-card-white:hover .card-emoji-badge {
+      transform: rotate(12deg) scale(1.15);
+    }
+    .card-corner-arrow {
+      transition: transform 0.3s ease, color 0.3s ease;
+    }
+    .about-card-white:hover .card-corner-arrow {
+      transform: translate(5px, -5px);
+      color: #2563eb;
+    }
+    .about-card-royal:hover {
+      box-shadow: 0 22px 50px rgba(30, 64, 175, 0.45);
+    }
+
+    /* Card 1: Illustration */
+    .about-card-img {
+      padding: 0;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid #e5e7eb;
+      background: #f4f4f6;
+    }
+    [data-theme="dark"] .about-card-img {
+      border-color: #262626;
+      background: #171717;
+    }
+    .about-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      transition: transform .5s ease;
+    }
+    .about-card-img:hover img {
+      transform: scale(1.05);
+    }
+
+    /* Card 2: 10+ Years (Pastel Ice Blue) */
+    .about-card-blue {
+      background: #f0f6ff;
+      border: 1px solid #dbeafe;
+    }
+    [data-theme="dark"] .about-card-blue {
+      background: #0c1829;
+      border-color: #1e3a5f;
+    }
+    .card-metric-num {
+      font-size: clamp(38px, 3.2vw, 46px);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      color: var(--text-main);
+      line-height: 1;
+    }
+    .card-metric-label {
+      font-size: 14.5px;
+      font-weight: 700;
+      color: #2563eb;
+      margin-top: 8px;
+    }
+    [data-theme="dark"] .card-metric-label {
+      color: #60a5fa;
+    }
+    .card-metric-sub {
+      font-size: 12.5px;
+      line-height: 1.55;
+      color: var(--text-muted);
+      margin-top: 24px;
+    }
+
+    /* Card 3: 150+ Clients (Crisp White with Icon) */
+    .about-card-white {
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+    }
+    [data-theme="dark"] .about-card-white {
+      background: #121124;
+      border-color: #262145;
+    }
+    .card-top-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+    .card-emoji-badge {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: #fef08a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+    [data-theme="dark"] .card-emoji-badge {
+      background: rgba(202, 138, 4, 0.4);
+    }
+    .card-corner-arrow {
+      color: #2563eb;
+      font-size: 18px;
+      font-weight: 700;
+    }
+    [data-theme="dark"] .card-corner-arrow {
+      color: #60a5fa;
+    }
+
+    /* Card 4: 50+ Team (Pastel Yellow) */
+    .about-card-yellow {
+      background: #fefce8;
+      border: 1px solid rgba(254, 240, 138, 0.7);
+    }
+    [data-theme="dark"] .about-card-yellow {
+      background: #232011;
+      border-color: rgba(113, 63, 18, 0.5);
+    }
+
+    /* Card 5: Royal Blue CTA */
+    .about-card-royal {
+      background: #1e40af;
+      border: 1px solid #1d4ed8;
+      color: #ffffff;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    [data-theme="dark"] .about-card-royal {
+      background: #1e3a8a;
+      border-color: #1e40af;
+    }
+    .about-card-royal:hover {
+      box-shadow: 0 14px 32px rgba(30, 64, 175, 0.35);
+    }
+    .team-avatars-img {
+      height: 38px;
+      width: auto;
+      max-width: 95px;
+      object-fit: contain;
+    }
+    .card-royal-heading {
+      font-size: 22px;
+      font-weight: 900;
+      color: #facc15;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+    }
+    .card-royal-sub {
+      font-size: 12.5px;
+      line-height: 1.5;
+      color: rgba(255, 255, 255, 0.85);
+      margin-top: 8px;
+    }
+
+  
+    
+
+    /* CASE STUDIES MARQUEE */
+    .case-studies-section {
+      padding: 96px 24px;
+      background: var(--bg-color);
+      border-bottom: 1px solid var(--border-color);
+      overflow: hidden;
+      position: relative;
+    }
+    .case-marquee-track {
+      display: flex;
+      align-items: stretch;
+      gap: 24px;
+      width: max-content;
+      animation: caseMarqueeAnim 55s linear infinite;
+      padding: 16px 0;
+    }
+    .case-marquee-track:hover {
+      animation-play-state: paused;
+    }
+    @keyframes caseMarqueeAnim {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-50%); }
+    }
+    .case-card-html {
+      width: 380px;
+      border-radius: 24px;
+      padding: 26px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      flex-shrink: 0;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.04);
+      transition: transform .35s ease, box-shadow .35s ease;
+    }
+    .case-card-html:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+    }
+    .case-card-img-wrap {
+      width: 100%;
+      height: 220px;
+      border-radius: 16px;
+      overflow: hidden;
+      margin-top: 20px;
+    }
+    .case-card-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+      transition: transform .5s ease;
+    }
+    .case-card-html:hover .case-card-img-wrap img {
+      transform: scale(1.05);
+    }
+
+    /* PROCESS SECTION */
+    .process-section {
+      padding: 96px 24px;
+      background: var(--bg-color);
+      border-bottom: 1px solid var(--border-color);
+    }
+    .process-grid-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 56px;
+      align-items: flex-start;
+    }
+    @media (max-width: 991px) {
+      .process-grid-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+    .process-step-card {
+      border-radius: 24px;
+      padding: 32px;
+      background: var(--bg-color);
+      border: 1px solid var(--border-color);
+      margin-bottom: 24px;
+      transition: transform .3s ease, box-shadow .3s ease;
+    }
+    .process-step-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+    }
+
+    /* TESTIMONIALS 3-COLUMN VERTICAL */
+    .testimonials-section {
+      padding: 96px 24px;
+      background: var(--bg-color);
+      border-bottom: 1px solid var(--border-color);
+      overflow: hidden;
+      position: relative;
+    }
+    .v-scroll-wall {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      height: 720px;
+      overflow: hidden;
+      position: relative;
+    }
+    @media (max-width: 991px) {
+      .v-scroll-wall {
+        grid-template-columns: 1fr;
+        height: 520px;
+      }
+    }
+    .v-col {
+      overflow: hidden;
+      position: relative;
+      height: 100%;
+    }
+    .v-col-track {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .v-col:hover .v-col-track {
+      animation-play-state: paused;
+    }
+    .v-speed-1 { animation: vScrollUpAnim 28s linear infinite; }
+    .v-speed-2 { animation: vScrollUpAnim 38s linear infinite; }
+    .v-speed-3 { animation: vScrollUpAnim 32s linear infinite; }
+
+    @keyframes vScrollUpAnim {
+      0% { transform: translateY(0%); }
+      100% { transform: translateY(-50%); }
+    }
+    .t-quote-card {
+      border-radius: 24px;
+      padding: 28px;
+      background: var(--bg-color);
+      border: 1px solid var(--border-color);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+    }
+    .t-case-card {
+      position: relative;
+      border-radius: 24px;
+      overflow: hidden;
+      min-height: 280px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 24px;
+      color: #ffffff;
+      border: 1px solid var(--border-color);
+    }
+    .t-case-card img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.7);
+    }
+
+  
+    /* ====================================================================
+       SERVICES STACKING CARDS (MATCHING REFERENCE DESIGN & STACK ANIMATION)
+       ==================================================================== */
+    .services-stack-section {
+      padding: 96px 24px 120px;
+      background: var(--bg-color);
+      border-bottom: 1px solid var(--border-color);
+      position: relative;
+    }
+    .services-stack-header {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 24px;
+      margin-bottom: 64px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--border-color);
+    }
+    @media (max-width: 768px) {
+      .services-stack-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+    .services-stack-title-h2 {
+      font-family: var(--font-heading);
+      font-size: clamp(28px, 3.6vw, 46px);
+      font-weight: 900;
+      color: var(--text-main);
+      line-height: 1.12;
+      letter-spacing: -0.03em;
+    }
+    .services-stack-link {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-main);
+      border-bottom: 2px solid var(--text-main);
+      padding-bottom: 2px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: color .2s ease, border-color .2s ease;
+    }
+    .services-stack-link:hover {
+      color: #101b96;
+      border-color: #101b96;
+    }
+    [data-theme="dark"] .services-stack-link:hover {
+      color: #7d8eff;
+      border-color: #7d8eff;
+    }
+    .services-stack-container {
+      display: flex;
+      flex-direction: column;
+      gap: 36px;
+      padding-bottom: 40px;
+    }
+    .service-stack-card {
+      position: sticky;
+      border-radius: 32px;
+      background: var(--bg-color);
+      border: 1px solid var(--border-color);
+      padding: 36px;
+      box-shadow: 0 -12px 36px rgba(0, 0, 0, 0.06);
+      transition: transform .3s ease, filter .3s ease, box-shadow .3s ease;
+    }
+    [data-theme="dark"] .service-stack-card {
+      background: #0c0a1d;
+      box-shadow: 0 -16px 45px rgba(0, 0, 0, 0.65);
+    }
+    .service-stack-card:hover {
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.12);
+    }
+    .service-stack-card-inner {
+      display: grid;
+      grid-template-columns: 280px 80px 1fr;
+      gap: 36px;
+      align-items: center;
+    }
+    @media (max-width: 991px) {
+      .service-stack-card-inner {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+    }
+    .service-stack-img-wrap {
+      width: 100%;
+      height: 220px;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+      position: relative;
+    }
+    .service-stack-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .5s ease;
+    }
+    .service-stack-card:hover .service-stack-img-wrap img {
+      transform: scale(1.05);
+    }
+    .service-stack-num {
+      font-family: monospace;
+      font-size: 48px;
+      font-weight: 900;
+      color: var(--text-main);
+      text-align: center;
+    }
+    @media (max-width: 991px) {
+      .service-stack-num {
+        text-align: left;
+        font-size: 36px;
+      }
+    }
+    .service-stack-title {
+      font-family: var(--font-heading);
+      font-size: 28px;
+      font-weight: 900;
+      color: var(--text-main);
+      line-height: 1.2;
+    }
+    .service-stack-sub {
+      font-size: 14px;
+      font-weight: 700;
+      color: #2563eb;
+      margin-top: 6px;
+    }
+    [data-theme="dark"] .service-stack-sub {
+      color: #60a5fa;
+    }
+    .service-stack-desc {
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--text-muted);
+      margin-top: 12px;
+      max-width: 620px;
+    }
+    .service-stack-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border-color);
+    }
+    .service-tag {
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 9999px;
+      background: rgba(0,0,0,0.04);
+      color: var(--text-main);
+    }
+    [data-theme="dark"] .service-tag {
+      background: rgba(255,255,255,0.06);
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- ====================================================================
+       1. PRELOADER OVERLAY & GLIDING LOGO
+       ==================================================================== -->
+  <div class="preloader-overlay" id="preloader-overlay" aria-label="Loading Orbiverse">
+    <div class="preloader-glow"></div>
+    <div class="preloader-counter" id="preloader-counter" aria-live="polite">
+      <div style="display:flex; align-items:baseline; justify-content:center;">
+        <span id="preloader-num">0</span><span class="percent">%</span>
+      </div>
+      <div class="preloader-bar-wrap">
+        <div class="preloader-bar-fill" id="preloader-bar-fill"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="floating-logo" id="floating-logo">
+    <img src="logo.png" alt="Orbiverse">
+  </div>
+
+  <!-- ====================================================================
+       2. STICKY FLOATING HEADER (1400PX MAX-WIDTH)
+       ==================================================================== -->
+  <header class="header-wrap" id="header-wrap">
+    <div class="header-bar" id="header-bar">
+      <!-- Left: Logo -->
+      <a href="/" class="header-logo">
+        <div class="header-logo-icon" id="header-logo-dock">
+          <img src="logo.png" alt="Orbiverse Logo">
+        </div>
+        <span>Orbiverse</span>
+      </a>
+
+      <!-- Middle: Center Capsule Pill Navigation -->
+      <nav class="header-nav" aria-label="Main Navigation">
+        <a href="#services" class="nav-link active">Services</a>
+        <a href="#work" class="nav-link">Work</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="#approach" class="nav-link">Approach</a>
+      </nav>
+
+      <!-- Right: Action CTA & Theme Toggle -->
+      <div class="header-actions">
+        <button class="theme-toggle" id="theme-btn" aria-label="Toggle theme">
+          <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+          </svg>
+        </button>
+        <a href="/drift-audit" class="cta-pill">
+          <span>Free Drift Audit</span>
+          <span style="font-size:14px">↗</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ====================================================================
+       3. NEW HERO SECTION (EXACT MATCH OF REFERENCE IMAGE)
+       ==================================================================== -->
+  <main>
+    <section class="hero-section" id="hero">
+      <!-- Celestial Background Image with Organic Glow -->
+      <div class="hero-bg-wrap" aria-hidden="true">
+        <div class="hero-bg-img-wrap" id="hero-bg-img-wrap">
+          <img src="2d9b0edc-3651-4bae-b2e7-1d024722e466.webp" alt="" class="hero-bg-img">
+        </div>
+        <div class="hero-bg-radial-veil"></div>
+        <div class="hero-bg-bottom-veil"></div>
+      </div>
+
+      <div class="hero-container">
+        <div class="hero-content" id="hero-content-wrap">
+
+          <!-- HEADLINE: STRICTLY TWO LINES WITH REAL ANIMATED ORBIT -->
+          <h1 class="hero-title">
+            <span class="line-1">Your marketing is drifting.</span>
+            <span class="line-2">We bring it into <span class="orbit-target">orbit.<svg class="orbit-ellipse-svg" viewBox="0 0 260 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <defs>
+                <linearGradient id="orbitTrackGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#7d8eff" stop-opacity="0.85" />
+                  <stop offset="35%" stop-color="#3b82f6" stop-opacity="0.35" />
+                  <stop offset="70%" stop-color="#60a5fa" stop-opacity="0.9" />
+                  <stop offset="100%" stop-color="#1d4ed8" stop-opacity="0.5" />
+                </linearGradient>
+
+                <filter id="satelliteGlow" x="-50%" y="-50%" width="200%" height="200%">
+                  <feGaussianBlur stdDeviation="3.5" result="blur" />
+                  <feMerge>
+                    <feMergeNode in="blur" />
+                    <feMergeNode in="blur" />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
+                </filter>
+              </defs>
+
+              <!-- 1. Base Elliptical Orbit Track -->
+              <path
+                d="M 236 50 C 236 74 186 92 125 92 C 60 92 14 74 14 50 C 14 26 62 8 125 8 C 188 8 234 26 235 48"
+                stroke="url(#orbitTrackGrad)"
+                stroke-width="2.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                opacity="0.8"
+              />
+
+              <!-- 2. Fast Celestial Energy Beam flowing along track -->
+              <path
+                d="M 236 50 C 236 74 186 92 125 92 C 60 92 14 74 14 50 C 14 26 62 8 125 8 C 188 8 234 26 235 48"
+                stroke="#60a5fa"
+                stroke-width="2.8"
+                stroke-linecap="round"
+                stroke-dasharray="50 440"
+                class="animate-orbit-beam"
+              />
+
+              <!-- 3. Trailing Particle 2 (subtle comet dust) -->
+              <g>
+                <animateMotion
+                  dur="3.8s"
+                  begin="-0.22s"
+                  repeatCount="indefinite"
+                  rotate="auto"
+                  path="M 236 50 C 236 74 186 92 125 92 C 60 92 14 74 14 50 C 14 26 62 8 125 8 C 188 8 234 26 235 48"
+                />
+                <circle r="1.8" fill="#93c5fd" opacity="0.4" />
+              </g>
+
+              <!-- 4. Trailing Particle 1 (closer trail) -->
+              <g>
+                <animateMotion
+                  dur="3.8s"
+                  begin="-0.1s"
+                  repeatCount="indefinite"
+                  rotate="auto"
+                  path="M 236 50 C 236 74 186 92 125 92 C 60 92 14 74 14 50 C 14 26 62 8 125 8 C 188 8 234 26 235 48"
+                />
+                <circle r="2.8" fill="#60a5fa" opacity="0.65" />
+              </g>
+
+              <!-- 5. Main Orbiting Satellite / Planet with radiant glow -->
+              <g>
+                <animateMotion
+                  dur="3.8s"
+                  repeatCount="indefinite"
+                  rotate="auto"
+                  path="M 236 50 C 236 74 186 92 125 92 C 60 92 14 74 14 50 C 14 26 62 8 125 8 C 188 8 234 26 235 48"
+                />
+                <circle r="10" fill="#93c5fd" opacity="0.3" filter="url(#satelliteGlow)" />
+                <circle r="4.6" fill="#2563eb" />
+                <circle r="2.2" fill="#ffffff" />
+              </g>
+            </svg></span></span>
+          </h1>
+
+          <!-- BADGE: ● Performance-led growth agency -->
+          <div class="hero-badge">
+            <span class="hero-badge-dot"></span>
+            <span>Performance-led growth agency</span>
+          </div>
+
+          <!-- BODY COPY -->
+          <p class="hero-body">
+            Your ads, SEO and social each report a win, but sales stay flat.<br>
+            We run every channel as one team, measured on one number:<br>
+            <strong>your revenue.</strong>
+          </p>
+
+          <!-- CTAS -->
+          <div class="hero-buttons">
+            <a href="/drift-audit" class="btn-primary">Get your free Drift Audit</a>
+            <a href="#drift-orbit" class="btn-secondary">
+              <span>See how it works</span>
+              <span class="arrow">↓</span>
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SECTION 2: ABOUT US (MATCHING REFERENCE DESIGN MOCKUP)
+         ==================================================================== -->
+    <section class="about-section" id="about">
+      <div class="about-container">
+        
+        <!-- Header: 2 Columns (Parallel Top Alignment & Matching Heights) -->
+        <div class="about-header">
+          <div class="about-col-left">
+            <div class="about-badge">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"/>
+              </svg>
+              <span>About Us</span>
+            </div>
+            <h2 class="about-title">
+              <span class="about-title-reveal-line"><span>Digital Expertise You</span></span>
+              <span class="about-title-reveal-line"><span>Can Count On</span></span>
+            </h2>
+          </div>
+
+          <div class="about-col-right">
+            <p class="about-desc">
+              We empower ambitious businesses, healthcare clinics, e-commerce brands,
+              and financial institutions with ROI-focused digital marketing campaigns,
+              high-converting Google &amp; Meta ads, search engine optimization (SEO),
+              and performance marketing strategies engineered for rapid revenue growth.
+            </p>
+            <div class="about-ctas">
+              <a href="/about" class="btn-learn-more">
+                <span>Learn More</span>
+                <span class="arrow-accent">↗</span>
+              </a>
+              <button type="button" class="btn-video-play" aria-label="Watch overview video" title="Watch overview">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                  <polygon points="6 3 20 12 6 21 6 3"></polygon>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5 Showcase Cards Grid -->
+        <div class="about-cards-grid">
+          
+          <!-- Card 1: Illustration -->
+          <div class="about-card about-card-img">
+            <img src="/about-illustration.png" alt="Digital team member" loading="lazy" />
+          </div>
+
+          <!-- Card 2: 10+ Years Experience -->
+          <div class="about-card about-card-blue">
+            <div>
+              <div class="card-metric-num">10+</div>
+              <div class="card-metric-label">Years Experience</div>
+            </div>
+            <p class="card-metric-sub">
+              Delivering high-performance IT solutions and scaling enterprise operations across global markets.
+            </p>
+          </div>
+
+          <!-- Card 3: 150+ Happy Clients -->
+          <div class="about-card about-card-white">
+            <div class="card-top-row">
+              <div class="card-emoji-badge">🙂</div>
+              <span class="card-corner-arrow">↗</span>
+            </div>
+            <div style="margin-top: 24px;">
+              <div class="card-metric-label">Happy Clients</div>
+              <div class="card-metric-num" style="margin-top: 4px;">150+</div>
+              <p class="card-metric-sub" style="margin-top: 8px;">
+                Trusted growth partners &amp; leading brands.
+              </p>
+            </div>
+          </div>
+
+          <!-- Card 4: 50+ Orbiverse Team -->
+          <div class="about-card about-card-yellow">
+            <div>
+              <div class="card-metric-num">50+</div>
+              <div class="card-metric-label">Orbiverse Team</div>
+            </div>
+            <p class="card-metric-sub">
+              A dedicated squad of software architects, AI engineers, and performance marketers.
+            </p>
+          </div>
+
+          <!-- Card 5: Get Started With Us -->
+          <a href="/drift-audit" class="about-card about-card-royal">
+            <div>
+              <img src="/about-team-avatars.png" alt="Leadership team avatars" class="team-avatars-img" />
+            </div>
+            <div style="margin-top: 24px;">
+              <div class="card-royal-heading">Get Started With Us</div>
+              <p class="card-royal-sub">
+                Launch your digital transformation sprint with direct executive guidance.
+              </p>
+            </div>
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SECTION: SERVICES STACKING CARDS (MATCHING REFERENCE IMAGE & ANIMATION)
+         ==================================================================== -->
+    <section class="services-stack-section" id="services">
+      <div class="about-container">
+        
+        <!-- Header (Matching Reference Design Exactly) -->
+        <div class="services-stack-header">
+          <div>
+            <h2 class="services-stack-title-h2">
+              Enjoy all these benefits<br>when you partner with us.
+            </h2>
+          </div>
+          <div>
+            <a href="/drift-audit" class="services-stack-link">
+              <span>Ready to get started? Contact us</span>
+              <span>↗</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Stacking Cards Container -->
+        <div class="services-stack-container" id="services-stack-container">
+          
+          <!-- Card 01 -->
+          <div class="service-stack-card" style="top: 100px; z-index: 11;">
+            <div class="service-stack-card-inner">
+              <div class="service-stack-img-wrap">
+                <img src="/bdb38855-3775-42ba-8d23-f32c41f2e827.webp" alt="Performance Marketing" loading="lazy" />
+              </div>
+              <div class="service-stack-num">01</div>
+              <div>
+                <h3 class="service-stack-title">Performance Marketing &amp; Paid Ads</h3>
+                <div class="service-stack-sub">Turn cold traffic into high-intent buyers with verified ROAS</div>
+                <p class="service-stack-desc">
+                  We construct data-driven ad campaigns across Google Search, Meta (Instagram &amp; Facebook), YouTube, and LinkedIn. Every dollar of ad spend is measured on one metric: net pipeline revenue.
+                </p>
+                <div class="service-stack-tags">
+                  <span class="service-tag">✓ Google Search &amp; Shopping</span>
+                  <span class="service-tag">✓ Meta Scaling</span>
+                  <span class="service-tag">✓ Precision Retargeting</span>
+                  <span class="service-tag">✓ Verified ROAS</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 02 -->
+          <div class="service-stack-card" style="top: 126px; z-index: 12;">
+            <div class="service-stack-card-inner">
+              <div class="service-stack-img-wrap">
+                <img src="/who we are.webp" alt="CRO & Funnels" loading="lazy" />
+              </div>
+              <div class="service-stack-num">02</div>
+              <div>
+                <h3 class="service-stack-title">Conversion Rate Optimization (CRO)</h3>
+                <div class="service-stack-sub">A faster page with a clearer offer improves every channel at once</div>
+                <p class="service-stack-desc">
+                  We diagnose friction across your entire checkout and lead funnel. Through high-converting landing page engineering, multi-variant A/B copy tests, and behavioral heatmaps, we turn more of your existing traffic into revenue.
+                </p>
+                <div class="service-stack-tags">
+                  <span class="service-tag">✓ Landing Page Engineering</span>
+                  <span class="service-tag">✓ A/B Split Testing</span>
+                  <span class="service-tag">✓ Frictionless UI/UX</span>
+                  <span class="service-tag">✓ Heatmap Audits</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 03 -->
+          <div class="service-stack-card" style="top: 152px; z-index: 13;">
+            <div class="service-stack-card-inner">
+              <div class="service-stack-img-wrap">
+                <img src="/679b7310-0afd-42d1-953b-94209bbf2c6f.png" alt="SEO" loading="lazy" />
+              </div>
+              <div class="service-stack-num">03</div>
+              <div>
+                <h3 class="service-stack-title">Technical SEO &amp; Organic Authority</h3>
+                <div class="service-stack-sub">Capture commercial search intent and lower blended CAC</div>
+                <p class="service-stack-desc">
+                  Every customer who finds you on Google search is one you didn't pay a click for. We combine technical Core Web Vitals audits, high-intent keyword capture, and authoritative backlink architectures to secure durable search dominance.
+                </p>
+                <div class="service-stack-tags">
+                  <span class="service-tag">✓ Core Web Vitals Fixes</span>
+                  <span class="service-tag">✓ Commercial Keyword Capture</span>
+                  <span class="service-tag">✓ Programmatic SEO</span>
+                  <span class="service-tag">✓ Authority Backlinks</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 04 -->
+          <div class="service-stack-card" style="top: 178px; z-index: 14;">
+            <div class="service-stack-card-inner">
+              <div class="service-stack-img-wrap">
+                <img src="/158bb487-34c7-4e8d-a53f-b72845659451.webp" alt="Brand & Content" loading="lazy" />
+              </div>
+              <div class="service-stack-num">04</div>
+              <div>
+                <h3 class="service-stack-title">Brand Positioning &amp; Content Engine</h3>
+                <div class="service-stack-sub">Give people an unmistakable reason to choose you</div>
+                <p class="service-stack-desc">
+                  Positioning, messaging, and high-velocity creative batches tested every single month. We deploy viral short-form video reels, conversion copywriting, and static hooks designed to stop the scroll and build lasting brand authority.
+                </p>
+                <div class="service-stack-tags">
+                  <span class="service-tag">✓ Positioning Guidelines</span>
+                  <span class="service-tag">✓ Weekly Video Reels</span>
+                  <span class="service-tag">✓ Conversion Copywriting</span>
+                  <span class="service-tag">✓ Winner Scaling</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 05 -->
+          <div class="service-stack-card" style="top: 204px; z-index: 15;">
+            <div class="service-stack-card-inner">
+              <div class="service-stack-img-wrap">
+                <img src="/case study (8).png" alt="AI & CRM" loading="lazy" />
+              </div>
+              <div class="service-stack-num">05</div>
+              <div>
+                <h3 class="service-stack-title">Autonomous AI &amp; CRM Tracking</h3>
+                <div class="service-stack-sub">Eliminate manual lead follow-up and close deals faster</div>
+                <p class="service-stack-desc">
+                  Speed to lead is everything. We integrate autonomous AI lead-qualification bots, instant WhatsApp/SMS notification workflows, and unified attribution dashboards so your sales pipeline moves at lightning speed without human lag.
+                </p>
+                <div class="service-stack-tags">
+                  <span class="service-tag">✓ Autonomous AI Qualifiers</span>
+                  <span class="service-tag">✓ Instant WhatsApp/SMS</span>
+                  <span class="service-tag">✓ CRM Sync</span>
+                  <span class="service-tag">✓ Attribution Dashboards</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SECTION: CASE STUDIES CONTINUOUS MARQUEE (ALTERNATING WHITE & BLUE)
+         ==================================================================== -->
+    <section class="case-studies-section" id="case-studies">
+      <div style="text-align: center; margin-bottom: 48px;">
+        <span class="about-badge" style="margin-bottom: 12px;">✨ PROVEN IMPACT &amp; CASE STUDIES</span>
+        <h2 style="font-size: clamp(28px, 3.5vw, 48px); font-weight: 900; color: var(--text-main);">
+          Recent Client Work That <span style="color: #101b96;">Delivers Results</span>
+        </h2>
+        <p style="font-size: 16px; color: var(--text-muted); max-width: 640px; margin: 12px auto 0;">
+          Explore verified growth architectures, conversion funnels, and enterprise solutions built by Orbiverse.
+        </p>
+      </div>
+
+      <div style="width: 100%; overflow: hidden; position: relative;">
+        <div class="case-marquee-track">
+          
+          <!-- Card 1 (White): Ageaon -->
+          <div class="case-card-html" style="background: #ffffff; color: #090814; border: 1px solid #e5e7eb;">
+            <div>
+              <span style="font-size: 11px; font-weight: 800; text-transform: uppercase; color: #2563eb;">ENTERPRISE IT &amp; CLOUD</span>
+              <h3 style="font-size: 24px; font-weight: 900; margin-top: 4px; color: #090814;">Ageaon</h3>
+              <p style="font-size: 13px; line-height: 1.5; color: #4b5563; margin-top: 8px;">
+                Engineered scalable cloud infrastructure &amp; automated CI/CD pipeline for high-concurrency enterprise workloads.
+              </p>
+            </div>
+            <div class="case-card-img-wrap">
+              <img src="/case study.png" alt="Ageaon Case Study" />
+            </div>
+          </div>
+
+          <!-- Card 2 (Blue): Choicezz -->
+          <div class="case-card-html" style="background: #101b96; color: #ffffff; border: 1px solid #233bbd;">
+            <div>
+              <span style="font-size: 11px; font-weight: 800; text-transform: uppercase; color: #93c5fd;">E-COMMERCE &amp; MARKETPLACE</span>
+              <h3 style="font-size: 24px; font-weight: 900; margin-top: 4px; color: #ffffff;">Choicezz</h3>
+              <p style="font-size: 13px; line-height: 1.5; color: #dbeafe; margin-top: 8px;">
+                Built next-gen multi-vendor e-commerce platform with AI recommendation engine and instant checkout.
+              </p>
+            </div>
+            <div class="case-card-img-wrap">
+              <img src="/case study (2).png" alt="Choicezz Case Study" />
+            </div>
+          </div>
+
+          <!-- Card 3 (White): Vasishta Events -->
+          <div class="case-card-html" style="background: #ffffff; color: #090814; border: 1px solid #e5e7eb;">
+            <div>
+              <span style="font-size: 11px; font-weight: 800; text-transform: uppercase; color: #2563eb;">EVENT MANAGEMENT &amp; BOOKINGS</span>
+              <h3 style="font-size: 24px; font-weight: 900; margin-top: 4px; color: #090814;">Vasishta Events</h3>
+              <p style="font-size: 13px; line-height: 1.5; color: #4b5563; margin-top: 8px;">
+                Designed interactive event booking portal with automated lead distribution &amp; 3D decor preview tools.
+              </p>
+            </div>
+            <div class="case-card-img-wrap">
+              <img src="/case study (3).png" alt="Vasishta Events Case Study" />
+            </div>
+          </div>
+
+          <!-- Card 4 (Blue): Corebridge HR -->
+          <div class="case-card-html" style="background: #101b96; color: #ffffff; border: 1px solid #233bbd;">
+            <div>
+              <span style="font-size: 11px; font-weight: 800; text-transform: uppercase; color: #93c5fd;">SAAS &amp; HRTECH</span>
+              <h3 style="font-size: 24px; font-weight: 900; margin-top: 4px; color: #ffffff;">Corebridge HR</h3>
+              <p style="font-size: 13px; line-height: 1.5; color: #dbeafe; margin-top: 8px;">
+                Architected intelligent HR management SaaS automating payroll, attendance tracking, and onboarding.
+              </p>
+            </div>
+            <div class="case-card-img-wrap">
+              <img src="/case study (4).png" alt="Corebridge HR Case Study" />
+            </div>
+          </div>
+
+          <!-- Card 5 (White): Pragathi Mahavidyalaya -->
+          <div class="case-card-html" style="background: #ffffff; color: #090814; border: 1px solid #e5e7eb;">
+            <div>
+              <span style="font-size: 11px; font-weight: 800; text-transform: uppercase; color: #2563eb;">EDTECH &amp; INSTITUTIONS</span>
+              <h3 style="font-size: 24px; font-weight: 900; margin-top: 4px; color: #090814;">Pragathi Mahavidyalaya</h3>
+              <p style="font-size: 13px; line-height: 1.5; color: #4b5563; margin-top: 8px;">
+                Deployed comprehensive campus management system, digital admissions portal, and student app.
+              </p>
+            </div>
+            <div class="case-card-img-wrap">
+              <img src="/case study (5).png" alt="Pragathi Mahavidyalaya Case Study" />
+            </div>
+          </div>
+
+          <!-- Card 6 (Blue): Medsurgy -->
+          <div class="case-card-html" style="background: #101b96; color: #ffffff; border: 1px solid #233bbd;">
+            <div>
+              <span style="font-size: 11px; font-weight: 800; text-transform: uppercase; color: #93c5fd;">HEALTHCARE &amp; MEDICAL</span>
+              <h3 style="font-size: 24px; font-weight: 900; margin-top: 4px; color: #ffffff;">Medsurgy</h3>
+              <p style="font-size: 13px; line-height: 1.5; color: #dbeafe; margin-top: 8px;">
+                Integrated hospital operations portal with live ICU bed tracking and emergency doctor booking.
+              </p>
+            </div>
+            <div class="case-card-img-wrap">
+              <img src="/case study (6).png" alt="Medsurgy Case Study" />
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SECTION 5: 3-COLUMN VERTICAL SCROLLING TESTIMONIAL WALL
+         ==================================================================== -->
+    <section class="testimonials-section" id="testimonials">
+      <div style="text-align: center; margin-bottom: 48px;">
+        <span class="about-badge" style="margin-bottom: 12px;">✨ CLIENT REVIEWS &amp; VERIFIED IMPACT</span>
+        <h2 style="font-size: clamp(28px, 3.5vw, 48px); font-weight: 900; color: var(--text-main);">
+          What They're Saying
+        </h2>
+        <p style="font-size: 16px; color: var(--text-muted); max-width: 640px; margin: 12px auto 0;">
+          Hear from founders, COOs, and growth leaders who turned marketing drift into predictable revenue orbit.
+        </p>
+      </div>
+
+      <div class="v-scroll-wall">
+        
+        <!-- Column 1 -->
+        <div class="v-col">
+          <div class="v-col-track v-speed-1">
+            <div class="t-case-card">
+              <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80" alt="Case Study" />
+              <div style="position: relative; z-index: 2;">
+                <span style="font-size: 11px; font-weight: 800; text-transform: uppercase; background: rgba(0,0,0,0.5); padding: 4px 10px; border-radius: 9999px;">CASE STUDY</span>
+                <h3 style="font-size: 18px; font-weight: 900; margin-top: 8px;">How Puno Automated 80% of Lead Handling</h3>
+              </div>
+            </div>
+            <div class="t-quote-card">
+              <p style="font-size: 13.5px; line-height: 1.6; color: var(--text-main);">
+                "Our enrollment process used to require manual follow-ups. Now, Orbiverse handles lead qualification, scheduling, and CRM updates automatically. Conversion increased by 35% in one quarter."
+              </p>
+              <div style="margin-top: 16px; font-size: 13px; font-weight: 800; color: var(--text-main);">Daniel Kim</div>
+              <div style="font-size: 11.5px; color: var(--text-muted);">Founder, ScaleLabs Education</div>
+            </div>
+            <div class="t-quote-card">
+              <p style="font-size: 13.5px; line-height: 1.6; color: var(--text-main);">
+                "Security and compliance were major concerns for us. They designed an automation architecture that was enterprise-grade secure and hyper-efficient."
+              </p>
+              <div style="margin-top: 16px; font-size: 13px; font-weight: 800; color: var(--text-main);">Alex Johnson</div>
+              <div style="font-size: 11.5px; color: var(--text-muted);">Head of Operations, Finovate Consulting</div>
+            </div>
+            <!-- Duplicate for loop -->
+            <div class="t-case-card">
+              <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80" alt="Case Study" />
+              <div style="position: relative; z-index: 2;">
+                <span style="font-size: 11px; font-weight: 800; text-transform: uppercase; background: rgba(0,0,0,0.5); padding: 4px 10px; border-radius: 9999px;">CASE STUDY</span>
+                <h3 style="font-size: 18px; font-weight: 900; margin-top: 8px;">How Puno Automated 80% of Lead Handling</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Column 2 -->
+        <div class="v-col">
+          <div class="v-col-track v-speed-2">
+            <div class="t-quote-card">
+              <p style="font-size: 13.5px; line-height: 1.6; color: var(--text-main);">
+                "We were spending hours on repetitive tasks. Orbiverse's growth architecture saved us 30+ hours per week and dramatically improved our sales performance."
+              </p>
+              <div style="margin-top: 16px; font-size: 13px; font-weight: 800; color: var(--text-main);">David Lee</div>
+              <div style="font-size: 11.5px; color: var(--text-muted);">Founder, Aradio Studio</div>
+            </div>
+            <div class="t-quote-card">
+              <p style="font-size: 13.5px; line-height: 1.6; color: var(--text-main);">
+                "We struggled with inconsistent lead follow-ups. Now our CRM runs intelligently, leads are scored automatically, and demo bookings rose by 40%."
+              </p>
+              <div style="margin-top: 16px; font-size: 13px; font-weight: 800; color: var(--text-main);">Sarah Mitchell</div>
+              <div style="font-size: 11.5px; color: var(--text-muted);">COO, BrightPath SaaS</div>
+            </div>
+            <div class="t-quote-card">
+              <p style="font-size: 13.5px; line-height: 1.6; color: var(--text-main);">
+                "We were scaling fast but drowning in manual workflows. Their automation connected CRM, email, and attribution reporting into one intelligent flow."
+              </p>
+              <div style="margin-top: 16px; font-size: 13px; font-weight: 800; color: var(--text-main);">Jonathan Reed</div>
+              <div style="font-size: 11.5px; color: var(--text-muted);">Managing Director, Nexora Digital</div>
+            </div>
+            <!-- Duplicate for loop -->
+            <div class="t-quote-card">
+              <p style="font-size: 13.5px; line-height: 1.6; color: var(--text-main);">
+                "We were spending hours on repetitive tasks. Orbiverse's growth architecture saved us 30+ hours per week and dramatically improved our sales performance."
+              </p>
+              <div style="margin-top: 16px; font-size: 13px; font-weight: 800; color: var(--text-main);">David Lee</div>
+              <div style="font-size: 11.5px; color: var(--text-muted);">Founder, Aradio Studio</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Column 3 -->
+        <div class="v-col">
+          <div class="v-col-track v-speed-3">
+            <div class="t-case-card">
+              <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=800&q=80" alt="Case Study" />
+              <div style="position: relative; z-index: 2;">
+                <span style="font-size: 11px; font-weight: 800; text-transform: uppercase; background: rgba(0,0,0,0.5); padding: 4px 10px; border-radius: 9999px;">CASE STUDY</span>
+                <h3 style="font-size: 18px; font-weight: 900; margin-top: 8px;">Scaled Customer Acquisition by 4.2x</h3>
+              </div>
+            </div>
+            <div class="t-quote-card">
+              <p style="font-size: 13.5px; line-height: 1.6; color: var(--text-main);">
+                "Working with Orbiverse was seamless. Their data-driven PPC campaigns reduced our CAC by 28% while doubling qualified demo bookings within 60 days."
+              </p>
+              <div style="margin-top: 16px; font-size: 13px; font-weight: 800; color: var(--text-main);">Elena Rostova</div>
+              <div style="font-size: 11.5px; color: var(--text-muted);">VP of Growth, Vanguard Global</div>
+            </div>
+            <div class="t-quote-card">
+              <p style="font-size: 13.5px; line-height: 1.6; color: var(--text-main);">
+                "The first monthly report that showed which channel was actually working. In 60 days, our cost per acquisition dropped 42% while scaling spend."
+              </p>
+              <div style="margin-top: 16px; font-size: 13px; font-weight: 800; color: var(--text-main);">Vikramaditya Rao</div>
+              <div style="font-size: 11.5px; color: var(--text-muted);">Founder & CEO, Horizon Commerce</div>
+            </div>
+            <!-- Duplicate for loop -->
+            <div class="t-case-card">
+              <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=800&q=80" alt="Case Study" />
+              <div style="position: relative; z-index: 2;">
+                <span style="font-size: 11px; font-weight: 800; text-transform: uppercase; background: rgba(0,0,0,0.5); padding: 4px 10px; border-radius: 9999px;">CASE STUDY</span>
+                <h3 style="font-size: 18px; font-weight: 900; margin-top: 8px;">Scaled Customer Acquisition by 4.2x</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    // Smooth ticker from 0% to 100% over 2.6s
+    const startTime = performance.now();
+    const duration = 2600;
+    const numEl = document.getElementById('preloader-num');
+    const counterEl = document.getElementById('preloader-counter');
+    const overlayEl = document.getElementById('preloader-overlay');
+    const floatingLogo = document.getElementById('floating-logo');
+    const headerBar = document.getElementById('header-bar');
+    let finished = false;
+
+    function finishPreloader() {
+      if (finished) return;
+      finished = true;
+      numEl.textContent = '100';
+      const barFill = document.getElementById('preloader-bar-fill');
+      if (barFill) barFill.style.width = '100%';
+
+      // 1. Counter blurs and lifts out
+      counterEl.classList.add('is-fading');
+
+      // 2. Logo glides from center to EXACT header logo dock position
+      const dock = document.getElementById('header-logo-dock');
+      if (dock) {
+        const rect = dock.getBoundingClientRect();
+        floatingLogo.style.top = rect.top + 'px';
+        floatingLogo.style.left = rect.left + 'px';
+        floatingLogo.style.width = rect.width + 'px';
+        floatingLogo.style.height = rect.height + 'px';
+        floatingLogo.style.transform = 'translate(0, 0)';
+      } else {
+        floatingLogo.classList.add('is-docked');
+      }
+
+      // 3. Reveal Header and Hero
+      document.body.classList.add('intro-ready');
+      overlayEl.classList.add('is-hidden');
+
+      setTimeout(() => {
+        document.body.classList.add('logo-settled');
+        floatingLogo.style.display = 'none';
+      }, 1400);
+    }
+
+    function tick(now) {
+      if (finished) return;
+      const elapsed = now - startTime;
+      const p = Math.min(1, elapsed / duration);
+      const eased = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
+      const val = Math.min(99, Math.floor(eased * 100));
+      numEl.textContent = val;
+      const barFill = document.getElementById('preloader-bar-fill');
+      if (barFill) barFill.style.width = val + '%';
+
+      if (p < 1) {
+        requestAnimationFrame(tick);
+      } else {
+        finishPreloader();
+      }
+    }
+    requestAnimationFrame(tick);
+
+    // Sticky Header Scroll Behavior
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 30) {
+        headerBar.classList.add('is-sticky');
+      } else {
+        headerBar.classList.remove('is-sticky');
+      }
+
+      // Hero Text Parallax Shrink & Background Depth (Sticky Curtain Effect)
+      const scrollY = window.scrollY;
+      const maxRange = window.innerHeight || 800;
+      const p = Math.min(1, Math.max(0, scrollY / maxRange));
+      const heroContent = document.getElementById('hero-content-wrap');
+      const heroBgImg = document.getElementById('hero-bg-img-wrap');
+
+      if (heroContent) {
+        const scale = Math.max(0.68, 1 - p * 0.32);
+        const translateY = scrollY * 0.22;
+        const opacity = Math.max(0.08, 1 - p * 0.88);
+        heroContent.style.transform = `translate3d(0, ${translateY}px, 0) scale(${scale})`;
+        heroContent.style.opacity = opacity;
+      }
+      if (heroBgImg) {
+        const bgTranslateY = scrollY * 0.16;
+        const bgScale = 1 + p * 0.08;
+        heroBgImg.style.transform = `translate3d(0, ${bgTranslateY}px, 0) scale(${bgScale})`;
+      }
+    }, { passive: true });
+
+    // Theme Toggle
+    const themeBtn = document.getElementById('theme-btn');
+    themeBtn.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+    });
+  </script>
+
+    // About Section In-View Entrance Animations
+    const aboutSection = document.getElementById('about');
+    if (aboutSection) {
+      const aboutObserver = new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting) {
+          aboutSection.classList.add('in-view');
+        }
+      }, { threshold: 0.15 });
+      aboutObserver.observe(aboutSection);
+      setTimeout(() => aboutSection.classList.add('in-view'), 1600);
+    }
+</body>
+</html>

@@ -1,0 +1,199 @@
+@import "tailwindcss";
+
+:root {
+  --bg-color: #ffffff;
+  --text-main: #0c0b16;
+  --text-muted: #5e5a75;
+  --border-color: #e5e3f0;
+  --surface: #f9f8fe;
+  --surface-alt: #f0edfd;
+  --accent: #190a6e;
+  --accent-light: #5b3bd1;
+  --orbit-blue: #0b1a99;
+  --orbit-ring: rgba(11, 26, 153, 0.12);
+  --card-bg: #ffffff;
+  --badge-bg: #ede9fc;
+}
+
+[data-theme="dark"],
+.dark {
+  --bg-color: #07060f;
+  --text-main: #f3f1ff;
+  --text-muted: #9f9ab8;
+  --border-color: #211c3a;
+  --surface: #0e0c1c;
+  --surface-alt: #16122d;
+  --accent: #8e71ff;
+  --accent-light: #a994ff;
+  --orbit-blue: #6d7bff;
+  --orbit-ring: rgba(109, 123, 255, 0.15);
+  --card-bg: #120f24;
+  --badge-bg: #1e193d;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  overflow-x: clip;
+}
+
+h1, h2, h3, h4, .font-heading {
+  font-family: "Poppins", "Inter", sans-serif;
+  letter-spacing: -0.025em;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-color);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-light);
+}
+
+/* Orbit animation utility */
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 35s linear infinite;
+}
+
+/* Real Orbit Path Beam Flow */
+@keyframes orbit-beam {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: -490;
+  }
+}
+
+.animate-orbit-beam {
+  animation: orbit-beam 3.8s linear infinite;
+}
+
+/* Celestial Background Ambient Drift */
+@keyframes celestial-drift {
+  0%, 100% {
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+  50% {
+    transform: scale(1.025) translate3d(0, -8px, 0);
+  }
+}
+
+.animate-celestial-drift {
+  animation: celestial-drift 18s ease-in-out infinite;
+}
+
+/* Preloader & Entrance Animations */
+@keyframes preload-count-out {
+  to {
+    opacity: 0;
+    filter: blur(7px);
+    transform: translate(-50%, -34px);
+  }
+}
+
+@keyframes reveal-down {
+  from {
+    opacity: 0;
+    filter: blur(8px);
+    transform: translateY(-18px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+}
+
+@keyframes reveal-side {
+  from {
+    opacity: 0;
+    filter: blur(8px);
+    transform: translate(-20px, -43%);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translate(0, -43%);
+  }
+}
+
+@keyframes title-rise {
+  from {
+    opacity: 0;
+    filter: blur(12px);
+    transform: translate(-32px, 42px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translate(-32px, 0);
+  }
+}
+
+@keyframes fact-rise {
+  from {
+    opacity: 0;
+    filter: blur(7px);
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+}
+
+@keyframes portal-caption {
+  from {
+    opacity: 0;
+    filter: blur(7px);
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+}
+
+.animate-reveal-down {
+  animation: reveal-down 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
+}
+
+.animate-reveal-side {
+  animation: reveal-side 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.65s both;
+}
+
+.animate-title-rise {
+  animation: title-rise 1.05s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-fact-rise {
+  animation: fact-rise 0.72s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.animate-preload-count-out {
+  animation: preload-count-out 0.75s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
