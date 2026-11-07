@@ -1,163 +1,213 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
-import { Sparkles, ArrowRight, CheckCircle2 } from "lucide-react";
+import { Sparkles, ArrowRight } from "lucide-react";
 
-interface StepItem {
-  stepNum: string;
+export interface TimelineMilestone {
+  id: string;
+  quarter: string;
   title: string;
-  subtitle: string;
   desc: string;
-  deliverables: string[];
-  cardBg: string;
-  borderColor: string;
-  numBg: string;
+  calloutHeadline: string;
+  calloutSub: string;
 }
 
-const STEPS_DATA: StepItem[] = [
+const MILESTONES: TimelineMilestone[] = [
   {
-    stepNum: "01",
-    title: "Subscribe & Discovery Audit",
-    subtitle: "Aligning Business Vision, Audience & Market Dynamics",
-    desc: "We analyze your current digital landscape, identify operational friction, profile target customer personas, and set clear ROI targets.",
-    deliverables: ["Digital Architecture Audit", "User Persona Mapping", "Competitor Benchmark"],
-    cardBg: "#f7fee7",
-    borderColor: "rgba(132, 204, 22, 0.4)",
-    numBg: "#84cc16",
+    id: "q1",
+    quarter: "Q1",
+    title: "Audit & Align",
+    desc: "Review brand, website, ads and tracking to identify gaps.",
+    calloutHeadline: "Phase 01",
+    calloutSub: "Auditing brand, technical tracking & digital infrastructure.",
   },
   {
-    stepNum: "02",
-    title: "Let's Discuss & Architecture Plan",
-    subtitle: "Designing Scalable Tech & Conversion Systems",
-    desc: "We map out custom software architecture, interactive Figma UI/UX wireframes, database schemas, and multi-channel funnel blueprints.",
-    deliverables: ["Interactive Figma Wireframes", "Cloud Architecture Blueprint", "Funnel Architecture"],
-    cardBg: "#f0f9ff",
-    borderColor: "rgba(56, 189, 248, 0.4)",
-    numBg: "#0ea5e9",
+    id: "q2",
+    quarter: "Q2",
+    title: "Plan & Strategize",
+    desc: "Define the primary growth goal and build a focused strategy.",
+    calloutHeadline: "Phase 02",
+    calloutSub: "Defining single primary KPI and engineering conversion pathways.",
   },
   {
-    stepNum: "03",
-    title: "Agile Sprint Engineering & AI Integration",
-    subtitle: "High-Velocity Code, Responsive UI & Autonomous AI",
-    desc: "Our engineering squad builds your custom web platform, mobile app, CRM/ERP integration, or AI automation engine using modern frameworks.",
-    deliverables: ["React & Mobile Codebase", "Autonomous AI Chatbots", "ERP & Payment Sync"],
-    cardBg: "#faf5ff",
-    borderColor: "rgba(192, 132, 252, 0.4)",
-    numBg: "#a855f7",
+    id: "q3",
+    quarter: "Q3",
+    title: "Execute in Orbit",
+    desc: "Align SEO, paid ads, social media, content and website towards one goal.",
+    calloutHeadline: "We are Here",
+    calloutSub: "Where strategy, execution and data come together to drive real results.",
   },
   {
-    stepNum: "04",
-    title: "Zero-Downtime Go-Live Launch",
-    subtitle: "Cloud Infrastructure & High-Availability Go-Live",
-    desc: "We execute zero-downtime cloud deployments on AWS/Azure, conduct stress tests, verify security protocols, and launch your platform.",
-    deliverables: ["AWS / Azure Deployment", "Core Web Vitals Optimization", "24/7 Security Setup"],
-    cardBg: "#fffbeb",
-    borderColor: "rgba(251, 191, 36, 0.4)",
-    numBg: "#eab308",
-  },
-  {
-    stepNum: "05",
-    title: "And Booom! Project is Ready & Scaling!",
-    subtitle: "Maximizing Conversions, Performance & Growth",
-    desc: "Post-launch, we continuously monitor user analytics, optimize ad campaigns, refine conversion funnels, and scale infrastructure as demand grows.",
-    deliverables: ["A/B Conversion Testing", "Paid Performance Scaling", "Monthly Executive Reports"],
-    cardBg: "#ecfdf5",
-    borderColor: "rgba(16, 185, 129, 0.4)",
-    numBg: "#10b981",
+    id: "q4",
+    quarter: "Q4",
+    title: "Optimize & Scale",
+    desc: "Measure performance, cut wasted spend and scale winning campaigns.",
+    calloutHeadline: "Phase 04",
+    calloutSub: "Cutting wasted spend, compounding winners and scaling enterprise ROAS.",
   },
 ];
 
 export default function ProcessSection() {
+  const [activeQuarterIndex, setActiveQuarterIndex] = useState<number>(2);
+
   return (
     <section
-      id="process"
-      className="py-20 sm:py-28 bg-[var(--surface-alt)] border-b border-[var(--border-color)] relative overflow-hidden transition-colors duration-300"
+      id="how-it-works"
+      className="py-20 sm:py-28 bg-[#f8faff] dark:bg-[#06070d] text-neutral-900 dark:text-white border-b border-blue-200/80 dark:border-white/10 relative overflow-hidden transition-colors duration-300"
     >
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-          
-          {/* Left Column: Sticky Process Heading */}
-          <div className="lg:col-span-5 lg:sticky lg:top-28 reveal-fade-right">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#f3eeff] dark:bg-[#231b44] text-[#6d28d9] dark:text-[#c4b5fd] text-xs font-semibold mb-4 border border-[#e9d5ff]/60 dark:border-[#4c1d95]/40 shadow-2xs">
-              <Sparkles className="w-3.5 h-3.5 text-[#10b981]" />
-              <span>THE ORBIVERSE METHODOLOGY</span>
+        
+        {/* ==================================================================== */}
+        {/* SECTION HEADER                                                       */}
+        {/* ==================================================================== */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 sm:mb-16 pb-8 border-b border-blue-200 dark:border-white/10">
+          <div className="reveal-fade-right">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-blue-100 dark:bg-white/10 text-[#101b96] dark:text-blue-300 border border-blue-200 dark:border-white/15 mb-3">
+              <Sparkles className="w-3.5 h-3.5 text-[#101b96] dark:text-blue-400" />
+              <span>ORBIVERSE · EXECUTION TIMELINE</span>
             </div>
-
-            <h2 className="font-heading font-black tracking-[-0.035em] text-3xl sm:text-4xl lg:text-5xl text-[var(--text-main)] leading-tight mb-5">
-              How We Turn Ideas Into{" "}
-              <span className="text-[#101b96] dark:text-[#7d8eff]">
-                High-Converting Realities
-              </span>
+            <h2 className="font-heading font-black tracking-[-0.035em] text-3xl sm:text-4xl lg:text-5xl text-neutral-900 dark:text-white leading-[1.12]">
+              How It Works – <span className="text-[#101b96] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r dark:from-blue-400 dark:via-indigo-300 dark:to-purple-300">The Orbit Method</span>
             </h2>
-
-            <p className="text-base sm:text-lg text-[var(--text-muted)] leading-relaxed mb-8">
-              A transparent, battle-tested 5-phase delivery sprint engineered to eliminate guesswork, accelerate go-to-market, and compound enterprise revenue.
+            <p className="text-sm sm:text-base text-neutral-600 dark:text-neutral-400 mt-2 max-w-xl">
+              From audit to exponential scale: a minimalist roadmap built on data, precision, and verified returns.
             </p>
+          </div>
 
+          <div className="flex flex-col items-start md:items-end justify-end flex-shrink-0 reveal-fade-left delay-100">
             <Link
               href="/drift-audit"
-              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#101b96] hover:bg-[#0c1575] text-white text-sm font-semibold transition-all shadow-md hover:scale-[1.02] active:scale-[0.98]"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold bg-[#101b96] text-white hover:bg-[#0c1575] transition-all shadow-md hover:scale-105"
             >
-              <span>Start Your Transformation</span>
+              <span>Book Your Drift Audit</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
+        </div>
 
-          {/* Right Column: 5 Process Steps */}
-          <div className="lg:col-span-7 flex flex-col gap-6">
-            {STEPS_DATA.map((step, idx) => {
-              const delayClass = idx === 0 ? "delay-100" : idx === 1 ? "delay-200" : idx === 2 ? "delay-300" : idx === 3 ? "delay-400" : "delay-500";
+        {/* ==================================================================== */}
+        {/* 4-BOX GRID ROADMAP (FLUSH SHARP EDGES, HANGING LINE & MIDDLE AXIS)  */}
+        {/* ==================================================================== */}
+        <div className="relative w-full border border-blue-200/90 dark:border-white/15 shadow-xl overflow-hidden reveal-fade-up rounded-none">
+          
+          {/* Continuous Middle Horizontal Line across all 4 boxes from left to right */}
+          <div className="hidden lg:block absolute left-0 right-0 top-[220px] h-[2px] bg-gradient-to-r from-blue-300 via-blue-400 to-blue-300 dark:from-white/20 dark:via-blue-400/40 dark:to-white/20 z-10 pointer-events-none" />
+
+          {/* 4 Columns Grid (Sharp Corners / No Border Radius) */}
+          <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 items-stretch divide-y lg:divide-y-0 lg:divide-x divide-blue-200/90 dark:divide-white/15">
+            {MILESTONES.map((milestone, idx) => {
+              const isHighlighted = activeQuarterIndex === idx;
+
               return (
                 <div
-                  key={step.stepNum}
-                  className={`rounded-3xl p-6 sm:p-8 bg-white dark:bg-[#110e24] border border-neutral-200/90 dark:border-neutral-800 shadow-xs hover:shadow-xl hover:-translate-y-1 transition-all duration-300 reveal-fade-left ${delayClass}`}
+                  key={milestone.id}
+                  onClick={() => setActiveQuarterIndex(idx)}
+                  className={`group cursor-pointer relative flex flex-col justify-between transition-all duration-300 rounded-none ${
+                    isHighlighted
+                      ? "text-white shadow-2xl z-20"
+                      : "text-neutral-900 dark:text-neutral-100 hover:brightness-95 dark:hover:brightness-110 z-10"
+                  }`}
+                  style={
+                    isHighlighted
+                      ? {
+                          // Blue for the active one (Logo Dark Blue Gradient)
+                          background:
+                            "linear-gradient(180deg, #101b96 0%, #12197a 45%, #090d3d 100%)",
+                        }
+                      : {
+                          // White and blue gradient for normal ones
+                          background:
+                            "linear-gradient(180deg, #ffffff 0%, #f0f6ff 50%, #dbeafe 100%)",
+                        }
+                  }
                 >
-                  <div className="flex items-start justify-between gap-4 mb-4">
-                  <div>
-                    <span className="text-xs font-bold uppercase tracking-wider text-[#2563eb] dark:text-[#60a5fa]">
-                      Phase {step.stepNum}
-                    </span>
-                    <h3 className="text-xl sm:text-2xl font-black text-neutral-900 dark:text-white tracking-tight mt-1">
-                      {step.title}
-                    </h3>
-                    <p className="text-xs sm:text-[13px] font-semibold text-neutral-500 dark:text-neutral-400 mt-1">
-                      {step.subtitle}
+                  {/* TOP HALF: Vertical Line Hanging Down from the Very Top to the Middle Node */}
+                  <div className="relative h-[220px] flex flex-col items-center justify-end px-7 pt-6">
+                    {/* Active one has callout text at top */}
+                    {isHighlighted ? (
+                      <div className="w-full text-left mb-auto">
+                        <span className="text-[11px] font-mono uppercase tracking-widest text-blue-200 block mb-1 font-semibold">
+                          Future Roadmap
+                        </span>
+                        <h3 className="font-heading font-black text-2xl sm:text-3xl text-white tracking-tight leading-tight">
+                          {milestone.calloutHeadline}
+                        </h3>
+                        <p className="text-xs text-blue-100 leading-relaxed font-normal mt-1 max-w-[240px]">
+                          {milestone.calloutSub}
+                        </p>
+                      </div>
+                    ) : null}
+
+                    {/* Hanging Vertical Line: Drops from the Top and stops at the Middle Ball */}
+                    <div
+                      className={`w-[2px] transition-all duration-300 ${
+                        isHighlighted
+                          ? "h-16 bg-white/60 mb-0"
+                          : "h-full bg-[#60a5fa] group-hover:bg-[#2563eb]"
+                      }`}
+                    />
+
+                    {/* Centered Node / Ball on the Middle Horizontal Line (Exact Match to User Image) */}
+                    <div className="absolute -bottom-[14px] left-1/2 -translate-x-1/2 z-20 flex items-center justify-center">
+                      {isHighlighted ? (
+                        <div className="w-7 h-7 rounded-full bg-white border-2 border-white flex items-center justify-center shadow-[0_0_18px_rgba(255,255,255,0.95)] ring-4 ring-blue-400/40">
+                          <span className="w-3 h-3 rounded-full bg-[#101b96]" />
+                        </div>
+                      ) : (
+                        <div className="w-7 h-7 rounded-full bg-white border-2 border-[#2563eb] flex items-center justify-center shadow-[0_4px_12px_rgba(37,99,235,0.25)] group-hover:scale-110 group-hover:border-[#101b96] transition-transform">
+                          <span className="w-2.5 h-2.5 rounded-full bg-[#101b96]" />
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* BOTTOM HALF: Content Placed Below the Horizontal Line */}
+                  <div className="flex-1 flex flex-col justify-start pt-12 pb-8 px-7 sm:px-8">
+                    {/* Quarter Label */}
+                    <div className="mb-2">
+                      <span
+                        className={`font-heading font-black text-3xl sm:text-4xl tracking-tight block ${
+                          isHighlighted
+                            ? "text-white"
+                            : "text-[#101b96]"
+                        }`}
+                      >
+                        {milestone.quarter}
+                      </span>
+                    </div>
+
+                    {/* Title */}
+                    <h4
+                      className={`font-heading font-bold text-lg sm:text-xl tracking-tight leading-snug mb-2 ${
+                        isHighlighted
+                          ? "text-white"
+                          : "text-neutral-900 dark:text-white"
+                      }`}
+                    >
+                      {milestone.title}
+                    </h4>
+
+                    {/* Description */}
+                    <p
+                      className={`text-xs sm:text-[13px] leading-relaxed font-normal ${
+                        isHighlighted
+                          ? "text-blue-100"
+                          : "text-neutral-700 dark:text-neutral-300"
+                      }`}
+                    >
+                      {milestone.desc}
                     </p>
                   </div>
 
-                  <div
-                    className="w-12 h-12 rounded-2xl flex items-center justify-center text-white font-mono font-black text-lg flex-shrink-0 shadow-sm"
-                    style={{ backgroundColor: step.numBg }}
-                  >
-                    {step.stepNum}
-                  </div>
                 </div>
+              );
+            })}
+          </div>
 
-                <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-300 leading-relaxed mb-6 font-normal">
-                  {step.desc}
-                </p>
-
-                {/* Deliverables Tags */}
-                <div className="flex flex-wrap gap-2 pt-4 border-t border-neutral-100 dark:border-white/5">
-                  {step.deliverables.map((item, i) => (
-                    <span
-                      key={i}
-                      className="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1 rounded-full bg-neutral-100 dark:bg-white/5 text-neutral-700 dark:text-neutral-300"
-                    >
-                      <CheckCircle2 className="w-3.5 h-3.5 text-[#10b981]" />
-                      <span>{item}</span>
-                    </span>
-                  ))}
-                </div>
-              </div>
-            );
-          })}
         </div>
 
-        </div>
       </div>
     </section>
   );
 }
-

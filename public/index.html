@@ -1035,36 +1035,153 @@
       transform: scale(1.05);
     }
 
-    /* PROCESS SECTION */
+    /* HOW IT WORKS / ORBIT METHOD INFOGRAPHIC */
     .process-section {
-      padding: 96px 24px;
-      background: var(--bg-color);
-      border-bottom: 1px solid var(--border-color);
+      padding: 96px 24px 110px;
+      background: #06070d;
+      color: #ffffff;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      position: relative;
+      overflow: hidden;
     }
-    .process-grid-layout {
-      display: grid;
-      grid-template-columns: 1fr 1.4fr;
-      gap: 56px;
-      align-items: flex-start;
+    .infographic-frame {
+      max-width: 1400px;
+      margin: 0 auto;
+      border-radius: 32px;
+      background: #08080c;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 48px;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7);
+      position: relative;
+      overflow: hidden;
+    }
+    @media (max-width: 768px) {
+      .infographic-frame {
+        padding: 24px;
+      }
+    }
+    .infographic-bg-glow {
+      position: absolute;
+      top: -100px;
+      right: -100px;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(37, 99, 235, 0.22) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .infographic-top-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: monospace;
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.45);
+      margin-bottom: 24px;
+      letter-spacing: 0.05em;
+    }
+    .infographic-top-line {
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
+      width: 100%;
+    }
+    .infographic-mid-line {
+      position: absolute;
+      left: 48px;
+      right: 48px;
+      top: 310px;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.2);
+      z-index: 1;
+      pointer-events: none;
     }
     @media (max-width: 991px) {
-      .process-grid-layout {
+      .infographic-mid-line {
+        display: none;
+      }
+    }
+    .infographic-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      position: relative;
+      z-index: 2;
+    }
+    @media (max-width: 991px) {
+      .infographic-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (max-width: 640px) {
+      .infographic-grid {
         grid-template-columns: 1fr;
       }
     }
-    .process-step-card {
-      border-radius: 24px;
-      padding: 32px;
-      background: var(--bg-color);
-      border: 1px solid var(--border-color);
-      margin-bottom: 24px;
-      transition: transform .3s ease, box-shadow .3s ease;
+    .infographic-col {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 24px 20px;
+      position: relative;
+      transition: transform .3s ease;
     }
-    .process-step-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+    .infographic-col-highlighted {
+      background: linear-gradient(180deg, #3b82f6 0%, #6366f1 22%, #8b5cf6 44%, #ea580c 78%, #f97316 100%) !important;
+      border-radius: 28px;
+      padding: 32px 28px;
+      box-shadow: 0 25px 70px rgba(234, 88, 12, 0.35);
+      margin-top: -16px;
+      margin-bottom: -16px;
+      z-index: 3;
     }
-
+    @media (max-width: 991px) {
+      .infographic-col-highlighted {
+        margin: 0;
+      }
+    }
+    .infographic-node-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 28px 0;
+      position: relative;
+    }
+    .infographic-guideline {
+      width: 1px;
+      height: 70px;
+      background: rgba(255, 255, 255, 0.15);
+      margin-bottom: 12px;
+    }
+    .infographic-col-highlighted .infographic-guideline {
+      background: rgba(255, 255, 255, 0.4);
+    }
+    .infographic-node {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: #08080c;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .infographic-node-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #ffffff;
+      box-shadow: 0 0 8px rgba(255, 255, 255, 0.9);
+    }
+    .infographic-col-highlighted .infographic-node {
+      width: 32px;
+      height: 32px;
+      background: rgba(255, 255, 255, 0.2);
+      border: 2px solid #ffffff;
+      outline: 4px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 0 24px rgba(255, 255, 255, 0.95);
+    }
+    .infographic-col-highlighted .infographic-node-dot {
+      width: 12px;
+      height: 12px;
+    }
     /* TESTIMONIALS 3-COLUMN VERTICAL */
     .testimonials-section {
       padding: 96px 24px;
@@ -1140,56 +1257,384 @@
     /* ====================================================================
        SERVICES STACKING CARDS (MATCHING REFERENCE DESIGN & STACK ANIMATION)
        ==================================================================== */
+            /* ====================================================================
+       SERVICES SECTION (WHITE BACKGROUND, CLEAN FIRST IMAGE -> LATER CONTENT, TRANSPARENT CONTENT BG)
+       ==================================================================== */
     .services-stack-section {
-      padding: 96px 24px 120px;
-      background: var(--bg-color);
-      border-bottom: 1px solid var(--border-color);
       position: relative;
-    }
-    .services-stack-header {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: flex-end;
-      gap: 24px;
-      margin-bottom: 64px;
-      padding-bottom: 32px;
+      min-height: 185vh;
+      background: #ffffff;
+      color: #0d0c15;
       border-bottom: 1px solid var(--border-color);
+      overflow: visible;
+      transition: background-color .3s ease;
+      padding-top: 32px;
     }
-    @media (max-width: 768px) {
-      .services-stack-header {
-        flex-direction: column;
-        align-items: flex-start;
+    @media (min-width: 993px) {
+      .services-stack-section {
+        padding-top: 0;
+      }
+    }
+    [data-theme="dark"] .services-stack-section {
+      background: #070612;
+      color: #ffffff;
+      border-bottom-color: rgba(255, 255, 255, 0.08);
+    }
+    .services-sticky-stage {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      width: 100%;
+      height: 52vh;
+      min-height: 360px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding-top: 16px;
+      pointer-events: none;
+      user-select: none;
+      overflow: visible;
+    }
+    @media (min-width: 993px) {
+      .services-sticky-stage {
+        height: 100vh;
+        min-height: auto;
+        padding-top: 0;
+      }
+    }
+    .orb-stage-glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: clamp(320px, 85vw, 580px);
+      height: clamp(320px, 85vw, 580px);
+      border-radius: 9999px;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.22) 0%, rgba(37, 99, 235, 0.12) 45%, transparent 70%);
+      filter: blur(80px);
+      pointer-events: none;
+      animation: pulse-slow 3.5s ease-in-out infinite;
+    }
+    [data-theme="dark"] .orb-stage-glow {
+      background: radial-gradient(circle, rgba(37, 99, 235, 0.4) 0%, rgba(6, 182, 212, 0.3) 50%, transparent 75%);
+      filter: blur(100px);
+    }
+    @keyframes pulse-slow {
+      0%, 100% { opacity: 0.8; transform: translate(-50%, -50%) scale(1); }
+      50% { opacity: 1; transform: translate(-50%, -50%) scale(1.06); }
+    }
+    .orb-sticky-fade-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transform: scale(0.85);
+      will-change: transform, opacity;
+      transition: opacity 0.1s ease-out, transform 0.1s ease-out;
+    }
+    .orb-stage-tilt-wrap {
+      position: relative;
+      z-index: 10;
+      width: clamp(330px, 88vw, 620px);
+      height: clamp(330px, 88vw, 620px);
+      will-change: transform;
+      animation: orb-float 7s ease-in-out infinite;
+      -webkit-mask-image: linear-gradient(to bottom, black 0%, black 50%, rgba(0,0,0,0.85) 65%, rgba(0,0,0,0.4) 76%, rgba(0,0,0,0.08) 84%, transparent 88%, transparent 100%);
+      mask-image: linear-gradient(to bottom, black 0%, black 50%, rgba(0,0,0,0.85) 65%, rgba(0,0,0,0.4) 76%, rgba(0,0,0,0.08) 84%, transparent 88%, transparent 100%);
+    }
+    .orb-stage-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: top center;
+      filter: drop-shadow(0 25px 60px rgba(37, 99, 235, 0.22));
+      user-select: none;
+      transform: scale(1);
+    }
+    @media (min-width: 993px) {
+      .orb-stage-img {
+        transform: scale(1);
+      }
+    }
+    [data-theme="dark"] .orb-stage-img {
+      filter: drop-shadow(0 25px 65px rgba(56, 189, 248, 0.45));
+    }
+    .services-content-curtain {
+      position: relative;
+      z-index: 20;
+      margin-top: -24px !important;
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+      padding: 0 0 100px;
+    }
+    @media (min-width: 993px) {
+      .services-content-curtain {
+        margin-top: 0 !important;
+        padding: 32px 0 110px;
       }
     }
     .services-stack-title-h2 {
-      font-family: var(--font-heading);
-      font-size: clamp(28px, 3.6vw, 46px);
+      color: var(--text-main);
+      font-size: clamp(28px, 3.2vw, 44px);
       font-weight: 900;
-      color: var(--text-main);
-      line-height: 1.12;
       letter-spacing: -0.03em;
+      line-height: 1.15;
     }
-    .services-stack-link {
+    .services-stack-subtitle {
       font-size: 15px;
-      font-weight: 700;
-      color: var(--text-main);
-      border-bottom: 2px solid var(--text-main);
-      padding-bottom: 2px;
+      color: var(--text-muted);
+      margin-top: 10px;
+      max-width: 580px;
+      line-height: 1.6;
+    }
+    .services-header-cta-btn {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      transition: color .2s ease, border-color .2s ease;
+      gap: 8px;
+      padding: 13px 26px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 700;
+      background: #0d0c15;
+      color: #ffffff;
+      text-decoration: none;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      transition: all .2s ease;
     }
-    .services-stack-link:hover {
+    .services-header-cta-btn:hover {
+      opacity: 0.92;
+      transform: translateY(-2px);
+    }
+    [data-theme="dark"] .services-header-cta-btn {
+      background: #ffffff;
+      color: #0d0c15;
+    }
+    .services-reference-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 48px;
+      align-items: flex-start;
+      margin-top: 24px;
+    }
+    .services-reference-grid.reverse-layout {
+      grid-template-columns: 0.85fr 1.15fr;
+    }
+    @media (max-width: 992px) {
+      .services-reference-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .services-reference-grid.reverse-layout {
+        grid-template-columns: 1fr;
+      }
+      .services-reference-grid.reverse-layout .services-preview-column {
+        order: 2;
+      }
+      .services-reference-grid.reverse-layout .services-nav-list {
+        order: 1;
+      }
+    }
+    .services-category-divider {
+      margin: 80px 0 36px;
+      padding-top: 56px;
+      border-top: 1px solid var(--border-color);
+    }
+    .services-category-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 14px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: rgba(16, 27, 150, 0.08);
       color: #101b96;
-      border-color: #101b96;
+      border: 1px solid rgba(16, 27, 150, 0.15);
+      margin-bottom: 12px;
     }
-    [data-theme="dark"] .services-stack-link:hover {
-      color: #7d8eff;
-      border-color: #7d8eff;
+    [data-theme="dark"] .services-category-badge {
+      background: rgba(96, 165, 250, 0.12);
+      color: #93c5fd;
+      border-color: rgba(96, 165, 250, 0.25);
     }
-    .service-cat-heading-row {
+    .services-category-heading {
+      font-family: var(--font-heading);
+      font-size: clamp(26px, 3.2vw, 40px);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      color: var(--text-main);
+      line-height: 1.18;
+    }
+    .services-category-subtext {
+      font-size: 15px;
+      color: var(--text-muted);
+      max-width: 660px;
+      margin-top: 8px;
+      line-height: 1.6;
+    }
+    .services-nav-list {
+      display: flex;
+      flex-direction: column;
+    }
+    .service-nav-item {
+      display: flex;
+      align-items: baseline;
+      gap: 24px;
+      padding: 22px 0;
+      border-bottom: 1px solid var(--border-color);
+      cursor: pointer;
+      user-select: none;
+      opacity: 0.45;
+      transition: opacity .3s cubic-bezier(0.16, 1, 0.3, 1), transform .3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .service-nav-item:hover {
+      opacity: 0.78;
+    }
+    .service-nav-item.is-active {
+      opacity: 1;
+    }
+    .service-nav-num {
+      font-family: monospace;
+      font-size: clamp(20px, 2.2vw, 28px);
+      font-weight: 800;
+      color: var(--text-muted);
+      width: 44px;
+      flex-shrink: 0;
+      transition: color .3s ease;
+    }
+    .service-nav-item.is-active .service-nav-num {
+      color: #101b96;
+    }
+    [data-theme="dark"] .service-nav-item.is-active .service-nav-num {
+      color: #60a5fa;
+    }
+    .service-nav-title {
+      font-family: var(--font-heading);
+      font-size: clamp(22px, 2.4vw, 34px);
+      font-weight: 600;
+      color: var(--text-muted);
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+      transition: color .3s ease, transform .3s ease, font-weight .3s ease;
+    }
+    .service-nav-item.is-active .service-nav-title {
+      font-weight: 900;
+      color: var(--text-main);
+      transform: translateX(8px);
+    }
+    .services-preview-column {
+      position: sticky;
+      top: 100px;
+    }
+    .service-preview-card {
+      border-radius: 28px;
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      padding: 24px;
+      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.06);
+      transition: all .3s ease;
+    }
+    [data-theme="dark"] .service-preview-card {
+      background: rgba(12, 10, 29, 0.9);
+      box-shadow: 0 16px 50px rgba(0, 0, 0, 0.7);
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+    .service-preview-img-box {
+      position: relative;
+      width: 100%;
+      height: 260px;
+      border-radius: 20px;
+      overflow: hidden;
+      background: #f8fafc;
+      border: 1px solid var(--border-color);
+    }
+    .service-preview-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      transition: transform .7s cubic-bezier(0.16, 1, 0.3, 1), opacity .3s ease;
+    }
+    .service-preview-img-box:hover .service-preview-img {
+      transform: scale(1.04);
+    }
+    .service-preview-expand-badge {
+      position: absolute;
+      bottom: 14px;
+      right: 14px;
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+      background: rgba(13, 12, 21, 0.85);
+      backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+      border: 1px solid rgba(255,255,255,0.2);
+      text-decoration: none;
+      transition: transform .2s ease;
+    }
+    .service-preview-expand-badge:hover {
+      transform: scale(1.1);
+    }
+    .service-preview-desc {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-top: 18px;
+      min-height: 68px;
+    }
+    .service-preview-action-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-top: 18px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border-color);
+    }
+    .service-preview-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 22px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+      background: #0d0c15;
+      color: #ffffff;
+      text-decoration: none;
+      transition: all .2s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+    .service-preview-btn:hover {
+      opacity: 0.92;
+      transform: translateY(-1px);
+    }
+    [data-theme="dark"] .service-preview-btn {
+      background: #ffffff;
+      color: #0d0c15;
+    }
+    .service-preview-tag {
+      font-family: monospace;
+      font-size: 11px;
+      font-weight: 800;
+      color: #101b96;
+      letter-spacing: .05em;
+    }
+    [data-theme="dark"] .service-preview-tag {
+      color: #93c5fd;
+    }
+.service-cat-heading-row {
       display: flex;
       flex-direction: row;
       justify-content: space-between;
@@ -1707,84 +2152,217 @@
     <!-- ====================================================================
          SECTION: SERVICES STACKING CARDS (MATCHING REFERENCE SCREENSHOT)
          ==================================================================== -->
+    <!-- ====================================================================
+         STAGE 1: 3D GLOWING ORB SHOWCASE (AFTER ABOUT US)
+         Asset: /5f3930af-e5d2-4427-ac77-bc6c089cfa0c.png
+         ==================================================================== -->
+    <div class="orb-showcase-stage reveal-fade-up">
+      <div class="orb-showcase-glow-1"></div>
+      <div class="orb-showcase-glow-2"></div>
+      
+      <div class="orb-showcase-badge">
+        <span>✦ CORE ARCHITECTURE &amp; CAPABILITIES</span>
+      </div>
+
+      <div class="orb-showcase-img-wrap reveal-scale-up">
+        <img src="/5f3930af-e5d2-4427-ac77-bc6c089cfa0c.png" alt="Orbiverse Core Engine" class="orb-showcase-img" />
+      </div>
+    </div>
+
+    <!-- ====================================================================
+         STAGE 2: SERVICES SECTION WITH NEGATIVE MARGIN-TOP COVERING 30% OF IMAGE
+         ==================================================================== -->
+    <!-- ====================================================================
+         ONE UNIFIED SERVICES SECTION (WHITE BACKGROUND, 3D ORB PARALLAX + SERVICES)
+         ==================================================================== -->
+    <!-- ====================================================================
+         ONE UNIFIED SERVICES SECTION (WHITE BACKGROUND, 3D ORB PARALLAX + SERVICES)
+         ==================================================================== -->
+    <!-- ====================================================================
+         ONE UNIFIED SERVICES SECTION (1. FIRST IMAGE WITH SUNSET EFFECT -> 2. HEADING & SERVICES)
+         ==================================================================== -->
+    <!-- ====================================================================
+         STICKY SERVICES SECTION (IMAGE STICKS & SLOWLY FADES IN LIKE HERO -> CONTENT SLIDES OVER)
+         ==================================================================== -->
+        <!-- ====================================================================
+         SERVICES SECTION (DARK IMMERSIVE BACKGROUND: HAND FULLY VISIBLE & STICKY FADE-IN)
+         ==================================================================== -->
+        <!-- ====================================================================
+         SERVICES SECTION (WHITE BACKGROUND, CLEAN FIRST IMAGE -> LATER CONTENT, NO CONTENT BG)
+         ==================================================================== -->
     <section class="services-stack-section" id="services">
-      <div class="about-container">
-        
-        <!-- Main Header (Exact 1:1 Reference Screenshot Layout) -->
-        <div class="services-stack-header reveal-fade-up">
-          <div>
-            <h2 class="services-stack-title-h2">
-              Enjoy all these benefits<br>when you partner with us.
-            </h2>
-          </div>
-          <div>
-            <a href="/drift-audit" class="services-stack-link reveal-fade-left delay-100">
-              <span>Ready to get started? Contact us</span>
-            </a>
+      
+      <!-- 1. STICKY SCREEN STAGE: IMAGE FADES IN & SUNSET FADES OUT -->
+      <div class="services-sticky-stage">
+        <div class="orb-sticky-fade-wrap" id="orb-sticky-fade-wrap">
+          <div class="orb-stage-glow"></div>
+          <div class="orb-stage-tilt-wrap" id="orb-stage-tilt-wrap">
+            <img src="/5f3930af-e5d2-4427-ac77-bc6c089cfa0c.png" alt="Orbiverse Core Engine" class="orb-stage-img" />
           </div>
         </div>
+      </div>
 
-        <!-- STACKING CARDS CONTAINER (1:1 SCREENSHOT CARDS & STACK ANIMATION) -->
-        <div class="services-stack-container">
-
-          <!-- Card 01 -->
-          <div class="service-stack-card reveal-fade-up delay-100" style="top: 100px; z-index: 11;">
-            <div class="service-stack-card-inner">
-              <div class="service-stack-img-wrap">
-                <img src="/bdb38855-3775-42ba-8d23-f32c41f2e827.webp" alt="Hit sustainability targets" loading="lazy" />
-              </div>
-              <div class="service-stack-num">01</div>
-              <div>
-                <h3 class="service-stack-title">Hit sustainability targets</h3>
-                <p class="service-stack-desc">
-                  This is a complete, comprehensive service. We manage the whole process end-to-end to deliver a future-focused solution. From initial design to ongoing operation and customer service.
-                </p>
-              </div>
+      <!-- 2. CONTENT WRAP: NO CONTENT BACKGROUND (TRANSPARENT, NO OVERLAY) -->
+      <div class="services-content-curtain">
+        <div class="about-container">
+          
+          <!-- Header Row (Left Side Heading, Right Side Contact Now Button) -->
+          <div class="services-stack-header reveal-fade-up">
+            <div>
+              <div class="services-category-badge" style="margin-bottom: 12px;">GROWTH &amp; PERFORMANCE MARKETING</div>
+              <h2 class="services-stack-title-h2">
+                High-Impact Services Built for Scale.
+              </h2>
+              <p class="services-stack-subtitle">
+                Full-funnel growth architecture engineered to move your business from drift into high-velocity orbit.
+              </p>
+            </div>
+            <div>
+              <a href="/drift-audit" class="services-header-cta-btn reveal-fade-left delay-100">
+                <span>Contact Now</span>
+                <span>→</span>
+              </a>
             </div>
           </div>
 
-          <!-- Card 02 -->
-          <div class="service-stack-card reveal-fade-up delay-200" style="top: 130px; z-index: 12;">
-            <div class="service-stack-card-inner">
-              <div class="service-stack-img-wrap">
-                <img src="/who we are.webp" alt="Generate revenue" loading="lazy" />
+          <!-- Services Reference Grid 1: GROWTH (01-05: List on LEFT, Card on RIGHT) -->
+          <div class="services-reference-grid">
+            
+            <!-- Left Column: Numbered List -->
+            <div class="services-nav-list reveal-fade-right delay-100">
+              <div class="service-nav-item service-nav-item-growth is-active" data-index="0">
+                <span class="service-nav-num">01</span>
+                <span class="service-nav-title">Performance Marketing & Paid Ads</span>
               </div>
-              <div class="service-stack-num">02</div>
-              <div>
-                <h3 class="service-stack-title">Generate revenue</h3>
-                <p class="service-stack-desc">
-                  We understand this is a significant investment for you. Our expert team will go the extra mile to successfully monetise your parking infrastructure, giving visibility on how you achieve a return on your investment.
-                </p>
+              <div class="service-nav-item service-nav-item-growth" data-index="1">
+                <span class="service-nav-num">02</span>
+                <span class="service-nav-title">Conversion Rate Optimization (CRO)</span>
+              </div>
+              <div class="service-nav-item service-nav-item-growth" data-index="2">
+                <span class="service-nav-num">03</span>
+                <span class="service-nav-title">Technical SEO & Search Authority</span>
+              </div>
+              <div class="service-nav-item service-nav-item-growth" data-index="3">
+                <span class="service-nav-num">04</span>
+                <span class="service-nav-title">Brand Positioning & Creative Engine</span>
+              </div>
+              <div class="service-nav-item service-nav-item-growth" data-index="4">
+                <span class="service-nav-num">05</span>
+                <span class="service-nav-title">Autonomous AI & CRM Pipeline Velocity</span>
               </div>
             </div>
+
+            <!-- Right Column: Active Preview Card -->
+            <div class="services-preview-column reveal-fade-left delay-200">
+              <div class="service-preview-card" id="service-preview-card">
+                
+                <!-- Image with Corner Expand Badge -->
+                <div class="service-preview-img-box">
+                  <img id="preview-img" src="/8d0b0df3-565f-498c-98b5-f5cd61d4d7f9.webp" alt="Performance Marketing" class="service-preview-img" />
+                  <a href="/drift-audit" id="preview-expand-btn" class="service-preview-expand-badge" title="Expand Service">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="15 3 21 3 21 9"></polyline>
+                      <polyline points="9 21 3 21 3 15"></polyline>
+                      <line x1="21" y1="3" x2="14" y2="10"></line>
+                      <line x1="3" y1="21" x2="10" y2="14"></line>
+                    </svg>
+                  </a>
+                </div>
+
+                <!-- Description -->
+                <p class="service-preview-desc" id="preview-desc">
+                  We construct data-driven ad campaigns across Google Search, Meta (Instagram & Facebook), YouTube, and LinkedIn. Every dollar of ad spend is measured on one metric: net pipeline revenue.
+                </p>
+
+                <!-- Button Row -->
+                <div class="service-preview-action-row">
+                  <a href="/drift-audit" id="preview-btn" class="service-preview-btn">
+                    <span id="preview-btn-text">Explore Performance Marketing</span>
+                    <span>→</span>
+                  </a>
+                  <span class="service-preview-tag" id="preview-tag">PAID MEDIA & PPC</span>
+                </div>
+
+              </div>
+            </div>
+
           </div>
 
-          <!-- Card 03 -->
-          <div class="service-stack-card reveal-fade-up delay-300" style="top: 160px; z-index: 13;">
-            <div class="service-stack-card-inner">
-              <div class="service-stack-img-wrap">
-                <img src="/679b7310-0afd-42d1-953b-94209bbf2c6f.png" alt="Entice more customers" loading="lazy" />
-              </div>
-              <div class="service-stack-num">03</div>
-              <div>
-                <h3 class="service-stack-title">Entice more customers</h3>
-                <p class="service-stack-desc">
-                  Our guidance around hardware choices ensures you only pay once for your investment. We will use all our experience to help you minimise your initial capital outlay. This includes working to secure government grant funding, bringing you closer to your long-term sustainable goals.
+          <!-- Divider & Category 2 Header: Development & Product Design -->
+          <div class="services-category-divider reveal-fade-up">
+            <div class="services-category-badge">DEVELOPMENT &amp; PRODUCT DESIGN</div>
+            <h3 class="services-category-heading">
+              Engineered for Velocity. Designed for Scale.
+            </h3>
+            <p class="services-category-subtext">
+              Modern Next.js web platforms, native mobile applications, intuitive UI/UX design systems, and resilient cloud architectures built to accelerate your product roadmap.
+            </p>
+          </div>
+
+          <!-- Services Reference Grid 2: DEV & DESIGN (Image Card on LEFT, Content on RIGHT) -->
+          <div class="services-reference-grid reverse-layout">
+            
+            <!-- Left Column: Active Preview Card (IMAGE ON LEFT) -->
+            <div class="services-preview-column reveal-fade-right delay-200">
+              <div class="service-preview-card" id="service-preview-card-dev">
+                
+                <!-- Image with Corner Expand Badge -->
+                <div class="service-preview-img-box">
+                  <img id="preview-img-dev" src="/h1_1.webp" alt="Full-Stack Web & Next.js" class="service-preview-img" />
+                  <a href="/drift-audit" id="preview-expand-btn-dev" class="service-preview-expand-badge" title="Expand Service">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="15 3 21 3 21 9"></polyline>
+                      <polyline points="9 21 3 21 3 15"></polyline>
+                      <line x1="21" y1="3" x2="14" y2="10"></line>
+                      <line x1="3" y1="21" x2="10" y2="14"></line>
+                    </svg>
+                  </a>
+                </div>
+
+                <!-- Description -->
+                <p class="service-preview-desc" id="preview-desc-dev">
+                  High-velocity web platforms engineered with Next.js, React, and TypeScript. Sub-second load speeds, SEO-optimized SSR/SSG rendering, and modular component architectures built to scale.
                 </p>
+
+                <!-- Button Row -->
+                <div class="service-preview-action-row">
+                  <a href="/drift-audit" id="preview-btn-dev" class="service-preview-btn">
+                    <span id="preview-btn-text-dev">Explore Web Development</span>
+                    <span>→</span>
+                  </a>
+                  <span class="service-preview-tag" id="preview-tag-dev">WEB ENGINEERING</span>
+                </div>
+
               </div>
             </div>
+
+            <!-- Right Column: Numbered List (06-10) (CONTENT ON RIGHT) -->
+            <div class="services-nav-list reveal-fade-left delay-100">
+              <div class="service-nav-item service-nav-item-dev is-active" data-index="0">
+                <span class="service-nav-num">06</span>
+                <span class="service-nav-title">Full-Stack Web &amp; Next.js Applications</span>
+              </div>
+              <div class="service-nav-item service-nav-item-dev" data-index="1">
+                <span class="service-nav-num">07</span>
+                <span class="service-nav-title">UI/UX Product Design &amp; Systems</span>
+              </div>
+              <div class="service-nav-item service-nav-item-dev" data-index="2">
+                <span class="service-nav-num">08</span>
+                <span class="service-nav-title">Mobile Applications (iOS &amp; Android)</span>
+              </div>
+              <div class="service-nav-item service-nav-item-dev" data-index="3">
+                <span class="service-nav-num">09</span>
+                <span class="service-nav-title">E-Commerce &amp; Digital Storefronts</span>
+              </div>
+              <div class="service-nav-item service-nav-item-dev" data-index="4">
+                <span class="service-nav-num">10</span>
+                <span class="service-nav-title">Enterprise Cloud &amp; DevOps</span>
+              </div>
+            </div>
+
           </div>
 
         </div>
-
-        <!-- Bottom Link to Full Services Catalog -->
-        <div style="text-align: center; margin-top: 36px;" class="reveal-fade-up delay-200">
-          <a href="/services.html" style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 28px; border-radius: 999px; font-size: 14px; font-weight: 700; border: 1px solid var(--border-color); color: var(--text-main); text-decoration: none; background: var(--surface);">
-            <span>Explore all 15 services organized by category</span>
-            <span>→</span>
-          </a>
-        </div>
-
       </div>
     </section>
 
@@ -1890,6 +2468,136 @@
           </div>
 
         </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SECTION: HOW IT WORKS – THE ORBIT METHOD (HANGING LINE & MIDDLE HORIZONTAL AXIS)
+         ==================================================================== -->
+    <section class="process-section" id="how-it-works" style="background: #f8faff; color: #0f172a; border-bottom: 1px solid rgba(16, 27, 150, 0.12); padding: 96px 24px;">
+      <div class="about-container">
+        
+        <!-- Section Header -->
+        <div class="services-stack-header reveal-fade-up" style="margin-bottom: 48px; border-bottom: 1px solid rgba(16, 27, 150, 0.12); padding-bottom: 32px;">
+          <div>
+            <div style="display: inline-flex; align-items: center; gap: 8px; padding: 4px 14px; border-radius: 999px; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; background: rgba(16, 27, 150, 0.08); color: #101b96; margin-bottom: 12px; border: 1px solid rgba(16, 27, 150, 0.15);">
+              <span>⚡ ORBIVERSE · EXECUTION TIMELINE</span>
+            </div>
+            <h2 class="services-stack-title-h2" style="color: #0f172a;">
+              How It Works – <span style="color: #101b96;">The Orbit Method</span>
+            </h2>
+            <p style="font-size: 15px; color: #64748b; margin-top: 8px; max-width: 600px;">
+              From audit to exponential scale: a minimalist roadmap built on data, precision, and verified returns.
+            </p>
+          </div>
+          <div>
+            <a href="/drift-audit" class="services-stack-link reveal-fade-left delay-100" style="color: #101b96; border-color: #101b96;">
+              <span>Book Your Drift Audit</span>
+              <span>→</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- 4-BOX GRID ROADMAP CONTAINER -->
+        <div class="infographic-frame reveal-fade-up" style="padding: 0; border-radius: 0; overflow: hidden; border: 1px solid rgba(16, 27, 150, 0.15); box-shadow: 0 10px 40px rgba(16, 27, 150, 0.08); background: #ffffff; position: relative;">
+          
+          <!-- Middle Continuous Timeline Line across all 4 boxes -->
+          <div class="infographic-mid-line" style="left: 0; right: 0; top: 220px; height: 2px; background: #93c5fd; position: absolute; z-index: 1;"></div>
+
+          <!-- 4 Vertical Grid Columns -->
+          <div class="infographic-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; position: relative; z-index: 2;">
+            
+            <!-- Q1 Box -->
+            <div class="infographic-col" style="border-right: 1px solid rgba(16, 27, 150, 0.12); padding: 0; border-radius: 0; background: linear-gradient(180deg, #ffffff 0%, #f0f6ff 50%, #dbeafe 100%); color: #0f172a; display: flex; flex-direction: column;">
+              <!-- Top Half: Line Hanging from Top Edge -->
+              <div style="height: 220px; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: flex-end;">
+                <div style="width: 2px; height: 100%; background: #60a5fa;"></div>
+                <!-- Ball on the Middle Horizontal Line -->
+                <div style="position: absolute; bottom: -13px; width: 26px; height: 26px; border-radius: 50%; background: #ffffff; border: 2px solid #2563eb; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(37,99,235,0.25); z-index: 5;">
+                  <div style="width: 10px; height: 10px; border-radius: 50%; background: #101b96;"></div>
+                </div>
+              </div>
+              <!-- Bottom Half: Content -->
+              <div style="padding: 44px 28px 32px;">
+                <span style="font-family: var(--font-heading); font-size: 32px; font-weight: 900; color: #101b96; display: block; margin-bottom: 6px;">Q1</span>
+                <h4 style="font-size: 18px; font-weight: 800; color: #0f172a; margin-bottom: 8px;">Audit &amp; Align</h4>
+                <p style="font-size: 13px; line-height: 1.6; color: #475569; margin: 0;">
+                  Review brand, website, ads and tracking to identify gaps.
+                </p>
+              </div>
+            </div>
+
+            <!-- Q2 Box -->
+            <div class="infographic-col" style="border-right: 1px solid rgba(16, 27, 150, 0.12); padding: 0; border-radius: 0; background: linear-gradient(180deg, #ffffff 0%, #f0f6ff 50%, #dbeafe 100%); color: #0f172a; display: flex; flex-direction: column;">
+              <!-- Top Half: Line Hanging from Top Edge -->
+              <div style="height: 220px; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: flex-end;">
+                <div style="width: 2px; height: 100%; background: #60a5fa;"></div>
+                <!-- Ball on the Middle Horizontal Line -->
+                <div style="position: absolute; bottom: -13px; width: 26px; height: 26px; border-radius: 50%; background: #ffffff; border: 2px solid #2563eb; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(37,99,235,0.25); z-index: 5;">
+                  <div style="width: 10px; height: 10px; border-radius: 50%; background: #101b96;"></div>
+                </div>
+              </div>
+              <!-- Bottom Half: Content -->
+              <div style="padding: 44px 28px 32px;">
+                <span style="font-family: var(--font-heading); font-size: 32px; font-weight: 900; color: #101b96; display: block; margin-bottom: 6px;">Q2</span>
+                <h4 style="font-size: 18px; font-weight: 800; color: #0f172a; margin-bottom: 8px;">Plan &amp; Strategize</h4>
+                <p style="font-size: 13px; line-height: 1.6; color: #475569; margin: 0;">
+                  Define the primary growth goal and build a focused strategy.
+                </p>
+              </div>
+            </div>
+
+            <!-- Q3 Box (Active One: Rich Blue Gradient) -->
+            <div class="infographic-col" style="border-right: 1px solid rgba(16, 27, 150, 0.12); padding: 0; border-radius: 0; background: linear-gradient(180deg, #101b96 0%, #12197a 45%, #090d3d 100%); color: #ffffff; display: flex; flex-direction: column; box-shadow: 0 10px 40px rgba(16, 27, 150, 0.4);">
+              <!-- Top Half: Future Roadmap Callout + Hanging Line -->
+              <div style="height: 220px; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 24px 28px 0;">
+                <div style="width: 100%; text-align: left;">
+                  <span style="font-family: monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: #93c5fd; display: block; margin-bottom: 4px; font-weight: 700;">Future Roadmap</span>
+                  <h3 style="font-size: 26px; font-weight: 900; color: #ffffff; line-height: 1.1; margin: 0 0 6px;">We are Here</h3>
+                  <p style="font-size: 12px; line-height: 1.4; color: #dbeafe; margin: 0;">
+                    Where strategy, execution and data come together to drive real results.
+                  </p>
+                </div>
+                <div style="width: 2px; height: 50px; background: rgba(255,255,255,0.6);"></div>
+                <!-- Active Ball on Middle Line -->
+                <div style="position: absolute; bottom: -14px; width: 28px; height: 28px; border-radius: 50%; background: #ffffff; border: 2px solid #ffffff; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 18px rgba(255,255,255,0.95); outline: 4px solid rgba(147, 197, 253, 0.4); z-index: 5;">
+                  <div style="width: 12px; height: 12px; border-radius: 50%; background: #101b96;"></div>
+                </div>
+              </div>
+              <!-- Bottom Half: Content -->
+              <div style="padding: 44px 28px 32px;">
+                <span style="font-family: var(--font-heading); font-size: 32px; font-weight: 900; color: #ffffff; display: block; margin-bottom: 6px;">Q3</span>
+                <h4 style="font-size: 18px; font-weight: 800; color: #ffffff; margin-bottom: 8px;">Execute in Orbit</h4>
+                <p style="font-size: 13px; line-height: 1.6; color: #dbeafe; margin: 0;">
+                  Align SEO, paid ads, social media, content and website towards one goal.
+                </p>
+              </div>
+            </div>
+
+            <!-- Q4 Box -->
+            <div class="infographic-col" style="padding: 0; border-radius: 0; background: linear-gradient(180deg, #ffffff 0%, #f0f6ff 50%, #dbeafe 100%); color: #0f172a; display: flex; flex-direction: column;">
+              <!-- Top Half: Line Hanging from Top Edge -->
+              <div style="height: 220px; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: flex-end;">
+                <div style="width: 2px; height: 100%; background: #60a5fa;"></div>
+                <!-- Ball on the Middle Horizontal Line -->
+                <div style="position: absolute; bottom: -13px; width: 26px; height: 26px; border-radius: 50%; background: #ffffff; border: 2px solid #2563eb; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(37,99,235,0.25); z-index: 5;">
+                  <div style="width: 10px; height: 10px; border-radius: 50%; background: #101b96;"></div>
+                </div>
+              </div>
+              <!-- Bottom Half: Content -->
+              <div style="padding: 44px 28px 32px;">
+                <span style="font-family: var(--font-heading); font-size: 32px; font-weight: 900; color: #101b96; display: block; margin-bottom: 6px;">Q4</span>
+                <h4 style="font-size: 18px; font-weight: 800; color: #0f172a; margin-bottom: 8px;">Optimize &amp; Scale</h4>
+                <p style="font-size: 13px; line-height: 1.6; color: #475569; margin: 0;">
+                  Measure performance, cut wasted spend and scale winning campaigns.
+                </p>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
       </div>
     </section>
 
@@ -2151,6 +2859,212 @@
     } else {
       revealElements.forEach(el => el.classList.add('is-visible'));
     }
+  
+    // 1. Interactive Growth Services Switcher (01 - 05)
+    const growthServicesData = [
+      {
+        number: "01",
+        title: "Performance Marketing & Paid Ads",
+        shortTitle: "Performance Marketing",
+        desc: "We construct data-driven ad campaigns across Google Search, Meta (Instagram & Facebook), YouTube, and LinkedIn. Every dollar of ad spend is measured on one metric: net pipeline revenue.",
+        image: "/8d0b0df3-565f-498c-98b5-f5cd61d4d7f9.webp",
+        tag: "PAID MEDIA & PPC"
+      },
+      {
+        number: "02",
+        title: "Conversion Rate Optimization (CRO)",
+        shortTitle: "Conversion Optimization",
+        desc: "We diagnose friction across your entire checkout and lead funnel. Through high-converting landing page engineering and multi-variant A/B copy tests, we turn more traffic into reliable revenue.",
+        image: "/who we are.webp",
+        tag: "CRO & FUNNELS"
+      },
+      {
+        number: "03",
+        title: "Technical SEO & Search Authority",
+        shortTitle: "Technical SEO",
+        desc: "Every customer who finds you on Google search is one you didn't pay a click for. Core Web Vitals audits, high-intent keyword capture, and authoritative backlink architectures for durable search dominance.",
+        image: "/73ecc189-9bab-4cb0-831a-3a0a158d6333.webp",
+        tag: "ORGANIC SEARCH"
+      },
+      {
+        number: "04",
+        title: "Brand Positioning & Creative Engine",
+        shortTitle: "Brand & Creative",
+        desc: "Positioning, messaging, and viral short-form creative batches tested weekly. Deploy scroll-stopping hooks and high-converting copy that give customers an unmistakable reason to choose you.",
+        image: "/wwe.webp",
+        tag: "CREATIVE & BRAND"
+      },
+      {
+        number: "05",
+        title: "Autonomous AI & CRM Pipeline Velocity",
+        shortTitle: "Autonomous AI & CRM",
+        desc: "Speed to lead is everything. We integrate autonomous AI lead-qualification workflows, instant WhatsApp/SMS notification triggers, and unified attribution dashboards for zero human lag.",
+        image: "/2d9b0edc-3651-4bae-b2e7-1d024722e466.webp",
+        tag: "AI & AUTOMATION"
+      }
+    ];
+
+    const navItemsGrowth = document.querySelectorAll('.service-nav-item-growth, .services-nav-list:not(.services-reference-grid.reverse-layout .services-nav-list) .service-nav-item');
+    const previewImgGrowth = document.getElementById('preview-img');
+    const previewDescGrowth = document.getElementById('preview-desc');
+    const previewBtnTextGrowth = document.getElementById('preview-btn-text');
+    const previewTagGrowth = document.getElementById('preview-tag');
+
+    function setActiveGrowthService(index) {
+      navItemsGrowth.forEach((item, idx) => {
+        if (idx === index) {
+          item.classList.add('is-active');
+        } else {
+          item.classList.remove('is-active');
+        }
+      });
+      const data = growthServicesData[index];
+      if (data && previewImgGrowth && previewDescGrowth && previewBtnTextGrowth && previewTagGrowth) {
+        previewImgGrowth.style.opacity = '0.6';
+        setTimeout(() => {
+          previewImgGrowth.src = data.image;
+          previewImgGrowth.alt = data.title;
+          previewDescGrowth.textContent = data.desc;
+          previewBtnTextGrowth.textContent = `Explore ${data.shortTitle}`;
+          previewTagGrowth.textContent = data.tag;
+          previewImgGrowth.style.opacity = '1';
+        }, 120);
+      }
+    }
+
+    navItemsGrowth.forEach((item) => {
+      const idx = parseInt(item.getAttribute('data-index') || '0', 10);
+      item.addEventListener('mouseenter', () => setActiveGrowthService(idx));
+      item.addEventListener('click', () => setActiveGrowthService(idx));
+    });
+
+    // 2. Interactive Development & Design Services Switcher (06 - 10)
+    const devServicesData = [
+      {
+        number: "06",
+        title: "Full-Stack Web & Next.js Applications",
+        shortTitle: "Web Development",
+        desc: "High-velocity web platforms engineered with Next.js, React, and TypeScript. Sub-second load speeds, SEO-optimized SSR/SSG rendering, and modular component architectures built to scale.",
+        image: "/h1_1.webp",
+        tag: "WEB ENGINEERING"
+      },
+      {
+        number: "07",
+        title: "UI/UX Product Design & Systems",
+        shortTitle: "UI/UX Design",
+        desc: "Pixel-perfect user interfaces, interactive Figma prototypes, and cohesive multi-brand design systems. We turn intricate user journeys into fluid, delightful digital interactions that maximize retention.",
+        image: "/5f298328-cb31-43f6-b842-32ea97f0a39d.jpg",
+        tag: "UI/UX PRODUCT DESIGN"
+      },
+      {
+        number: "08",
+        title: "Mobile Applications (iOS & Android)",
+        shortTitle: "Mobile App Development",
+        desc: "Native and cross-platform mobile apps engineered with React Native and Flutter. 60 FPS fluid gesture animations, offline-first data sync, biometric security, and frictionless app store deployments.",
+        image: "/73ecc189-9bab-4cb0-831a-3a0a158d6333.webp",
+        tag: "MOBILE APPS"
+      },
+      {
+        number: "09",
+        title: "E-Commerce & Digital Storefronts",
+        shortTitle: "E-Commerce Architecture",
+        desc: "Custom headless Shopify and Next.js commerce stores. Instant search indexing, 1-click frictionless checkout, automated inventory sync, and multi-currency global payment gateways.",
+        image: "/8d0b0df3-565f-498c-98b5-f5cd61d4d7f9.webp",
+        tag: "HEADLESS COMMERCE"
+      },
+      {
+        number: "10",
+        title: "Enterprise Cloud & DevOps",
+        shortTitle: "Cloud & DevOps",
+        desc: "Multi-region AWS and Google Cloud infrastructure, Docker container orchestration, automated GitHub Actions CI/CD pipelines, and hardened GraphQL/REST APIs ensuring 99.99% uptime.",
+        image: "/2d9b0edc-3651-4bae-b2e7-1d024722e466.webp",
+        tag: "CLOUD & DEVOPS"
+      }
+    ];
+
+    const navItemsDev = document.querySelectorAll('.service-nav-item-dev');
+    const previewImgDev = document.getElementById('preview-img-dev');
+    const previewDescDev = document.getElementById('preview-desc-dev');
+    const previewBtnTextDev = document.getElementById('preview-btn-text-dev');
+    const previewTagDev = document.getElementById('preview-tag-dev');
+
+    function setActiveDevService(index) {
+      navItemsDev.forEach((item, idx) => {
+        if (idx === index) {
+          item.classList.add('is-active');
+        } else {
+          item.classList.remove('is-active');
+        }
+      });
+      const data = devServicesData[index];
+      if (data && previewImgDev && previewDescDev && previewBtnTextDev && previewTagDev) {
+        previewImgDev.style.opacity = '0.6';
+        setTimeout(() => {
+          previewImgDev.src = data.image;
+          previewImgDev.alt = data.title;
+          previewDescDev.textContent = data.desc;
+          previewBtnTextDev.textContent = `Explore ${data.shortTitle}`;
+          previewTagDev.textContent = data.tag;
+          previewImgDev.style.opacity = '1';
+        }, 120);
+      }
+    }
+
+    navItemsDev.forEach((item) => {
+      const idx = parseInt(item.getAttribute('data-index') || '0', 10);
+      item.addEventListener('mouseenter', () => setActiveDevService(idx));
+      item.addEventListener('click', () => setActiveDevService(idx));
+    });
+
+  
+                // Sticky Scroll Fade-in & Sunset Parallax Animation (Like Hero Section)
+    const orbStickyWrap = document.getElementById('orb-sticky-fade-wrap');
+    const orbTiltWrap = document.getElementById('orb-stage-tilt-wrap');
+    const servicesSec = document.getElementById('services');
+
+    if (orbStickyWrap && servicesSec) {
+      function handleStickyFadeIn() {
+        const rect = servicesSec.getBoundingClientRect();
+        const winHeight = window.innerHeight;
+        const isMobile = winHeight < 800 || window.innerWidth < 768;
+
+        // Entry fade in:
+        const entryDist = winHeight - rect.top;
+        const entryProgress = Math.min(1, Math.max(0, entryDist / (winHeight * 0.75)));
+        const fadeIn = Math.min(1, Math.max(0, Math.pow(entryProgress, 1.35)));
+        const scale = (isMobile ? 0.92 : 0.85) + entryProgress * (isMobile ? 0.12 : 0.18);
+
+        // Sunset fade out as user scrolls further into content:
+        const scrollThrough = Math.max(0, -rect.top);
+        const sunsetDivisor = isMobile ? (winHeight * 0.42) : (winHeight * 0.65);
+        const sunsetProgress = Math.min(1, Math.max(0, scrollThrough / sunsetDivisor));
+        const sunsetOpacity = 1 - Math.pow(sunsetProgress, 1.4);
+
+        const finalOpacity = Math.max(0, fadeIn * sunsetOpacity);
+        const translateY = -sunsetProgress * (isMobile ? 35 : 65);
+
+        orbStickyWrap.style.opacity = `${finalOpacity}`;
+        orbStickyWrap.style.transform = `translate3d(0, ${translateY}px, 0) scale(${scale})`;
+      }
+
+      window.addEventListener('scroll', handleStickyFadeIn, { passive: true });
+      handleStickyFadeIn();
+
+      // 3D Perspective Tilt on Mouse Move
+      servicesSec.addEventListener('mousemove', (e) => {
+        if (!orbTiltWrap) return;
+        const rect = servicesSec.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        orbTiltWrap.style.transform = `perspective(1000px) rotateX(${-y * 12}deg) rotateY(${x * 12}deg) scale(1.02)`;
+      });
+
+      servicesSec.addEventListener('mouseleave', () => {
+        if (!orbTiltWrap) return;
+        orbTiltWrap.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)`;
+      });
+    }
+
   </script>
 </body>
 </html>

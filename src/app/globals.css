@@ -104,6 +104,20 @@ h1, h2, h3, h4, .font-heading {
   animation: celestial-drift 18s ease-in-out infinite;
 }
 
+/* Floating 3D Orb Keyframe Animation */
+@keyframes orb-float {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+  }
+  50% {
+    transform: translateY(-14px) scale(1.015);
+  }
+}
+
+.animate-orb-float {
+  animation: orb-float 7s ease-in-out infinite;
+}
+
 /* Preloader & Entrance Animations */
 @keyframes preload-count-out {
   to {
