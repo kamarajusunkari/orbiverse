@@ -2,8 +2,8 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { ArrowUpRight, Play, Sparkles, X } from "lucide-react";
+import { openCtaModal } from "@/components/CtaModal";
 
 export default function AboutSection() {
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
@@ -37,7 +37,7 @@ export default function AboutSection() {
     <section
       ref={sectionRef}
       id="about"
-      className="relative z-10 py-20 sm:py-28 bg-white dark:bg-[#07060f] border-t border-b border-[var(--border-color)] rounded-t-[32px] sm:rounded-t-[48px] lg:rounded-t-[56px] shadow-[0_-25px_60px_rgba(0,0,0,0.12)] dark:shadow-[0_-30px_70px_rgba(0,0,0,0.65)] overflow-hidden transition-colors duration-300"
+      className="relative z-10 py-20 sm:py-28 bg-white border-t border-b border-slate-200 rounded-t-[32px] sm:rounded-t-[48px] lg:rounded-t-[56px] shadow-[0_-25px_60px_rgba(0,0,0,0.06)] overflow-hidden transition-colors duration-300 scroll-mt-24"
     >
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
         
@@ -105,13 +105,14 @@ export default function AboutSection() {
                   : "opacity-0 translate-y-6 scale-95"
               }`}
             >
-              <Link
-                href="/about"
-                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#0a0f29] hover:bg-[#131c4b] dark:bg-white dark:hover:bg-neutral-100 text-white dark:text-[#0a0f29] text-sm font-semibold transition-all shadow-sm hover:shadow-lg hover:scale-[1.03] active:scale-[0.98] group"
+              <button
+                type="button"
+                onClick={() => openCtaModal("AboutLearnMore")}
+                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#0a0f29] hover:bg-[#131c4b] text-white text-sm font-semibold transition-all shadow-sm hover:shadow-lg hover:scale-[1.03] active:scale-[0.98] group cursor-pointer"
               >
                 <span>Learn More</span>
-                <ArrowUpRight className="w-4 h-4 text-[#84cc16] dark:text-[#65a30d] group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:scale-115 transition-all duration-300" />
-              </Link>
+                <ArrowUpRight className="w-4 h-4 text-[#84cc16] group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:scale-115 transition-all duration-300" />
+              </button>
 
               <div className="relative">
                 <button
@@ -231,9 +232,10 @@ export default function AboutSection() {
           </div>
 
           {/* CARD 5: Get Started With Us (Rich Royal Blue Card) */}
-          <Link
-            href="/drift-audit"
-            className={`rounded-3xl p-6 sm:p-7 flex flex-col justify-between min-h-[280px] sm:min-h-[300px] bg-[#1e40af] dark:bg-[#1e3a8a] border border-[#1d4ed8] shadow-sm hover:shadow-[0_20px_45px_rgba(30,64,175,0.45)] hover:-translate-y-2 hover:border-blue-400 transition-all duration-400 text-white group cursor-pointer ${
+          <button
+            type="button"
+            onClick={() => openCtaModal("AboutCard5")}
+            className={`rounded-3xl p-6 sm:p-7 flex flex-col justify-between text-left min-h-[280px] sm:min-h-[300px] bg-[#1e40af] border border-[#1d4ed8] shadow-sm hover:shadow-[0_20px_45px_rgba(30,64,175,0.45)] hover:-translate-y-2 hover:border-blue-400 transition-all duration-400 text-white group cursor-pointer ${
               hasEntered
                 ? "opacity-100 translate-y-0 scale-100"
                 : "opacity-0 translate-y-12 scale-[0.96]"
@@ -259,7 +261,7 @@ export default function AboutSection() {
                 Launch your digital transformation sprint with direct executive guidance.
               </p>
             </div>
-          </Link>
+          </button>
 
         </div>
 

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import ScrollRevealInit from "@/components/ScrollRevealInit";
+import CtaModal from "@/components/CtaModal";
 
 export const metadata: Metadata = {
   title: "Orbiverse — Performance-Led Growth Agency | We Bring Marketing Into Orbit",
@@ -17,7 +18,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className="light scroll-smooth" data-theme="light">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -27,10 +28,10 @@ export default function RootLayout({
         />
       </head>
       <body
-        suppressHydrationWarning
-        className="min-h-screen flex flex-col antialiased selection:bg-[#5b3bd1] selection:text-white transition-colors duration-300"
+        className="min-h-screen flex flex-col antialiased selection:bg-[#5b3bd1] selection:text-white bg-white text-slate-900 overflow-x-hidden w-full relative"
       >
         <ScrollRevealInit />
+        <CtaModal />
         {children}
       </body>
     </html>

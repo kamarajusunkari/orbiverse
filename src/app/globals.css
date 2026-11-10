@@ -15,31 +15,20 @@
   --badge-bg: #ede9fc;
 }
 
-[data-theme="dark"],
-.dark {
-  --bg-color: #07060f;
-  --text-main: #f3f1ff;
-  --text-muted: #9f9ab8;
-  --border-color: #211c3a;
-  --surface: #0e0c1c;
-  --surface-alt: #16122d;
-  --accent: #8e71ff;
-  --accent-light: #a994ff;
-  --orbit-blue: #6d7bff;
-  --orbit-ring: rgba(109, 123, 255, 0.15);
-  --card-bg: #120f24;
-  --badge-bg: #1e193d;
-}
-
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
+  max-width: 100vw;
 }
 
 body {
   background-color: var(--bg-color);
   color: var(--text-main);
   font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  overflow-x: clip;
+  overflow-x: hidden;
+  max-width: 100vw;
+  width: 100%;
+  position: relative;
 }
 
 h1, h2, h3, h4, .font-heading {

@@ -2,8 +2,8 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { ArrowRight, Maximize2 } from "lucide-react";
+import { openCtaModal } from "@/components/CtaModal";
 
 export interface ServicePreviewItem {
   number: string;
@@ -196,7 +196,7 @@ export default function ServicesStackSection() {
       id="services"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="relative z-10 min-h-fit bg-white text-neutral-900 border-b border-neutral-200 overflow-visible transition-colors duration-300 dark:bg-[#070612] dark:text-white dark:border-white/10 pt-6 sm:pt-10 lg:pt-0"
+      className="relative z-10 min-h-fit bg-white text-neutral-900 border-b border-neutral-200 overflow-visible transition-colors duration-300 pt-6 sm:pt-10 lg:pt-0 scroll-mt-24"
     >
       {/* ==================================================================== */}
       {/* 1. STICKY SCREEN STAGE: FIRST IMAGE FADES IN & SUNSET FADES OUT     */}
@@ -274,13 +274,14 @@ export default function ServicesStackSection() {
             </div>
 
             <div className="flex-shrink-0 reveal-fade-left delay-100">
-              <Link
-                href="/drift-audit"
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full text-sm font-semibold bg-neutral-950 text-white hover:bg-neutral-800 active:scale-95 transition-all shadow-[0_4px_15px_rgba(0,0,0,0.1)] dark:bg-white dark:text-neutral-950 dark:hover:bg-neutral-100 group"
+              <button
+                type="button"
+                onClick={() => openCtaModal("ServicesHeader")}
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full text-sm font-semibold bg-neutral-950 text-white hover:bg-neutral-800 active:scale-95 transition-all shadow-[0_4px_15px_rgba(0,0,0,0.1)] group cursor-pointer"
               >
                 <span>Contact Now</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </Link>
+              </button>
             </div>
           </div>
 
@@ -346,29 +347,31 @@ export default function ServicesStackSection() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
 
                   {/* Corner Expand Action Badge */}
-                  <Link
-                    href={activeGrowth.ctaHref}
-                    className="absolute bottom-3.5 right-3.5 w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-neutral-950/80 backdrop-blur-md flex items-center justify-center text-white shadow-lg border border-white/20 hover:scale-105 active:scale-95 transition-all group/badge"
+                  <button
+                    type="button"
+                    onClick={() => openCtaModal(`Service_${activeGrowth.shortTitle}`)}
+                    className="absolute bottom-3.5 right-3.5 w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-neutral-950/80 backdrop-blur-md flex items-center justify-center text-white shadow-lg border border-white/20 hover:scale-105 active:scale-95 transition-all group/badge cursor-pointer"
                     title={`Explore ${activeGrowth.title}`}
                   >
                     <Maximize2 className="w-5 h-5 group-hover/badge:scale-110 transition-transform" />
-                  </Link>
+                  </button>
                 </div>
 
                 {/* Supporting Description Below Image */}
-                <p className="mt-5 text-sm sm:text-base text-neutral-600 dark:text-neutral-300 leading-relaxed font-normal min-h-[4.5rem]">
+                <p className="mt-5 text-sm sm:text-base text-neutral-600 leading-relaxed font-normal min-h-[4.5rem]">
                   {activeGrowth.desc}
                 </p>
 
                 {/* Action Pill Button Below Description */}
-                <div className="mt-5 pt-4 border-t border-neutral-200 dark:border-white/10 flex items-center justify-between gap-4">
-                  <Link
-                    href={activeGrowth.ctaHref}
-                    className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-neutral-950 text-white font-semibold text-xs sm:text-sm hover:bg-neutral-800 active:scale-95 transition-all shadow-sm dark:bg-white dark:text-neutral-950 dark:hover:bg-neutral-100 group/btn"
+                <div className="mt-5 pt-4 border-t border-neutral-200 flex items-center justify-between gap-4">
+                  <button
+                    type="button"
+                    onClick={() => openCtaModal(`Service_${activeGrowth.shortTitle}`)}
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-neutral-950 text-white font-semibold text-xs sm:text-sm hover:bg-neutral-800 active:scale-95 transition-all shadow-sm group/btn cursor-pointer"
                   >
                     <span>Explore {activeGrowth.shortTitle}</span>
                     <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-                  </Link>
+                  </button>
 
                   <span className="text-xs font-mono font-semibold text-[#101b96] dark:text-[#93c5fd] hidden sm:inline">
                     {activeGrowth.categoryTag}
@@ -418,29 +421,31 @@ export default function ServicesStackSection() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
 
                   {/* Corner Expand Action Badge */}
-                  <Link
-                    href={activeDev.ctaHref}
-                    className="absolute bottom-3.5 right-3.5 w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-neutral-950/80 backdrop-blur-md flex items-center justify-center text-white shadow-lg border border-white/20 hover:scale-105 active:scale-95 transition-all group/badge"
+                  <button
+                    type="button"
+                    onClick={() => openCtaModal(`Service_${activeDev.shortTitle}`)}
+                    className="absolute bottom-3.5 right-3.5 w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-neutral-950/80 backdrop-blur-md flex items-center justify-center text-white shadow-lg border border-white/20 hover:scale-105 active:scale-95 transition-all group/badge cursor-pointer"
                     title={`Explore ${activeDev.title}`}
                   >
                     <Maximize2 className="w-5 h-5 group-hover/badge:scale-110 transition-transform" />
-                  </Link>
+                  </button>
                 </div>
 
                 {/* Supporting Description Below Image */}
-                <p className="mt-5 text-sm sm:text-base text-neutral-600 dark:text-neutral-300 leading-relaxed font-normal min-h-[4.5rem]">
+                <p className="mt-5 text-sm sm:text-base text-neutral-600 leading-relaxed font-normal min-h-[4.5rem]">
                   {activeDev.desc}
                 </p>
 
                 {/* Action Pill Button Below Description */}
-                <div className="mt-5 pt-4 border-t border-neutral-200 dark:border-white/10 flex items-center justify-between gap-4">
-                  <Link
-                    href={activeDev.ctaHref}
-                    className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-neutral-950 text-white font-semibold text-xs sm:text-sm hover:bg-neutral-800 active:scale-95 transition-all shadow-sm dark:bg-white dark:text-neutral-950 dark:hover:bg-neutral-100 group/btn"
+                <div className="mt-5 pt-4 border-t border-neutral-200 flex items-center justify-between gap-4">
+                  <button
+                    type="button"
+                    onClick={() => openCtaModal(`Service_${activeDev.shortTitle}`)}
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-neutral-950 text-white font-semibold text-xs sm:text-sm hover:bg-neutral-800 active:scale-95 transition-all shadow-sm group/btn cursor-pointer"
                   >
                     <span>Explore {activeDev.shortTitle}</span>
                     <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-                  </Link>
+                  </button>
 
                   <span className="text-xs font-mono font-semibold text-[#101b96] dark:text-[#93c5fd] hidden sm:inline">
                     {activeDev.categoryTag}

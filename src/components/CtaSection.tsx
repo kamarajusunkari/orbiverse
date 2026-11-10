@@ -1,11 +1,13 @@
+"use client";
+
 import React from "react";
-import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Sparkles } from "lucide-react";
+import { openCtaModal } from "@/components/CtaModal";
 
 export default function CtaSection() {
   return (
-    <section className="relative w-full py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 bg-transparent transition-colors">
+    <section id="contact" className="relative w-full py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 bg-transparent transition-colors scroll-mt-24">
       <div 
         className="max-w-[1400px] mx-auto relative rounded-[32px] sm:rounded-[40px] md:rounded-[44px] overflow-hidden border border-blue-400/30 shadow-[0_24px_70px_-15px_rgba(16,27,150,0.45)] transition-all"
         style={{
@@ -13,7 +15,7 @@ export default function CtaSection() {
         }}
       >
         
-        {/* Subtle Ambient Radial Glows */}
+        {/* Ambient Radial Glows */}
         <div 
           className="absolute -top-24 -left-24 w-[420px] h-[420px] rounded-full pointer-events-none select-none opacity-70"
           style={{
@@ -33,7 +35,7 @@ export default function CtaSection() {
           
           {/* Left Column: Content */}
           <div className="lg:col-span-7 p-8 sm:p-12 lg:p-16 flex flex-col justify-center items-start text-white z-20">
-            <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wider uppercase bg-white/15 text-blue-100 border border-white/25 backdrop-blur-md mb-5 shadow-sm">
+            <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wider uppercase bg-white/15 text-blue-100 border border-white/25 backdrop-blur-md mb-5 shadow-xs">
               <Sparkles className="w-3.5 h-3.5 text-cyan-300" />
               START YOUR GROWTH JOURNEY TODAY
             </span>
@@ -47,25 +49,25 @@ export default function CtaSection() {
             </p>
 
             <div className="mt-8 flex flex-wrap items-center gap-4">
-              <Link
-                href="/drift-audit"
-                className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-sm sm:text-base font-bold bg-white text-[#0c1874] hover:bg-neutral-100 shadow-xl shadow-black/25 hover:shadow-black/40 hover:scale-105 active:scale-95 transition-all duration-200"
+              <button
+                type="button"
+                onClick={() => openCtaModal("BottomCta")}
+                className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-sm sm:text-base font-bold bg-white text-[#0c1874] hover:bg-neutral-100 shadow-xl shadow-black/25 hover:shadow-black/40 hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer"
               >
-                Contact Us
+                <span>Claim Free Drift Audit</span>
                 <ArrowRight className="w-4 h-4 text-[#0c1874]" />
-              </Link>
-              <Link
-                href="/services"
-                className="inline-flex items-center gap-2 px-7 py-4 rounded-full text-sm sm:text-base font-semibold bg-white/10 hover:bg-white/20 text-white border border-white/25 backdrop-blur-md hover:border-white/40 hover:scale-105 active:scale-95 transition-all duration-200"
+              </button>
+              <a
+                href="#services"
+                className="inline-flex items-center gap-2 px-7 py-4 rounded-full text-sm sm:text-base font-semibold bg-white/10 hover:bg-white/20 text-white border border-white/25 backdrop-blur-md hover:border-white/40 hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer"
               >
                 Explore Services
-              </Link>
+              </a>
             </div>
           </div>
 
-          {/* Right Column: Visual Asset - Edge to Edge, No Right Padding, Attached to Borders */}
+          {/* Right Column: Visual Asset */}
           <div className="lg:col-span-5 relative w-full h-[360px] sm:h-[440px] lg:h-full min-h-[380px] lg:min-h-[500px] flex items-end justify-center lg:justify-end overflow-hidden p-0 m-0 pointer-events-none select-none">
-            {/* Luminous Pulsing Glow behind visual */}
             <div 
               className="absolute bottom-0 right-0 w-80 sm:w-96 lg:w-[480px] h-80 sm:h-96 lg:h-[480px] rounded-full pointer-events-none"
               style={{

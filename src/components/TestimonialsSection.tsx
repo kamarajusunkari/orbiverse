@@ -102,7 +102,7 @@ export default function TestimonialsSection() {
   return (
     <section
       id="testimonials"
-      className="py-24 sm:py-32 bg-white dark:bg-[#070913] text-slate-900 dark:text-white transition-colors duration-300 relative overflow-hidden border-t border-[var(--border-color)]"
+      className="py-24 sm:py-32 bg-white text-slate-900 transition-colors duration-300 relative overflow-hidden border-t border-slate-200 scroll-mt-24"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >

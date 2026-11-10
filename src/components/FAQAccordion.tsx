@@ -118,7 +118,7 @@ export default function FAQAccordion() {
   };
 
   return (
-    <section className="relative w-full py-16 sm:py-24 bg-transparent transition-colors">
+    <section id="faq" className="relative w-full py-16 sm:py-24 bg-transparent transition-colors scroll-mt-24">
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header: Pill Badge + Split Heading & Description (Matching Reference Image) */}

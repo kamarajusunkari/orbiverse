@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import Link from "next/link";
 import { Sparkles, ArrowRight } from "lucide-react";
+import { openCtaModal } from "@/components/CtaModal";
 
 export interface TimelineMilestone {
   id: string;
@@ -53,8 +53,8 @@ export default function ProcessSection() {
 
   return (
     <section
-      id="how-it-works"
-      className="py-20 sm:py-28 bg-[#f8faff] dark:bg-[#06070d] text-neutral-900 dark:text-white border-b border-blue-200/80 dark:border-white/10 relative overflow-hidden transition-colors duration-300"
+      id="process"
+      className="py-20 sm:py-28 bg-[#f8faff] text-neutral-900 border-b border-blue-200/80 relative overflow-hidden transition-colors duration-300 scroll-mt-24"
     >
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
@@ -76,13 +76,14 @@ export default function ProcessSection() {
           </div>
 
           <div className="flex flex-col items-start md:items-end justify-end flex-shrink-0 reveal-fade-left delay-100">
-            <Link
-              href="/drift-audit"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold bg-[#101b96] text-white hover:bg-[#0c1575] transition-all shadow-md hover:scale-105"
+            <button
+              type="button"
+              onClick={() => openCtaModal("ProcessSection")}
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold bg-[#101b96] text-white hover:bg-[#0c1575] transition-all shadow-md hover:scale-105 cursor-pointer"
             >
               <span>Book Your Drift Audit</span>
               <ArrowRight className="w-4 h-4" />
-            </Link>
+            </button>
           </div>
         </div>
 

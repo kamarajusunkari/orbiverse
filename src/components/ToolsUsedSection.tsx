@@ -625,7 +625,7 @@ export default function ToolsUsedSection() {
   const marqueeItems = [...TECHNOLOGY_LOGOS, ...TECHNOLOGY_LOGOS];
 
   return (
-    <section className="w-full bg-white dark:bg-[#070914] text-slate-900 dark:text-white py-20 sm:py-28 relative overflow-hidden transition-colors duration-300" id="tools">
+    <section className="w-full bg-white text-slate-900 py-20 sm:py-28 relative overflow-hidden transition-colors duration-300 scroll-mt-24" id="tools">
       
       {/* Ambient Radial Soft Lighting Blobs */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[340px] bg-[radial-gradient(ellipse_60%_40%_at_50%_0%,rgba(59,130,246,0.08)_0%,rgba(99,102,241,0.04)_50%,transparent_100%)] pointer-events-none z-0" />

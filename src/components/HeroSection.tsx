@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useEffect, useState, useRef } from "react";
-import Link from "next/link";
 import Image from "next/image";
+import { openCtaModal } from "@/components/CtaModal";
 
 export default function HeroSection() {
   const [preloadPct, setPreloadPct] = useState(0);
@@ -84,9 +84,9 @@ export default function HeroSection() {
       } else {
         const isMobile = window.innerWidth < 640;
         const isTablet = window.innerWidth < 768;
-        const size = isMobile ? 44 : isTablet ? 48 : 56;
-        const top = isMobile ? 22 : isTablet ? 28 : 32;
-        const left = Math.max(isMobile ? 28 : 52, (window.innerWidth - 1400) / 2 + 52);
+        const size = isMobile ? 48 : isTablet ? 56 : 68;
+        const top = isMobile ? 18 : isTablet ? 24 : 28;
+        const left = 24;
         setDockCoords({ top, left, width: size, height: size });
       }
 
@@ -121,9 +121,10 @@ export default function HeroSection() {
       const elapsed = now - startTime;
       const progress = Math.min(1, elapsed / duration);
       // Easing for a smooth, natural count
-      const eased = progress < 0.5
-        ? 2 * progress * progress
-        : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+      const eased =
+        progress < 0.5
+          ? 2 * progress * progress
+          : 1 - Math.pow(-2 * progress + 2, 2) / 2;
       const val = Math.min(99, Math.floor(eased * 100));
       setPreloadPct(val);
 
@@ -156,7 +157,7 @@ export default function HeroSection() {
           {/* Subtle celestial soft-blue ambient glow */}
           <div className="absolute w-[520px] h-[520px] rounded-full bg-[#101b96]/8 blur-[140px] pointer-events-none" />
 
-          {/* Counter and Glowing Progress Bar (positioned directly below the large centered logo) */}
+          {/* Counter and Glowing Progress Bar */}
           {showCounter && (
             <div
               className={`relative z-10 flex flex-col items-center mt-48 sm:mt-56 transition-all duration-500 ${
@@ -182,7 +183,7 @@ export default function HeroSection() {
         </div>
       )}
 
-      {/* FLYING/GLIDING LOGO: Stays visible (opacity-100) and lands in the EXACT SAME PLACE as header logo */}
+      {/* FLYING/GLIDING LOGO */}
       {!isLogoSettled && (
         <div
           id="gliding-logo"
@@ -227,73 +228,76 @@ export default function HeroSection() {
       )}
 
       {/* ==================================================================== */}
-      {/* 2. STICKY HERO SECTION WITH CELESTIAL BACKGROUND & PARALLAX          */}
+      {/* 2. STICKY HERO SECTION (LIGHT THEME ONLY, 100% CENTERED ON MOBILE)   */}
       {/* ==================================================================== */}
       <section
         id="hero"
-        className={`sticky top-0 z-0 w-full h-[100dvh] min-h-[640px] flex items-center justify-center bg-[var(--bg-color)] overflow-hidden transition-opacity duration-700 ${
+        className={`sticky top-0 z-0 w-full h-[100dvh] min-h-[640px] flex items-center justify-center bg-white overflow-hidden transition-opacity duration-700 ${
           isIntroReady ? "opacity-100" : "opacity-0"
         }`}
       >
-        {/* CELESTIAL BACKGROUND BANNER (2d9b0edc-3651-4bae-b2e7-1d024722e466.webp) */}
+        {/* CELESTIAL BACKGROUND BANNER */}
         <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden select-none">
-          <div ref={bgImageRef} className="relative w-full h-full animate-celestial-drift origin-bottom will-change-transform">
+          <div
+            ref={bgImageRef}
+            className="relative w-full h-full animate-celestial-drift origin-bottom will-change-transform"
+          >
             <Image
               src="/2d9b0edc-3651-4bae-b2e7-1d024722e466.webp"
               alt="Orbiverse Celestial Orbit Banner"
               fill
               priority
               quality={95}
-              className="object-cover object-bottom md:object-[center_bottom] filter brightness-[1.02] contrast-[1.02]"
+              className="object-cover object-bottom md:object-[center_bottom] filter brightness-[1.03] contrast-[1.01]"
             />
           </div>
 
-          {/* Theme & Contrast Layering */}
-          {/* 1. Luminous radial atmosphere in upper center for crisp headline & description legibility */}
-          <div className="absolute inset-0 bg-radial-[circle_at_50%_40%] from-white/90 via-white/60 to-transparent dark:from-[#07060f]/90 dark:via-[#07060f]/60 dark:to-transparent pointer-events-none transition-colors duration-500" />
+          {/* Luminous light atmosphere in upper center for crisp headline & description legibility */}
+          <div className="absolute inset-0 bg-radial-[circle_at_50%_40%] from-white/95 via-white/70 to-transparent pointer-events-none" />
 
-          {/* 2. Top fade for navbar integration */}
-          <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-[var(--bg-color)]/80 via-[var(--bg-color)]/40 to-transparent" />
+          {/* Top fade for navbar integration */}
+          <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-white/90 via-white/50 to-transparent" />
 
-          {/* 3. Bottom Seamless Blend */}
-          <div className="absolute bottom-0 left-0 right-0 h-28 bg-gradient-to-t from-[var(--bg-color)] via-[var(--bg-color)]/60 to-transparent" />
+          {/* Bottom Seamless Blend */}
+          <div className="absolute bottom-0 left-0 right-0 h-28 bg-gradient-to-t from-white via-white/70 to-transparent" />
         </div>
 
-        {/* HERO CONTENT (CENTERED WITH SCROLL PARALLAX SHRINK EFFECT) */}
-        <div className="relative z-10 w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28 md:pt-32 pb-12 sm:pb-16 flex flex-col items-center justify-center">
+        {/* HERO CONTENT (PERFECTLY CENTERED ON MOBILE & DESKTOP) */}
+        <div className="relative z-10 w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 pt-20 sm:pt-28 md:pt-32 pb-12 sm:pb-16 flex flex-col items-center justify-center text-center">
           <div
             ref={textContainerRef}
-            className="w-full max-w-4xl lg:max-w-5xl flex flex-col items-center text-center mx-auto will-change-transform transition-[transform,opacity] duration-75 ease-out"
+            className="w-full max-w-4xl lg:max-w-5xl flex flex-col items-center justify-center text-center mx-auto will-change-transform transition-[transform,opacity] duration-75 ease-out"
           >
             {/* BADGE: ● Performance-led growth agency */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-neutral-300 dark:border-neutral-700 bg-white/70 dark:bg-white/[0.04] text-[13px] sm:text-[13.5px] font-medium text-neutral-600 dark:text-neutral-300 mb-6 sm:mb-8 animate-fade-in-up backdrop-blur-xs shadow-2xs">
-              <span className="w-2 h-2 rounded-full bg-[#101b96] dark:bg-[#7d8eff]" />
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-slate-300 bg-white/80 text-[13px] sm:text-[13.5px] font-semibold text-slate-700 mb-5 sm:mb-7 animate-fade-in-up backdrop-blur-md shadow-2xs">
+              <span className="w-2 h-2 rounded-full bg-[#101b96]" />
               <span>Performance-led growth agency</span>
             </div>
 
-            {/* HEADLINE: STRICTLY TWO LINES, CENTERED (ENLARGED ON MOBILE) */}
-            <h1 className="font-heading font-black tracking-[-0.035em] leading-[1.08] sm:leading-[1.04] text-[clamp(2.15rem,7vw,5.1rem)] sm:text-[clamp(2.7rem,5vw,5.1rem)] mb-6 sm:mb-8 animate-title-rise w-full text-center">
-              <span className="block sm:whitespace-nowrap text-[#090812] dark:text-white">
+            {/* HEADLINE: INCREASED SIZE, FULLY CENTERED */}
+            <h1 className="font-heading font-black tracking-[-0.035em] leading-[1.12] sm:leading-[1.04] text-[clamp(2.45rem,8.2vw,5.3rem)] mb-6 sm:mb-8 animate-title-rise w-full text-center flex flex-col items-center justify-center">
+              <span className="block w-full text-center text-slate-950">
                 Your marketing is drifting.
               </span>
-              <span className="inline-flex items-center justify-center flex-wrap sm:flex-nowrap gap-x-2.5 text-[#101b96] dark:text-[#7d8eff] mt-1 sm:mt-2 text-center">
+              <span className="flex items-center justify-center flex-wrap gap-x-2 sm:gap-x-3 text-[#101b96] mt-2 sm:mt-3 text-center w-full">
                 <span>We bring it into</span>
                 <span className="relative inline-block whitespace-nowrap">
                   <span className="relative z-10">orbit.</span>
+                  
                   {/* REAL CELESTIAL ORBIT ANIMATION */}
                   <svg
                     viewBox="0 0 260 100"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
-                    className="absolute -top-4 -bottom-4 -left-5 -right-5 w-[calc(100%+40px)] h-[calc(100%+32px)] pointer-events-none -rotate-2 overflow-visible"
+                    className="absolute -top-4 -bottom-4 -left-4 -right-4 w-[calc(100%+32px)] h-[calc(100%+32px)] pointer-events-none -rotate-2 overflow-visible"
                     aria-hidden="true"
                   >
                     <defs>
                       <linearGradient id="orbitTrackGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stopColor="#7d8eff" stopOpacity="0.85" />
-                        <stop offset="35%" stopColor="#3b82f6" stopOpacity="0.35" />
-                        <stop offset="70%" stopColor="#60a5fa" stopOpacity="0.9" />
-                        <stop offset="100%" stopColor="#1d4ed8" stopOpacity="0.5" />
+                        <stop offset="0%" stopColor="#101b96" stopOpacity="0.85" />
+                        <stop offset="35%" stopColor="#2563eb" stopOpacity="0.45" />
+                        <stop offset="70%" stopColor="#3b82f6" stopOpacity="0.9" />
+                        <stop offset="100%" stopColor="#1d4ed8" stopOpacity="0.6" />
                       </linearGradient>
 
                       <filter id="satelliteGlow" x="-50%" y="-50%" width="200%" height="200%">
@@ -310,23 +314,23 @@ export default function HeroSection() {
                     <path
                       d="M 236 50 C 236 74 186 92 125 92 C 60 92 14 74 14 50 C 14 26 62 8 125 8 C 188 8 234 26 235 48"
                       stroke="url(#orbitTrackGrad)"
-                      strokeWidth="2.2"
+                      strokeWidth="2.4"
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      className="opacity-75 dark:opacity-90"
+                      className="opacity-80"
                     />
 
                     {/* 2. Fast Celestial Energy Beam flowing along track */}
                     <path
                       d="M 236 50 C 236 74 186 92 125 92 C 60 92 14 74 14 50 C 14 26 62 8 125 8 C 188 8 234 26 235 48"
-                      stroke="#60a5fa"
-                      strokeWidth="2.8"
+                      stroke="#2563eb"
+                      strokeWidth="3"
                       strokeLinecap="round"
                       strokeDasharray="50 440"
                       className="animate-orbit-beam"
                     />
 
-                    {/* 3. Trailing Particle 2 (subtle comet dust) */}
+                    {/* 3. Trailing Particle 2 */}
                     <g>
                       <animateMotion
                         dur="3.8s"
@@ -335,10 +339,10 @@ export default function HeroSection() {
                         rotate="auto"
                         path="M 236 50 C 236 74 186 92 125 92 C 60 92 14 74 14 50 C 14 26 62 8 125 8 C 188 8 234 26 235 48"
                       />
-                      <circle r="1.8" fill="#93c5fd" opacity="0.4" />
+                      <circle r="1.8" fill="#60a5fa" opacity="0.45" />
                     </g>
 
-                    {/* 4. Trailing Particle 1 (closer trail) */}
+                    {/* 4. Trailing Particle 1 */}
                     <g>
                       <animateMotion
                         dur="3.8s"
@@ -347,7 +351,7 @@ export default function HeroSection() {
                         rotate="auto"
                         path="M 236 50 C 236 74 186 92 125 92 C 60 92 14 74 14 50 C 14 26 62 8 125 8 C 188 8 234 26 235 48"
                       />
-                      <circle r="2.8" fill="#60a5fa" opacity="0.65" />
+                      <circle r="2.8" fill="#2563eb" opacity="0.75" />
                     </g>
 
                     {/* 5. Main Orbiting Satellite / Planet with radiant glow */}
@@ -358,11 +362,8 @@ export default function HeroSection() {
                         rotate="auto"
                         path="M 236 50 C 236 74 186 92 125 92 C 60 92 14 74 14 50 C 14 26 62 8 125 8 C 188 8 234 26 235 48"
                       />
-                      {/* Ambient Halo */}
-                      <circle r="10" fill="#93c5fd" opacity="0.3" filter="url(#satelliteGlow)" />
-                      {/* Body */}
-                      <circle r="4.6" fill="#2563eb" className="dark:fill-[#60a5fa]" />
-                      {/* Specular Core */}
+                      <circle r="10" fill="#93c5fd" opacity="0.35" filter="url(#satelliteGlow)" />
+                      <circle r="4.6" fill="#101b96" />
                       <circle r="2.2" fill="#ffffff" />
                     </g>
                   </svg>
@@ -371,31 +372,32 @@ export default function HeroSection() {
             </h1>
 
             {/* BODY TEXT, CENTERED (HIGH-CONTRAST & PROPERLY VISIBLE) */}
-            <p className="text-base sm:text-lg md:text-xl text-slate-800 dark:text-slate-100 font-medium leading-relaxed max-w-2xl mx-auto mb-8 sm:mb-10 text-center drop-shadow-[0_1px_2px_rgba(255,255,255,0.9)] dark:drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)]">
+            <p className="text-base sm:text-lg md:text-xl text-slate-800 font-medium leading-relaxed max-w-2xl mx-auto mb-8 sm:mb-10 text-center drop-shadow-[0_1px_2px_rgba(255,255,255,0.9)]">
               Your ads, SEO and social each report a win, but sales stay flat.{" "}
               <br className="hidden sm:inline" />
               We run every channel as one team, measured on one number:{" "}
-              <strong className="font-extrabold text-slate-950 dark:text-white underline decoration-[#101b96]/40 dark:decoration-[#7d8eff]/60 decoration-2 underline-offset-4">
+              <strong className="font-extrabold text-slate-950 underline decoration-[#101b96]/40 decoration-2 underline-offset-4">
                 your revenue.
               </strong>
             </p>
 
-            {/* CTAS, CENTERED */}
-            <div className="flex flex-wrap items-center justify-center gap-5 sm:gap-7 mx-auto">
-              <Link
-                href="/drift-audit"
-                className="inline-flex items-center justify-center px-6 sm:px-7 py-3.5 rounded-lg sm:rounded-xl bg-[#101b96] hover:bg-[#0c1575] text-white font-medium text-[15px] sm:text-base shadow-sm hover:shadow-md transition-all duration-200 active:scale-[0.99]"
+            {/* CTAS: OPENS POPUP FOR AUDIT */}
+            <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 mx-auto">
+              <button
+                type="button"
+                onClick={() => openCtaModal("Hero")}
+                className="inline-flex items-center justify-center px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl bg-[#101b96] hover:bg-[#0c1575] text-white font-bold text-[15.5px] sm:text-base shadow-[0_4px_16px_rgba(16,27,150,0.25)] hover:shadow-[0_6px_22px_rgba(16,27,150,0.35)] transition-all duration-200 active:scale-[0.99] cursor-pointer"
               >
                 Get your free Drift Audit
-              </Link>
+              </button>
 
               <a
-                href="#tools"
-                className="inline-flex items-center gap-1.5 text-neutral-900 dark:text-white font-medium text-[15px] sm:text-base hover:text-[#101b96] dark:hover:text-[#7d8eff] transition-colors group cursor-pointer"
+                href="#about"
+                className="inline-flex items-center gap-1.5 text-slate-800 font-semibold text-[15.5px] sm:text-base hover:text-[#101b96] transition-colors group cursor-pointer px-3 py-2"
               >
                 <span>See how it works</span>
                 <span className="group-hover:translate-y-0.5 transition-transform text-lg">
-                  ↓
+                  &darr;
                 </span>
               </a>
             </div>
@@ -405,4 +407,3 @@ export default function HeroSection() {
     </>
   );
 }
-

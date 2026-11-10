@@ -3,6 +3,7 @@
 import React, { useState, useRef } from "react";
 import Image from "next/image";
 import { Sparkles, ArrowUpRight, ArrowRight, CheckCircle2, X, ChevronLeft, ChevronRight, ExternalLink } from "lucide-react";
+import { openCtaModal } from "@/components/CtaModal";
 
 export interface CaseStudyItem {
   id: string;
@@ -129,7 +130,7 @@ export default function CaseStudiesSection() {
   return (
     <section
       id="case-studies"
-      className="py-20 sm:py-28 bg-[#f8fafd] dark:bg-[#070914] border-y border-neutral-200/90 dark:border-white/10 relative overflow-hidden transition-colors duration-300"
+      className="py-20 sm:py-28 bg-[#f8fafd] border-y border-neutral-200/90 relative overflow-hidden transition-colors duration-300 scroll-mt-24"
     >
       {/* 1. Technical Grid Pattern Background with Vignette Mask */}
       <div
@@ -518,12 +519,17 @@ export default function CaseStudiesSection() {
                 >
                   Close
                 </button>
-                <a
-                  href="/drift-audit"
-                  className="px-6 py-2.5 rounded-full text-xs font-bold bg-[#101b96] hover:bg-[#0c1575] text-white transition-all shadow-sm"
+                <button
+                  type="button"
+                  onClick={() => {
+                    const title = selectedStudy.title;
+                    setSelectedStudy(null);
+                    openCtaModal(`CaseStudy_${title}`);
+                  }}
+                  className="px-6 py-2.5 rounded-full text-xs font-bold bg-[#101b96] hover:bg-[#0c1575] text-white transition-all shadow-sm cursor-pointer"
                 >
                   Build Similar →
-                </a>
+                </button>
               </div>
             </div>
           </div>
