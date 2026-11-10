@@ -275,12 +275,12 @@ export default function HeroSection() {
               <span>Performance-led growth agency</span>
             </div>
 
-            {/* HEADLINE: BOLD & ENLARGED SIZE, STRICTLY 2 LINES, 100% DEAD CENTERED */}
-            <h1 className="font-heading font-black tracking-[-0.04em] leading-[1.08] sm:leading-[1.03] text-[clamp(1.85rem,7.4vw,5.2rem)] mb-6 sm:mb-8 animate-title-rise w-full text-center flex flex-col items-center justify-center">
-              <span className="block text-center text-slate-950 whitespace-nowrap mx-auto">
+            {/* HEADLINE: BIG SIZE ON MOBILE, CONTROLLED ON DESKTOP, 100% DEAD CENTERED */}
+            <h1 className="font-heading font-black tracking-[-0.035em] leading-[1.08] sm:leading-[1.04] text-[35px] sm:text-[48px] md:text-[58px] lg:text-[70px] mb-6 sm:mb-8 animate-title-rise w-full text-center flex flex-col items-center justify-center">
+              <span className="block text-center text-slate-950 sm:whitespace-nowrap mx-auto w-full">
                 Your marketing is drifting.
               </span>
-              <span className="inline-flex items-center justify-center gap-x-2 sm:gap-x-2.5 text-[#101b96] mt-1.5 sm:mt-2.5 text-center whitespace-nowrap mx-auto">
+              <span className="inline-flex items-center justify-center flex-wrap sm:flex-nowrap gap-x-2 sm:gap-x-2.5 text-[#101b96] mt-1.5 sm:mt-2.5 text-center mx-auto">
                 <span>We bring it into</span>
                 <span className="relative inline-block whitespace-nowrap">
                   <span className="relative z-10">orbit.</span>
