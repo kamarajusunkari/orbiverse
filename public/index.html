@@ -433,12 +433,12 @@
       transition: transform 0.05s ease-out, opacity 0.05s ease-out;
     }
 
-    /* Big Headline: BIG ON MOBILE, CONTROLLED ON DESKTOP, 100% DEAD CENTERED */
+    /* Big Headline: STRICTLY TWO LINES ON ALL DEVICES, 100% DEAD CENTERED */
     .hero-title {
       font-family: var(--font-heading);
       font-weight: 900;
-      font-size: clamp(38px, 9vw, 70px);
-      line-height: 1.08;
+      font-size: clamp(24px, 6.8vw, 34px);
+      line-height: 1.12;
       letter-spacing: -0.035em;
       margin-bottom: 24px;
       width: 100%;
@@ -450,37 +450,33 @@
       margin-left: auto;
       margin-right: auto;
     }
+    @media (min-width: 640px) {
+      .hero-title {
+        font-size: clamp(44px, 5.5vw, 70px);
+        line-height: 1.04;
+      }
+    }
     .hero-title .line-1 {
       color: #0d0c15;
       display: block;
       text-align: center;
       width: 100%;
-    }
-    .hero-title .desktop-inline {
-      display: block;
-    }
-    @media (min-width: 640px) {
-      .hero-title .desktop-inline {
-        display: inline;
-      }
-      .hero-title .line-1 {
-        white-space: nowrap;
-      }
+      white-space: nowrap;
     }
     .hero-title .line-2 {
       color: #101b96;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      flex-wrap: wrap;
-      gap: 10px;
+      white-space: nowrap;
+      gap: 6px;
       margin-top: 6px;
       text-align: center;
     }
     @media (min-width: 640px) {
       .hero-title .line-2 {
-        white-space: nowrap;
-        flex-wrap: nowrap;
+        gap: 10px;
+        margin-top: 8px;
       }
     }
     [data-theme="dark"] .hero-title .line-2 {
@@ -621,7 +617,6 @@
     @media (max-width: 768px) {
       .header-nav { display: none; }
       .hero-section { padding-top: 130px; }
-      .hero-title { font-size: 40px; }
       .floating-logo.is-docked {
         top: 20px;
         left: 20px;
@@ -1993,14 +1988,20 @@
     }
     .service-nav-item {
       display: flex;
-      align-items: baseline;
-      gap: 24px;
-      padding: 22px 0;
+      flex-direction: column;
+      align-items: stretch;
+      padding: 20px 0;
       border-bottom: 1px solid var(--border-color);
       cursor: pointer;
       user-select: none;
       opacity: 0.45;
       transition: opacity .3s cubic-bezier(0.16, 1, 0.3, 1), transform .3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .service-nav-header-row {
+      display: flex;
+      align-items: baseline;
+      gap: 24px;
+      width: 100%;
     }
     .service-nav-item:hover {
       opacity: 0.78;
@@ -2025,7 +2026,7 @@
     }
     .service-nav-title {
       font-family: var(--font-heading);
-      font-size: clamp(22px, 2.4vw, 34px);
+      font-size: clamp(20px, 2.4vw, 32px);
       font-weight: 600;
       color: var(--text-muted);
       line-height: 1.25;
@@ -2035,7 +2036,38 @@
     .service-nav-item.is-active .service-nav-title {
       font-weight: 900;
       color: var(--text-main);
-      transform: translateX(8px);
+      transform: translateX(6px);
+    }
+    .service-mobile-card {
+      display: none;
+    }
+    @media (max-width: 991px) {
+      .services-preview-column {
+        display: none !important;
+      }
+      .service-mobile-card {
+        display: none;
+        margin-top: 14px;
+        margin-bottom: 6px;
+        border-radius: 20px;
+        background: #ffffff;
+        border: 1px solid var(--border-color);
+        padding: 16px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+        animation: fadeSlideDown 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .service-nav-item.is-active .service-mobile-card {
+        display: block;
+      }
+    }
+    @media (min-width: 992px) {
+      .service-mobile-card {
+        display: none !important;
+      }
+    }
+    @keyframes fadeSlideDown {
+      from { opacity: 0; transform: translateY(-8px); }
+      to { opacity: 1; transform: translateY(0); }
     }
     .services-preview-column {
       position: sticky;
@@ -3429,8 +3461,8 @@
 
           <!-- HEADLINE: STRICTLY TWO LINES WITH REAL ANIMATED ORBIT -->
           <h1 class="hero-title">
-            <span class="line-1"><span class="desktop-inline">Your marketing </span><span class="desktop-inline">is drifting.</span></span>
-            <span class="line-2"><span class="desktop-inline">We bring it into </span><span class="orbit-target">orbit.<svg class="orbit-ellipse-svg" viewBox="0 0 260 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <span class="line-1">Your marketing is drifting.</span>
+            <span class="line-2">We bring it into <span class="orbit-target">orbit.<svg class="orbit-ellipse-svg" viewBox="0 0 260 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
               <defs>
                 <linearGradient id="orbitTrackGrad" x1="0%" y1="0%" x2="100%" y2="100%">
                   <stop offset="0%" stop-color="#7d8eff" stop-opacity="0.85" />
@@ -3723,38 +3755,127 @@
           <!-- Services Reference Grid 1: GROWTH (01-05: List on LEFT, Card on RIGHT) -->
           <div class="services-reference-grid">
             
-            <!-- Left Column: Numbered List -->
+            <!-- Left Column: Numbered List with Mobile Inline Expandable Cards -->
             <div class="services-nav-list reveal-fade-right delay-100">
               <div class="service-nav-item service-nav-item-growth is-active" data-index="0">
-                <span class="service-nav-num">01</span>
-                <span class="service-nav-title">Performance Marketing & Paid Ads</span>
+                <div class="service-nav-header-row">
+                  <span class="service-nav-num">01</span>
+                  <span class="service-nav-title">Performance Marketing & Paid Ads</span>
+                </div>
+                <div class="service-mobile-card">
+                  <div class="service-preview-img-box">
+                    <img src="/services/e5506b99-32d2-4538-bcf5-c1cec3ff9629.webp" alt="Performance Marketing" class="service-preview-img" />
+                  </div>
+                  <p class="service-preview-desc">
+                    We construct data-driven ad campaigns across Google Search, Meta (Instagram & Facebook), YouTube, and LinkedIn. Every dollar of ad spend is measured on net pipeline revenue.
+                  </p>
+                  <div class="service-preview-action-row">
+                    <button type="button" onclick="openCtaModal('Service_PerformanceMarketing'); return false;" class="service-preview-btn">
+                      <span>Explore Performance Marketing</span>
+                      <span>→</span>
+                    </button>
+                    <span class="service-preview-tag">PAID MEDIA & PPC</span>
+                  </div>
+                </div>
               </div>
+
               <div class="service-nav-item service-nav-item-growth" data-index="1">
-                <span class="service-nav-num">02</span>
-                <span class="service-nav-title">Conversion Rate Optimization (CRO)</span>
+                <div class="service-nav-header-row">
+                  <span class="service-nav-num">02</span>
+                  <span class="service-nav-title">Conversion Rate Optimization (CRO)</span>
+                </div>
+                <div class="service-mobile-card">
+                  <div class="service-preview-img-box">
+                    <img src="/services/cro converstion rate optimization.webp" alt="Conversion Rate Optimization" class="service-preview-img" />
+                  </div>
+                  <p class="service-preview-desc">
+                    We diagnose friction across your entire checkout and lead funnel. Through high-converting landing page engineering and multi-variant A/B copy tests, we turn more traffic into reliable revenue.
+                  </p>
+                  <div class="service-preview-action-row">
+                    <button type="button" onclick="openCtaModal('Service_CRO'); return false;" class="service-preview-btn">
+                      <span>Explore Conversion Optimization</span>
+                      <span>→</span>
+                    </button>
+                    <span class="service-preview-tag">CRO & FUNNELS</span>
+                  </div>
+                </div>
               </div>
+
               <div class="service-nav-item service-nav-item-growth" data-index="2">
-                <span class="service-nav-num">03</span>
-                <span class="service-nav-title">Technical SEO & Search Authority</span>
+                <div class="service-nav-header-row">
+                  <span class="service-nav-num">03</span>
+                  <span class="service-nav-title">Technical SEO & Search Authority</span>
+                </div>
+                <div class="service-mobile-card">
+                  <div class="service-preview-img-box">
+                    <img src="/services/seo.webp" alt="Technical SEO" class="service-preview-img" />
+                  </div>
+                  <p class="service-preview-desc">
+                    Every customer who finds you on Google search is one you didn't pay a click for. Core Web Vitals audits, high-intent keyword capture, and authoritative backlink architectures for durable search dominance.
+                  </p>
+                  <div class="service-preview-action-row">
+                    <button type="button" onclick="openCtaModal('Service_TechnicalSEO'); return false;" class="service-preview-btn">
+                      <span>Explore Technical SEO</span>
+                      <span>→</span>
+                    </button>
+                    <span class="service-preview-tag">ORGANIC SEARCH</span>
+                  </div>
+                </div>
               </div>
+
               <div class="service-nav-item service-nav-item-growth" data-index="3">
-                <span class="service-nav-num">04</span>
-                <span class="service-nav-title">Brand Positioning & Creative Engine</span>
+                <div class="service-nav-header-row">
+                  <span class="service-nav-num">04</span>
+                  <span class="service-nav-title">Brand Positioning & Creative Engine</span>
+                </div>
+                <div class="service-mobile-card">
+                  <div class="service-preview-img-box">
+                    <img src="/services/brand postitoning.webp" alt="Brand Positioning" class="service-preview-img" />
+                  </div>
+                  <p class="service-preview-desc">
+                    Positioning, messaging, and viral short-form creative batches tested weekly. Deploy scroll-stopping hooks and high-converting copy that give customers an unmistakable reason to choose you.
+                  </p>
+                  <div class="service-preview-action-row">
+                    <button type="button" onclick="openCtaModal('Service_BrandCreative'); return false;" class="service-preview-btn">
+                      <span>Explore Brand & Creative</span>
+                      <span>→</span>
+                    </button>
+                    <span class="service-preview-tag">CREATIVE & BRAND</span>
+                  </div>
+                </div>
               </div>
+
               <div class="service-nav-item service-nav-item-growth" data-index="4">
-                <span class="service-nav-num">05</span>
-                <span class="service-nav-title">Autonomous AI & CRM Pipeline Velocity</span>
+                <div class="service-nav-header-row">
+                  <span class="service-nav-num">05</span>
+                  <span class="service-nav-title">Autonomous AI & CRM Pipeline Velocity</span>
+                </div>
+                <div class="service-mobile-card">
+                  <div class="service-preview-img-box">
+                    <img src="/services/autonomus ai and crm.webp" alt="Autonomous AI & CRM" class="service-preview-img" />
+                  </div>
+                  <p class="service-preview-desc">
+                    Speed to lead is everything. We integrate autonomous AI lead-qualification workflows, instant WhatsApp/SMS notification triggers, and unified attribution dashboards for zero human lag.
+                  </p>
+                  <div class="service-preview-action-row">
+                    <button type="button" onclick="openCtaModal('Service_AutonomousAI'); return false;" class="service-preview-btn">
+                      <span>Explore Autonomous AI</span>
+                      <span>→</span>
+                    </button>
+                    <span class="service-preview-tag">AI & AUTOMATION</span>
+                  </div>
+                </div>
               </div>
             </div>
 
-            <!-- Right Column: Active Preview Card -->
+            <!-- Right Column: Active Preview Card (DESKTOP ONLY) -->
             <div class="services-preview-column reveal-fade-left delay-200">
               <div class="service-preview-card" id="service-preview-card">
                 
                 <!-- Image with Corner Expand Badge -->
                 <div class="service-preview-img-box">
-                  <img id="preview-img" src="/8d0b0df3-565f-498c-98b5-f5cd61d4d7f9.webp" alt="Performance Marketing" class="service-preview-img" />
-                  <a href="/drift-audit" id="preview-expand-btn" class="service-preview-expand-badge" title="Expand Service">
+                  <img id="preview-img" src="/services/e5506b99-32d2-4538-bcf5-c1cec3ff9629.webp" alt="Performance Marketing" class="service-preview-img" />
+                  <a href="#" onclick="openCtaModal('Service_PerformanceMarketing'); return false;" id="preview-expand-btn" class="service-preview-expand-badge" title="Expand Service">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                       <polyline points="15 3 21 3 21 9"></polyline>
                       <polyline points="9 21 3 21 3 15"></polyline>
@@ -3766,15 +3887,15 @@
 
                 <!-- Description -->
                 <p class="service-preview-desc" id="preview-desc">
-                  We construct data-driven ad campaigns across Google Search, Meta (Instagram & Facebook), YouTube, and LinkedIn. Every dollar of ad spend is measured on one metric: net pipeline revenue.
+                  We construct data-driven ad campaigns across Google Search, Meta (Instagram & Facebook), YouTube, and LinkedIn. Every dollar of ad spend is measured on net pipeline revenue.
                 </p>
 
                 <!-- Button Row -->
                 <div class="service-preview-action-row">
-                  <a href="/drift-audit" id="preview-btn" class="service-preview-btn">
+                  <button type="button" onclick="openCtaModal('Service_PerformanceMarketing'); return false;" id="preview-btn" class="service-preview-btn">
                     <span id="preview-btn-text">Explore Performance Marketing</span>
                     <span>→</span>
-                  </a>
+                  </button>
                   <span class="service-preview-tag" id="preview-tag">PAID MEDIA & PPC</span>
                 </div>
 
@@ -3797,14 +3918,14 @@
           <!-- Services Reference Grid 2: DEV & DESIGN (Image Card on LEFT, Content on RIGHT) -->
           <div class="services-reference-grid reverse-layout">
             
-            <!-- Left Column: Active Preview Card (IMAGE ON LEFT) -->
+            <!-- Left Column: Active Preview Card (DESKTOP ONLY) -->
             <div class="services-preview-column reveal-fade-right delay-200">
               <div class="service-preview-card" id="service-preview-card-dev">
                 
                 <!-- Image with Corner Expand Badge -->
                 <div class="service-preview-img-box">
-                  <img id="preview-img-dev" src="/h1_1.webp" alt="Full-Stack Web & Next.js" class="service-preview-img" />
-                  <a href="/drift-audit" id="preview-expand-btn-dev" class="service-preview-expand-badge" title="Expand Service">
+                  <img id="preview-img-dev" src="/services/web developement.webp" alt="Full-Stack Web & Next.js" class="service-preview-img" />
+                  <a href="#" onclick="openCtaModal('Service_WebDevelopment'); return false;" id="preview-expand-btn-dev" class="service-preview-expand-badge" title="Expand Service">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                       <polyline points="15 3 21 3 21 9"></polyline>
                       <polyline points="9 21 3 21 3 15"></polyline>
@@ -3821,37 +3942,126 @@
 
                 <!-- Button Row -->
                 <div class="service-preview-action-row">
-                  <a href="/drift-audit" id="preview-btn-dev" class="service-preview-btn">
+                  <button type="button" onclick="openCtaModal('Service_WebDevelopment'); return false;" id="preview-btn-dev" class="service-preview-btn">
                     <span id="preview-btn-text-dev">Explore Web Development</span>
                     <span>→</span>
-                  </a>
+                  </button>
                   <span class="service-preview-tag" id="preview-tag-dev">WEB ENGINEERING</span>
                 </div>
 
               </div>
             </div>
 
-            <!-- Right Column: Numbered List (06-10) (CONTENT ON RIGHT) -->
+            <!-- Right Column: Numbered List with Mobile Inline Expandable Cards (06-10) -->
             <div class="services-nav-list reveal-fade-left delay-100">
               <div class="service-nav-item service-nav-item-dev is-active" data-index="0">
-                <span class="service-nav-num">06</span>
-                <span class="service-nav-title">Full-Stack Web &amp; Next.js Applications</span>
+                <div class="service-nav-header-row">
+                  <span class="service-nav-num">06</span>
+                  <span class="service-nav-title">Full-Stack Web &amp; Next.js Applications</span>
+                </div>
+                <div class="service-mobile-card">
+                  <div class="service-preview-img-box">
+                    <img src="/services/web developement.webp" alt="Full-Stack Web & Next.js" class="service-preview-img" />
+                  </div>
+                  <p class="service-preview-desc">
+                    High-velocity web platforms engineered with Next.js, React, and TypeScript. Sub-second load speeds, SEO-optimized SSR/SSG rendering, and modular component architectures built to scale.
+                  </p>
+                  <div class="service-preview-action-row">
+                    <button type="button" onclick="openCtaModal('Service_WebDevelopment'); return false;" class="service-preview-btn">
+                      <span>Explore Web Development</span>
+                      <span>→</span>
+                    </button>
+                    <span class="service-preview-tag">WEB ENGINEERING</span>
+                  </div>
+                </div>
               </div>
+
               <div class="service-nav-item service-nav-item-dev" data-index="1">
-                <span class="service-nav-num">07</span>
-                <span class="service-nav-title">UI/UX Product Design &amp; Systems</span>
+                <div class="service-nav-header-row">
+                  <span class="service-nav-num">07</span>
+                  <span class="service-nav-title">UI/UX Product Design &amp; Systems</span>
+                </div>
+                <div class="service-mobile-card">
+                  <div class="service-preview-img-box">
+                    <img src="/services/ui ux.webp" alt="UI/UX Product Design" class="service-preview-img" />
+                  </div>
+                  <p class="service-preview-desc">
+                    Pixel-perfect user interfaces, interactive Figma prototypes, and cohesive multi-brand design systems. We turn intricate user journeys into fluid, delightful digital interactions that maximize retention.
+                  </p>
+                  <div class="service-preview-action-row">
+                    <button type="button" onclick="openCtaModal('Service_UIUX'); return false;" class="service-preview-btn">
+                      <span>Explore UI/UX Design</span>
+                      <span>→</span>
+                    </button>
+                    <span class="service-preview-tag">UI/UX PRODUCT DESIGN</span>
+                  </div>
+                </div>
               </div>
+
               <div class="service-nav-item service-nav-item-dev" data-index="2">
-                <span class="service-nav-num">08</span>
-                <span class="service-nav-title">Mobile Applications (iOS &amp; Android)</span>
+                <div class="service-nav-header-row">
+                  <span class="service-nav-num">08</span>
+                  <span class="service-nav-title">Mobile Applications (iOS &amp; Android)</span>
+                </div>
+                <div class="service-mobile-card">
+                  <div class="service-preview-img-box">
+                    <img src="/services/mobile.webp" alt="Mobile Applications" class="service-preview-img" />
+                  </div>
+                  <p class="service-preview-desc">
+                    Native and cross-platform mobile apps engineered with React Native and Flutter. 60 FPS fluid gesture animations, offline-first data sync, biometric security, and frictionless app store deployments.
+                  </p>
+                  <div class="service-preview-action-row">
+                    <button type="button" onclick="openCtaModal('Service_MobileApps'); return false;" class="service-preview-btn">
+                      <span>Explore Mobile Apps</span>
+                      <span>→</span>
+                    </button>
+                    <span class="service-preview-tag">MOBILE APPS</span>
+                  </div>
+                </div>
               </div>
+
               <div class="service-nav-item service-nav-item-dev" data-index="3">
-                <span class="service-nav-num">09</span>
-                <span class="service-nav-title">E-Commerce &amp; Digital Storefronts</span>
+                <div class="service-nav-header-row">
+                  <span class="service-nav-num">09</span>
+                  <span class="service-nav-title">E-Commerce &amp; Digital Storefronts</span>
+                </div>
+                <div class="service-mobile-card">
+                  <div class="service-preview-img-box">
+                    <img src="/services/ecommere.webp" alt="E-Commerce Storefronts" class="service-preview-img" />
+                  </div>
+                  <p class="service-preview-desc">
+                    Custom headless Shopify and Next.js commerce stores. Instant search indexing, 1-click frictionless checkout, automated inventory sync, and multi-currency global payment gateways.
+                  </p>
+                  <div class="service-preview-action-row">
+                    <button type="button" onclick="openCtaModal('Service_ECommerce'); return false;" class="service-preview-btn">
+                      <span>Explore E-Commerce</span>
+                      <span>→</span>
+                    </button>
+                    <span class="service-preview-tag">HEADLESS COMMERCE</span>
+                  </div>
+                </div>
               </div>
+
               <div class="service-nav-item service-nav-item-dev" data-index="4">
-                <span class="service-nav-num">10</span>
-                <span class="service-nav-title">Enterprise Cloud &amp; DevOps</span>
+                <div class="service-nav-header-row">
+                  <span class="service-nav-num">10</span>
+                  <span class="service-nav-title">Enterprise Cloud &amp; DevOps</span>
+                </div>
+                <div class="service-mobile-card">
+                  <div class="service-preview-img-box">
+                    <img src="/services/devops.webp" alt="Cloud & DevOps" class="service-preview-img" />
+                  </div>
+                  <p class="service-preview-desc">
+                    Multi-region AWS and Google Cloud infrastructure, Docker container orchestration, automated GitHub Actions CI/CD pipelines, and hardened GraphQL/REST APIs ensuring 99.99% uptime.
+                  </p>
+                  <div class="service-preview-action-row">
+                    <button type="button" onclick="openCtaModal('Service_CloudDevOps'); return false;" class="service-preview-btn">
+                      <span>Explore Cloud & DevOps</span>
+                      <span>→</span>
+                    </button>
+                    <span class="service-preview-tag">CLOUD & DEVOPS</span>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -6968,8 +7178,8 @@
         number: "01",
         title: "Performance Marketing & Paid Ads",
         shortTitle: "Performance Marketing",
-        desc: "We construct data-driven ad campaigns across Google Search, Meta (Instagram & Facebook), YouTube, and LinkedIn. Every dollar of ad spend is measured on one metric: net pipeline revenue.",
-        image: "/8d0b0df3-565f-498c-98b5-f5cd61d4d7f9.webp",
+        desc: "We construct data-driven ad campaigns across Google Search, Meta (Instagram & Facebook), YouTube, and LinkedIn. Every dollar of ad spend is measured on net pipeline revenue.",
+        image: "/services/e5506b99-32d2-4538-bcf5-c1cec3ff9629.webp",
         tag: "PAID MEDIA & PPC"
       },
       {
@@ -6977,7 +7187,7 @@
         title: "Conversion Rate Optimization (CRO)",
         shortTitle: "Conversion Optimization",
         desc: "We diagnose friction across your entire checkout and lead funnel. Through high-converting landing page engineering and multi-variant A/B copy tests, we turn more traffic into reliable revenue.",
-        image: "/who we are.webp",
+        image: "/services/cro converstion rate optimization.webp",
         tag: "CRO & FUNNELS"
       },
       {
@@ -6985,7 +7195,7 @@
         title: "Technical SEO & Search Authority",
         shortTitle: "Technical SEO",
         desc: "Every customer who finds you on Google search is one you didn't pay a click for. Core Web Vitals audits, high-intent keyword capture, and authoritative backlink architectures for durable search dominance.",
-        image: "/73ecc189-9bab-4cb0-831a-3a0a158d6333.webp",
+        image: "/services/seo.webp",
         tag: "ORGANIC SEARCH"
       },
       {
@@ -6993,7 +7203,7 @@
         title: "Brand Positioning & Creative Engine",
         shortTitle: "Brand & Creative",
         desc: "Positioning, messaging, and viral short-form creative batches tested weekly. Deploy scroll-stopping hooks and high-converting copy that give customers an unmistakable reason to choose you.",
-        image: "/wwe.webp",
+        image: "/services/brand postitoning.webp",
         tag: "CREATIVE & BRAND"
       },
       {
@@ -7001,7 +7211,7 @@
         title: "Autonomous AI & CRM Pipeline Velocity",
         shortTitle: "Autonomous AI & CRM",
         desc: "Speed to lead is everything. We integrate autonomous AI lead-qualification workflows, instant WhatsApp/SMS notification triggers, and unified attribution dashboards for zero human lag.",
-        image: "/2d9b0edc-3651-4bae-b2e7-1d024722e466.webp",
+        image: "/services/autonomus ai and crm.webp",
         tag: "AI & AUTOMATION"
       }
     ];
@@ -7047,7 +7257,7 @@
         title: "Full-Stack Web & Next.js Applications",
         shortTitle: "Web Development",
         desc: "High-velocity web platforms engineered with Next.js, React, and TypeScript. Sub-second load speeds, SEO-optimized SSR/SSG rendering, and modular component architectures built to scale.",
-        image: "/h1_1.webp",
+        image: "/services/web developement.webp",
         tag: "WEB ENGINEERING"
       },
       {
@@ -7055,7 +7265,7 @@
         title: "UI/UX Product Design & Systems",
         shortTitle: "UI/UX Design",
         desc: "Pixel-perfect user interfaces, interactive Figma prototypes, and cohesive multi-brand design systems. We turn intricate user journeys into fluid, delightful digital interactions that maximize retention.",
-        image: "/5f298328-cb31-43f6-b842-32ea97f0a39d.jpg",
+        image: "/services/ui ux.webp",
         tag: "UI/UX PRODUCT DESIGN"
       },
       {
@@ -7063,7 +7273,7 @@
         title: "Mobile Applications (iOS & Android)",
         shortTitle: "Mobile App Development",
         desc: "Native and cross-platform mobile apps engineered with React Native and Flutter. 60 FPS fluid gesture animations, offline-first data sync, biometric security, and frictionless app store deployments.",
-        image: "/73ecc189-9bab-4cb0-831a-3a0a158d6333.webp",
+        image: "/services/mobile.webp",
         tag: "MOBILE APPS"
       },
       {
@@ -7071,7 +7281,7 @@
         title: "E-Commerce & Digital Storefronts",
         shortTitle: "E-Commerce Architecture",
         desc: "Custom headless Shopify and Next.js commerce stores. Instant search indexing, 1-click frictionless checkout, automated inventory sync, and multi-currency global payment gateways.",
-        image: "/8d0b0df3-565f-498c-98b5-f5cd61d4d7f9.webp",
+        image: "/services/ecommere.webp",
         tag: "HEADLESS COMMERCE"
       },
       {
@@ -7079,7 +7289,7 @@
         title: "Enterprise Cloud & DevOps",
         shortTitle: "Cloud & DevOps",
         desc: "Multi-region AWS and Google Cloud infrastructure, Docker container orchestration, automated GitHub Actions CI/CD pipelines, and hardened GraphQL/REST APIs ensuring 99.99% uptime.",
-        image: "/2d9b0edc-3651-4bae-b2e7-1d024722e466.webp",
+        image: "/services/devops.webp",
         tag: "CLOUD & DEVOPS"
       }
     ];
