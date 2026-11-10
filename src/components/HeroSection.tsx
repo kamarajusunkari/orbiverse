@@ -264,7 +264,7 @@ export default function HeroSection() {
         </div>
 
         {/* HERO CONTENT (PERFECTLY CENTERED ON MOBILE & DESKTOP) */}
-        <div className="relative z-10 w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 pt-20 sm:pt-28 md:pt-32 pb-12 sm:pb-16 flex flex-col items-center justify-center text-center">
+        <div className="relative z-10 w-full max-w-[1400px] mx-auto px-3.5 sm:px-6 lg:px-8 pt-20 sm:pt-28 md:pt-32 pb-12 sm:pb-16 flex flex-col items-center justify-center text-center">
           <div
             ref={textContainerRef}
             className="w-full max-w-4xl lg:max-w-5xl flex flex-col items-center justify-center text-center mx-auto will-change-transform transition-[transform,opacity] duration-75 ease-out"
@@ -275,12 +275,12 @@ export default function HeroSection() {
               <span>Performance-led growth agency</span>
             </div>
 
-            {/* HEADLINE: REDUCED SIZE TO STRICTLY 2 LINES, FULLY CENTERED ON MOBILE & DESKTOP */}
-            <h1 className="font-heading font-black tracking-[-0.03em] leading-[1.12] sm:leading-[1.05] text-[clamp(1.42rem,5.6vw,4.4rem)] mb-6 sm:mb-8 animate-title-rise w-full text-center flex flex-col items-center justify-center">
-              <span className="block text-center text-slate-950 whitespace-nowrap">
+            {/* HEADLINE: INCREASED PROMINENT SIZE, STRICTLY 2 LINES, 100% DEAD CENTERED */}
+            <h1 className="font-heading font-black tracking-[-0.035em] leading-[1.1] sm:leading-[1.04] text-[clamp(1.62rem,6.4vw,4.8rem)] mb-6 sm:mb-8 animate-title-rise w-full text-center flex flex-col items-center justify-center">
+              <span className="block text-center text-slate-950 whitespace-nowrap mx-auto">
                 Your marketing is drifting.
               </span>
-              <span className="inline-flex items-center justify-center gap-x-2 sm:gap-x-3 text-[#101b96] mt-1.5 sm:mt-2.5 text-center whitespace-nowrap">
+              <span className="inline-flex items-center justify-center gap-x-2 sm:gap-x-2.5 text-[#101b96] mt-1.5 sm:mt-2.5 text-center whitespace-nowrap mx-auto">
                 <span>We bring it into</span>
                 <span className="relative inline-block whitespace-nowrap">
                   <span className="relative z-10">orbit.</span>
@@ -290,7 +290,7 @@ export default function HeroSection() {
                     viewBox="0 0 260 100"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
-                    className="absolute -top-4 -bottom-4 -left-4 -right-4 w-[calc(100%+32px)] h-[calc(100%+32px)] pointer-events-none -rotate-2 overflow-visible"
+                    className="absolute -top-3.5 -bottom-3.5 -left-3 -right-3 sm:-top-4 sm:-bottom-4 sm:-left-4 sm:-right-4 w-[calc(100%+24px)] sm:w-[calc(100%+32px)] h-[calc(100%+28px)] sm:h-[calc(100%+32px)] pointer-events-none -rotate-2 overflow-visible"
                     aria-hidden="true"
                   >
                     <defs>
