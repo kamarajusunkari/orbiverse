@@ -456,7 +456,13 @@
       text-align: center;
       width: 100%;
     }
+    .hero-title .desktop-inline {
+      display: block;
+    }
     @media (min-width: 640px) {
+      .hero-title .desktop-inline {
+        display: inline;
+      }
       .hero-title .line-1 {
         white-space: nowrap;
       }
@@ -475,11 +481,6 @@
       .hero-title .line-2 {
         white-space: nowrap;
         flex-wrap: nowrap;
-      }
-    }
-    @media (min-width: 640px) {
-      .hero-title .line-2 {
-        white-space: nowrap;
       }
     }
     [data-theme="dark"] .hero-title .line-2 {
@@ -3402,8 +3403,8 @@
 
           <!-- HEADLINE: STRICTLY TWO LINES WITH REAL ANIMATED ORBIT -->
           <h1 class="hero-title">
-            <span class="line-1">Your marketing is drifting.</span>
-            <span class="line-2">We bring it into <span class="orbit-target">orbit.<svg class="orbit-ellipse-svg" viewBox="0 0 260 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <span class="line-1"><span class="desktop-inline">Your marketing </span><span class="desktop-inline">is drifting.</span></span>
+            <span class="line-2"><span class="desktop-inline">We bring it into </span><span class="orbit-target">orbit.<svg class="orbit-ellipse-svg" viewBox="0 0 260 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
               <defs>
                 <linearGradient id="orbitTrackGrad" x1="0%" y1="0%" x2="100%" y2="100%">
                   <stop offset="0%" stop-color="#7d8eff" stop-opacity="0.85" />
@@ -6809,22 +6810,20 @@
 
       // Hero Text Parallax Shrink & Background Depth (Sticky Curtain Effect)
       const scrollY = window.scrollY;
-      const maxRange = window.innerHeight || 800;
+      const maxRange = (window.innerHeight || 800) * 0.75;
       const p = Math.min(1, Math.max(0, scrollY / maxRange));
       const heroContent = document.getElementById('hero-content-wrap');
       const heroBgImg = document.getElementById('hero-bg-img-wrap');
 
       if (heroContent) {
-        const scale = Math.max(0.84, 1 - p * 0.16);
-        const translateY = scrollY * 0.24;
-        const opacity = Math.max(0, 1 - p * 1.05);
-        heroContent.style.transform = `translate3d(0, ${translateY}px, 0) scale(${scale})`;
+        const translateY = scrollY * 0.28;
+        const opacity = Math.max(0, 1 - p * 1.2);
+        heroContent.style.transform = `translate3d(0, ${translateY}px, 0)`;
         heroContent.style.opacity = opacity;
       }
       if (heroBgImg) {
-        const bgTranslateY = scrollY * 0.16;
-        const bgScale = 1 + p * 0.08;
-        heroBgImg.style.transform = `translate3d(0, ${bgTranslateY}px, 0) scale(${bgScale})`;
+        const bgTranslateY = scrollY * 0.12;
+        heroBgImg.style.transform = `translate3d(0, ${bgTranslateY}px, 0)`;
       }
     }, { passive: true });
 

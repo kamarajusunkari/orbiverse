@@ -29,7 +29,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className="min-h-screen flex flex-col antialiased selection:bg-[#5b3bd1] selection:text-white bg-white text-slate-900 overflow-x-hidden w-full relative"
+        className="min-h-screen flex flex-col antialiased selection:bg-[#5b3bd1] selection:text-white bg-white text-slate-900 overflow-x-clip w-full relative"
       >
         <ScrollRevealInit />
         <CtaModal />

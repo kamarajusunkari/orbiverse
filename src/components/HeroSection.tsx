@@ -23,7 +23,7 @@ export default function HeroSection() {
   const textContainerRef = useRef<HTMLDivElement>(null);
   const bgImageRef = useRef<HTMLDivElement>(null);
 
-  // Parallax scroll effect: sticky hero text shrinks/scales and drifts with depth as next section moves up
+  // Parallax scroll effect: sticky hero background stays pinned, text drifts and slowly fades off as next section slides over
   useEffect(() => {
     let ticking = false;
 
@@ -31,23 +31,21 @@ export default function HeroSection() {
       if (!ticking) {
         requestAnimationFrame(() => {
           const scrollY = window.scrollY;
-          const maxRange = window.innerHeight || 800;
+          const maxRange = (window.innerHeight || 800) * 0.75;
           const p = Math.min(1, Math.max(0, scrollY / maxRange));
 
-          // Enhanced parallax scroll effect: silky smooth 3D depth on both mobile and desktop
+          // Hero text drifts upwards and slowly fades off cleanly to 0
           if (textContainerRef.current) {
-            const scale = Math.max(0.84, 1 - p * 0.16);
-            const translateY = scrollY * 0.24;
-            const opacity = Math.max(0, 1 - p * 1.05);
-            textContainerRef.current.style.transform = `translate3d(0, ${translateY}px, 0) scale(${scale})`;
+            const translateY = scrollY * 0.28;
+            const opacity = Math.max(0, 1 - p * 1.2);
+            textContainerRef.current.style.transform = `translate3d(0, ${translateY}px, 0)`;
             textContainerRef.current.style.opacity = `${opacity}`;
           }
 
-          // Celestial background moves with subtle parallax depth
+          // Celestial background stays sticky with gentle depth drift
           if (bgImageRef.current) {
-            const bgTranslateY = scrollY * 0.16;
-            const bgScale = 1 + p * 0.08;
-            bgImageRef.current.style.transform = `translate3d(0, ${bgTranslateY}px, 0) scale(${bgScale})`;
+            const bgTranslateY = scrollY * 0.12;
+            bgImageRef.current.style.transform = `translate3d(0, ${bgTranslateY}px, 0)`;
           }
 
           ticking = false;
@@ -263,10 +261,10 @@ export default function HeroSection() {
         </div>
 
         {/* HERO CONTENT (PERFECTLY CENTERED ON MOBILE & DESKTOP) */}
-        <div className="relative z-10 w-full max-w-[1400px] mx-auto px-2.5 sm:px-6 lg:px-8 pt-20 sm:pt-28 md:pt-32 pb-12 sm:pb-16 flex flex-col items-center justify-center text-center">
+        <div className="relative z-10 w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 pt-20 sm:pt-28 md:pt-32 pb-12 sm:pb-16 flex flex-col items-center justify-center text-center">
           <div
             ref={textContainerRef}
-            className="w-full max-w-4xl lg:max-w-5xl flex flex-col items-center justify-center text-center mx-auto will-change-transform transition-[transform,opacity] duration-75 ease-out"
+            className="w-full max-w-4xl lg:max-w-5xl flex flex-col items-center justify-center text-center mx-auto will-change-transform"
           >
             {/* BADGE: ● Performance-led growth agency */}
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-slate-300 bg-white/80 text-[13px] sm:text-[13.5px] font-semibold text-slate-700 mb-5 sm:mb-7 animate-fade-in-up backdrop-blur-md shadow-2xs">
@@ -274,13 +272,14 @@ export default function HeroSection() {
               <span>Performance-led growth agency</span>
             </div>
 
-            {/* HEADLINE: BIGGER SIZE ON MOBILE (38px+), CONTROLLED ON DESKTOP (70px), 100% DEAD CENTERED */}
-            <h1 className="font-heading font-black tracking-[-0.035em] leading-[1.08] sm:leading-[1.04] text-[38px] xs:text-[40px] sm:text-[48px] md:text-[58px] lg:text-[70px] mb-6 sm:mb-8 animate-title-rise w-full text-center flex flex-col items-center justify-center">
-              <span className="block text-center text-slate-950 sm:whitespace-nowrap mx-auto w-full">
-                Your marketing is drifting.
+            {/* HEADLINE: IMPACTFUL BIG SIZE ON MOBILE (36px-40px), CONTROLLED ON DESKTOP (70px), 100% DEAD CENTERED */}
+            <h1 className="font-heading font-black tracking-[-0.035em] leading-[1.08] sm:leading-[1.04] text-[36px] xs:text-[40px] sm:text-[48px] md:text-[58px] lg:text-[70px] mb-6 sm:mb-8 animate-title-rise w-full text-center flex flex-col items-center justify-center">
+              <span className="block text-center text-slate-950 mx-auto w-full">
+                <span className="sm:inline block">Your marketing </span>
+                <span className="sm:inline block">is drifting.</span>
               </span>
               <span className="inline-flex items-center justify-center flex-wrap sm:flex-nowrap gap-x-2 sm:gap-x-2.5 text-[#101b96] mt-1.5 sm:mt-2.5 text-center mx-auto">
-                <span>We bring it into</span>
+                <span className="sm:inline block">We bring it into </span>
                 <span className="relative inline-block whitespace-nowrap">
                   <span className="relative z-10">orbit.</span>
                   

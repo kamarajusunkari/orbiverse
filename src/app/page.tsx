@@ -22,7 +22,7 @@ export default function Home() {
     <>
       <Navbar />
 
-      <main className="flex-1 relative overflow-x-hidden w-full">
+      <main className="flex-1 relative overflow-x-clip w-full">
         {/* IMMERSIVE HERO SECTION WITH PRELOADER (STICKY) */}
         <HeroSection />
 
