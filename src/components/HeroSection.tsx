@@ -216,7 +216,7 @@ export default function HeroSection() {
         >
           <div className="relative w-full h-full">
             <Image
-              src="/logo.png"
+              src="/0rbb.png"
               alt="Orbiverse"
               fill
               priority
@@ -249,8 +249,8 @@ export default function HeroSection() {
           </div>
 
           {/* Theme & Contrast Layering */}
-          {/* 1. Luminous radial atmosphere in upper center for crisp headline legibility */}
-          <div className="absolute inset-0 bg-radial-[circle_at_50%_35%] from-white/75 via-white/40 to-transparent dark:from-[#07060f]/80 dark:via-[#07060f]/40 dark:to-transparent pointer-events-none transition-colors duration-500" />
+          {/* 1. Luminous radial atmosphere in upper center for crisp headline & description legibility */}
+          <div className="absolute inset-0 bg-radial-[circle_at_50%_40%] from-white/90 via-white/60 to-transparent dark:from-[#07060f]/90 dark:via-[#07060f]/60 dark:to-transparent pointer-events-none transition-colors duration-500" />
 
           {/* 2. Top fade for navbar integration */}
           <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-[var(--bg-color)]/80 via-[var(--bg-color)]/40 to-transparent" />
@@ -271,9 +271,9 @@ export default function HeroSection() {
               <span>Performance-led growth agency</span>
             </div>
 
-            {/* HEADLINE: STRICTLY TWO LINES, CENTERED */}
-            <h1 className="font-heading font-black tracking-[-0.035em] leading-[1.04] text-[clamp(1.4rem,4.8vw,5.1rem)] mb-6 sm:mb-8 animate-title-rise w-full text-center">
-              <span className="block whitespace-nowrap text-[#090812] dark:text-white">
+            {/* HEADLINE: STRICTLY TWO LINES, CENTERED (ENLARGED ON MOBILE) */}
+            <h1 className="font-heading font-black tracking-[-0.035em] leading-[1.08] sm:leading-[1.04] text-[clamp(2.15rem,7vw,5.1rem)] sm:text-[clamp(2.7rem,5vw,5.1rem)] mb-6 sm:mb-8 animate-title-rise w-full text-center">
+              <span className="block sm:whitespace-nowrap text-[#090812] dark:text-white">
                 Your marketing is drifting.
               </span>
               <span className="inline-flex items-center justify-center flex-wrap sm:flex-nowrap gap-x-2.5 text-[#101b96] dark:text-[#7d8eff] mt-1 sm:mt-2 text-center">
@@ -370,12 +370,12 @@ export default function HeroSection() {
               </span>
             </h1>
 
-            {/* BODY TEXT, CENTERED */}
-            <p className="text-base sm:text-lg md:text-xl text-neutral-600 dark:text-neutral-400 font-normal leading-relaxed max-w-2xl mx-auto mb-8 sm:mb-10 text-center">
-              Your ads, SEO and social each report a win, but sales stay flat.
-              <br className="hidden sm:inline" />{" "}
+            {/* BODY TEXT, CENTERED (HIGH-CONTRAST & PROPERLY VISIBLE) */}
+            <p className="text-base sm:text-lg md:text-xl text-slate-800 dark:text-slate-100 font-medium leading-relaxed max-w-2xl mx-auto mb-8 sm:mb-10 text-center drop-shadow-[0_1px_2px_rgba(255,255,255,0.9)] dark:drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)]">
+              Your ads, SEO and social each report a win, but sales stay flat.{" "}
+              <br className="hidden sm:inline" />
               We run every channel as one team, measured on one number:{" "}
-              <strong className="font-bold text-neutral-900 dark:text-white">
+              <strong className="font-extrabold text-slate-950 dark:text-white underline decoration-[#101b96]/40 dark:decoration-[#7d8eff]/60 decoration-2 underline-offset-4">
                 your revenue.
               </strong>
             </p>
@@ -390,7 +390,7 @@ export default function HeroSection() {
               </Link>
 
               <a
-                href="#drift-orbit"
+                href="#tools"
                 className="inline-flex items-center gap-1.5 text-neutral-900 dark:text-white font-medium text-[15px] sm:text-base hover:text-[#101b96] dark:hover:text-[#7d8eff] transition-colors group cursor-pointer"
               >
                 <span>See how it works</span>

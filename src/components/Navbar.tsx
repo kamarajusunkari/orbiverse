@@ -77,7 +77,7 @@ export default function Navbar() {
 
   const navLinks = [
     { name: "Services", href: "/services" },
-    { name: "Work", href: "/#work" },
+    { name: "Work", href: "/#case-studies" },
     { name: "About", href: "/about" },
     { name: "Approach", href: "/#approach" },
   ];
@@ -89,7 +89,7 @@ export default function Navbar() {
       } pt-3 sm:pt-4 md:pt-5 pb-2 px-3 sm:px-6`}
     >
       <div
-        className={`max-w-[1400px] mx-auto pointer-events-auto rounded-2xl sm:rounded-full px-4 sm:px-7 py-2.5 sm:py-3 relative flex items-center justify-between transition-all duration-300 ${
+        className={`max-w-[1400px] mx-auto pointer-events-auto rounded-2xl sm:rounded-full px-4 sm:px-6 py-1.5 sm:py-2 relative flex items-center justify-between transition-all duration-300 ${
           isScrolled
             ? "bg-[var(--bg-color)]/75 dark:bg-[#080614]/75 backdrop-blur-2xl border border-[var(--border-color)] shadow-[0_16px_40px_rgba(0,0,0,0.12),inset_0_1px_1px_rgba(255,255,255,0.15)]"
             : !isScrolled && pathname === "/"
@@ -97,37 +97,37 @@ export default function Navbar() {
             : "bg-[var(--bg-color)]/80 dark:bg-[#080614]/80 backdrop-blur-2xl border border-[var(--border-color)] shadow-sm"
         }`}
       >
-        {/* ================= LEFT: LOGO ================= */}
+        {/* ================= LEFT: LOGO (INCREASED SIZE) ================= */}
         <div className="flex items-center z-10">
           <Link href="/" className="flex items-center gap-3 sm:gap-3.5 group">
             <div
               id="header-logo-dock"
-              className={`relative w-11 h-11 sm:w-12 sm:h-12 md:w-14 md:h-14 flex-shrink-0 transition-opacity duration-200 group-hover:scale-105 ${
+              className={`relative w-14 h-14 sm:w-16 sm:h-16 md:w-[68px] md:h-[68px] flex-shrink-0 transition-opacity duration-200 group-hover:scale-105 ${
                 pathname === "/" && !logoSettled ? "opacity-0" : "opacity-100"
               }`}
             >
               <Image
-                src="/logo.png"
+                src="/0rbb.png"
                 alt="Orbiverse Logo"
-                width={56}
-                height={56}
+                width={68}
+                height={68}
                 className="w-full h-full object-contain filter brightness-110 drop-shadow-md"
                 priority
               />
             </div>
-            <span className="font-heading font-black text-xl sm:text-2xl tracking-tight text-[var(--text-main)] transition-colors">
+            <span className="font-heading font-black text-2xl sm:text-3xl md:text-[30px] tracking-tight text-[var(--text-main)] transition-colors">
               Orbiverse
             </span>
           </Link>
         </div>
 
-        {/* ================= MIDDLE: MENU (PILL CONTAINER - EXACT CENTER) ================= */}
+        {/* ================= MIDDLE: MENU (INCREASED FONT SIZE) ================= */}
         <nav
           className="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 pointer-events-auto"
           aria-label="Main Navigation"
         >
           <div
-            className={`flex items-center rounded-full px-2 py-1.5 transition-all duration-300 ${
+            className={`flex items-center rounded-full px-2 py-1 transition-all duration-300 ${
               isScrolled
                 ? "border-0 border-transparent bg-transparent backdrop-blur-none shadow-none"
                 : "border border-black/10 dark:border-white/20 bg-black/[0.04] dark:bg-white/[0.08] backdrop-blur-md shadow-sm"
@@ -140,13 +140,13 @@ export default function Navbar() {
                 <Link
                   key={link.name}
                   href={link.href}
-                  className={`px-4 sm:px-5 py-1 text-[13.5px] font-medium rounded-full transition-all duration-200 ${
+                  className={`px-4 sm:px-5 py-1.5 text-[16px] sm:text-[17px] font-semibold tracking-tight rounded-full transition-all duration-200 ${
                     isScrolled
                       ? isActive
-                        ? "text-[var(--text-main)] font-semibold"
+                        ? "text-[var(--text-main)] font-bold"
                         : "text-[var(--text-muted)] hover:text-[var(--text-main)]"
                       : isActive
-                        ? "text-[var(--text-main)] font-semibold bg-black/5 dark:bg-white/20 shadow-2xs"
+                        ? "text-[var(--text-main)] font-bold bg-black/5 dark:bg-white/20 shadow-2xs"
                         : "text-[var(--text-muted)] hover:text-[var(--text-main)] hover:bg-black/[0.04] dark:hover:bg-white/10"
                   }`}
                 >
@@ -178,10 +178,10 @@ export default function Navbar() {
           {/* CTA Button matching the reference pill capsule */}
           <Link
             href="/drift-audit"
-            className="hidden sm:inline-flex items-center justify-center gap-1.5 px-5 py-2 rounded-full text-[13.5px] font-semibold transition-all hover:scale-[1.02] cursor-pointer shadow-2xs border border-black/15 dark:border-white/25 bg-white/80 dark:bg-white/[0.08] hover:bg-[#101b96] dark:hover:bg-white text-neutral-900 dark:text-white hover:text-white dark:hover:text-black backdrop-blur-md"
+            className="hidden sm:inline-flex items-center justify-center gap-1.5 px-5 py-2 rounded-full text-[14.5px] sm:text-[15px] font-semibold transition-all hover:scale-[1.02] cursor-pointer shadow-2xs border border-black/15 dark:border-white/25 bg-white/80 dark:bg-white/[0.08] hover:bg-[#101b96] dark:hover:bg-white text-neutral-900 dark:text-white hover:text-white dark:hover:text-black backdrop-blur-md"
           >
             <span>Free Drift Audit</span>
-            <ArrowUpRight className="w-3.5 h-3.5 opacity-80" />
+            <ArrowUpRight className="w-4 h-4 opacity-80" />
           </Link>
 
           {/* Mobile Menu Button */}

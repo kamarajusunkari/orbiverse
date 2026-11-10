@@ -649,7 +649,7 @@ export default function PlanetPortalHero() {
           }`}
         >
           <img
-            src="/logo.png"
+            src="/0rbb.png"
             alt="Orbiverse"
             className="w-full h-full object-contain filter brightness-120"
           />

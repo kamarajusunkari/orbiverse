@@ -276,6 +276,21 @@ h1, h2, h3, h4, .font-heading {
 .delay-600 { transition-delay: 600ms !important; }
 .delay-700 { transition-delay: 700ms !important; }
 
+/* Technical Grid Pattern for Case Studies Section */
+.case-studies-grid-pattern {
+  background-image: 
+    linear-gradient(to right, rgba(16, 27, 150, 0.055) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(16, 27, 150, 0.055) 1px, transparent 1px);
+  background-size: 44px 44px;
+}
+
+[data-theme="dark"] .case-studies-grid-pattern,
+.dark .case-studies-grid-pattern {
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+}
+
 /* Reduced Motion Support */
 @media (prefers-reduced-motion: reduce) {
   .reveal-fade-up,

@@ -207,12 +207,29 @@ export default function ServicesStackSection() {
         {/* Outer Scroll Container: Controls Slow Fade-in, Sunset Fade-out & Parallax Scaling */}
         <div
           ref={orbScrollRef}
-          className="relative flex items-center justify-center will-change-[transform,opacity] transition-all duration-75 ease-out"
+          className="relative flex items-center justify-center will-change-[transform,opacity] transition-all duration-75 ease-out w-full"
           style={{ opacity: 0, transform: "scale(0.85)" }}
         >
           {/* Luminous Pulsing Electric Blue Aura Behind Glowing Orbiverse Cube */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[340px] sm:w-[500px] md:w-[620px] h-[340px] sm:h-[500px] md:h-[620px] rounded-full bg-gradient-to-tr from-blue-500/20 via-cyan-400/25 to-indigo-500/15 blur-[70px] sm:blur-[120px] pointer-events-none animate-pulse duration-1000" />
           <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[240px] sm:w-[340px] h-[240px] sm:h-[340px] rounded-full bg-cyan-400/20 blur-[45px] pointer-events-none" />
+
+          {/* ================================================================ */}
+          {/* GIANT "ORBIVERSE" BACKDROP TYPOGRAPHY BEHIND 3D HAND IMAGE       */}
+          {/* ================================================================ */}
+          <div
+            aria-hidden="true"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[45%] z-0 select-none pointer-events-none w-screen flex items-center justify-center overflow-hidden"
+          >
+            <span
+              className="font-heading font-black tracking-[-0.04em] uppercase text-[15vw] sm:text-[17vw] md:text-[18vw] lg:text-[210px] xl:text-[250px] leading-none whitespace-nowrap text-[#101b96]/12 dark:text-[#38bdf8]/20 transition-colors duration-500 drop-shadow-[0_10px_35px_rgba(16,27,150,0.1)] dark:drop-shadow-[0_0_50px_rgba(56,189,248,0.25)]"
+              style={{
+                WebkitTextStroke: "1px rgba(16, 27, 150, 0.2)",
+              }}
+            >
+              ORBIVERSE
+            </span>
+          </div>
 
           {/* Inner 3D Tilt Container: Hand Softly Merges at Wrist into White Background */}
           <div

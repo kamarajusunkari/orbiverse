@@ -6,8 +6,8 @@ export const metadata: Metadata = {
   title: "Orbiverse — Performance-Led Growth Agency | We Bring Marketing Into Orbit",
   description: "Brand, demand and data, run by one team that answers to one number. Orbiverse turns drift into orbit for high-growth businesses.",
   icons: {
-    icon: "/logo.png",
-    apple: "/logo.png",
+    icon: "/0rbb.png",
+    apple: "/0rbb.png",
   },
 };
 

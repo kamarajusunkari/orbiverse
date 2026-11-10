@@ -66,7 +66,7 @@ export default function OrbitHero() {
       <div className="relative z-10 w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center">
         {/* EYEBROW PILL */}
         <Link
-          href="#drift-orbit"
+          href="#tools"
           className="group inline-flex items-center gap-2 px-3 sm:px-3.5 py-1.5 rounded-full border border-black/10 dark:border-white/15 bg-white/70 dark:bg-white/12 backdrop-blur-md shadow-xs hover:bg-white/90 dark:hover:bg-white/20 transition-all duration-200 mb-6 sm:mb-8"
         >
           <span className="inline-flex items-center justify-center px-2 py-0.5 rounded-full text-[10.5px] font-bold tracking-tight bg-[#0b1a99] dark:bg-white text-white dark:text-black">
@@ -117,7 +117,7 @@ export default function OrbitHero() {
 
           {/* Solid button */}
           <a
-            href="#drift-orbit"
+            href="#tools"
             className="inline-flex items-center justify-center min-w-[110px] sm:min-w-[120px] px-5 sm:px-6 py-2.5 sm:py-3 rounded-full text-[13px] sm:text-[14px] font-semibold tracking-tight bg-[#0b1a99] dark:bg-white text-white dark:text-black hover:bg-[#1224bf] dark:hover:bg-neutral-200 transition-all duration-200 shadow-sm"
           >
             Explore
