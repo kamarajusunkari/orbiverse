@@ -34,11 +34,12 @@ export default function HeroSection() {
           const maxRange = window.innerHeight || 800;
           const p = Math.min(1, Math.max(0, scrollY / maxRange));
 
-          // Text reduces in size and drifts with 3D depth as next section moves up
+          // Parallax scroll effect: on desktop, text shrinks/scales and drifts; on mobile, keep same size (don't decrease)
           if (textContainerRef.current) {
-            const scale = Math.max(0.68, 1 - p * 0.32);
-            const translateY = scrollY * 0.22;
-            const opacity = Math.max(0.08, 1 - p * 0.88);
+            const isMobile = window.innerWidth < 768;
+            const scale = isMobile ? 1 : Math.max(0.72, 1 - p * 0.28);
+            const translateY = isMobile ? 0 : scrollY * 0.22;
+            const opacity = Math.max(0.08, 1 - p * 0.92);
             textContainerRef.current.style.transform = `translate3d(0, ${translateY}px, 0) scale(${scale})`;
             textContainerRef.current.style.opacity = `${opacity}`;
           }
@@ -274,12 +275,12 @@ export default function HeroSection() {
               <span>Performance-led growth agency</span>
             </div>
 
-            {/* HEADLINE: INCREASED SIZE, FULLY CENTERED */}
-            <h1 className="font-heading font-black tracking-[-0.035em] leading-[1.12] sm:leading-[1.04] text-[clamp(2.45rem,8.2vw,5.3rem)] mb-6 sm:mb-8 animate-title-rise w-full text-center flex flex-col items-center justify-center">
-              <span className="block w-full text-center text-slate-950">
+            {/* HEADLINE: REDUCED SIZE TO STRICTLY 2 LINES, FULLY CENTERED ON MOBILE & DESKTOP */}
+            <h1 className="font-heading font-black tracking-[-0.03em] leading-[1.12] sm:leading-[1.05] text-[clamp(1.42rem,5.6vw,4.4rem)] mb-6 sm:mb-8 animate-title-rise w-full text-center flex flex-col items-center justify-center">
+              <span className="block text-center text-slate-950 whitespace-nowrap">
                 Your marketing is drifting.
               </span>
-              <span className="flex items-center justify-center flex-wrap gap-x-2 sm:gap-x-3 text-[#101b96] mt-2 sm:mt-3 text-center w-full">
+              <span className="inline-flex items-center justify-center gap-x-2 sm:gap-x-3 text-[#101b96] mt-1.5 sm:mt-2.5 text-center whitespace-nowrap">
                 <span>We bring it into</span>
                 <span className="relative inline-block whitespace-nowrap">
                   <span className="relative z-10">orbit.</span>
