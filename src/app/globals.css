@@ -1,6 +1,10 @@
 @import "tailwindcss";
 
+/* Disable Tailwind dark variant so system dark mode cannot trigger dark styles */
+@custom-variant dark (&:where([data-theme="never-dark-disabled"]));
+
 :root {
+  color-scheme: light !important;
   --bg-color: #ffffff;
   --text-main: #0c0b16;
   --text-muted: #5e5a75;
@@ -13,6 +17,15 @@
   --orbit-ring: rgba(11, 26, 153, 0.12);
   --card-bg: #ffffff;
   --badge-bg: #ede9fc;
+}
+
+/* Force light mode regardless of device prefers-color-scheme */
+@media (prefers-color-scheme: dark) {
+  :root, html, body {
+    color-scheme: light !important;
+    background-color: #ffffff !important;
+    color: #0c0b16 !important;
+  }
 }
 
 html {

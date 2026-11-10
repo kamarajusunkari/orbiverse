@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light">
   <title>Orbiverse — Performance-Led Growth Agency</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -10,6 +11,7 @@
 
   <style>
     :root {
+      color-scheme: light !important;
       --bg-color: #ffffff;
       --text-main: #0d0c15;
       --text-muted: #5e5a75;
@@ -435,7 +437,7 @@
     .hero-title {
       font-family: var(--font-heading);
       font-weight: 900;
-      font-size: clamp(35px, 8.8vw, 70px);
+      font-size: clamp(38px, 9vw, 70px);
       line-height: 1.08;
       letter-spacing: -0.035em;
       margin-bottom: 24px;
@@ -6813,10 +6815,9 @@
       const heroBgImg = document.getElementById('hero-bg-img-wrap');
 
       if (heroContent) {
-        const isMobile = window.innerWidth < 768;
-        const scale = isMobile ? 1 : Math.max(0.72, 1 - p * 0.28);
-        const translateY = isMobile ? 0 : scrollY * 0.22;
-        const opacity = Math.max(0.08, 1 - p * 0.92);
+        const scale = Math.max(0.84, 1 - p * 0.16);
+        const translateY = scrollY * 0.24;
+        const opacity = Math.max(0, 1 - p * 1.05);
         heroContent.style.transform = `translate3d(0, ${translateY}px, 0) scale(${scale})`;
         heroContent.style.opacity = opacity;
       }

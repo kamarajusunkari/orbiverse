@@ -34,12 +34,11 @@ export default function HeroSection() {
           const maxRange = window.innerHeight || 800;
           const p = Math.min(1, Math.max(0, scrollY / maxRange));
 
-          // Parallax scroll effect: on desktop, text shrinks/scales and drifts; on mobile, keep same size (don't decrease)
+          // Enhanced parallax scroll effect: silky smooth 3D depth on both mobile and desktop
           if (textContainerRef.current) {
-            const isMobile = window.innerWidth < 768;
-            const scale = isMobile ? 1 : Math.max(0.72, 1 - p * 0.28);
-            const translateY = isMobile ? 0 : scrollY * 0.22;
-            const opacity = Math.max(0.08, 1 - p * 0.92);
+            const scale = Math.max(0.84, 1 - p * 0.16);
+            const translateY = scrollY * 0.24;
+            const opacity = Math.max(0, 1 - p * 1.05);
             textContainerRef.current.style.transform = `translate3d(0, ${translateY}px, 0) scale(${scale})`;
             textContainerRef.current.style.opacity = `${opacity}`;
           }
@@ -275,8 +274,8 @@ export default function HeroSection() {
               <span>Performance-led growth agency</span>
             </div>
 
-            {/* HEADLINE: BIG SIZE ON MOBILE, CONTROLLED ON DESKTOP, 100% DEAD CENTERED */}
-            <h1 className="font-heading font-black tracking-[-0.035em] leading-[1.08] sm:leading-[1.04] text-[35px] sm:text-[48px] md:text-[58px] lg:text-[70px] mb-6 sm:mb-8 animate-title-rise w-full text-center flex flex-col items-center justify-center">
+            {/* HEADLINE: BIGGER SIZE ON MOBILE (38px+), CONTROLLED ON DESKTOP (70px), 100% DEAD CENTERED */}
+            <h1 className="font-heading font-black tracking-[-0.035em] leading-[1.08] sm:leading-[1.04] text-[38px] xs:text-[40px] sm:text-[48px] md:text-[58px] lg:text-[70px] mb-6 sm:mb-8 animate-title-rise w-full text-center flex flex-col items-center justify-center">
               <span className="block text-center text-slate-950 sm:whitespace-nowrap mx-auto w-full">
                 Your marketing is drifting.
               </span>
