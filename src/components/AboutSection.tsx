@@ -5,30 +5,143 @@ import Image from "next/image";
 import { ArrowUpRight, Play, Sparkles, X } from "lucide-react";
 import { openCtaModal } from "@/components/CtaModal";
 
+// Reusable smooth count-up ticker animation
+function AnimatedCounter({
+  target,
+  suffix = "+",
+  duration = 1800,
+  start = false,
+}: {
+  target: number;
+  suffix?: string;
+  duration?: number;
+  start: boolean;
+}) {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (!start) return;
+
+    let startTime: number | null = null;
+    let animFrame: number;
+
+    const easeOutExpo = (x: number): number => {
+      return x === 1 ? 1 : 1 - Math.pow(2, -10 * x);
+    };
+
+    const update = (now: number) => {
+      if (!startTime) startTime = now;
+      const progress = Math.min(1, (now - startTime) / duration);
+      const easedProgress = easeOutExpo(progress);
+      const current = Math.floor(easedProgress * target);
+
+      setCount(current);
+
+      if (progress < 1) {
+        animFrame = requestAnimationFrame(update);
+      } else {
+        setCount(target);
+      }
+    };
+
+    animFrame = requestAnimationFrame(update);
+    return () => cancelAnimationFrame(animFrame);
+  }, [start, target, duration]);
+
+  return (
+    <span>
+      {count}
+      {suffix}
+    </span>
+  );
+}
+
 export default function AboutSection() {
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
   const [hasEntered, setHasEntered] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Individual box entrance states (ensures each box on mobile fades up smoothly as user scrolls)
+  const [card1Entered, setCard1Entered] = useState(false);
+  const [card2Entered, setCard2Entered] = useState(false);
+  const [card3Entered, setCard3Entered] = useState(false);
+  const [card4Entered, setCard4Entered] = useState(false);
+  const [card5Entered, setCard5Entered] = useState(false);
+
   const sectionRef = useRef<HTMLElement>(null);
+  const card1Ref = useRef<HTMLDivElement>(null);
+  const card2Ref = useRef<HTMLDivElement>(null);
+  const card3Ref = useRef<HTMLDivElement>(null);
+  const card4Ref = useRef<HTMLDivElement>(null);
+  const card5Ref = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile, { passive: true });
+
+    const mobileMode = window.innerWidth < 1024;
+
+    // Header & Section Observer
+    const sectionObserver = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setHasEntered(true);
+          // On desktop where all cards are side-by-side, trigger all cards
+          if (!mobileMode) {
+            setCard1Entered(true);
+            setCard2Entered(true);
+            setCard3Entered(true);
+            setCard4Entered(true);
+            setCard5Entered(true);
+          }
         }
       },
-      { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+      { threshold: 0.08, rootMargin: "0px 0px -40px 0px" }
     );
 
     if (sectionRef.current) {
-      observer.observe(sectionRef.current);
+      sectionObserver.observe(sectionRef.current);
     }
 
-    // Safety fallback: ensure elements reveal after 1.4s even if scroll observer is slow
-    const timer = setTimeout(() => setHasEntered(true), 1400);
+    // Individual Box Observer: enables mobile fade-up entrance for every single box as it scrolls into view
+    const cardObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            if (entry.target === card1Ref.current) setCard1Entered(true);
+            if (entry.target === card2Ref.current) setCard2Entered(true);
+            if (entry.target === card3Ref.current) setCard3Entered(true);
+            if (entry.target === card4Ref.current) setCard4Entered(true);
+            if (entry.target === card5Ref.current) setCard5Entered(true);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -30px 0px" }
+    );
+
+    if (card1Ref.current) cardObserver.observe(card1Ref.current);
+    if (card2Ref.current) cardObserver.observe(card2Ref.current);
+    if (card3Ref.current) cardObserver.observe(card3Ref.current);
+    if (card4Ref.current) cardObserver.observe(card4Ref.current);
+    if (card5Ref.current) cardObserver.observe(card5Ref.current);
+
+    // Safety fallback: ensure elements reveal after 2.4s even if scroll observer is slow
+    const timer = setTimeout(() => {
+      setHasEntered(true);
+      setCard1Entered(true);
+      setCard2Entered(true);
+      setCard3Entered(true);
+      setCard4Entered(true);
+      setCard5Entered(true);
+    }, 2400);
 
     return () => {
-      observer.disconnect();
+      sectionObserver.disconnect();
+      cardObserver.disconnect();
+      window.removeEventListener("resize", checkMobile);
       clearTimeout(timer);
     };
   }, []);
@@ -132,42 +245,45 @@ export default function AboutSection() {
         </div>
 
         {/* ==================================================================== */}
-        {/* 2. FIVE METRIC & SHOWCASE CARDS (STAGGERED ENTRANCE & HOVER EFFECTS) */}
+        {/* 2. FIVE METRIC & SHOWCASE CARDS (MOBILE FADE-UP & COUNTER ANIMATION) */}
         {/* ==================================================================== */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-5 items-stretch">
           
-          {/* CARD 1: Graphic Illustration */}
+          {/* CARD 1: Graphic Illustration (about us.webp) */}
           <div
-            className={`relative rounded-3xl overflow-hidden border border-neutral-200/90 dark:border-neutral-800 bg-[#f4f4f6] dark:bg-neutral-900 min-h-[280px] sm:min-h-[300px] shadow-xs hover:shadow-xl hover:-translate-y-2 transition-all duration-500 group cursor-pointer ${
-              hasEntered
+            ref={card1Ref}
+            className={`relative rounded-3xl overflow-hidden border border-neutral-200/90 dark:border-neutral-800 bg-[#f4f4f6] dark:bg-neutral-900 min-h-[280px] sm:min-h-[300px] shadow-xs hover:shadow-xl hover:-translate-y-2 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group cursor-pointer ${
+              card1Entered
                 ? "opacity-100 translate-y-0 scale-100"
                 : "opacity-0 translate-y-12 scale-[0.96]"
             }`}
-            style={{ transitionDelay: hasEntered ? "200ms" : "0ms" }}
+            style={{ transitionDelay: !isMobile && hasEntered ? "150ms" : "0ms" }}
           >
             <Image
-              src="/about-illustration.png"
-              alt="Digital team at work"
+              src="/about us.webp"
+              alt="About Orbiverse team"
               fill
               className="object-cover object-center group-hover:scale-108 transition-transform duration-700 ease-out"
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 20vw"
+              priority
             />
             {/* Ambient light sheen sweep on hover */}
             <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/25 dark:via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out pointer-events-none" />
           </div>
 
-          {/* CARD 2: 10+ Years Experience (Pastel Ice-Blue) */}
+          {/* CARD 2: 10+ Years Experience (Pastel Ice-Blue with Count-Up Counter) */}
           <div
-            className={`rounded-3xl p-6 sm:p-7 flex flex-col justify-between min-h-[280px] sm:min-h-[300px] bg-[#f0f6ff] dark:bg-[#0c1829] border border-[#dbeafe] dark:border-[#1e3a5f] shadow-xs hover:shadow-xl hover:-translate-y-2 hover:border-blue-300 dark:hover:border-blue-500 transition-all duration-400 group cursor-pointer ${
-              hasEntered
+            ref={card2Ref}
+            className={`rounded-3xl p-6 sm:p-7 flex flex-col justify-between min-h-[280px] sm:min-h-[300px] bg-[#f0f6ff] dark:bg-[#0c1829] border border-[#dbeafe] dark:border-[#1e3a5f] shadow-xs hover:shadow-xl hover:-translate-y-2 hover:border-blue-300 dark:hover:border-blue-500 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group cursor-pointer ${
+              card2Entered
                 ? "opacity-100 translate-y-0 scale-100"
                 : "opacity-0 translate-y-12 scale-[0.96]"
             }`}
-            style={{ transitionDelay: hasEntered ? "320ms" : "0ms" }}
+            style={{ transitionDelay: !isMobile && hasEntered ? "260ms" : "0ms" }}
           >
             <div>
               <div className="text-4xl sm:text-5xl font-black text-neutral-900 dark:text-white tracking-tight group-hover:text-blue-600 dark:group-hover:text-blue-400 group-hover:scale-105 inline-block origin-left transition-all duration-300">
-                10+
+                <AnimatedCounter target={10} start={card2Entered} />
               </div>
               <div className="text-sm sm:text-[15px] font-bold text-[#2563eb] dark:text-[#60a5fa] mt-1.5 group-hover:tracking-wide transition-all duration-300">
                 Years Experience
@@ -179,14 +295,15 @@ export default function AboutSection() {
             </p>
           </div>
 
-          {/* CARD 3: 150+ Happy Clients (Crisp White Card with Icon) */}
+          {/* CARD 3: 150+ Happy Clients (Crisp White Card with Count-Up Counter) */}
           <div
-            className={`rounded-3xl p-6 sm:p-7 flex flex-col justify-between min-h-[280px] sm:min-h-[300px] bg-white dark:bg-[#121124] border border-neutral-200/90 dark:border-neutral-800 shadow-xs hover:shadow-xl hover:-translate-y-2 hover:border-neutral-300 dark:hover:border-neutral-700 transition-all duration-400 group cursor-pointer ${
-              hasEntered
+            ref={card3Ref}
+            className={`rounded-3xl p-6 sm:p-7 flex flex-col justify-between min-h-[280px] sm:min-h-[300px] bg-white dark:bg-[#121124] border border-neutral-200/90 dark:border-neutral-800 shadow-xs hover:shadow-xl hover:-translate-y-2 hover:border-neutral-300 dark:hover:border-neutral-700 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group cursor-pointer ${
+              card3Entered
                 ? "opacity-100 translate-y-0 scale-100"
                 : "opacity-0 translate-y-12 scale-[0.96]"
             }`}
-            style={{ transitionDelay: hasEntered ? "440ms" : "0ms" }}
+            style={{ transitionDelay: !isMobile && hasEntered ? "370ms" : "0ms" }}
           >
             <div className="flex items-center justify-between w-full">
               <div className="w-10 h-10 rounded-xl bg-[#fef08a] dark:bg-[#ca8a04]/40 flex items-center justify-center text-xl shadow-xs group-hover:rotate-12 group-hover:scale-115 group-hover:shadow-md transition-all duration-300">
@@ -200,7 +317,7 @@ export default function AboutSection() {
                 Happy Clients
               </div>
               <div className="text-4xl sm:text-5xl font-black text-neutral-900 dark:text-white tracking-tight mt-1 group-hover:scale-105 inline-block origin-left transition-transform duration-300">
-                150+
+                <AnimatedCounter target={150} start={card3Entered} />
               </div>
               <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-2 leading-relaxed">
                 Trusted growth partners &amp; leading brands.
@@ -208,18 +325,19 @@ export default function AboutSection() {
             </div>
           </div>
 
-          {/* CARD 4: 50+ Orbiverse Team (Pastel Warm Yellow) */}
+          {/* CARD 4: 50+ Orbiverse Team (Pastel Warm Yellow with Count-Up Counter) */}
           <div
-            className={`rounded-3xl p-6 sm:p-7 flex flex-col justify-between min-h-[280px] sm:min-h-[300px] bg-[#fefce8] dark:bg-[#232011] border border-[#fef08a]/70 dark:border-[#713f12]/50 shadow-xs hover:shadow-xl hover:-translate-y-2 hover:border-amber-300 dark:hover:border-amber-600 hover:bg-[#fef9c3] dark:hover:bg-[#2b2413] transition-all duration-400 group cursor-pointer ${
-              hasEntered
+            ref={card4Ref}
+            className={`rounded-3xl p-6 sm:p-7 flex flex-col justify-between min-h-[280px] sm:min-h-[300px] bg-[#fefce8] dark:bg-[#232011] border border-[#fef08a]/70 dark:border-[#713f12]/50 shadow-xs hover:shadow-xl hover:-translate-y-2 hover:border-amber-300 dark:hover:border-amber-600 hover:bg-[#fef9c3] dark:hover:bg-[#2b2413] transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group cursor-pointer ${
+              card4Entered
                 ? "opacity-100 translate-y-0 scale-100"
                 : "opacity-0 translate-y-12 scale-[0.96]"
             }`}
-            style={{ transitionDelay: hasEntered ? "560ms" : "0ms" }}
+            style={{ transitionDelay: !isMobile && hasEntered ? "480ms" : "0ms" }}
           >
             <div>
               <div className="text-4xl sm:text-5xl font-black text-neutral-900 dark:text-white tracking-tight group-hover:text-amber-600 dark:group-hover:text-amber-400 group-hover:scale-105 inline-block origin-left transition-all duration-300">
-                50+
+                <AnimatedCounter target={50} start={card4Entered} />
               </div>
               <div className="text-sm sm:text-[15px] font-bold text-[#2563eb] dark:text-[#60a5fa] mt-1.5 group-hover:tracking-wide transition-all duration-300">
                 Orbiverse Team
@@ -231,24 +349,25 @@ export default function AboutSection() {
             </p>
           </div>
 
-          {/* CARD 5: Get Started With Us (Rich Royal Blue Card) */}
+          {/* CARD 5: Get Started With Us (Rich Royal Blue Card with profiles.webp) */}
           <button
+            ref={card5Ref}
             type="button"
             onClick={() => openCtaModal("AboutCard5")}
-            className={`rounded-3xl p-6 sm:p-7 flex flex-col justify-between text-left min-h-[280px] sm:min-h-[300px] bg-[#1e40af] border border-[#1d4ed8] shadow-sm hover:shadow-[0_20px_45px_rgba(30,64,175,0.45)] hover:-translate-y-2 hover:border-blue-400 transition-all duration-400 text-white group cursor-pointer ${
-              hasEntered
+            className={`rounded-3xl p-6 sm:p-7 flex flex-col justify-between text-left min-h-[280px] sm:min-h-[300px] bg-[#1e40af] border border-[#1d4ed8] shadow-sm hover:shadow-[0_20px_45px_rgba(30,64,175,0.45)] hover:-translate-y-2 hover:border-blue-400 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] text-white group cursor-pointer ${
+              card5Entered
                 ? "opacity-100 translate-y-0 scale-100"
                 : "opacity-0 translate-y-12 scale-[0.96]"
             }`}
-            style={{ transitionDelay: hasEntered ? "680ms" : "0ms" }}
+            style={{ transitionDelay: !isMobile && hasEntered ? "590ms" : "0ms" }}
           >
-            {/* Team Avatars Cluster */}
-            <div className="relative h-10 w-24 group-hover:scale-110 origin-left transition-transform duration-300">
+            {/* Team Profiles Cluster (profiles.webp) */}
+            <div className="relative h-12 w-36 group-hover:scale-105 origin-left transition-transform duration-300">
               <Image
-                src="/about-team-avatars.png"
-                alt="Leadership team"
+                src="/profiles.webp"
+                alt="Orbiverse team profiles"
                 fill
-                className="object-contain object-left"
+                className="object-contain object-left filter drop-shadow-md"
               />
             </div>
 
@@ -274,27 +393,26 @@ export default function AboutSection() {
           onClick={() => setIsVideoModalOpen(false)}
         >
           <div
-            className="relative bg-neutral-900 border border-white/20 rounded-2xl p-6 max-w-2xl w-full text-white shadow-2xl"
+            className="relative w-full max-w-4xl bg-black rounded-3xl overflow-hidden shadow-2xl border border-white/20 aspect-video flex items-center justify-center"
             onClick={(e) => e.stopPropagation()}
           >
             <button
               onClick={() => setIsVideoModalOpen(false)}
-              className="absolute top-4 right-4 p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
+              className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-white/20 hover:bg-white/40 text-white flex items-center justify-center transition-colors cursor-pointer"
               aria-label="Close modal"
             >
               <X className="w-5 h-5" />
             </button>
-            <h3 className="text-xl font-bold mb-3">Orbiverse Overview</h3>
-            <p className="text-sm text-neutral-300 mb-4">
-              Watch how we engineer unified growth, brand performance, and data tracking for ambitious brands.
-            </p>
-            <div className="aspect-video w-full rounded-xl overflow-hidden bg-black flex items-center justify-center border border-white/10">
-              <video
-                src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/4b73c700-3112-4c07-bd48-0af2893dff7c.mp4"
-                controls
-                autoPlay
-                className="w-full h-full object-cover"
-              />
+            <div className="text-center p-8">
+              <div className="w-16 h-16 rounded-full bg-blue-600/30 border border-blue-500/50 flex items-center justify-center mx-auto mb-4 text-blue-400">
+                <Play className="w-8 h-8 fill-current ml-1" />
+              </div>
+              <h3 className="text-xl sm:text-2xl font-bold text-white mb-2">
+                Orbiverse Agency Showreel
+              </h3>
+              <p className="text-sm text-neutral-400 max-w-md mx-auto">
+                Discover how our unified brand, demand, and data squads drive exponential ARR for global ventures.
+              </p>
             </div>
           </div>
         </div>
