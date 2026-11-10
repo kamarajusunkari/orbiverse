@@ -1424,19 +1424,19 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 6px 20px;
+      padding: 7px 24px;
       border-radius: 9999px;
-      background: rgba(99, 102, 241, 0.1);
-      color: #6366f1;
+      background: #7042f8;
+      color: #ffffff;
       font-size: 13px;
       font-weight: 700;
-      border: 1px solid rgba(99, 102, 241, 0.25);
+      box-shadow: 0 4px 16px rgba(112, 66, 248, 0.35);
       margin-bottom: 16px;
     }
     [data-theme="dark"] .t-showcase-pill {
-      background: rgba(99, 102, 241, 0.2);
-      color: #a5b4fc;
-      border-color: rgba(99, 102, 241, 0.4);
+      background: #7042f8;
+      color: #ffffff;
+      box-shadow: 0 4px 20px rgba(112, 66, 248, 0.45);
     }
     .t-showcase-title {
       font-size: clamp(32px, 4vw, 50px);
@@ -1561,9 +1561,9 @@
     .t-indigo-card {
       border-radius: 32px;
       padding: 48px 48px;
-      background: linear-gradient(135deg, #6366f1 0%, #4f46e5 45%, #2563eb 100%);
+      background: linear-gradient(135deg, #7444ff 0%, #6835f0 45%, #5925dc 100%);
       color: #ffffff;
-      box-shadow: 0 25px 60px -15px rgba(99, 102, 241, 0.35);
+      box-shadow: 0 25px 60px -15px rgba(112, 66, 248, 0.4);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -1668,12 +1668,12 @@
       gap: 8px;
     }
     .t-nav-dot {
-      height: 10px;
+      height: 8px;
       border-radius: 9999px;
-      background: #e2e8f0;
+      background: #cbd5e1;
       cursor: pointer;
       transition: all 0.3s ease;
-      width: 10px;
+      width: 14px;
       border: none;
       padding: 0;
     }
@@ -1682,8 +1682,8 @@
     }
     .t-nav-dot.active {
       width: 32px;
-      background: #6366f1;
-      box-shadow: 0 0 10px rgba(99, 102, 241, 0.6);
+      background: #7042f8;
+      box-shadow: 0 2px 8px rgba(112, 66, 248, 0.5);
     }
 
   
@@ -6273,8 +6273,11 @@
           <div class="t-indigo-card" id="tIndigoCard">
             <div>
               <div class="t-indigo-card-header">
-                <div class="t-quote-badge">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="#ffffff"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+                <div style="display: flex; align-items: center; color: #ffffff;">
+                  <svg width="44" height="34" viewBox="0 0 48 38" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 14C19 7.4 14.8 3 8.5 3C4 3 0.5 6.5 0.5 11C0.5 14.5 2.6 17.5 5.8 18.6C4.6 22.5 2.2 26 0.2 28.5L3.2 31.5C8.8 27.5 19 20.5 19 14Z" />
+                    <path d="M47.5 14C47.5 7.4 43.3 3 37 3C32.5 3 29 6.5 29 11C29 14.5 31.1 17.5 34.3 18.6C33.1 22.5 30.7 26 28.7 28.5L31.7 31.5C37.3 27.5 47.5 20.5 47.5 14Z" />
+                  </svg>
                 </div>
                 <div class="t-showcase-stars">★★★★★</div>
               </div>
