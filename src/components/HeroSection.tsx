@@ -264,7 +264,7 @@ export default function HeroSection() {
         </div>
 
         {/* HERO CONTENT (PERFECTLY CENTERED ON MOBILE & DESKTOP) */}
-        <div className="relative z-10 w-full max-w-[1400px] mx-auto px-3.5 sm:px-6 lg:px-8 pt-20 sm:pt-28 md:pt-32 pb-12 sm:pb-16 flex flex-col items-center justify-center text-center">
+        <div className="relative z-10 w-full max-w-[1400px] mx-auto px-2.5 sm:px-6 lg:px-8 pt-20 sm:pt-28 md:pt-32 pb-12 sm:pb-16 flex flex-col items-center justify-center text-center">
           <div
             ref={textContainerRef}
             className="w-full max-w-4xl lg:max-w-5xl flex flex-col items-center justify-center text-center mx-auto will-change-transform transition-[transform,opacity] duration-75 ease-out"
@@ -275,8 +275,8 @@ export default function HeroSection() {
               <span>Performance-led growth agency</span>
             </div>
 
-            {/* HEADLINE: INCREASED PROMINENT SIZE, STRICTLY 2 LINES, 100% DEAD CENTERED */}
-            <h1 className="font-heading font-black tracking-[-0.035em] leading-[1.1] sm:leading-[1.04] text-[clamp(1.62rem,6.4vw,4.8rem)] mb-6 sm:mb-8 animate-title-rise w-full text-center flex flex-col items-center justify-center">
+            {/* HEADLINE: BOLD & ENLARGED SIZE, STRICTLY 2 LINES, 100% DEAD CENTERED */}
+            <h1 className="font-heading font-black tracking-[-0.04em] leading-[1.08] sm:leading-[1.03] text-[clamp(1.85rem,7.4vw,5.2rem)] mb-6 sm:mb-8 animate-title-rise w-full text-center flex flex-col items-center justify-center">
               <span className="block text-center text-slate-950 whitespace-nowrap mx-auto">
                 Your marketing is drifting.
               </span>
