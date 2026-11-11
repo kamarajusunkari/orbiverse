@@ -220,7 +220,7 @@ export default function WorkWithUsToggleSection() {
         {/* ================================================================
             TOP EYEBROW: "● WHAT YOU CAN HOLD US TO · THE DIFFERENCE"
             ================================================================ */}
-        <div className="flex items-center gap-2 mb-4 sm:mb-5">
+        <div className="flex items-center gap-2 mb-4 sm:mb-5 reveal-fade-up">
           <span
             className={`w-2.5 h-2.5 rounded-full transition-colors duration-300 ${
               isWorkingWithUs
@@ -236,7 +236,7 @@ export default function WorkWithUsToggleSection() {
         {/* ================================================================
             HEADER ROW: STRICTLY 2-LINE HEADLINE + INTEGRATED COMPACT TOGGLE
             ================================================================ */}
-        <div className="flex flex-col lg:flex-row items-start lg:items-end justify-between gap-6 pb-10 sm:pb-12 border-b border-slate-200/80 dark:border-white/10">
+        <div className="flex flex-col lg:flex-row items-start lg:items-end justify-between gap-6 pb-10 sm:pb-12 border-b border-slate-200/80 dark:border-white/10 reveal-fade-up delay-100">
           
           {/* Left: Strictly 2-Line Headline */}
           <div className="max-w-xl">
@@ -323,7 +323,7 @@ export default function WorkWithUsToggleSection() {
             Active pillar expands to ~30-32% of total width with white & blue gradient.
             Remaining 5 pillars share ~68-70% and feature crisp blue borders & rich vertical cues.
             ================================================================ */}
-        <div className="hidden md:flex flex-row gap-3.5 lg:gap-4.5 h-[480px] lg:h-[510px] w-full items-stretch pt-10 sm:pt-12">
+        <div className="hidden md:flex flex-row gap-3.5 lg:gap-4.5 h-[480px] lg:h-[510px] w-full items-stretch pt-10 sm:pt-12 reveal-fade-up delay-200">
           {pillars.map((pillar, idx) => {
             const Icon = pillar.icon;
             const isActive = activePillarIndex === idx;
@@ -480,7 +480,7 @@ export default function WorkWithUsToggleSection() {
         {/* ================================================================
             MOBILE VERTICAL EXPANDING ACCORDION (< 768px)
             ================================================================ */}
-        <div className="flex md:hidden flex-col gap-3 pt-8">
+        <div className="flex md:hidden flex-col gap-3 pt-8 reveal-fade-up delay-100">
           {pillars.map((pillar, idx) => {
             const Icon = pillar.icon;
             const isActive = activePillarIndex === idx;

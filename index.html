@@ -433,12 +433,12 @@
       transition: transform 0.05s ease-out, opacity 0.05s ease-out;
     }
 
-    /* Big Headline: STRICTLY TWO LINES ON ALL DEVICES, 100% DEAD CENTERED */
+    /* Big Headline: BIG ON MOBILE, 100% DEAD CENTERED */
     .hero-title {
       font-family: var(--font-heading);
       font-weight: 900;
-      font-size: clamp(24px, 6.8vw, 34px);
-      line-height: 1.12;
+      font-size: clamp(35px, 8.8vw, 42px);
+      line-height: 1.1;
       letter-spacing: -0.035em;
       margin-bottom: 24px;
       width: 100%;
@@ -449,11 +449,13 @@
       justify-content: center;
       margin-left: auto;
       margin-right: auto;
+      padding: 0 4px;
     }
     @media (min-width: 640px) {
       .hero-title {
-        font-size: clamp(44px, 5.5vw, 70px);
+        font-size: clamp(48px, 5.5vw, 70px);
         line-height: 1.04;
+        padding: 0;
       }
     }
     .hero-title .line-1 {
@@ -461,20 +463,23 @@
       display: block;
       text-align: center;
       width: 100%;
-      white-space: nowrap;
     }
     .hero-title .line-2 {
       color: #101b96;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      white-space: nowrap;
+      flex-wrap: wrap;
       gap: 6px;
       margin-top: 6px;
       text-align: center;
     }
     @media (min-width: 640px) {
+      .hero-title .line-1 {
+        white-space: nowrap;
+      }
       .hero-title .line-2 {
+        white-space: nowrap;
         gap: 10px;
         margin-top: 8px;
       }
@@ -1134,6 +1139,17 @@
       border: 1px solid var(--border-color);
       box-shadow: 0 4px 14px rgba(0,0,0,0.04);
       transition: transform .35s ease, box-shadow .35s ease;
+    }
+    @media (max-width: 640px) {
+      .case-card-html {
+        width: 295px;
+        padding: 20px;
+        border-radius: 20px;
+      }
+      .case-card-img-wrap {
+        height: 180px !important;
+        margin-top: 14px !important;
+      }
     }
     .case-card-html:hover {
       transform: translateY(-8px);
@@ -4103,203 +4119,11 @@
           
           <!-- =================== LOOP SET 1 =================== -->
 
-          <!-- Card 1 (White): Anthlete Nutrition -->
+          <!-- Card 1 (White): Naturalth Cosmetics -->
           <div class="case-card-html" style="background: #ffffff; color: #090814; border: 1px solid #e5e7eb;">
             <div>
               <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
-                <span style="font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: #2563eb;">01. Sports Nutrition &amp; E-commerce</span>
-              </div>
-              <h3 style="font-size: 24px; font-weight: 900; color: #090814; margin: 4px 0 8px;">Anthlete Nutrition</h3>
-              <p style="font-size: 13px; line-height: 1.55; color: #4b5563; margin-bottom: 14px;">
-                A sports nutrition e-commerce platform showcasing performance supplements, protein bars, hydration products and athlete-focused nutrition solutions, with a seamless shopping experience.
-              </p>
-              <a href="https://anthletenutritions.com/" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 4px; font-size: 13px; font-weight: 800; color: #101b96; text-decoration: none;">
-                Visit Website ↗
-              </a>
-            </div>
-            <div class="case-card-img-wrap">
-              <img src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="Anthlete Nutrition" loading="lazy" />
-            </div>
-          </div>
-
-          <!-- Card 2 (Blue): Cattorini -->
-          <div class="case-card-html" style="background: #101b96; color: #ffffff; border: 1px solid #233bbd;">
-            <div>
-              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
-                <span style="font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: #93c5fd;">02. Luxury Italian Footwear &amp; Fashion</span>
-              </div>
-              <h3 style="font-size: 24px; font-weight: 900; color: #ffffff; margin: 4px 0 8px;">Cattorini</h3>
-              <p style="font-size: 13px; line-height: 1.55; color: #dbeafe; margin-bottom: 14px;">
-                A premium e-commerce experience for an Italian footwear brand, showcasing handcrafted men's, women's and kids' collections inspired by heritage, craftsmanship and timeless design.
-              </p>
-              <a href="https://cattoriniofficial.com/" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 4px; font-size: 13px; font-weight: 800; color: #93c5fd; text-decoration: none;">
-                Visit Website ↗
-              </a>
-            </div>
-            <div class="case-card-img-wrap">
-              <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="Cattorini" loading="lazy" />
-            </div>
-          </div>
-
-          <!-- Card 3 (White): Ayuronix -->
-          <div class="case-card-html" style="background: #ffffff; color: #090814; border: 1px solid #e5e7eb;">
-            <div>
-              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
-                <span style="font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: #2563eb;">03. Ayurvedic Wellness &amp; E-commerce</span>
-              </div>
-              <h3 style="font-size: 24px; font-weight: 900; color: #090814; margin: 4px 0 8px;">Ayuronix</h3>
-              <p style="font-size: 13px; line-height: 1.55; color: #4b5563; margin-bottom: 14px;">
-                An online shopping platform for Himalayan Shilajit and Ayurvedic wellness products, bringing traditional ingredients and modern product presentation together.
-              </p>
-              <a href="https://ayuronix.com/" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 4px; font-size: 13px; font-weight: 800; color: #101b96; text-decoration: none;">
-                Visit Website ↗
-              </a>
-            </div>
-            <div class="case-card-img-wrap">
-              <img src="https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="Ayuronix" loading="lazy" />
-            </div>
-          </div>
-
-          <!-- Card 4 (Blue): Naturalth Cosmetics -->
-          <div class="case-card-html" style="background: #101b96; color: #ffffff; border: 1px solid #233bbd;">
-            <div>
-              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
-                <span style="font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: #93c5fd;">04. Beauty, Skincare &amp; E-commerce</span>
-              </div>
-              <h3 style="font-size: 24px; font-weight: 900; color: #ffffff; margin: 4px 0 8px;">Naturalth Cosmetics</h3>
-              <p style="font-size: 13px; line-height: 1.55; color: #dbeafe; margin-bottom: 14px;">
-                A skincare e-commerce experience featuring nature-derived, peptide-powered skincare and innovative face ice therapy products, with a focus on product discovery and customer experience.
-              </p>
-              <a href="https://naturalthcosmetics.com/" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 4px; font-size: 13px; font-weight: 800; color: #93c5fd; text-decoration: none;">
-                Visit Website ↗
-              </a>
-            </div>
-            <div class="case-card-img-wrap">
-              <img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="Naturalth Cosmetics" loading="lazy" />
-            </div>
-          </div>
-
-          <!-- Card 5 (White): Forestique -->
-          <div class="case-card-html" style="background: #ffffff; color: #090814; border: 1px solid #e5e7eb;">
-            <div>
-              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
-                <span style="font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: #2563eb;">05. Skincare &amp; Beauty E-commerce</span>
-              </div>
-              <h3 style="font-size: 24px; font-weight: 900; color: #090814; margin: 4px 0 8px;">Forestique</h3>
-              <p style="font-size: 13px; line-height: 1.55; color: #4b5563; margin-bottom: 14px;">
-                A modern skincare storefront combining Ayurvedic ingredients with contemporary skincare science, featuring moisturizers, serums, sunscreens, cleansers and curated skincare kits.
-              </p>
-              <a href="https://forestique.co.in/" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 4px; font-size: 13px; font-weight: 800; color: #101b96; text-decoration: none;">
-                Visit Website ↗
-              </a>
-            </div>
-            <div class="case-card-img-wrap">
-              <img src="https://images.unsplash.com/photo-1608248597359-59754f9a0a4c?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="Forestique" loading="lazy" />
-            </div>
-          </div>
-
-          <!-- Card 6 (Blue): Prestige -->
-          <div class="case-card-html" style="background: #101b96; color: #ffffff; border: 1px solid #233bbd;">
-            <div>
-              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
-                <span style="font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: #93c5fd;">06. Luxury Fashion &amp; Lifestyle E-commerce</span>
-              </div>
-              <h3 style="font-size: 24px; font-weight: 900; color: #ffffff; margin: 4px 0 8px;">Prestige</h3>
-              <p style="font-size: 13px; line-height: 1.55; color: #dbeafe; margin-bottom: 14px;">
-                A premium fashion e-commerce platform showcasing footwear, clothing, jackets, caps and leather accessories across men's, women's and kids' collections.
-              </p>
-              <a href="https://prestige.co.ae/" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 4px; font-size: 13px; font-weight: 800; color: #93c5fd; text-decoration: none;">
-                Visit Website ↗
-              </a>
-            </div>
-            <div class="case-card-img-wrap">
-              <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="Prestige" loading="lazy" />
-            </div>
-          </div>
-
-          <!-- Card 7 (White): Consciento -->
-          <div class="case-card-html" style="background: #ffffff; color: #090814; border: 1px solid #e5e7eb;">
-            <div>
-              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
-                <span style="font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: #2563eb;">07. Organizational Psychology &amp; Analytics</span>
-              </div>
-              <h3 style="font-size: 24px; font-weight: 900; color: #090814; margin: 4px 0 8px;">Consciento</h3>
-              <p style="font-size: 13px; line-height: 1.55; color: #4b5563; margin-bottom: 14px;">
-                A professional digital platform presenting science-based organizational psychology, psychological diagnostics, employee wellbeing solutions and data-driven workplace analytics.
-              </p>
-              <a href="https://consciento.com/" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 4px; font-size: 13px; font-weight: 800; color: #101b96; text-decoration: none;">
-                Visit Website ↗
-              </a>
-            </div>
-            <div class="case-card-img-wrap">
-              <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="Consciento" loading="lazy" />
-            </div>
-          </div>
-
-          <!-- =================== LOOP SET 2 (ALTERNATING COLORS) =================== -->
-
-          <!-- Card 8 (Blue): Anthlete Nutrition -->
-          <div class="case-card-html" style="background: #101b96; color: #ffffff; border: 1px solid #233bbd;">
-            <div>
-              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
-                <span style="font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: #93c5fd;">01. Sports Nutrition &amp; E-commerce</span>
-              </div>
-              <h3 style="font-size: 24px; font-weight: 900; color: #ffffff; margin: 4px 0 8px;">Anthlete Nutrition</h3>
-              <p style="font-size: 13px; line-height: 1.55; color: #dbeafe; margin-bottom: 14px;">
-                A sports nutrition e-commerce platform showcasing performance supplements, protein bars, hydration products and athlete-focused nutrition solutions, with a seamless shopping experience.
-              </p>
-              <a href="https://anthletenutritions.com/" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 4px; font-size: 13px; font-weight: 800; color: #93c5fd; text-decoration: none;">
-                Visit Website ↗
-              </a>
-            </div>
-            <div class="case-card-img-wrap">
-              <img src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="Anthlete Nutrition" loading="lazy" />
-            </div>
-          </div>
-
-          <!-- Card 9 (White): Cattorini -->
-          <div class="case-card-html" style="background: #ffffff; color: #090814; border: 1px solid #e5e7eb;">
-            <div>
-              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
-                <span style="font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: #2563eb;">02. Luxury Italian Footwear &amp; Fashion</span>
-              </div>
-              <h3 style="font-size: 24px; font-weight: 900; color: #090814; margin: 4px 0 8px;">Cattorini</h3>
-              <p style="font-size: 13px; line-height: 1.55; color: #4b5563; margin-bottom: 14px;">
-                A premium e-commerce experience for an Italian footwear brand, showcasing handcrafted men's, women's and kids' collections inspired by heritage, craftsmanship and timeless design.
-              </p>
-              <a href="https://cattoriniofficial.com/" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 4px; font-size: 13px; font-weight: 800; color: #101b96; text-decoration: none;">
-                Visit Website ↗
-              </a>
-            </div>
-            <div class="case-card-img-wrap">
-              <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="Cattorini" loading="lazy" />
-            </div>
-          </div>
-
-          <!-- Card 10 (Blue): Ayuronix -->
-          <div class="case-card-html" style="background: #101b96; color: #ffffff; border: 1px solid #233bbd;">
-            <div>
-              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
-                <span style="font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: #93c5fd;">03. Ayurvedic Wellness &amp; E-commerce</span>
-              </div>
-              <h3 style="font-size: 24px; font-weight: 900; color: #ffffff; margin: 4px 0 8px;">Ayuronix</h3>
-              <p style="font-size: 13px; line-height: 1.55; color: #dbeafe; margin-bottom: 14px;">
-                An online shopping platform for Himalayan Shilajit and Ayurvedic wellness products, bringing traditional ingredients and modern product presentation together.
-              </p>
-              <a href="https://ayuronix.com/" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 4px; font-size: 13px; font-weight: 800; color: #93c5fd; text-decoration: none;">
-                Visit Website ↗
-              </a>
-            </div>
-            <div class="case-card-img-wrap">
-              <img src="https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="Ayuronix" loading="lazy" />
-            </div>
-          </div>
-
-          <!-- Card 11 (White): Naturalth Cosmetics -->
-          <div class="case-card-html" style="background: #ffffff; color: #090814; border: 1px solid #e5e7eb;">
-            <div>
-              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
-                <span style="font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: #2563eb;">04. Beauty, Skincare &amp; E-commerce</span>
+                <span style="font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: #2563eb;">01. Beauty, Skincare &amp; E-commerce</span>
               </div>
               <h3 style="font-size: 24px; font-weight: 900; color: #090814; margin: 4px 0 8px;">Naturalth Cosmetics</h3>
               <p style="font-size: 13px; line-height: 1.55; color: #4b5563; margin-bottom: 14px;">
@@ -4310,53 +4134,53 @@
               </a>
             </div>
             <div class="case-card-img-wrap">
-              <img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="Naturalth Cosmetics" loading="lazy" />
+              <img src="/case-studies/naturalth.jpg" alt="Naturalth Cosmetics" loading="lazy" />
             </div>
           </div>
 
-          <!-- Card 12 (Blue): Forestique -->
+          <!-- Card 2 (Blue): Ayuronix -->
           <div class="case-card-html" style="background: #101b96; color: #ffffff; border: 1px solid #233bbd;">
             <div>
               <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
-                <span style="font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: #93c5fd;">05. Skincare &amp; Beauty E-commerce</span>
+                <span style="font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: #93c5fd;">02. Ayurvedic Wellness &amp; E-commerce</span>
               </div>
-              <h3 style="font-size: 24px; font-weight: 900; color: #ffffff; margin: 4px 0 8px;">Forestique</h3>
+              <h3 style="font-size: 24px; font-weight: 900; color: #ffffff; margin: 4px 0 8px;">Ayuronix</h3>
               <p style="font-size: 13px; line-height: 1.55; color: #dbeafe; margin-bottom: 14px;">
-                A modern skincare storefront combining Ayurvedic ingredients with contemporary skincare science, featuring moisturizers, serums, sunscreens, cleansers and curated skincare kits.
+                An online shopping platform for Himalayan Shilajit and Ayurvedic wellness products, bringing traditional ingredients and modern product presentation together.
               </p>
-              <a href="https://forestique.co.in/" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 4px; font-size: 13px; font-weight: 800; color: #93c5fd; text-decoration: none;">
+              <a href="https://ayuronix.com/" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 4px; font-size: 13px; font-weight: 800; color: #93c5fd; text-decoration: none;">
                 Visit Website ↗
               </a>
             </div>
             <div class="case-card-img-wrap">
-              <img src="https://images.unsplash.com/photo-1608248597359-59754f9a0a4c?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="Forestique" loading="lazy" />
+              <img src="/case-studies/ayuronix.jpg" alt="Ayuronix" loading="lazy" />
             </div>
           </div>
 
-          <!-- Card 13 (White): Prestige -->
+          <!-- Card 3 (White): Cattorini -->
           <div class="case-card-html" style="background: #ffffff; color: #090814; border: 1px solid #e5e7eb;">
             <div>
               <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
-                <span style="font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: #2563eb;">06. Luxury Fashion &amp; Lifestyle E-commerce</span>
+                <span style="font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: #2563eb;">03. Luxury Italian Footwear &amp; Fashion</span>
               </div>
-              <h3 style="font-size: 24px; font-weight: 900; color: #090814; margin: 4px 0 8px;">Prestige</h3>
+              <h3 style="font-size: 24px; font-weight: 900; color: #090814; margin: 4px 0 8px;">Cattorini</h3>
               <p style="font-size: 13px; line-height: 1.55; color: #4b5563; margin-bottom: 14px;">
-                A premium fashion e-commerce platform showcasing footwear, clothing, jackets, caps and leather accessories across men's, women's and kids' collections.
+                A premium e-commerce experience for an Italian footwear brand, showcasing handcrafted men's, women's and kids' collections inspired by heritage, craftsmanship and timeless design.
               </p>
-              <a href="https://prestige.co.ae/" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 4px; font-size: 13px; font-weight: 800; color: #101b96; text-decoration: none;">
+              <a href="https://cattoriniofficial.com/" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 4px; font-size: 13px; font-weight: 800; color: #101b96; text-decoration: none;">
                 Visit Website ↗
               </a>
             </div>
             <div class="case-card-img-wrap">
-              <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="Prestige" loading="lazy" />
+              <img src="/case-studies/cattorini.jpg" alt="Cattorini" loading="lazy" />
             </div>
           </div>
 
-          <!-- Card 14 (Blue): Consciento -->
+          <!-- Card 4 (Blue): Consciento -->
           <div class="case-card-html" style="background: #101b96; color: #ffffff; border: 1px solid #233bbd;">
             <div>
               <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
-                <span style="font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: #93c5fd;">07. Organizational Psychology &amp; Analytics</span>
+                <span style="font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: #93c5fd;">04. Organizational Psychology &amp; Analytics</span>
               </div>
               <h3 style="font-size: 24px; font-weight: 900; color: #ffffff; margin: 4px 0 8px;">Consciento</h3>
               <p style="font-size: 13px; line-height: 1.55; color: #dbeafe; margin-bottom: 14px;">
@@ -4367,7 +4191,161 @@
               </a>
             </div>
             <div class="case-card-img-wrap">
-              <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="Consciento" loading="lazy" />
+              <img src="/case-studies/consciento.jpg" alt="Consciento" loading="lazy" />
+            </div>
+          </div>
+
+          <!-- Card 5 (White): Anthlete Nutrition -->
+          <div class="case-card-html" style="background: #ffffff; color: #090814; border: 1px solid #e5e7eb;">
+            <div>
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+                <span style="font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: #2563eb;">05. Sports Nutrition &amp; E-commerce</span>
+              </div>
+              <h3 style="font-size: 24px; font-weight: 900; color: #090814; margin: 4px 0 8px;">Anthlete Nutrition</h3>
+              <p style="font-size: 13px; line-height: 1.55; color: #4b5563; margin-bottom: 14px;">
+                A sports nutrition e-commerce platform showcasing performance supplements, protein bars, hydration products and athlete-focused nutrition solutions, with a seamless shopping experience.
+              </p>
+              <a href="https://anthletenutritions.com/" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 4px; font-size: 13px; font-weight: 800; color: #101b96; text-decoration: none;">
+                Visit Website ↗
+              </a>
+            </div>
+            <div class="case-card-img-wrap">
+              <img src="/case-studies/anthlete.jpg" alt="Anthlete Nutrition" loading="lazy" />
+            </div>
+          </div>
+
+          <!-- Card 6 (Blue): Forestique -->
+          <div class="case-card-html" style="background: #101b96; color: #ffffff; border: 1px solid #233bbd;">
+            <div>
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+                <span style="font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: #93c5fd;">06. Skincare &amp; Beauty E-commerce</span>
+              </div>
+              <h3 style="font-size: 24px; font-weight: 900; color: #ffffff; margin: 4px 0 8px;">Forestique</h3>
+              <p style="font-size: 13px; line-height: 1.55; color: #dbeafe; margin-bottom: 14px;">
+                A modern skincare storefront combining Ayurvedic ingredients with contemporary skincare science, featuring moisturizers, serums, sunscreens, cleansers and curated skincare kits.
+              </p>
+              <a href="https://forestique.co.in/" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 4px; font-size: 13px; font-weight: 800; color: #93c5fd; text-decoration: none;">
+                Visit Website ↗
+              </a>
+            </div>
+            <div class="case-card-img-wrap">
+              <img src="/case-studies/forestique.jpg" alt="Forestique" loading="lazy" />
+            </div>
+          </div>
+
+          <!-- =================== LOOP SET 2 (ALTERNATING COLORS) =================== -->
+
+          <!-- Card 7 (White): Naturalth Cosmetics -->
+          <div class="case-card-html" style="background: #ffffff; color: #090814; border: 1px solid #e5e7eb;">
+            <div>
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+                <span style="font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: #2563eb;">01. Beauty, Skincare &amp; E-commerce</span>
+              </div>
+              <h3 style="font-size: 24px; font-weight: 900; color: #090814; margin: 4px 0 8px;">Naturalth Cosmetics</h3>
+              <p style="font-size: 13px; line-height: 1.55; color: #4b5563; margin-bottom: 14px;">
+                A skincare e-commerce experience featuring nature-derived, peptide-powered skincare and innovative face ice therapy products, with a focus on product discovery and customer experience.
+              </p>
+              <a href="https://naturalthcosmetics.com/" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 4px; font-size: 13px; font-weight: 800; color: #101b96; text-decoration: none;">
+                Visit Website ↗
+              </a>
+            </div>
+            <div class="case-card-img-wrap">
+              <img src="/case-studies/naturalth.jpg" alt="Naturalth Cosmetics" loading="lazy" />
+            </div>
+          </div>
+
+          <!-- Card 8 (Blue): Ayuronix -->
+          <div class="case-card-html" style="background: #101b96; color: #ffffff; border: 1px solid #233bbd;">
+            <div>
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+                <span style="font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: #93c5fd;">02. Ayurvedic Wellness &amp; E-commerce</span>
+              </div>
+              <h3 style="font-size: 24px; font-weight: 900; color: #ffffff; margin: 4px 0 8px;">Ayuronix</h3>
+              <p style="font-size: 13px; line-height: 1.55; color: #dbeafe; margin-bottom: 14px;">
+                An online shopping platform for Himalayan Shilajit and Ayurvedic wellness products, bringing traditional ingredients and modern product presentation together.
+              </p>
+              <a href="https://ayuronix.com/" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 4px; font-size: 13px; font-weight: 800; color: #93c5fd; text-decoration: none;">
+                Visit Website ↗
+              </a>
+            </div>
+            <div class="case-card-img-wrap">
+              <img src="/case-studies/ayuronix.jpg" alt="Ayuronix" loading="lazy" />
+            </div>
+          </div>
+
+          <!-- Card 9 (White): Cattorini -->
+          <div class="case-card-html" style="background: #ffffff; color: #090814; border: 1px solid #e5e7eb;">
+            <div>
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+                <span style="font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: #2563eb;">03. Luxury Italian Footwear &amp; Fashion</span>
+              </div>
+              <h3 style="font-size: 24px; font-weight: 900; color: #090814; margin: 4px 0 8px;">Cattorini</h3>
+              <p style="font-size: 13px; line-height: 1.55; color: #4b5563; margin-bottom: 14px;">
+                A premium e-commerce experience for an Italian footwear brand, showcasing handcrafted men's, women's and kids' collections inspired by heritage, craftsmanship and timeless design.
+              </p>
+              <a href="https://cattoriniofficial.com/" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 4px; font-size: 13px; font-weight: 800; color: #101b96; text-decoration: none;">
+                Visit Website ↗
+              </a>
+            </div>
+            <div class="case-card-img-wrap">
+              <img src="/case-studies/cattorini.jpg" alt="Cattorini" loading="lazy" />
+            </div>
+          </div>
+
+          <!-- Card 10 (Blue): Consciento -->
+          <div class="case-card-html" style="background: #101b96; color: #ffffff; border: 1px solid #233bbd;">
+            <div>
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+                <span style="font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: #93c5fd;">04. Organizational Psychology &amp; Analytics</span>
+              </div>
+              <h3 style="font-size: 24px; font-weight: 900; color: #ffffff; margin: 4px 0 8px;">Consciento</h3>
+              <p style="font-size: 13px; line-height: 1.55; color: #dbeafe; margin-bottom: 14px;">
+                A professional digital platform presenting science-based organizational psychology, psychological diagnostics, employee wellbeing solutions and data-driven workplace analytics.
+              </p>
+              <a href="https://consciento.com/" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 4px; font-size: 13px; font-weight: 800; color: #93c5fd; text-decoration: none;">
+                Visit Website ↗
+              </a>
+            </div>
+            <div class="case-card-img-wrap">
+              <img src="/case-studies/consciento.jpg" alt="Consciento" loading="lazy" />
+            </div>
+          </div>
+
+          <!-- Card 11 (White): Anthlete Nutrition -->
+          <div class="case-card-html" style="background: #ffffff; color: #090814; border: 1px solid #e5e7eb;">
+            <div>
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+                <span style="font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: #2563eb;">05. Sports Nutrition &amp; E-commerce</span>
+              </div>
+              <h3 style="font-size: 24px; font-weight: 900; color: #090814; margin: 4px 0 8px;">Anthlete Nutrition</h3>
+              <p style="font-size: 13px; line-height: 1.55; color: #4b5563; margin-bottom: 14px;">
+                A sports nutrition e-commerce platform showcasing performance supplements, protein bars, hydration products and athlete-focused nutrition solutions, with a seamless shopping experience.
+              </p>
+              <a href="https://anthletenutritions.com/" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 4px; font-size: 13px; font-weight: 800; color: #101b96; text-decoration: none;">
+                Visit Website ↗
+              </a>
+            </div>
+            <div class="case-card-img-wrap">
+              <img src="/case-studies/anthlete.jpg" alt="Anthlete Nutrition" loading="lazy" />
+            </div>
+          </div>
+
+          <!-- Card 12 (Blue): Forestique -->
+          <div class="case-card-html" style="background: #101b96; color: #ffffff; border: 1px solid #233bbd;">
+            <div>
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+                <span style="font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: #93c5fd;">06. Skincare &amp; Beauty E-commerce</span>
+              </div>
+              <h3 style="font-size: 24px; font-weight: 900; color: #ffffff; margin: 4px 0 8px;">Forestique</h3>
+              <p style="font-size: 13px; line-height: 1.55; color: #dbeafe; margin-bottom: 14px;">
+                A modern skincare storefront combining Ayurvedic ingredients with contemporary skincare science, featuring moisturizers, serums, sunscreens, cleansers and curated skincare kits.
+              </p>
+              <a href="https://forestique.co.in/" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 4px; font-size: 13px; font-weight: 800; color: #93c5fd; text-decoration: none;">
+                Visit Website ↗
+              </a>
+            </div>
+            <div class="case-card-img-wrap">
+              <img src="/case-studies/forestique.jpg" alt="Forestique" loading="lazy" />
             </div>
           </div>
 

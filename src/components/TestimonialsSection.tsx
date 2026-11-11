@@ -131,7 +131,7 @@ export default function TestimonialsSection() {
             HEADER: "Our Testimonials" SOLID PURPLE PILL & HEADLINE
             Matches Image 2 exactly
             ==================================================================== */}
-        <div className="text-center mb-12 sm:mb-16">
+        <div className="text-center mb-12 sm:mb-16 reveal-fade-up">
           <div className="inline-flex items-center justify-center px-6 py-2 rounded-full bg-[#7042f8] text-white text-xs sm:text-[13px] font-bold tracking-wide shadow-[0_4px_16px_rgba(112,66,248,0.35)] mb-4">
             <span>Our Testimonials</span>
           </div>
@@ -155,7 +155,7 @@ export default function TestimonialsSection() {
               LEFT COLUMN (30% WIDTH ON DESKTOP):
               Full-fit image without clipping + radiating dot halo + Trusted Clients
               ------------------------------------------------------------------ */}
-          <div className="lg:col-span-3 relative flex flex-col justify-center">
+          <div className="lg:col-span-3 relative flex flex-col justify-center reveal-fade-right delay-100">
             
             {/* Dotted Radial Halo behind portrait (as seen in Image 2) */}
             <div
@@ -237,7 +237,7 @@ export default function TestimonialsSection() {
               Vibrant Purple/Violet Testimonial Card with Outline Quotes & 5 Stars
               ------------------------------------------------------------------ */}
           <div
-            className="lg:col-span-7 flex flex-col justify-between rounded-3xl sm:rounded-[32px] p-7 sm:p-10 lg:p-14 text-white relative overflow-hidden shadow-[0_25px_60px_-15px_rgba(112,66,248,0.4)] transition-all duration-500 min-h-[460px] lg:min-h-[500px]"
+            className="lg:col-span-7 flex flex-col justify-between rounded-3xl sm:rounded-[32px] p-7 sm:p-10 lg:p-14 text-white relative overflow-hidden shadow-[0_25px_60px_-15px_rgba(112,66,248,0.4)] transition-all duration-500 min-h-[460px] lg:min-h-[500px] reveal-fade-left delay-200"
             style={{
               background:
                 "linear-gradient(135deg, #7444ff 0%, #6835f0 45%, #5925dc 100%)",

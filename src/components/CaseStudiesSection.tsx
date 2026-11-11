@@ -2,7 +2,7 @@
 
 import React, { useState, useRef } from "react";
 import Image from "next/image";
-import { Sparkles, ArrowUpRight, ArrowRight, CheckCircle2, X, ChevronLeft, ChevronRight, ExternalLink } from "lucide-react";
+import { Sparkles, ArrowUpRight, ArrowRight, CheckCircle2, X, ExternalLink } from "lucide-react";
 import { openCtaModal } from "@/components/CtaModal";
 
 export interface CaseStudyItem {
@@ -19,113 +19,83 @@ export interface CaseStudyItem {
 
 export const CASE_STUDIES: CaseStudyItem[] = [
   {
-    id: "anthlete-nutrition",
-    number: "01",
-    title: "Anthlete Nutrition",
-    category: "Sports Nutrition & E-commerce",
-    desc: "A sports nutrition e-commerce platform showcasing performance supplements, protein bars, hydration products and athlete-focused nutrition solutions, with a seamless shopping experience.",
-    fullDesc:
-      "A sports nutrition e-commerce platform showcasing performance supplements, protein bars, hydration products and athlete-focused nutrition solutions, engineered with a seamless shopping experience and high-converting checkout flows.",
-    website: "https://anthletenutritions.com/",
-    image: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=800&q=80",
-    impact: ["High-Velocity Checkout", "Mobile-Optimized Store", "Sub-1s Page Load"],
-  },
-  {
-    id: "cattorini",
-    number: "02",
-    title: "Cattorini",
-    category: "Luxury Italian Footwear & Fashion",
-    desc: "A premium e-commerce experience for an Italian footwear brand, showcasing handcrafted men's, women's and kids' collections inspired by heritage, craftsmanship and timeless design.",
-    fullDesc:
-      "A premium e-commerce experience for an Italian footwear brand, showcasing handcrafted men's, women's and kids' collections inspired by heritage, craftsmanship and timeless design with elevated editorial styling.",
-    website: "https://cattoriniofficial.com/",
-    image: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=800&q=80",
-    impact: ["Luxury Editorial UX", "Global Multi-Currency", "Seamless Collection Filter"],
-  },
-  {
-    id: "ayuronix",
-    number: "03",
-    title: "Ayuronix",
-    category: "Ayurvedic Wellness & E-commerce",
-    desc: "An online shopping platform for Himalayan Shilajit and Ayurvedic wellness products, bringing traditional ingredients and modern product presentation together.",
-    fullDesc:
-      "An online shopping platform for Himalayan Shilajit and Ayurvedic wellness products, bringing traditional ingredients and modern product presentation together with verified ingredient transparency and trust badges.",
-    website: "https://ayuronix.com/",
-    image: "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=800&q=80",
-    impact: ["Trust-Centered Funnels", "High-Converting Landers", "Automated Retention"],
-  },
-  {
     id: "naturalth-cosmetics",
-    number: "04",
+    number: "01",
     title: "Naturalth Cosmetics",
     category: "Beauty, Skincare & E-commerce",
     desc: "A skincare e-commerce experience featuring nature-derived, peptide-powered skincare and innovative face ice therapy products, with a focus on product discovery and customer experience.",
     fullDesc:
       "A skincare e-commerce experience featuring nature-derived, peptide-powered skincare and innovative face ice therapy products, with a focus on intuitive product discovery and seamless customer experience.",
     website: "https://naturalthcosmetics.com/",
-    image: "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=800&q=80",
+    image: "/case-studies/naturalth.jpg",
     impact: ["Interactive Routine Quiz", "Visual Discovery Flow", "Recurring Subscription"],
   },
   {
-    id: "forestique",
-    number: "05",
-    title: "Forestique",
-    category: "Skincare & Beauty E-commerce",
-    desc: "A modern skincare storefront combining Ayurvedic ingredients with contemporary skincare science, featuring moisturizers, serums, sunscreens, cleansers and curated skincare kits.",
+    id: "ayuronix",
+    number: "02",
+    title: "Ayuronix",
+    category: "Ayurvedic Wellness & E-commerce",
+    desc: "An online shopping platform for Himalayan Shilajit and Ayurvedic wellness products, bringing traditional ingredients and modern product presentation together.",
     fullDesc:
-      "A modern skincare storefront combining Ayurvedic ingredients with contemporary skincare science, featuring moisturizers, serums, sunscreens, cleansers and curated skincare kits with frictionless mobile checkout.",
-    website: "https://forestique.co.in/",
-    image: "https://images.unsplash.com/photo-1608248597359-59754f9a0a4c?auto=format&fit=crop&w=800&q=80",
-    impact: ["Custom Bundle Builder", "Blazing Fast Speed", "Social Proof Integration"],
+      "An online shopping platform for Himalayan Shilajit and Ayurvedic wellness products, bringing traditional ingredients and modern product presentation together with verified ingredient transparency and trust badges.",
+    website: "https://ayuronix.com/",
+    image: "/case-studies/ayuronix.jpg",
+    impact: ["Trust-Centered Funnels", "High-Converting Landers", "Automated Retention"],
   },
   {
-    id: "prestige",
-    number: "06",
-    title: "Prestige",
-    category: "Luxury Fashion & Lifestyle E-commerce",
-    desc: "A premium fashion e-commerce platform showcasing footwear, clothing, jackets, caps and leather accessories across men's, women's and kids' collections.",
+    id: "cattorini",
+    number: "03",
+    title: "Cattorini",
+    category: "Luxury Italian Footwear & Fashion",
+    desc: "A premium e-commerce experience for an Italian footwear brand, showcasing handcrafted men's, women's and kids' collections inspired by heritage, craftsmanship and timeless design.",
     fullDesc:
-      "A premium fashion e-commerce platform showcasing footwear, clothing, jackets, caps and leather accessories across men's, women's and kids' collections with dynamic catalog filtering and VIP membership perks.",
-    website: "https://prestige.co.ae/",
-    image: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=800&q=80",
-    impact: ["Middle East Regional Hub", "Omnichannel Inventory", "High Average Order Value"],
+      "A premium e-commerce experience for an Italian footwear brand, showcasing handcrafted men's, women's and kids' collections inspired by heritage, craftsmanship and timeless design with elevated editorial styling.",
+    website: "https://cattoriniofficial.com/",
+    image: "/case-studies/cattorini.jpg",
+    impact: ["Luxury Editorial UX", "Global Multi-Currency", "Seamless Collection Filter"],
   },
   {
     id: "consciento",
-    number: "07",
+    number: "04",
     title: "Consciento",
     category: "Organizational Psychology & Analytics",
     desc: "A professional digital platform presenting science-based organizational psychology, psychological diagnostics, employee wellbeing solutions and data-driven workplace analytics.",
     fullDesc:
       "A professional digital platform presenting science-based organizational psychology, psychological diagnostics, employee wellbeing solutions and data-driven workplace analytics with enterprise security.",
     website: "https://consciento.com/",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
+    image: "/case-studies/consciento.jpg",
     impact: ["Enterprise Lead Gen", "Interactive Diagnostic", "Data-First UX Architecture"],
+  },
+  {
+    id: "anthlete-nutrition",
+    number: "05",
+    title: "Anthlete Nutrition",
+    category: "Sports Nutrition & E-commerce",
+    desc: "A sports nutrition e-commerce platform showcasing performance supplements, protein bars, hydration products and athlete-focused nutrition solutions, with a seamless shopping experience.",
+    fullDesc:
+      "A sports nutrition e-commerce platform showcasing performance supplements, protein bars, hydration products and athlete-focused nutrition solutions, engineered with a seamless shopping experience and high-converting checkout flows.",
+    website: "https://anthletenutritions.com/",
+    image: "/case-studies/anthlete.jpg",
+    impact: ["High-Velocity Checkout", "Mobile-Optimized Store", "Sub-1s Page Load"],
+  },
+  {
+    id: "forestique",
+    number: "06",
+    title: "Forestique",
+    category: "Skincare & Beauty E-commerce",
+    desc: "A modern skincare storefront combining Ayurvedic ingredients with contemporary skincare science, featuring moisturizers, serums, sunscreens, cleansers and curated skincare kits.",
+    fullDesc:
+      "A modern skincare storefront combining Ayurvedic ingredients with contemporary skincare science, featuring moisturizers, serums, sunscreens, cleansers and curated skincare kits with frictionless mobile checkout.",
+    website: "https://forestique.co.in/",
+    image: "/case-studies/forestique.jpg",
+    impact: ["Custom Bundle Builder", "Blazing Fast Speed", "Social Proof Integration"],
   },
 ];
 
 export default function CaseStudiesSection() {
   const [selectedStudy, setSelectedStudy] = useState<CaseStudyItem | null>(null);
-  const [mobileIdx, setMobileIdx] = useState(0);
-  const mobileTrackRef = useRef<HTMLDivElement>(null);
 
   const marqueeCards = [...CASE_STUDIES, ...CASE_STUDIES];
-
-  const handleMobileScroll = (direction: "prev" | "next") => {
-    const nextIdx =
-      direction === "prev"
-        ? Math.max(0, mobileIdx - 1)
-        : Math.min(CASE_STUDIES.length - 1, mobileIdx + 1);
-
-    setMobileIdx(nextIdx);
-    if (mobileTrackRef.current) {
-      const cardWidth = mobileTrackRef.current.clientWidth * 0.85;
-      mobileTrackRef.current.scrollTo({
-        left: nextIdx * cardWidth,
-        behavior: "smooth",
-      });
-    }
-  };
 
   return (
     <section
@@ -180,15 +150,15 @@ export default function CaseStudiesSection() {
       </div>
 
       {/* ==================================================================== */}
-      {/* DESKTOP INFINITE CONTINUOUS MARQUEE CAROUSEL                         */}
+      {/* INFINITE CONTINUOUS MARQUEE CAROUSEL (MOBILE & DESKTOP)              */}
       {/* ==================================================================== */}
-      <div className="hidden md:flex w-full overflow-hidden relative items-center py-4 reveal-fade-in delay-200">
+      <div className="w-full overflow-hidden relative items-center py-4 reveal-fade-in delay-200">
         {/* Left & Right Edge Fades */}
-        <div className="absolute top-0 bottom-0 left-0 w-32 bg-gradient-to-r from-[#f8fafd] dark:from-[#070914] to-transparent z-10 pointer-events-none" />
-        <div className="absolute top-0 bottom-0 right-0 w-32 bg-gradient-to-l from-[#f8fafd] dark:from-[#070914] to-transparent z-10 pointer-events-none" />
+        <div className="absolute top-0 bottom-0 left-0 w-16 sm:w-32 bg-gradient-to-r from-[#f8fafd] dark:from-[#070914] to-transparent z-10 pointer-events-none" />
+        <div className="absolute top-0 bottom-0 right-0 w-16 sm:w-32 bg-gradient-to-l from-[#f8fafd] dark:from-[#070914] to-transparent z-10 pointer-events-none" />
 
-        {/* Marquee Track */}
-        <div className="flex items-stretch gap-6 w-max animate-portfolio-marquee hover:[animation-play-state:paused] px-4">
+        {/* Marquee Track (Smooth Continuous Infinite Scroll on Mobile and Desktop) */}
+        <div className="flex items-stretch gap-4 sm:gap-6 w-max animate-portfolio-marquee hover:[animation-play-state:paused] active:[animation-play-state:paused] px-4">
           {marqueeCards.map((study, idx) => {
             const isBlue = idx % 2 === 1;
 
@@ -196,17 +166,17 @@ export default function CaseStudiesSection() {
               <div
                 key={`${study.id}-${idx}`}
                 onClick={() => setSelectedStudy(study)}
-                className={`w-[380px] lg:w-[410px] rounded-3xl p-6 sm:p-7 flex flex-col justify-between flex-shrink-0 border shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-400 cursor-pointer group ${
+                className={`w-[295px] sm:w-[380px] lg:w-[410px] rounded-3xl p-5 sm:p-7 flex flex-col justify-between flex-shrink-0 border shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-400 cursor-pointer group ${
                   isBlue
                     ? "bg-[#101b96] dark:bg-[#142366] border-[#253dca] text-white"
                     : "bg-white dark:bg-[#110e24] border-neutral-200/90 dark:border-neutral-800 text-neutral-900 dark:text-white"
                 }`}
               >
                 {/* Top Text Content */}
-                <div className="mb-5">
-                  <div className="flex justify-between items-start gap-3 mb-3">
+                <div className="mb-4 sm:mb-5">
+                  <div className="flex justify-between items-start gap-2.5 sm:gap-3 mb-2.5 sm:mb-3">
                     <div>
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-1.5 sm:gap-2">
                         <span
                           className={`text-xs font-mono font-bold ${
                             isBlue ? "text-[#93c5fd]" : "text-[#2563eb] dark:text-[#60a5fa]"
@@ -215,7 +185,7 @@ export default function CaseStudiesSection() {
                           {study.number}.
                         </span>
                         <span
-                          className={`text-[11px] font-extrabold tracking-wider uppercase ${
+                          className={`text-[10px] sm:text-[11px] font-extrabold tracking-wider uppercase ${
                             isBlue ? "text-[#93c5fd]" : "text-[#2563eb] dark:text-[#60a5fa]"
                           }`}
                         >
@@ -223,7 +193,7 @@ export default function CaseStudiesSection() {
                         </span>
                       </div>
                       <h3
-                        className={`text-2xl font-black tracking-tight leading-tight mt-1.5 ${
+                        className={`text-xl sm:text-2xl font-black tracking-tight leading-tight mt-1 sm:mt-1.5 ${
                           isBlue ? "text-white" : "text-neutral-900 dark:text-white"
                         }`}
                       >
@@ -237,13 +207,13 @@ export default function CaseStudiesSection() {
                       rel="noopener noreferrer"
                       onClick={(e) => e.stopPropagation()}
                       title="Visit Website"
-                      className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300 ${
+                      className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center flex-shrink-0 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300 ${
                         isBlue
                           ? "bg-white/20 text-white hover:bg-white hover:text-[#101b96]"
                           : "bg-neutral-100 dark:bg-white/10 text-neutral-900 dark:text-white hover:bg-[#101b96] hover:text-white dark:hover:bg-[#7d8eff] dark:hover:text-black"
                       }`}
                     >
-                      <ArrowUpRight className="w-5 h-5" />
+                      <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5" />
                     </a>
                   </div>
 
@@ -268,9 +238,9 @@ export default function CaseStudiesSection() {
                   </a>
                 </div>
 
-                {/* Bottom Image Container */}
+                {/* Bottom Image Container (Clean Website Screenshot) */}
                 <div
-                  className={`relative w-full h-52 sm:h-56 rounded-2xl overflow-hidden shadow-sm border ${
+                  className={`relative w-full h-44 sm:h-56 rounded-2xl overflow-hidden shadow-sm border ${
                     isBlue ? "border-white/15" : "border-neutral-200/80 dark:border-neutral-800"
                   }`}
                 >
@@ -279,138 +249,12 @@ export default function CaseStudiesSection() {
                     alt={study.title}
                     fill
                     className="object-cover object-top group-hover:scale-106 transition-transform duration-500"
-                    sizes="410px"
+                    sizes="(max-width: 640px) 295px, 410px"
                   />
                 </div>
               </div>
             );
           })}
-        </div>
-      </div>
-
-      {/* ==================================================================== */}
-      {/* MOBILE TOUCH-SWIPE CAROUSEL (ALTERNATING WHITE & BLUE)              */}
-      {/* ==================================================================== */}
-      <div className="block md:hidden px-4">
-        <div
-          ref={mobileTrackRef}
-          className="flex overflow-x-auto snap-x snap-mandatory gap-4 py-2 scrollbar-none"
-        >
-          {CASE_STUDIES.map((study, idx) => {
-            const isBlue = idx % 2 === 1;
-
-            return (
-              <div
-                key={study.id}
-                onClick={() => setSelectedStudy(study)}
-                className={`w-[85vw] flex-shrink-0 snap-center rounded-3xl p-6 border shadow-md flex flex-col justify-between ${
-                  isBlue
-                    ? "bg-[#101b96] dark:bg-[#142366] border-[#253dca] text-white"
-                    : "bg-white dark:bg-[#110e24] border-neutral-200 dark:border-neutral-800 text-neutral-900 dark:text-white"
-                }`}
-              >
-                <div>
-                  <div className="flex justify-between items-start gap-3 mb-2.5">
-                    <div>
-                      <div className="flex items-center gap-1.5">
-                        <span
-                          className={`text-xs font-mono font-bold ${
-                            isBlue ? "text-[#93c5fd]" : "text-[#2563eb] dark:text-[#60a5fa]"
-                          }`}
-                        >
-                          {study.number}.
-                        </span>
-                        <span
-                          className={`text-[11px] font-extrabold tracking-wider uppercase ${
-                            isBlue ? "text-[#93c5fd]" : "text-[#2563eb] dark:text-[#60a5fa]"
-                          }`}
-                        >
-                          {study.category}
-                        </span>
-                      </div>
-                      <h3
-                        className={`text-xl font-black tracking-tight leading-tight mt-1 ${
-                          isBlue ? "text-white" : "text-neutral-900 dark:text-white"
-                        }`}
-                      >
-                        {study.title}
-                      </h3>
-                    </div>
-
-                    <a
-                      href={study.website}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={(e) => e.stopPropagation()}
-                      className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
-                        isBlue ? "bg-white/20 text-white" : "bg-neutral-100 dark:bg-white/10 text-neutral-900 dark:text-white"
-                      }`}
-                    >
-                      <ArrowUpRight className="w-4 h-4" />
-                    </a>
-                  </div>
-
-                  <p
-                    className={`text-xs leading-relaxed mb-3 ${
-                      isBlue ? "text-blue-100/90" : "text-neutral-600 dark:text-neutral-400"
-                    }`}
-                  >
-                    {study.desc}
-                  </p>
-
-                  <a
-                    href={study.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={(e) => e.stopPropagation()}
-                    className={`inline-flex items-center gap-1 text-xs font-bold mb-3 ${
-                      isBlue ? "text-[#93c5fd]" : "text-[#101b96] dark:text-[#7d8eff]"
-                    }`}
-                  >
-                    Visit Website ↗
-                  </a>
-                </div>
-
-                <div
-                  className={`relative w-full h-44 rounded-xl overflow-hidden shadow-sm border ${
-                    isBlue ? "border-white/15" : "border-neutral-200 dark:border-neutral-800"
-                  }`}
-                >
-                  <Image
-                    src={study.image}
-                    alt={study.title}
-                    fill
-                    className="object-cover object-top"
-                  />
-                </div>
-              </div>
-            );
-          })}
-        </div>
-
-        {/* Mobile Navigation Arrows */}
-        <div className="flex items-center justify-center gap-3 mt-6">
-          <button
-            type="button"
-            onClick={() => handleMobileScroll("prev")}
-            disabled={mobileIdx === 0}
-            className="w-10 h-10 rounded-full bg-neutral-900 text-white flex items-center justify-center disabled:opacity-40"
-            aria-label="Previous project"
-          >
-            <ChevronLeft className="w-5 h-5" />
-          </button>
-          <span className="text-xs font-mono font-bold text-[var(--text-muted)]">
-            {mobileIdx + 1} / {CASE_STUDIES.length}
-          </span>
-          <button
-            type="button"
-            onClick={() => handleMobileScroll("next")}
-            disabled={mobileIdx === CASE_STUDIES.length - 1}
-            className="w-10 h-10 rounded-full bg-neutral-900 text-white flex items-center justify-center disabled:opacity-40"
-            aria-label="Next project"
-          >
-            <ChevronRight className="w-5 h-5" />
-          </button>
         </div>
       </div>
 

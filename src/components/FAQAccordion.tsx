@@ -122,7 +122,7 @@ export default function FAQAccordion() {
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header: Pill Badge + Split Heading & Description (Matching Reference Image) */}
-        <div className="mb-12 sm:mb-16">
+        <div className="mb-12 sm:mb-16 reveal-fade-up">
           <div className="mb-4">
             <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-bold tracking-wider uppercase bg-blue-500/10 text-blue-600 dark:bg-blue-400/10 dark:text-blue-400 border border-blue-500/20">
               // FAQS
@@ -143,7 +143,7 @@ export default function FAQAccordion() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start">
           
           {/* Left Column: Category Pills */}
-          <div className="lg:col-span-4 flex flex-row lg:flex-col gap-3 overflow-x-auto pb-2 lg:pb-0 scrollbar-none">
+          <div className="lg:col-span-4 flex flex-row lg:flex-col gap-3 overflow-x-auto pb-2 lg:pb-0 scrollbar-none reveal-fade-right delay-100">
             {FAQ_DATA.map((category) => {
               const isActive = category.id === activeCategoryId;
               return (
@@ -163,7 +163,7 @@ export default function FAQAccordion() {
           </div>
 
           {/* Right Column: Accordion Questions */}
-          <div className="lg:col-span-8 flex flex-col gap-3.5">
+          <div className="lg:col-span-8 flex flex-col gap-3.5 reveal-fade-left delay-200">
             {currentCategory.items.map((faq, index) => {
               const isOpen = openIndex === index;
               return (

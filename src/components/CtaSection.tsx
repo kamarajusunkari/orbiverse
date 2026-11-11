@@ -9,7 +9,7 @@ export default function CtaSection() {
   return (
     <section id="contact" className="relative w-full py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 bg-transparent transition-colors scroll-mt-24">
       <div 
-        className="max-w-[1400px] mx-auto relative rounded-[32px] sm:rounded-[40px] md:rounded-[44px] overflow-hidden border border-blue-400/30 shadow-[0_24px_70px_-15px_rgba(16,27,150,0.45)] transition-all"
+        className="max-w-[1400px] mx-auto relative rounded-[32px] sm:rounded-[40px] md:rounded-[44px] overflow-hidden border border-blue-400/30 shadow-[0_24px_70px_-15px_rgba(16,27,150,0.45)] transition-all reveal-scale-up"
         style={{
           background: "linear-gradient(135deg, #060a28 0%, #0c1874 30%, #1024b8 65%, #2563eb 100%)",
         }}

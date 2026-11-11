@@ -7,16 +7,17 @@ export default function ScrollRevealInit() {
   const pathname = usePathname();
 
   useEffect(() => {
-    const revealElements = document.querySelectorAll<HTMLElement>(
-      ".reveal-fade-up, .reveal-fade-left, .reveal-fade-right, .reveal-scale-up, .reveal-fade-in"
-    );
-
-    if (revealElements.length === 0) return;
+    const selector =
+      ".reveal-fade-up, .reveal-fade-left, .reveal-fade-right, .reveal-scale-up, .reveal-fade-in";
 
     if (!("IntersectionObserver" in window)) {
-      revealElements.forEach((el) => el.classList.add("is-visible"));
+      document
+        .querySelectorAll<HTMLElement>(selector)
+        .forEach((el) => el.classList.add("is-visible"));
       return;
     }
+
+    const observedSet = new WeakSet<HTMLElement>();
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -28,22 +29,37 @@ export default function ScrollRevealInit() {
         });
       },
       {
-        threshold: 0.12,
+        threshold: 0.08,
         rootMargin: "0px 0px -40px 0px",
       }
     );
 
-    revealElements.forEach((el) => {
-      const rect = el.getBoundingClientRect();
-      if (rect.top < window.innerHeight && rect.bottom > 0) {
-        el.classList.add("is-visible");
-      } else {
-        observer.observe(el);
-      }
+    const observeNewElements = () => {
+      const elements = document.querySelectorAll<HTMLElement>(selector);
+      elements.forEach((el) => {
+        if (!observedSet.has(el)) {
+          observedSet.add(el);
+          const rect = el.getBoundingClientRect();
+          if (rect.top < window.innerHeight && rect.bottom > 0) {
+            el.classList.add("is-visible");
+          } else {
+            observer.observe(el);
+          }
+        }
+      });
+    };
+
+    observeNewElements();
+
+    const mutationObserver = new MutationObserver(() => {
+      observeNewElements();
     });
+
+    mutationObserver.observe(document.body, { childList: true, subtree: true });
 
     return () => {
       observer.disconnect();
+      mutationObserver.disconnect();
     };
   }, [pathname]);
 

@@ -621,21 +621,26 @@ export const TECHNOLOGY_LOGOS: TechLogo[] = [
 ];
 
 export default function ToolsUsedSection() {
-  // Duplicated twice for a seamless infinite continuous marquee loop
-  const marqueeItems = [...TECHNOLOGY_LOGOS, ...TECHNOLOGY_LOGOS];
+  const half = Math.ceil(TECHNOLOGY_LOGOS.length / 2);
+  const row1 = TECHNOLOGY_LOGOS.slice(0, half);
+  const row2 = TECHNOLOGY_LOGOS.slice(half);
+
+  // Duplicated twice for seamless infinite continuous marquee loops
+  const row1Items = [...row1, ...row1];
+  const row2Items = [...row2, ...row2];
 
   return (
-    <section className="w-full bg-white text-slate-900 py-20 sm:py-28 relative overflow-hidden transition-colors duration-300 scroll-mt-24" id="tools">
+    <section className="w-full bg-[#f8faff] dark:bg-[#070914] text-slate-900 dark:text-white py-20 sm:py-28 relative overflow-hidden transition-colors duration-300 scroll-mt-24 border-b border-neutral-200/80 dark:border-white/10" id="tools">
       
       {/* Ambient Radial Soft Lighting Blobs */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[340px] bg-[radial-gradient(ellipse_60%_40%_at_50%_0%,rgba(59,130,246,0.08)_0%,rgba(99,102,241,0.04)_50%,transparent_100%)] pointer-events-none z-0" />
-      <div className="absolute bottom-0 right-[10%] w-[500px] h-[350px] bg-[radial-gradient(circle,rgba(168,85,247,0.05)_0%,transparent_70%)] pointer-events-none z-0" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[340px] bg-[radial-gradient(ellipse_60%_40%_at_50%_0%,rgba(59,130,246,0.12)_0%,rgba(99,102,241,0.06)_50%,transparent_100%)] pointer-events-none z-0" />
+      <div className="absolute bottom-0 right-[10%] w-[500px] h-[350px] bg-[radial-gradient(circle,rgba(168,85,247,0.08)_0%,transparent_70%)] pointer-events-none z-0" />
 
       {/* Header Container */}
-      <div className="max-w-[1320px] mx-auto px-4 sm:px-6 relative z-10 text-center mb-10 sm:mb-14">
+      <div className="max-w-[1320px] mx-auto px-4 sm:px-6 relative z-10 text-center mb-12 sm:mb-16 reveal-fade-up">
         
         {/* Pill Badge */}
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-[11px] font-extrabold uppercase tracking-widest bg-[#101b96]/[0.06] border border-[#101b96]/15 text-[#101b96] dark:bg-white/10 dark:border-white/20 dark:text-blue-300 mb-4 shadow-sm">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-[11px] font-extrabold uppercase tracking-widest bg-[#101b96]/[0.06] border border-[#101b96]/15 text-[#101b96] dark:bg-white/10 dark:border-white/20 dark:text-blue-300 mb-4 shadow-xs">
           <span>✦ INTEGRATIONS &amp; TECH STACK</span>
         </div>
 
@@ -645,75 +650,96 @@ export default function ToolsUsedSection() {
         </h2>
 
         {/* Subtitle */}
-        <p className="text-base sm:text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
+        <p className="text-base sm:text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed font-normal">
           From high-converting storefronts and data pipelines to custom software and cloud infrastructure — engineered on industry-standard platforms.
         </p>
       </div>
 
-      {/* CONTINUOUS INFINITE LOGO MARQUEE (ONE LINE WITH CLAY MIRROR REFLECTIONS) */}
-      <div className="w-full overflow-hidden relative select-none pt-4 pb-14">
+      {/* TWO ROWS OPPOSITE-DIRECTION CONTINUOUS MARQUEE WITH AUTHENTIC GLASSMORPHISM */}
+      <div className="w-full overflow-hidden relative select-none py-2 space-y-4 sm:space-y-5 reveal-fade-in delay-100">
         
         {/* Left Edge Smooth Gradient Fade */}
-        <div className="absolute top-0 bottom-0 left-0 w-24 sm:w-48 bg-gradient-to-r from-white via-white/80 to-transparent dark:from-[#070914] dark:via-[#070914]/80 dark:to-transparent z-20 pointer-events-none" />
+        <div className="absolute top-0 bottom-0 left-0 w-20 sm:w-48 bg-gradient-to-r from-[#f8faff] via-[#f8faff]/80 to-transparent dark:from-[#070914] dark:via-[#070914]/80 dark:to-transparent z-20 pointer-events-none" />
 
         {/* Right Edge Smooth Gradient Fade */}
-        <div className="absolute top-0 bottom-0 right-0 w-24 sm:w-48 bg-gradient-to-l from-white via-white/80 to-transparent dark:from-[#070914] dark:via-[#070914]/80 dark:to-transparent z-20 pointer-events-none" />
+        <div className="absolute top-0 bottom-0 right-0 w-20 sm:w-48 bg-gradient-to-l from-[#f8faff] via-[#f8faff]/80 to-transparent dark:from-[#070914] dark:via-[#070914]/80 dark:to-transparent z-20 pointer-events-none" />
 
-        {/* Marquee Motion Track */}
-        <div className="flex items-center gap-6 sm:gap-7 w-max animate-tools-marquee hover:[animation-play-state:paused] px-4">
-          {marqueeItems.map((tool, idx) => (
+        {/* ROW 1: Scrolls to LEFT (0% -> -50%) */}
+        <div className="flex items-center gap-4 sm:gap-5 w-max animate-tools-marquee-left hover:[animation-play-state:paused] active:[animation-play-state:paused] px-4">
+          {row1Items.map((tool, idx) => (
             <div
-              key={`${tool.id}-${idx}`}
-              className="flex flex-col items-center flex-shrink-0 group cursor-pointer"
+              key={`row1-${tool.id}-${idx}`}
+              className="group flex items-center gap-3.5 px-4 sm:px-5 py-3 sm:py-3.5 rounded-2xl sm:rounded-[20px] backdrop-blur-xl bg-white/65 dark:bg-white/[0.06] border border-white/80 dark:border-white/15 shadow-[0_4px_16px_rgba(31,38,135,0.04),inset_0_1px_1px_rgba(255,255,255,0.9)] dark:shadow-[0_4px_16px_rgba(0,0,0,0.3),inset_0_1px_1px_rgba(255,255,255,0.15)] hover:bg-white/90 dark:hover:bg-white/[0.12] hover:border-blue-400/50 hover:scale-105 transition-all duration-300 cursor-pointer min-w-[200px] sm:min-w-[230px] flex-shrink-0"
               title={`${tool.name} (${tool.category})`}
             >
-              {/* Main 3D Glossy Squircle Logo */}
+              {/* Brand Icon in Frosted Squircle */}
               <div
-                className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl sm:rounded-3xl flex items-center justify-center shadow-[0_10px_25px_rgba(0,0,0,0.1)] dark:shadow-[0_14px_32px_rgba(0,0,0,0.45)] border border-black/5 dark:border-white/20 relative overflow-hidden transition-all duration-300 group-hover:scale-110 group-hover:-translate-y-2 group-hover:shadow-[0_16px_36px_rgba(16,27,150,0.2)]"
+                className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl flex items-center justify-center p-2 flex-shrink-0 shadow-xs relative overflow-hidden"
                 style={{ background: tool.bg }}
               >
-                {/* Glossy Bevel Sheen */}
-                <div className="absolute inset-0 bg-gradient-to-br from-white/35 via-transparent to-black/20 pointer-events-none" />
-                
-                {/* Brand SVG Mark */}
-                <div className="relative z-10 flex items-center justify-center drop-shadow-sm">
-                  <svg
-                    className="w-8 h-8 sm:w-9 sm:h-9"
-                    viewBox={tool.viewBox}
-                    fill={tool.color}
-                  >
-                    {tool.svgPath}
-                  </svg>
-                </div>
+                <div className="absolute inset-0 bg-white/15 pointer-events-none" />
+                <svg
+                  className="w-5 h-5 sm:w-6 sm:h-6 relative z-10"
+                  viewBox={tool.viewBox}
+                  fill={tool.color}
+                >
+                  {tool.svgPath}
+                </svg>
               </div>
 
-              {/* Mirror Reflection underneath (Clay Aesthetic) */}
+              {/* Tool Text Details */}
+              <div className="flex flex-col min-w-0">
+                <span className="font-heading font-black text-sm sm:text-[15px] text-slate-900 dark:text-white truncate">
+                  {tool.name}
+                </span>
+                <span className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 truncate">
+                  {tool.category}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* ROW 2: Scrolls in OPPOSITE DIRECTION (to RIGHT: -50% -> 0%) */}
+        <div className="flex items-center gap-4 sm:gap-5 w-max animate-tools-marquee-right hover:[animation-play-state:paused] active:[animation-play-state:paused] px-4">
+          {row2Items.map((tool, idx) => (
+            <div
+              key={`row2-${tool.id}-${idx}`}
+              className="group flex items-center gap-3.5 px-4 sm:px-5 py-3 sm:py-3.5 rounded-2xl sm:rounded-[20px] backdrop-blur-xl bg-white/65 dark:bg-white/[0.06] border border-white/80 dark:border-white/15 shadow-[0_4px_16px_rgba(31,38,135,0.04),inset_0_1px_1px_rgba(255,255,255,0.9)] dark:shadow-[0_4px_16px_rgba(0,0,0,0.3),inset_0_1px_1px_rgba(255,255,255,0.15)] hover:bg-white/90 dark:hover:bg-white/[0.12] hover:border-blue-400/50 hover:scale-105 transition-all duration-300 cursor-pointer min-w-[200px] sm:min-w-[230px] flex-shrink-0"
+              title={`${tool.name} (${tool.category})`}
+            >
+              {/* Brand Icon in Frosted Squircle */}
               <div
-                className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl sm:rounded-3xl flex items-center justify-center opacity-25 scale-y-[-1] translate-y-[-6px] pointer-events-none blur-[0.6px] transition-opacity duration-300 group-hover:opacity-10"
-                style={{
-                  background: tool.bg,
-                  maskImage: "linear-gradient(to bottom, black 0%, transparent 65%)",
-                  WebkitMaskImage: "linear-gradient(to bottom, black 0%, transparent 65%)",
-                }}
+                className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl flex items-center justify-center p-2 flex-shrink-0 shadow-xs relative overflow-hidden"
+                style={{ background: tool.bg }}
               >
-                <div className="relative z-10 flex items-center justify-center">
-                  <svg
-                    className="w-8 h-8 sm:w-9 sm:h-9"
-                    viewBox={tool.viewBox}
-                    fill={tool.color}
-                  >
-                    {tool.svgPath}
-                  </svg>
-                </div>
+                <div className="absolute inset-0 bg-white/15 pointer-events-none" />
+                <svg
+                  className="w-5 h-5 sm:w-6 sm:h-6 relative z-10"
+                  viewBox={tool.viewBox}
+                  fill={tool.color}
+                >
+                  {tool.svgPath}
+                </svg>
+              </div>
+
+              {/* Tool Text Details */}
+              <div className="flex flex-col min-w-0">
+                <span className="font-heading font-black text-sm sm:text-[15px] text-slate-900 dark:text-white truncate">
+                  {tool.name}
+                </span>
+                <span className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 truncate">
+                  {tool.category}
+                </span>
               </div>
             </div>
           ))}
         </div>
       </div>
 
-      {/* Scoped CSS for Continuous Linear Infinite Marquee */}
+      {/* Scoped CSS for Continuous Linear Infinite Marquee in Opposite Directions */}
       <style jsx>{`
-        @keyframes toolsMarquee {
+        @keyframes toolsMarqueeLeft {
           0% {
             transform: translateX(0%);
           }
@@ -721,8 +747,19 @@ export default function ToolsUsedSection() {
             transform: translateX(-50%);
           }
         }
-        .animate-tools-marquee {
-          animation: toolsMarquee 75s linear infinite;
+        @keyframes toolsMarqueeRight {
+          0% {
+            transform: translateX(-50%);
+          }
+          100% {
+            transform: translateX(0%);
+          }
+        }
+        .animate-tools-marquee-left {
+          animation: toolsMarqueeLeft 55s linear infinite;
+        }
+        .animate-tools-marquee-right {
+          animation: toolsMarqueeRight 55s linear infinite;
         }
       `}</style>
     </section>
