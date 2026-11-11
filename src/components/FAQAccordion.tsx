@@ -77,11 +77,11 @@ export default function FAQAccordion() {
           </div>
         </div>
 
-        {/* 2-Column Grid: Left Sticky CTA Card + Right Clean Accordion */}
+        {/* 2-Column Grid: Left Sticky CTA Card (Desktop only) + Right Clean Accordion */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
           
-          {/* Left Column: Drift Audit Support Card */}
-          <div className="lg:col-span-4 p-6 sm:p-8 rounded-3xl bg-gradient-to-b from-blue-50/70 to-slate-50 border border-blue-100/80 shadow-xs reveal-fade-right sticky top-28">
+          {/* Left Column: Drift Audit Support Card (Normal flow on mobile, sticky on desktop) */}
+          <div className="lg:col-span-4 p-6 sm:p-8 rounded-3xl bg-gradient-to-b from-blue-50/70 to-slate-50 border border-blue-100/80 shadow-xs reveal-fade-right relative lg:sticky lg:top-28">
             <div className="w-12 h-12 rounded-2xl bg-[#101b96] text-white flex items-center justify-center mb-5 shadow-sm">
               <HelpCircle className="w-6 h-6" />
             </div>
