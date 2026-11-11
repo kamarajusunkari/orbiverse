@@ -205,12 +205,19 @@ export default function WorkWithUsToggleSection() {
       id="orbit-rules"
       className="py-20 sm:py-28 bg-[#fafafc] dark:bg-[#070913] text-slate-900 dark:text-white transition-colors duration-300 relative overflow-hidden border-t border-[var(--border-color)]"
     >
-      {/* Background Soft Accent Glow */}
+      {/* Background Soft Accent Glows for Glassmorphism Refraction */}
       <div
-        className={`absolute top-0 right-1/4 w-[500px] h-[300px] rounded-full blur-3xl pointer-events-none transition-all duration-700 opacity-30 ${
+        className={`absolute top-1/4 right-1/4 w-[500px] h-[320px] rounded-full blur-[100px] pointer-events-none transition-all duration-700 opacity-40 ${
           isWorkingWithUs
-            ? "bg-blue-400/20 dark:bg-blue-600/20"
-            : "bg-rose-400/20 dark:bg-rose-600/20"
+            ? "bg-gradient-to-tr from-blue-400/30 via-indigo-400/25 to-sky-300/20"
+            : "bg-gradient-to-tr from-rose-400/30 via-red-400/25 to-pink-300/20"
+        }`}
+      />
+      <div
+        className={`absolute bottom-10 left-1/4 w-[420px] h-[300px] rounded-full blur-[110px] pointer-events-none transition-all duration-700 opacity-30 ${
+          isWorkingWithUs
+            ? "bg-gradient-to-br from-blue-600/25 via-indigo-500/20 to-sky-400/15"
+            : "bg-gradient-to-br from-rose-600/25 via-red-500/20 to-orange-400/15"
         }`}
       />
 
@@ -319,13 +326,12 @@ export default function WorkWithUsToggleSection() {
         </div>
 
         {/* ================================================================
-            6-PILLAR ACCORDION WITH PROMINENT BLUE BORDERS (1400PX DESKTOP)
-            Active pillar expands to ~30-32% of total width with white & blue gradient.
-            Remaining 5 pillars share ~68-70% and feature crisp blue borders & rich vertical cues.
+            6-PILLAR ACCORDION WITH FULL GLASSMORPHISM (1400PX DESKTOP)
+            Active pillar expands to ~30-32% width with frosted glass & specular highlights.
+            Remaining 5 pillars feature clean translucent glass & vertical typography.
             ================================================================ */}
-        <div className="hidden md:flex flex-row gap-3.5 lg:gap-4.5 h-[480px] lg:h-[510px] w-full items-stretch pt-10 sm:pt-12 reveal-fade-up delay-200">
+        <div className="hidden md:flex flex-row gap-3.5 lg:gap-4.5 h-[480px] lg:h-[515px] w-full items-stretch pt-10 sm:pt-12 reveal-fade-up delay-200">
           {pillars.map((pillar, idx) => {
-            const Icon = pillar.icon;
             const isActive = activePillarIndex === idx;
 
             return (
@@ -338,35 +344,44 @@ export default function WorkWithUsToggleSection() {
                 className={`relative rounded-2xl lg:rounded-3xl cursor-pointer overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] select-none flex flex-col justify-between ${
                   isActive
                     ? isWorkingWithUs
-                      ? "p-7 lg:p-8 bg-gradient-to-br from-white via-[#f0f7ff] to-[#dbeafe] dark:from-[#0d162a] dark:via-[#111f3d] dark:to-[#172554] border-2 border-[#0066ff] dark:border-[#38bdf8] shadow-[0_22px_50px_rgba(0,102,255,0.22)] translate-y-[-3px]"
-                      : "p-7 lg:p-8 bg-gradient-to-br from-white via-[#fff1f2] to-[#ffe4e6] dark:from-[#240c14] dark:via-[#350f1d] dark:to-[#4c0519] border-2 border-rose-500 dark:border-rose-400 shadow-[0_22px_50px_rgba(244,63,94,0.22)] translate-y-[-3px]"
+                      ? "p-7 lg:p-8 backdrop-blur-2xl bg-gradient-to-br from-white/95 via-white/85 to-blue-50/75 dark:from-slate-900/90 dark:via-[#0e1933]/85 dark:to-slate-950/90 border-2 border-[#0066ff]/60 dark:border-blue-400/50 shadow-[inset_0_1px_3px_rgba(255,255,255,1),inset_0_-1px_2px_rgba(0,102,255,0.08),0_24px_55px_-12px_rgba(0,102,255,0.22)] translate-y-[-4px]"
+                      : "p-7 lg:p-8 backdrop-blur-2xl bg-gradient-to-br from-white/95 via-white/85 to-rose-50/75 dark:from-slate-900/90 dark:via-[#2b0c16]/85 dark:to-slate-950/90 border-2 border-rose-500/60 dark:border-rose-400/50 shadow-[inset_0_1px_3px_rgba(255,255,255,1),inset_0_-1px_2px_rgba(244,63,94,0.08),0_24px_55px_-12px_rgba(244,63,94,0.22)] translate-y-[-4px]"
                     : isWorkingWithUs
-                    ? "p-4.5 lg:p-5 bg-white dark:bg-[#0c1024] border-2 border-blue-200/80 dark:border-blue-900/40 hover:border-[#0066ff] dark:hover:border-[#38bdf8] shadow-[0_4px_18px_rgba(0,102,255,0.06)] hover:shadow-[0_12px_30px_rgba(0,102,255,0.14)] hover:bg-[#f8faff] dark:hover:bg-[#0e142c]"
-                    : "p-4.5 lg:p-5 bg-white dark:bg-[#120a10] border-2 border-rose-200/80 dark:border-rose-900/40 hover:border-rose-500 shadow-[0_4px_18px_rgba(244,63,94,0.06)] hover:shadow-[0_12px_30px_rgba(244,63,94,0.14)] hover:bg-[#fff9fa] dark:hover:bg-[#180d16]"
+                    ? "p-4.5 lg:p-5 backdrop-blur-xl bg-white/65 dark:bg-slate-900/40 border border-white/90 dark:border-white/10 hover:border-[#0066ff]/60 dark:hover:border-blue-400/60 shadow-[inset_0_1px_2px_rgba(255,255,255,0.9),0_8px_24px_-6px_rgba(16,27,150,0.06)] hover:shadow-[0_16px_36px_-8px_rgba(0,102,255,0.18)] hover:bg-white/90 dark:hover:bg-slate-900/70"
+                    : "p-4.5 lg:p-5 backdrop-blur-xl bg-white/65 dark:bg-slate-900/40 border border-white/90 dark:border-white/10 hover:border-rose-400/60 shadow-[inset_0_1px_2px_rgba(255,255,255,0.9),0_8px_24px_-6px_rgba(244,63,94,0.06)] hover:shadow-[0_16px_36px_-8px_rgba(244,63,94,0.18)] hover:bg-white/90 dark:hover:bg-slate-900/70"
                 }`}
               >
                 {/* ---------------- ACTIVE EXPANDED PILLAR (~32% WIDTH) ---------------- */}
                 {isActive ? (
                   <div className="flex flex-col justify-between h-full w-full">
                     
-                    {/* Top: Icon + Number Badge */}
+                    {/* Top: Clean Status Indicator Pill + Number Count (No Generic AI Icon) */}
                     <div className="flex items-center justify-between w-full">
                       <div
-                        className={`w-13 h-13 rounded-2xl flex items-center justify-center shadow-sm border-2 ${
+                        className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full backdrop-blur-md border shadow-xs ${
                           isWorkingWithUs
-                            ? "bg-white dark:bg-[#1a2542] text-[#0066ff] dark:text-[#38bdf8] border-blue-200"
-                            : "bg-white dark:bg-[#3b1220] text-rose-500 dark:text-rose-400 border-rose-200"
+                            ? "bg-blue-500/10 dark:bg-blue-500/20 text-[#0066ff] dark:text-[#38bdf8] border-blue-400/30"
+                            : "bg-rose-500/10 dark:bg-rose-500/20 text-rose-600 dark:text-rose-400 border-rose-400/30"
                         }`}
                       >
-                        <Icon className="w-6.5 h-6.5 stroke-[2.2]" />
+                        <span
+                          className={`w-2 h-2 rounded-full ${
+                            isWorkingWithUs
+                              ? "bg-[#0066ff] shadow-[0_0_8px_#0066ff]"
+                              : "bg-rose-500 shadow-[0_0_8px_#f43f5e]"
+                          }`}
+                        />
+                        <span className="text-[11px] font-mono font-bold tracking-wider uppercase">
+                          TENET {pillar.num}
+                        </span>
                       </div>
 
                       <div className="flex items-center gap-2">
                         <span
-                          className={`text-xs font-mono font-black px-3 py-1 rounded-full border shadow-xs ${
+                          className={`text-xs font-mono font-black px-3.5 py-1.5 rounded-full backdrop-blur-md border shadow-xs ${
                             isWorkingWithUs
-                              ? "bg-[#0066ff] text-white border-blue-600"
-                              : "bg-rose-500 text-white border-rose-600"
+                              ? "bg-[#0066ff] text-white border-blue-600 shadow-blue-500/20"
+                              : "bg-rose-500 text-white border-rose-600 shadow-rose-500/20"
                           }`}
                         >
                           {pillar.num} / 06
@@ -374,26 +389,29 @@ export default function WorkWithUsToggleSection() {
                       </div>
                     </div>
 
-                    {/* Middle: Title, Description & Bullet Proofs */}
-                    <div className="my-auto py-3">
-                      <h3 className="text-xl lg:text-[23px] font-black text-slate-950 dark:text-white tracking-tight leading-snug mb-2.5">
+                    {/* Middle: Prominent Bold Title, Description & Bullet Proofs */}
+                    <div className="my-auto py-2">
+                      <h3 className="text-2xl sm:text-3xl lg:text-[30px] xl:text-[34px] font-black text-slate-950 dark:text-white tracking-[-0.03em] leading-[1.12] mb-3">
                         {pillar.title}
                       </h3>
                       
-                      <p className="text-xs lg:text-[13.5px] text-slate-600 dark:text-slate-300 font-normal leading-relaxed mb-4">
+                      <p className="text-xs sm:text-[13.5px] lg:text-[14px] text-slate-600 dark:text-slate-300 font-normal leading-relaxed mb-4">
                         {pillar.description}
                       </p>
 
-                      {/* 2 Bullet Proof Chips (Rich Content) */}
-                      <div className="space-y-2 pt-1 border-t border-blue-100/80 dark:border-white/10">
+                      {/* 2 Bullet Proof Chips (Glassmorphism Cards) */}
+                      <div className="space-y-2 pt-2 border-t border-blue-100/70 dark:border-white/10">
                         {pillar.bullets.map((bullet, bIdx) => (
-                          <div key={bIdx} className="flex items-start gap-2">
+                          <div
+                            key={bIdx}
+                            className="flex items-start gap-2.5 p-2 sm:p-2.5 rounded-xl backdrop-blur-md bg-white/60 dark:bg-white/5 border border-white/80 dark:border-white/10 shadow-xs"
+                          >
                             {isWorkingWithUs ? (
                               <CheckCircle2 className="w-4 h-4 text-[#0066ff] dark:text-[#38bdf8] shrink-0 mt-0.5" />
                             ) : (
                               <AlertTriangle className="w-4 h-4 text-rose-500 dark:text-rose-400 shrink-0 mt-0.5" />
                             )}
-                            <span className="text-[12px] lg:text-[12.5px] font-medium text-slate-700 dark:text-slate-300 leading-snug">
+                            <span className="text-[12px] lg:text-[12.5px] font-semibold text-slate-800 dark:text-slate-200 leading-snug">
                               {bullet}
                             </span>
                           </div>
@@ -404,10 +422,10 @@ export default function WorkWithUsToggleSection() {
                     {/* Bottom: Highlight Tag */}
                     <div className="pt-2">
                       <div
-                        className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-[11px] font-bold border shadow-xs ${
+                        className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-[11px] font-bold backdrop-blur-md border shadow-xs ${
                           isWorkingWithUs
-                            ? "bg-[#0066ff]/15 text-[#0066ff] dark:bg-blue-500/25 dark:text-blue-200 border-[#0066ff]/30"
-                            : "bg-rose-500/15 text-rose-600 dark:bg-rose-500/25 dark:text-rose-200 border-rose-500/30"
+                            ? "bg-[#0066ff]/12 text-[#0066ff] dark:bg-blue-500/25 dark:text-blue-200 border-[#0066ff]/25"
+                            : "bg-rose-500/12 text-rose-600 dark:bg-rose-500/25 dark:text-rose-200 border-rose-500/25"
                         }`}
                       >
                         {isWorkingWithUs ? (
@@ -421,35 +439,26 @@ export default function WorkWithUsToggleSection() {
 
                   </div>
                 ) : (
-                  /* ---------------- COLLAPSED PILLAR (CRISP BLUE BORDERS & NEVER EMPTY) ---------------- */
+                  /* ---------------- COLLAPSED PILLAR (CLEAN TYPOGRAPHY & NO AI SQUIRCLE) ---------------- */
                   <div className="flex flex-col items-center justify-between h-full w-full py-2">
                     
-                    {/* Top: Blue Squircle Icon & Number Badge */}
+                    {/* Top: Clean Number Badge Pill */}
                     <div className="flex flex-col items-center gap-2">
                       <span
-                        className={`text-[10px] font-mono font-black px-2 py-0.5 rounded-full border ${
+                        className={`text-xs font-mono font-black px-2.5 py-1 rounded-full backdrop-blur-md border transition-all shadow-xs ${
                           isWorkingWithUs
-                            ? "bg-blue-50 dark:bg-blue-950/60 text-[#0066ff] dark:text-[#38bdf8] border-blue-200 dark:border-blue-800"
-                            : "bg-rose-50 dark:bg-rose-950/60 text-rose-600 dark:text-rose-400 border-rose-200 dark:border-rose-800"
+                            ? "bg-white/80 dark:bg-white/10 text-[#0066ff] dark:text-[#38bdf8] border-blue-200/80 dark:border-blue-800/50 group-hover:bg-[#0066ff] group-hover:text-white group-hover:border-[#0066ff]"
+                            : "bg-white/80 dark:bg-white/10 text-rose-600 dark:text-rose-400 border-rose-200/80 dark:border-rose-800/50 group-hover:bg-rose-500 group-hover:text-white group-hover:border-rose-500"
                         }`}
                       >
                         {pillar.num}
                       </span>
-                      <div
-                        className={`w-9 h-9 rounded-xl flex items-center justify-center transition-colors border ${
-                          isWorkingWithUs
-                            ? "bg-blue-50/80 dark:bg-blue-950/40 text-[#0066ff] dark:text-[#38bdf8] border-blue-200/80 dark:border-blue-800/40"
-                            : "bg-rose-50/80 dark:bg-rose-950/40 text-rose-500 dark:text-rose-400 border-rose-200/80 dark:border-rose-800/40"
-                        }`}
-                      >
-                        <Icon className="w-4.5 h-4.5 stroke-[2]" />
-                      </div>
                     </div>
 
                     {/* Center: Vertical Rotated Title */}
-                    <div className="my-auto flex items-center justify-center py-4">
+                    <div className="my-auto flex items-center justify-center py-6">
                       <span
-                        className="text-xs lg:text-[13px] font-extrabold text-slate-800 dark:text-slate-200 tracking-wider whitespace-nowrap select-none"
+                        className="text-[13px] lg:text-[14px] font-extrabold text-slate-800 dark:text-slate-200 tracking-wider whitespace-nowrap select-none group-hover:text-[#0066ff] dark:group-hover:text-blue-300 transition-colors"
                         style={{
                           writingMode: "vertical-rl",
                           transform: "rotate(180deg)",
@@ -459,13 +468,13 @@ export default function WorkWithUsToggleSection() {
                       </span>
                     </div>
 
-                    {/* Bottom: Accent Blue Indicator Bar */}
+                    {/* Bottom: Accent Blue Indicator Bar with Smooth Growth on Hover */}
                     <div className="flex flex-col items-center gap-1 pt-1">
                       <div
-                        className={`w-1.5 h-6 rounded-full transition-all ${
+                        className={`w-1.5 h-7 rounded-full transition-all duration-300 ${
                           isWorkingWithUs
-                            ? "bg-blue-300 dark:bg-blue-700/60 group-hover:bg-[#0066ff]"
-                            : "bg-rose-300 dark:bg-rose-700/60 group-hover:bg-rose-500"
+                            ? "bg-blue-300/80 dark:bg-blue-700/60 group-hover:bg-[#0066ff] group-hover:h-9"
+                            : "bg-rose-300/80 dark:bg-rose-700/60 group-hover:bg-rose-500 group-hover:h-9"
                         }`}
                       />
                     </div>
@@ -482,55 +491,49 @@ export default function WorkWithUsToggleSection() {
             ================================================================ */}
         <div className="flex md:hidden flex-col gap-3 pt-8 reveal-fade-up delay-100">
           {pillars.map((pillar, idx) => {
-            const Icon = pillar.icon;
             const isActive = activePillarIndex === idx;
 
             return (
               <div
                 key={`mobile-${pillar.id}`}
                 onClick={() => setActivePillarIndex(idx)}
-                className={`rounded-2xl p-5 transition-all duration-300 cursor-pointer border-2 ${
+                className={`rounded-2xl p-5 transition-all duration-300 cursor-pointer backdrop-blur-xl border ${
                   isActive
                     ? isWorkingWithUs
-                      ? "bg-gradient-to-br from-white via-[#f0f7ff] to-[#dbeafe] dark:from-[#0d162a] dark:to-[#172554] border-[#0066ff] shadow-md"
-                      : "bg-gradient-to-br from-white via-[#fff1f2] to-[#ffe4e6] dark:from-[#240c14] dark:to-[#4c0519] border-rose-500 shadow-md"
+                      ? "bg-gradient-to-br from-white/95 via-white/90 to-blue-50/80 dark:from-[#0d162a]/95 dark:to-[#172554]/95 border-[#0066ff]/60 shadow-[inset_0_1px_2px_rgba(255,255,255,1),0_12px_28px_rgba(0,102,255,0.18)]"
+                      : "bg-gradient-to-br from-white/95 via-white/90 to-rose-50/80 dark:from-[#240c14]/95 dark:to-[#4c0519]/95 border-rose-500/60 shadow-[inset_0_1px_2px_rgba(255,255,255,1),0_12px_28px_rgba(244,63,94,0.18)]"
                     : isWorkingWithUs
-                    ? "bg-white/95 dark:bg-[#0c1024] border-blue-200/80 dark:border-blue-900/40"
-                    : "bg-white/95 dark:bg-[#120a10] border-rose-200/80 dark:border-rose-900/40"
+                    ? "bg-white/75 dark:bg-[#0c1024]/70 border-white/80 dark:border-blue-900/30 shadow-xs"
+                    : "bg-white/75 dark:bg-[#120a10]/70 border-white/80 dark:border-rose-900/30 shadow-xs"
                 }`}
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <div
-                      className={`w-9 h-9 rounded-xl flex items-center justify-center ${
+                    <span
+                      className={`text-xs font-mono font-black px-2.5 py-1 rounded-full border shadow-xs ${
                         isActive
                           ? isWorkingWithUs
-                            ? "bg-[#0066ff] text-white"
-                            : "bg-rose-500 text-white"
-                          : isWorkingWithUs
-                          ? "bg-blue-50 text-[#0066ff]"
-                          : "bg-rose-50 text-rose-500"
+                            ? "bg-[#0066ff] text-white border-blue-600"
+                            : "bg-rose-500 text-white border-rose-600"
+                          : "bg-white/80 dark:bg-white/10 text-slate-600 dark:text-slate-300 border-slate-200/80 dark:border-white/10"
                       }`}
                     >
-                      <Icon className="w-4.5 h-4.5 stroke-[2]" />
-                    </div>
+                      {pillar.num}
+                    </span>
                     <div>
-                      <span className="text-[10px] font-mono font-bold text-slate-400">
-                        {pillar.num}
-                      </span>
-                      <h4 className="text-sm font-bold text-slate-900 dark:text-white">
+                      <h4 className="text-base sm:text-lg font-black text-slate-900 dark:text-white tracking-tight">
                         {pillar.title}
                       </h4>
                     </div>
                   </div>
 
                   <span
-                    className={`text-xs font-bold px-2 py-0.5 rounded-full ${
+                    className={`text-xs font-bold px-3 py-1 rounded-full backdrop-blur-md ${
                       isActive
                         ? isWorkingWithUs
-                          ? "bg-[#0066ff] text-white"
-                          : "bg-rose-500 text-white"
-                        : "text-slate-400 border border-slate-200 dark:border-white/10"
+                          ? "bg-[#0066ff]/15 text-[#0066ff] border border-blue-500/30"
+                          : "bg-rose-500/15 text-rose-500 border border-rose-500/30"
+                        : "text-slate-400 border border-slate-200/60 dark:border-white/10"
                     }`}
                   >
                     {isActive ? "Active" : "Tap"}
@@ -539,22 +542,25 @@ export default function WorkWithUsToggleSection() {
 
                 {isActive && (
                   <div className="mt-3.5 pt-3 border-t border-black/5 dark:border-white/5 animate-fadeIn">
-                    <p className="text-xs text-slate-600 dark:text-slate-300 font-normal leading-relaxed mb-3">
+                    <p className="text-xs sm:text-[13px] text-slate-600 dark:text-slate-300 font-normal leading-relaxed mb-3">
                       {pillar.description}
                     </p>
                     
                     <div className="space-y-1.5 mb-3">
                       {pillar.bullets.map((bullet, bIdx) => (
-                        <div key={bIdx} className="flex items-center gap-2">
+                        <div
+                          key={bIdx}
+                          className="flex items-center gap-2 p-2 rounded-lg bg-white/60 dark:bg-white/5 border border-white/80 dark:border-white/10"
+                        >
                           <CheckCircle2 className="w-3.5 h-3.5 text-[#0066ff] shrink-0" />
-                          <span className="text-[11.5px] text-slate-700 dark:text-slate-300">
+                          <span className="text-[11.5px] font-medium text-slate-700 dark:text-slate-300">
                             {bullet}
                           </span>
                         </div>
                       ))}
                     </div>
 
-                    <span className="inline-block text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-md bg-white/70 dark:bg-black/30 text-slate-800 dark:text-slate-200 border border-blue-200/50">
+                    <span className="inline-block text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-md bg-white/80 dark:bg-black/30 text-slate-800 dark:text-slate-200 border border-blue-200/50">
                       ✦ {pillar.tag}
                     </span>
                   </div>

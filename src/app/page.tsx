@@ -55,16 +55,7 @@ export default function Home() {
             </div>
             <div className="absolute -right-20 -bottom-20 w-96 h-96 rounded-full bg-[#5b3bd1]/20 blur-3xl pointer-events-none" />
             <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-8 relative z-10">
-              <div className="flex items-center gap-6 reveal-fade-right">
-                <div className="w-16 h-16 rounded-2xl bg-white/10 p-2 flex items-center justify-center flex-shrink-0 border border-white/20">
-                  <Image
-                    src="/0rbb.png"
-                    alt="Orbiverse"
-                    width={64}
-                    height={64}
-                    className="w-full h-full object-contain filter brightness-125"
-                  />
-                </div>
+              <div className="reveal-fade-right">
                 <p className="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight leading-tight">
                   Most agencies report what they did.<br />
                   <span className="text-[#a892ff]">We report what it brought back.</span>
