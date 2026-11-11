@@ -257,9 +257,10 @@ h1, h2, h3, h4, .font-heading {
 }
 
 /* ==========================================================================
-   ROADMAP / HOW IT WORKS ANIMATION (FADE RIGHT ON DESKTOP, FADE UP ON MOBILE)
+   ROADMAP / HOW IT WORKS ANIMATION (REACT-CONTROLLED ENTRANCE)
    ========================================================================== */
 
+.roadmap-card-hidden,
 .reveal-roadmap-card {
   opacity: 0;
   transform: translate3d(0, 36px, 0); /* Mobile: Fade Up entrance */
@@ -269,6 +270,7 @@ h1, h2, h3, h4, .font-heading {
 }
 
 @media (min-width: 1024px) {
+  .roadmap-card-hidden,
   .reveal-roadmap-card {
     transform: translate3d(-40px, 0, 0); /* Desktop: Fade Right entrance */
   }
@@ -280,9 +282,13 @@ h1, h2, h3, h4, .font-heading {
 .reveal-fade-right.is-visible,
 .reveal-scale-up.is-visible,
 .reveal-fade-in.is-visible,
-.reveal-roadmap-card.is-visible {
+.reveal-roadmap-card.is-visible,
+.roadmap-card-visible {
   opacity: 1 !important;
   transform: translate3d(0, 0, 0) scale(1) !important;
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1), background 0.35s ease, color 0.35s ease, box-shadow 0.35s ease !important;
+  will-change: opacity, transform;
+  backface-visibility: hidden;
 }
 
 /* Staggered entrance delays on Desktop (Q1 -> Q2 -> Q3 -> Q4 separately) */
@@ -337,7 +343,9 @@ h1, h2, h3, h4, .font-heading {
   .reveal-fade-right,
   .reveal-scale-up,
   .reveal-fade-in,
-  .reveal-roadmap-card {
+  .reveal-roadmap-card,
+  .roadmap-card-hidden,
+  .roadmap-card-visible {
     opacity: 1 !important;
     transform: none !important;
     transition: none !important;

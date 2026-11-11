@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Sparkles, ArrowRight } from "lucide-react";
 import { openCtaModal } from "@/components/CtaModal";
 
@@ -50,6 +50,68 @@ const MILESTONES: TimelineMilestone[] = [
 
 export default function ProcessSection() {
   const [activeQuarterIndex, setActiveQuarterIndex] = useState<number>(2);
+  const [cardsVisible, setCardsVisible] = useState<boolean[]>([false, false, false, false]);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    if (!("IntersectionObserver" in window)) {
+      setCardsVisible([true, true, true, true]);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const indexAttr = entry.target.getAttribute("data-index");
+            if (indexAttr !== null) {
+              const index = parseInt(indexAttr, 10);
+              if (!isNaN(index)) {
+                setCardsVisible((prev) => {
+                  if (prev[index]) return prev;
+                  const next = [...prev];
+                  next[index] = true;
+                  return next;
+                });
+                observer.unobserve(entry.target);
+              }
+            }
+          }
+        });
+      },
+      {
+        threshold: 0.08,
+        rootMargin: "0px 0px -40px 0px",
+      }
+    );
+
+    cardRefs.current.forEach((el) => {
+      if (el) {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+          const indexAttr = el.getAttribute("data-index");
+          if (indexAttr !== null) {
+            const index = parseInt(indexAttr, 10);
+            if (!isNaN(index)) {
+              setCardsVisible((prev) => {
+                const next = [...prev];
+                next[index] = true;
+                return next;
+              });
+            }
+          }
+        } else {
+          observer.observe(el);
+        }
+      }
+    });
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
 
   return (
     <section
@@ -99,12 +161,19 @@ export default function ProcessSection() {
           <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 items-stretch divide-y lg:divide-y-0 lg:divide-x divide-blue-200/90 dark:divide-white/15">
             {MILESTONES.map((milestone, idx) => {
               const isHighlighted = activeQuarterIndex === idx;
+              const isVisible = cardsVisible[idx];
 
               return (
                 <div
                   key={milestone.id}
+                  ref={(el) => {
+                    cardRefs.current[idx] = el;
+                  }}
+                  data-index={idx}
                   onClick={() => setActiveQuarterIndex(idx)}
-                  className={`group cursor-pointer relative flex flex-col justify-between rounded-none reveal-roadmap-card roadmap-card-${milestone.id.toLowerCase()} ${
+                  className={`group cursor-pointer relative flex flex-col justify-between rounded-none roadmap-card-${milestone.id.toLowerCase()} ${
+                    isVisible ? "roadmap-card-visible" : "roadmap-card-hidden"
+                  } ${
                     isHighlighted
                       ? "text-white shadow-2xl z-20"
                       : "text-neutral-900 dark:text-neutral-100 hover:brightness-95 dark:hover:brightness-110 z-10"
