@@ -8,7 +8,7 @@ export default function ScrollRevealInit() {
 
   useEffect(() => {
     const selector =
-      ".reveal-fade-up, .reveal-fade-left, .reveal-fade-right, .reveal-scale-up, .reveal-fade-in";
+      ".reveal-fade-up, .reveal-fade-left, .reveal-fade-right, .reveal-scale-up, .reveal-fade-in, .reveal-roadmap-card";
 
     if (!("IntersectionObserver" in window)) {
       document

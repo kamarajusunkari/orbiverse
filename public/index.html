@@ -2394,13 +2394,40 @@
       transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1);
       will-change: opacity;
     }
+    .reveal-roadmap-card {
+      opacity: 0;
+      transform: translate3d(0, 36px, 0);
+      transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1), background 0.35s ease, color 0.35s ease, box-shadow 0.35s ease !important;
+      will-change: opacity, transform;
+      backface-visibility: hidden;
+    }
+    @media (min-width: 992px) {
+      .reveal-roadmap-card {
+        transform: translate3d(-40px, 0, 0);
+      }
+    }
     .reveal-fade-up.is-visible,
     .reveal-fade-left.is-visible,
     .reveal-fade-right.is-visible,
     .reveal-scale-up.is-visible,
-    .reveal-fade-in.is-visible {
+    .reveal-fade-in.is-visible,
+    .reveal-roadmap-card.is-visible {
       opacity: 1 !important;
       transform: translate3d(0, 0, 0) scale(1) !important;
+    }
+    @media (min-width: 992px) {
+      .roadmap-card-q1 { transition-delay: 80ms, 80ms, 0s, 0s, 0s !important; }
+      .roadmap-card-q2 { transition-delay: 200ms, 200ms, 0s, 0s, 0s !important; }
+      .roadmap-card-q3 { transition-delay: 320ms, 320ms, 0s, 0s, 0s !important; }
+      .roadmap-card-q4 { transition-delay: 440ms, 440ms, 0s, 0s, 0s !important; }
+    }
+    @media (max-width: 991px) {
+      .roadmap-card-q1,
+      .roadmap-card-q2,
+      .roadmap-card-q3,
+      .roadmap-card-q4 {
+        transition-delay: 0s, 0s, 0s, 0s, 0s !important;
+      }
     }
     .delay-75 { transition-delay: 75ms !important; }
     .delay-100 { transition-delay: 100ms !important; }
@@ -2411,7 +2438,7 @@
     .delay-400 { transition-delay: 400ms !important; }
     .delay-500 { transition-delay: 500ms !important; }
     @media (prefers-reduced-motion: reduce) {
-      .reveal-fade-up, .reveal-fade-left, .reveal-fade-right, .reveal-scale-up, .reveal-fade-in {
+      .reveal-fade-up, .reveal-fade-left, .reveal-fade-right, .reveal-scale-up, .reveal-fade-in, .reveal-roadmap-card {
         opacity: 1 !important;
         transform: none !important;
         transition: none !important;
@@ -6299,7 +6326,7 @@
         </div>
 
         <!-- 4-BOX GRID ROADMAP CONTAINER -->
-        <div class="infographic-frame reveal-fade-up" style="padding: 0; border-radius: 0; overflow: hidden; border: 1px solid rgba(16, 27, 150, 0.15); box-shadow: 0 10px 40px rgba(16, 27, 150, 0.08); background: #ffffff; position: relative;">
+        <div class="infographic-frame reveal-fade-in" style="padding: 0; border-radius: 0; overflow: hidden; border: 1px solid rgba(16, 27, 150, 0.15); box-shadow: 0 10px 40px rgba(16, 27, 150, 0.08); background: #ffffff; position: relative;">
           
           <!-- Middle Continuous Timeline Line across all 4 boxes -->
           <div class="infographic-mid-line" style="left: 0; right: 0; top: 220px; height: 2px; background: #93c5fd; position: absolute; z-index: 1;"></div>
@@ -6308,7 +6335,7 @@
           <div class="infographic-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; position: relative; z-index: 2;">
             
             <!-- Q1 Box -->
-            <div class="infographic-col" style="border-right: 1px solid rgba(16, 27, 150, 0.12); padding: 0; border-radius: 0; background: linear-gradient(180deg, #ffffff 0%, #f0f6ff 50%, #dbeafe 100%); color: #0f172a; display: flex; flex-direction: column;">
+            <div class="infographic-col reveal-roadmap-card roadmap-card-q1" style="border-right: 1px solid rgba(16, 27, 150, 0.12); padding: 0; border-radius: 0; background: linear-gradient(180deg, #ffffff 0%, #f0f6ff 50%, #dbeafe 100%); color: #0f172a; display: flex; flex-direction: column;">
               <!-- Top Half: Line Hanging from Top Edge -->
               <div style="height: 220px; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: flex-end;">
                 <div style="width: 2px; height: 100%; background: #60a5fa;"></div>
@@ -6328,7 +6355,7 @@
             </div>
 
             <!-- Q2 Box -->
-            <div class="infographic-col" style="border-right: 1px solid rgba(16, 27, 150, 0.12); padding: 0; border-radius: 0; background: linear-gradient(180deg, #ffffff 0%, #f0f6ff 50%, #dbeafe 100%); color: #0f172a; display: flex; flex-direction: column;">
+            <div class="infographic-col reveal-roadmap-card roadmap-card-q2" style="border-right: 1px solid rgba(16, 27, 150, 0.12); padding: 0; border-radius: 0; background: linear-gradient(180deg, #ffffff 0%, #f0f6ff 50%, #dbeafe 100%); color: #0f172a; display: flex; flex-direction: column;">
               <!-- Top Half: Line Hanging from Top Edge -->
               <div style="height: 220px; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: flex-end;">
                 <div style="width: 2px; height: 100%; background: #60a5fa;"></div>
@@ -6348,7 +6375,7 @@
             </div>
 
             <!-- Q3 Box (Active One: Rich Blue Gradient) -->
-            <div class="infographic-col" style="border-right: 1px solid rgba(16, 27, 150, 0.12); padding: 0; border-radius: 0; background: linear-gradient(180deg, #101b96 0%, #12197a 45%, #090d3d 100%); color: #ffffff; display: flex; flex-direction: column; box-shadow: 0 10px 40px rgba(16, 27, 150, 0.4);">
+            <div class="infographic-col reveal-roadmap-card roadmap-card-q3" style="border-right: 1px solid rgba(16, 27, 150, 0.12); padding: 0; border-radius: 0; background: linear-gradient(180deg, #101b96 0%, #12197a 45%, #090d3d 100%); color: #ffffff; display: flex; flex-direction: column; box-shadow: 0 10px 40px rgba(16, 27, 150, 0.4);">
               <!-- Top Half: Future Roadmap Callout + Hanging Line -->
               <div style="height: 220px; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 24px 28px 0;">
                 <div style="width: 100%; text-align: left;">
@@ -6375,7 +6402,7 @@
             </div>
 
             <!-- Q4 Box -->
-            <div class="infographic-col" style="padding: 0; border-radius: 0; background: linear-gradient(180deg, #ffffff 0%, #f0f6ff 50%, #dbeafe 100%); color: #0f172a; display: flex; flex-direction: column;">
+            <div class="infographic-col reveal-roadmap-card roadmap-card-q4" style="padding: 0; border-radius: 0; background: linear-gradient(180deg, #ffffff 0%, #f0f6ff 50%, #dbeafe 100%); color: #0f172a; display: flex; flex-direction: column;">
               <!-- Top Half: Line Hanging from Top Edge -->
               <div style="height: 220px; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: flex-end;">
                 <div style="width: 2px; height: 100%; background: #60a5fa;"></div>
@@ -7133,7 +7160,7 @@
     }
 
     // Scroll Reveal IntersectionObserver for hardware-accelerated entrance animations
-    const revealElements = document.querySelectorAll('.reveal-fade-up, .reveal-fade-left, .reveal-fade-right, .reveal-scale-up, .reveal-fade-in');
+    const revealElements = document.querySelectorAll('.reveal-fade-up, .reveal-fade-left, .reveal-fade-right, .reveal-scale-up, .reveal-fade-in, .reveal-roadmap-card');
     if ('IntersectionObserver' in window) {
       const revealObserver = new IntersectionObserver((entries, obs) => {
         entries.forEach(entry => {

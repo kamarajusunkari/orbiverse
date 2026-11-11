@@ -90,7 +90,7 @@ export default function ProcessSection() {
         {/* ==================================================================== */}
         {/* 4-BOX GRID ROADMAP (FLUSH SHARP EDGES, HANGING LINE & MIDDLE AXIS)  */}
         {/* ==================================================================== */}
-        <div className="relative w-full border border-blue-200/90 dark:border-white/15 shadow-xl overflow-hidden reveal-fade-up rounded-none">
+        <div className="relative w-full border border-blue-200/90 dark:border-white/15 shadow-xl overflow-hidden reveal-fade-in rounded-none">
           
           {/* Continuous Middle Horizontal Line across all 4 boxes from left to right */}
           <div className="hidden lg:block absolute left-0 right-0 top-[220px] h-[2px] bg-gradient-to-r from-blue-300 via-blue-400 to-blue-300 dark:from-white/20 dark:via-blue-400/40 dark:to-white/20 z-10 pointer-events-none" />
@@ -104,7 +104,7 @@ export default function ProcessSection() {
                 <div
                   key={milestone.id}
                   onClick={() => setActiveQuarterIndex(idx)}
-                  className={`group cursor-pointer relative flex flex-col justify-between transition-all duration-300 rounded-none ${
+                  className={`group cursor-pointer relative flex flex-col justify-between rounded-none reveal-roadmap-card roadmap-card-${milestone.id.toLowerCase()} ${
                     isHighlighted
                       ? "text-white shadow-2xl z-20"
                       : "text-neutral-900 dark:text-neutral-100 hover:brightness-95 dark:hover:brightness-110 z-10"

@@ -256,14 +256,51 @@ h1, h2, h3, h4, .font-heading {
   will-change: opacity;
 }
 
+/* ==========================================================================
+   ROADMAP / HOW IT WORKS ANIMATION (FADE RIGHT ON DESKTOP, FADE UP ON MOBILE)
+   ========================================================================== */
+
+.reveal-roadmap-card {
+  opacity: 0;
+  transform: translate3d(0, 36px, 0); /* Mobile: Fade Up entrance */
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1), background 0.35s ease, color 0.35s ease, box-shadow 0.35s ease !important;
+  will-change: opacity, transform;
+  backface-visibility: hidden;
+}
+
+@media (min-width: 1024px) {
+  .reveal-roadmap-card {
+    transform: translate3d(-40px, 0, 0); /* Desktop: Fade Right entrance */
+  }
+}
+
 /* When element scrolls into viewport */
 .reveal-fade-up.is-visible,
 .reveal-fade-left.is-visible,
 .reveal-fade-right.is-visible,
 .reveal-scale-up.is-visible,
-.reveal-fade-in.is-visible {
+.reveal-fade-in.is-visible,
+.reveal-roadmap-card.is-visible {
   opacity: 1 !important;
   transform: translate3d(0, 0, 0) scale(1) !important;
+}
+
+/* Staggered entrance delays on Desktop (Q1 -> Q2 -> Q3 -> Q4 separately) */
+@media (min-width: 1024px) {
+  .roadmap-card-q1 { transition-delay: 80ms, 80ms, 0s, 0s, 0s !important; }
+  .roadmap-card-q2 { transition-delay: 200ms, 200ms, 0s, 0s, 0s !important; }
+  .roadmap-card-q3 { transition-delay: 320ms, 320ms, 0s, 0s, 0s !important; }
+  .roadmap-card-q4 { transition-delay: 440ms, 440ms, 0s, 0s, 0s !important; }
+}
+
+/* Mobile: Each card triggers individually upon scroll with 0s delay */
+@media (max-width: 1023px) {
+  .roadmap-card-q1,
+  .roadmap-card-q2,
+  .roadmap-card-q3,
+  .roadmap-card-q4 {
+    transition-delay: 0s, 0s, 0s, 0s, 0s !important;
+  }
 }
 
 /* Staggered Delay Classes */
@@ -299,7 +336,8 @@ h1, h2, h3, h4, .font-heading {
   .reveal-fade-left,
   .reveal-fade-right,
   .reveal-scale-up,
-  .reveal-fade-in {
+  .reveal-fade-in,
+  .reveal-roadmap-card {
     opacity: 1 !important;
     transform: none !important;
     transition: none !important;
