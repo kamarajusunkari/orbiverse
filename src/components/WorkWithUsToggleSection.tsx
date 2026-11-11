@@ -456,9 +456,9 @@ export default function WorkWithUsToggleSection() {
                     </div>
 
                     {/* Center: Vertical Rotated Title */}
-                    <div className="my-auto flex items-center justify-center py-6">
+                    <div className="my-auto flex items-center justify-center py-4">
                       <span
-                        className="text-[13px] lg:text-[14px] font-extrabold text-slate-800 dark:text-slate-200 tracking-wider whitespace-nowrap select-none group-hover:text-[#0066ff] dark:group-hover:text-blue-300 transition-colors"
+                        className="text-lg md:text-xl lg:text-[22px] xl:text-[24px] font-black text-slate-900 dark:text-white tracking-[-0.02em] whitespace-nowrap select-none group-hover:text-[#0066ff] dark:group-hover:text-blue-400 transition-colors"
                         style={{
                           writingMode: "vertical-rl",
                           transform: "rotate(180deg)",
