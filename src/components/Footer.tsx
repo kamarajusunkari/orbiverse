@@ -138,15 +138,7 @@ export default function Footer() {
                 Connect
               </span>
               <a
-                href="https://linkedin.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm text-slate-600 hover:text-[#101b96] transition-colors inline-flex items-center gap-1 group/link"
-              >
-                LinkedIn <ArrowUpRight className="w-3.5 h-3.5 opacity-60 group-hover/link:opacity-100 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-all" />
-              </a>
-              <a
-                href="https://instagram.com"
+                href="https://instagram.com/orbiverse.co"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sm text-slate-600 hover:text-[#101b96] transition-colors inline-flex items-center gap-1 group/link"
@@ -154,12 +146,28 @@ export default function Footer() {
                 Instagram <ArrowUpRight className="w-3.5 h-3.5 opacity-60 group-hover/link:opacity-100 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-all" />
               </a>
               <a
-                href="https://twitter.com"
+                href="https://linkedin.com/company/orbiverse-co"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sm text-slate-600 hover:text-[#101b96] transition-colors inline-flex items-center gap-1 group/link"
               >
-                Twitter / X <ArrowUpRight className="w-3.5 h-3.5 opacity-60 group-hover/link:opacity-100 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-all" />
+                LinkedIn <ArrowUpRight className="w-3.5 h-3.5 opacity-60 group-hover/link:opacity-100 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-all" />
+              </a>
+              <a
+                href="https://youtube.com/@orbiverse-co"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-slate-600 hover:text-[#101b96] transition-colors inline-flex items-center gap-1 group/link"
+              >
+                YouTube <ArrowUpRight className="w-3.5 h-3.5 opacity-60 group-hover/link:opacity-100 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-all" />
+              </a>
+              <a
+                href="https://facebook.com/orbiverse.co"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-slate-600 hover:text-[#101b96] transition-colors inline-flex items-center gap-1 group/link"
+              >
+                Facebook <ArrowUpRight className="w-3.5 h-3.5 opacity-60 group-hover/link:opacity-100 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-all" />
               </a>
               <a
                 href="mailto:hello@orbiverse.co"
