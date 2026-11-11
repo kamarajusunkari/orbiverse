@@ -278,7 +278,7 @@ export default function HeroSection() {
                 Your marketing is drifting.
               </span>
               <span className="inline-flex items-center justify-center flex-wrap sm:flex-nowrap gap-x-2 text-[#101b96] mt-1.5 sm:mt-2.5 text-center mx-auto">
-                <span>We bring it into</span>
+                <span>We bring it into </span>
                 <span className="relative inline-block">
                   <span className="relative z-10">orbit.</span>
                   

@@ -21,8 +21,9 @@ export default function CtaModal() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    phone: "",
     website: "",
-    spend: "$5k - $25k/mo",
+    spend: "₹1,00,000 - ₹5,00,000 / mo",
     bottleneck: "High CAC / Blended ROAS Dropping",
   });
 
@@ -66,15 +67,26 @@ export default function CtaModal() {
     };
   }, [isOpen, handleOpen, handleClose]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate swift submission
-    setTimeout(() => {
+    try {
+      await fetch("/api/drift-audit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...formData,
+          monthlySpend: formData.spend,
+          source: `modal-${source}`,
+        }),
+      });
+    } catch (err) {
+      console.error("[CtaModal] Submission error:", err);
+    } finally {
       setIsSubmitting(false);
       setIsSubmitted(true);
-    }, 700);
+    }
   };
 
   if (!isOpen) return null;
@@ -164,20 +176,38 @@ export default function CtaModal() {
                   </div>
                 </div>
 
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
-                    Website or Store URL *
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    placeholder="https://yourbrand.com"
-                    value={formData.website}
-                    onChange={(e) =>
-                      setFormData({ ...formData, website: e.target.value })
-                    }
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 focus:border-[#101b96] focus:ring-2 focus:ring-[#101b96]/15 outline-none text-sm text-slate-900 bg-white placeholder:text-slate-400 font-medium transition-all"
-                  />
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                      Phone / WhatsApp *
+                    </label>
+                    <input
+                      type="tel"
+                      required
+                      placeholder="+91 98765 43210"
+                      value={formData.phone}
+                      onChange={(e) =>
+                        setFormData({ ...formData, phone: e.target.value })
+                      }
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 focus:border-[#101b96] focus:ring-2 focus:ring-[#101b96]/15 outline-none text-sm text-slate-900 bg-white placeholder:text-slate-400 font-medium transition-all"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                      Website or Store URL *
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="https://yourbrand.com"
+                      value={formData.website}
+                      onChange={(e) =>
+                        setFormData({ ...formData, website: e.target.value })
+                      }
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 focus:border-[#101b96] focus:ring-2 focus:ring-[#101b96]/15 outline-none text-sm text-slate-900 bg-white placeholder:text-slate-400 font-medium transition-all"
+                    />
+                  </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
@@ -192,10 +222,12 @@ export default function CtaModal() {
                       }
                       className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 focus:border-[#101b96] focus:ring-2 focus:ring-[#101b96]/15 outline-none text-sm text-slate-900 bg-white font-medium transition-all cursor-pointer"
                     >
-                      <option value="Under $5k/mo">Under $5k / mo</option>
-                      <option value="$5k - $25k/mo">$5k - $25k / mo</option>
-                      <option value="$25k - $100k/mo">$25k - $100k / mo</option>
-                      <option value="$100k+/mo">$100k+ / mo</option>
+                      <option value="Under ₹50,000 / mo">Under ₹50,000 / mo</option>
+                      <option value="₹50,000 - ₹2,00,000 / mo">₹50,000 - ₹2,00,000 / mo</option>
+                      <option value="₹2,00,000 - ₹5,00,000 / mo">₹2,00,000 - ₹5,00,000 / mo</option>
+                      <option value="₹5,00,000 - ₹15,00,000 / mo">₹5,00,000 - ₹15,00,000 / mo</option>
+                      <option value="₹15,00,000+ / mo">₹15,00,000+ / mo</option>
+                      <option value="Not running ads yet">Not running ads yet</option>
                     </select>
                   </div>
 

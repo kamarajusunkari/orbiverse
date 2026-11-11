@@ -8,7 +8,6 @@ import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
 import CaseStudiesSection from "@/components/CaseStudiesSection";
 import ProcessSection from "@/components/ProcessSection";
-import TestimonialsSection from "@/components/TestimonialsSection";
 import ToolsUsedSection from "@/components/ToolsUsedSection";
 import ServicesStackSection from "@/components/ServicesStackSection";
 import FAQAccordion from "@/components/FAQAccordion";
@@ -75,9 +74,6 @@ export default function Home() {
 
           {/* WHEN PEOPLE DO / DON'T WORK WITH US (INTERACTIVE TOGGLE SECTION) */}
           <WorkWithUsToggleSection />
-
-          {/* TESTIMONIALS SECTION (WHITE BG SPLIT SHOWCASE MATCHING IMAGE 2) */}
-          <TestimonialsSection />
 
           {/* FAQ ACCORDION */}
           <FAQAccordion />

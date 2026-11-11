@@ -68,7 +68,7 @@ const DO_PILLARS: PillarItem[] = [
     tag: "Server-Side CAPI",
     bullets: [
       "Meta Conversions API & GA4 first-party event tracking",
-      "Real-time CRM deals feed deterministic ad bidding",
+      "Real-time CRM deals feed measurable ad bidding",
     ],
     icon: Cpu,
   },
@@ -245,65 +245,52 @@ export default function WorkWithUsToggleSection() {
             ================================================================ */}
         <div className="flex flex-col lg:flex-row items-start lg:items-end justify-between gap-6 pb-10 sm:pb-12 border-b border-slate-200/80 dark:border-white/10 reveal-fade-up delay-100">
           
-          {/* Left: Strictly 2-Line Headline */}
+          {/* Left: Strictly 2-Line Headline & Toggle */}
           <div className="max-w-xl">
             <h2 className="text-2xl sm:text-3xl lg:text-[36px] xl:text-[40px] font-black tracking-tight text-slate-950 dark:text-white leading-[1.2]">
-              {/* Line 1 */}
-              <span className="block">When people</span>
-              
-              {/* Line 2 with inline switch and tight nowrap */}
-              <span className="inline-flex items-center flex-nowrap gap-2.5 sm:gap-3.5 mt-1 sm:mt-1.5 whitespace-nowrap">
-                {/* Active Dynamic Word */}
-                <span
-                  onClick={() => setIsWorkingWithUs(!isWorkingWithUs)}
-                  className={`transition-colors duration-300 font-black cursor-pointer select-none ${
-                    isWorkingWithUs
-                      ? "text-[#0066ff] dark:text-[#38bdf8]"
-                      : "text-rose-500 dark:text-rose-400"
-                  }`}
-                >
-                  {isWorkingWithUs ? "do" : "don't"}
-                </span>
-
-                {/* Sleek iOS-Style Compact Toggle Pill */}
-                <button
-                  type="button"
-                  role="switch"
-                  aria-checked={isWorkingWithUs}
-                  aria-label="Toggle comparison"
-                  onClick={() => setIsWorkingWithUs(!isWorkingWithUs)}
-                  className={`relative inline-flex items-center h-8 sm:h-8.5 w-16 sm:w-17 shrink-0 cursor-pointer rounded-full p-1 transition-colors duration-300 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0066ff] shadow-inner ${
-                    isWorkingWithUs
-                      ? "bg-[#0066ff] shadow-[0_0_14px_rgba(0,102,255,0.4)]"
-                      : "bg-slate-300 dark:bg-slate-700"
-                  }`}
-                >
-                  <span
-                    className={`pointer-events-none inline-flex items-center justify-center h-6 sm:h-6.5 w-6 sm:w-6.5 rounded-full bg-white shadow-md transition duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] transform ${
-                      isWorkingWithUs
-                        ? "translate-x-8 sm:translate-x-8.5"
-                        : "translate-x-0"
-                    }`}
-                  >
-                    {isWorkingWithUs ? (
-                      <Check className="w-3.5 h-3.5 text-[#0066ff] stroke-[3]" />
-                    ) : (
-                      <X className="w-3.5 h-3.5 text-slate-500 stroke-[3]" />
-                    )}
-                  </span>
-                </button>
-
-                {/* Remainder of line 2 */}
-                <span>work with us.</span>
-              </span>
+              What you can hold us to
             </h2>
+            <div className="flex items-center gap-3 mt-3">
+              <span className="text-xs sm:text-sm font-bold text-slate-700 dark:text-slate-300">
+                {isWorkingWithUs ? "Our Standards" : "Industry Drift"}
+              </span>
+              <button
+                type="button"
+                role="switch"
+                aria-checked={isWorkingWithUs}
+                aria-label="Toggle comparison"
+                onClick={() => setIsWorkingWithUs(!isWorkingWithUs)}
+                className={`relative inline-flex items-center h-7 sm:h-8 w-14 sm:w-16 shrink-0 cursor-pointer rounded-full p-1 transition-colors duration-300 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0066ff] shadow-inner ${
+                  isWorkingWithUs
+                    ? "bg-[#0066ff] shadow-[0_0_14px_rgba(0,102,255,0.4)]"
+                    : "bg-slate-300 dark:bg-slate-700"
+                }`}
+              >
+                <span
+                  className={`pointer-events-none inline-flex items-center justify-center h-5 sm:h-6 w-5 sm:w-6 rounded-full bg-white shadow-md transition duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] transform ${
+                    isWorkingWithUs
+                      ? "translate-x-7 sm:translate-x-8"
+                      : "translate-x-0"
+                  }`}
+                >
+                  {isWorkingWithUs ? (
+                    <Check className="w-3 h-3 text-[#0066ff] stroke-[3]" />
+                  ) : (
+                    <X className="w-3 h-3 text-slate-500 stroke-[3]" />
+                  )}
+                </span>
+              </button>
+              <span className="text-xs text-slate-400">
+                (Click to compare)
+              </span>
+            </div>
           </div>
 
           {/* Right: Subtext Description & Pill CTA Button */}
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5 lg:gap-6">
             <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-medium leading-relaxed max-w-sm transition-all duration-300">
               {isWorkingWithUs
-                ? "Expect deterministic solutions, clear reporting, and compounding revenue tailored to your business."
+                ? "Expect measurable solutions, clear reporting, and compounding revenue tailored to your business."
                 : "Expect fragmented reports, hidden agency markups, junior handoffs, and stagnant blended ROAS."}
             </p>
 

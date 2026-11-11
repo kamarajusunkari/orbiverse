@@ -27,7 +27,7 @@ export const COMPARISON_ROWS: ComparisonRow[] = [
     id: "attribution",
     badge: "ATTRIBUTION",
     drift: "Blind guesswork — every platform claims credit for the exact same transaction.",
-    orbit: "Deterministic server-side Conversions API & CRM pipeline revenue sync.",
+    orbit: "Measurable server-side Conversions API & CRM pipeline revenue sync.",
   },
   {
     id: "budget",

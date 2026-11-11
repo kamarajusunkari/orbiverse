@@ -2,6 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { openCtaModal } from "@/components/CtaModal";
 
@@ -90,7 +91,7 @@ export default function Footer() {
                 Explore
               </span>
               <a href="#case-studies" className="text-sm text-slate-600 hover:text-[#101b96] transition-colors">
-                Case Studies
+                Our Work
               </a>
               <button
                 type="button"
@@ -99,9 +100,6 @@ export default function Footer() {
               >
                 Free Drift Audit
               </button>
-              <a href="#testimonials" className="text-sm text-slate-600 hover:text-[#101b96] transition-colors">
-                Client Reviews
-              </a>
               <a href="#faq" className="text-sm text-slate-600 hover:text-[#101b96] transition-colors">
                 FAQ
               </a>
@@ -128,7 +126,7 @@ export default function Footer() {
                 CRO &amp; Funnels
               </a>
               <a href="#services" className="text-sm text-slate-600 hover:text-[#101b96] transition-colors">
-                Deterministic Attribution
+                Measurable Attribution
               </a>
             </div>
 
@@ -182,14 +180,14 @@ export default function Footer() {
 
         {/* Divider & Metadata Bar */}
         <div className="border-t border-slate-200/80 pt-6 pb-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
-          <p>&copy; 2026 Orbiverse Inc. All rights reserved.</p>
+          <p>&copy; 2026 Orbiverse Media &amp; Strategy LLP. All rights reserved.</p>
           <div className="flex items-center gap-6">
-            <span className="hover:text-slate-900 transition-colors cursor-pointer">
+            <Link href="/privacy-policy" className="hover:text-slate-900 transition-colors">
               Privacy Policy
-            </span>
-            <span className="hover:text-slate-900 transition-colors cursor-pointer">
+            </Link>
+            <Link href="/terms-of-service" className="hover:text-slate-900 transition-colors">
               Terms of Service
-            </span>
+            </Link>
             <span className="hidden md:inline text-slate-300">&middot;</span>
             <span className="hidden md:inline font-medium">Architected for High-Velocity Scale</span>
           </div>

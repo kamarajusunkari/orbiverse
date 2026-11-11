@@ -15,32 +15,32 @@ export interface TimelineMilestone {
 
 const MILESTONES: TimelineMilestone[] = [
   {
-    id: "q1",
-    quarter: "Q1",
+    id: "step1",
+    quarter: "Step 01",
     title: "Audit & Align",
     desc: "Review brand, website, ads and tracking to identify gaps.",
     calloutHeadline: "Phase 01",
     calloutSub: "Auditing brand, technical tracking & digital infrastructure.",
   },
   {
-    id: "q2",
-    quarter: "Q2",
+    id: "step2",
+    quarter: "Step 02",
     title: "Plan & Strategize",
     desc: "Define the primary growth goal and build a focused strategy.",
     calloutHeadline: "Phase 02",
     calloutSub: "Defining single primary KPI and engineering conversion pathways.",
   },
   {
-    id: "q3",
-    quarter: "Q3",
+    id: "step3",
+    quarter: "Step 03",
     title: "Execute in Orbit",
     desc: "Align SEO, paid ads, social media, content and website towards one goal.",
-    calloutHeadline: "We are Here",
+    calloutHeadline: "Phase 03",
     calloutSub: "Where strategy, execution and data come together to drive real results.",
   },
   {
-    id: "q4",
-    quarter: "Q4",
+    id: "step4",
+    quarter: "Step 04",
     title: "Optimize & Scale",
     desc: "Measure performance, cut wasted spend and scale winning campaigns.",
     calloutHeadline: "Phase 04",
@@ -197,9 +197,6 @@ export default function ProcessSection() {
                     {/* Active one has callout text at top */}
                     {isHighlighted ? (
                       <div className="w-full text-left mb-auto">
-                        <span className="text-[11px] font-mono uppercase tracking-widest text-blue-200 block mb-1 font-semibold">
-                          Future Roadmap
-                        </span>
                         <h3 className="font-heading font-black text-2xl sm:text-3xl text-white tracking-tight leading-tight">
                           {milestone.calloutHeadline}
                         </h3>

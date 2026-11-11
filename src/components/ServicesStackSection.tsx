@@ -21,7 +21,7 @@ export const GROWTH_SERVICES: ServicePreviewItem[] = [
     number: "01",
     title: "Performance Marketing & Paid Ads",
     shortTitle: "Performance Marketing",
-    desc: "We construct data-driven ad campaigns across Google Search, Meta (Instagram & Facebook), YouTube, and LinkedIn. Every dollar of ad spend is measured on net pipeline revenue.",
+    desc: "We construct data-driven ad campaigns across Google Search, Meta (Instagram & Facebook), YouTube, and LinkedIn. Every rupee of ad spend is measured on net pipeline revenue.",
     image: "/services/e5506b99-32d2-4538-bcf5-c1cec3ff9629.webp",
     ctaHref: "/drift-audit",
     categoryTag: "PAID MEDIA & PPC",
@@ -67,7 +67,7 @@ export const GROWTH_SERVICES: ServicePreviewItem[] = [
 // Alias for backwards compatibility
 export const FLAGSHIP_SERVICES = GROWTH_SERVICES;
 
-// 2. Group 2: Development & Design Services (06 - 10)
+// 2. Group 2: Development & Design Services (06 - 09)
 export const DEV_DESIGN_SERVICES: ServicePreviewItem[] = [
   {
     number: "06",
@@ -89,12 +89,12 @@ export const DEV_DESIGN_SERVICES: ServicePreviewItem[] = [
   },
   {
     number: "08",
-    title: "Mobile Applications (iOS & Android)",
-    shortTitle: "Mobile App Development",
-    desc: "Native and cross-platform mobile apps engineered with React Native and Flutter. 60 FPS fluid gesture animations, offline-first data sync, biometric security, and frictionless app store deployments.",
-    image: "/services/mobile.webp",
+    title: "AEO & GEO – AI Search Visibility",
+    shortTitle: "AEO & GEO Search",
+    desc: "Dominate Answer Engine Optimization (AEO) and Generative Engine Optimization (GEO). We optimize entity schemas, brand knowledge graphs, and authoritative citations across OpenAI Search, Perplexity, and Google AI Overviews.",
+    image: "/services/seo.webp",
     ctaHref: "/drift-audit",
-    categoryTag: "MOBILE APPS",
+    categoryTag: "AI SEARCH & GEO",
   },
   {
     number: "09",
@@ -104,15 +104,6 @@ export const DEV_DESIGN_SERVICES: ServicePreviewItem[] = [
     image: "/services/ecommere.webp",
     ctaHref: "/drift-audit",
     categoryTag: "HEADLESS COMMERCE",
-  },
-  {
-    number: "10",
-    title: "Enterprise Cloud, DevOps & Microservices",
-    shortTitle: "Cloud & DevOps",
-    desc: "Multi-region AWS and Google Cloud infrastructure, Docker container orchestration, automated GitHub Actions CI/CD pipelines, and hardened GraphQL/REST APIs ensuring 99.99% uptime.",
-    image: "/services/devops.webp",
-    ctaHref: "/drift-audit",
-    categoryTag: "CLOUD & DEVOPS",
   },
 ];
 

@@ -202,7 +202,7 @@ export default function AboutSection() {
                       : "translate-y-[115%] opacity-0"
                   }`}
                 >
-                  Digital Expertise You
+                  Digital Expertise You{" "}
                 </span>
               </span>
               <span className="block overflow-hidden pb-1">
@@ -226,8 +226,8 @@ export default function AboutSection() {
                 hasEntered ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
               }`}
             >
-              We empower ambitious businesses, healthcare clinics, e-commerce brands,
-              and financial institutions with ROI-focused digital marketing campaigns,
+              We empower ambitious businesses across D2C &amp; e-commerce, education &amp; franchising,
+              real estate, lead generation, and political campaigns with ROI-focused digital marketing campaigns,
               high-converting Google &amp; Meta ads, search engine optimization (SEO),
               and performance marketing strategies engineered for rapid revenue growth.
             </p>
@@ -266,14 +266,14 @@ export default function AboutSection() {
         </div>
 
         {/* ==================================================================== */}
-        {/* 2. SHOWCASE CARDS (MOBILE: 1 SINGLE IMAGE + 2x2 GRID OF 4 CARDS)     */}
+        {/* 2. SHOWCASE CARDS (BALANCED 4-CARD MARKETING SUITE)                  */}
         {/* ==================================================================== */}
-        <div className="grid grid-cols-2 lg:grid-cols-5 gap-3.5 sm:gap-5 items-stretch">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-5 items-stretch">
           
-          {/* CARD 1: Graphic Illustration (about us.webp) - Single full width on mobile */}
+          {/* CARD 1: Graphic Illustration (about us.webp) */}
           <div
             ref={card1Ref}
-            className={`col-span-2 lg:col-span-1 relative rounded-2xl sm:rounded-3xl overflow-hidden border border-neutral-200/90 dark:border-neutral-800 bg-[#f4f4f6] dark:bg-neutral-900 min-h-[240px] xs:min-h-[270px] sm:min-h-[300px] shadow-xs hover:shadow-xl hover:-translate-y-2 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group cursor-pointer ${
+            className={`col-span-2 lg:col-span-1 relative rounded-2xl sm:rounded-3xl overflow-hidden border border-neutral-200/90 dark:border-neutral-800 bg-[#f4f4f6] dark:bg-neutral-900 min-h-[220px] xs:min-h-[250px] sm:min-h-[290px] shadow-xs hover:shadow-xl hover:-translate-y-2 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group cursor-pointer ${
               card1Entered
                 ? "opacity-100 translate-y-0 scale-100"
                 : "opacity-0 translate-y-16 sm:translate-y-20 scale-[0.95]"
@@ -285,17 +285,17 @@ export default function AboutSection() {
               alt="About Orbiverse team"
               fill
               className="object-cover object-center group-hover:scale-108 transition-transform duration-700 ease-out"
-              sizes="(max-width: 1024px) 100vw, 20vw"
+              sizes="(max-width: 1024px) 100vw, 25vw"
               priority
             />
             {/* Ambient light sheen sweep on hover */}
             <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/25 dark:via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out pointer-events-none" />
           </div>
 
-          {/* CARD 2: 10+ Years Experience (Pastel Ice-Blue with Count-Up Counter) - 2x2 Grid Col 1 */}
+          {/* CARD 2: 10+ Years Experience */}
           <div
             ref={card2Ref}
-            className={`col-span-1 rounded-2xl sm:rounded-3xl p-4 sm:p-7 flex flex-col justify-between min-h-[190px] xs:min-h-[220px] sm:min-h-[300px] bg-[#f0f6ff] dark:bg-[#0c1829] border border-[#dbeafe] dark:border-[#1e3a5f] shadow-xs hover:shadow-xl hover:-translate-y-2 hover:border-blue-300 dark:hover:border-blue-500 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group cursor-pointer ${
+            className={`col-span-1 rounded-2xl sm:rounded-3xl p-4 sm:p-7 flex flex-col justify-between min-h-[190px] xs:min-h-[220px] sm:min-h-[290px] bg-[#f0f6ff] dark:bg-[#0c1829] border border-[#dbeafe] dark:border-[#1e3a5f] shadow-xs hover:shadow-xl hover:-translate-y-2 hover:border-blue-300 dark:hover:border-blue-500 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group cursor-pointer ${
               card2Entered
                 ? "opacity-100 translate-y-0 scale-100"
                 : "opacity-0 translate-y-16 sm:translate-y-20 scale-[0.95]"
@@ -304,7 +304,7 @@ export default function AboutSection() {
           >
             <div>
               <div className="text-3xl xs:text-4xl sm:text-5xl font-black text-neutral-900 dark:text-white tracking-tight group-hover:text-blue-600 dark:group-hover:text-blue-400 group-hover:scale-105 inline-block origin-left transition-all duration-300">
-                <AnimatedCounter target={10} start={card2Entered} />
+                <AnimatedCounter target={10} start={card2Entered || hasEntered} />
               </div>
               <div className="text-xs xs:text-sm sm:text-[15px] font-bold text-[#2563eb] dark:text-[#60a5fa] mt-1 sm:mt-1.5 group-hover:tracking-wide transition-all duration-300">
                 Years Experience
@@ -312,75 +312,45 @@ export default function AboutSection() {
             </div>
 
             <p className="text-[11px] xs:text-xs sm:text-[13px] text-neutral-600 dark:text-neutral-400 leading-snug sm:leading-relaxed mt-3 sm:mt-6">
-              Delivering high-performance IT solutions and scaling operations.
+              Executing high-ROI performance marketing and revenue scale.
             </p>
           </div>
 
-          {/* CARD 3: 150+ Happy Clients (Crisp White Card with Count-Up Counter) - 2x2 Grid Col 2 */}
+          {/* CARD 3: 25+ Growth Specialists */}
           <div
-            ref={card3Ref}
-            className={`col-span-1 rounded-2xl sm:rounded-3xl p-4 sm:p-7 flex flex-col justify-between min-h-[190px] xs:min-h-[220px] sm:min-h-[300px] bg-white dark:bg-[#121124] border border-neutral-200/90 dark:border-neutral-800 shadow-xs hover:shadow-xl hover:-translate-y-2 hover:border-neutral-300 dark:hover:border-neutral-700 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group cursor-pointer ${
-              card3Entered
+            ref={card4Ref}
+            className={`col-span-1 rounded-2xl sm:rounded-3xl p-4 sm:p-7 flex flex-col justify-between min-h-[190px] xs:min-h-[220px] sm:min-h-[290px] bg-[#fefce8] dark:bg-[#232011] border border-[#fef08a]/70 dark:border-[#713f12]/50 shadow-xs hover:shadow-xl hover:-translate-y-2 hover:border-amber-300 dark:hover:border-amber-600 hover:bg-[#fef9c3] dark:hover:bg-[#2b2413] transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group cursor-pointer ${
+              card4Entered
                 ? "opacity-100 translate-y-0 scale-100"
                 : "opacity-0 translate-y-16 sm:translate-y-20 scale-[0.95]"
             }`}
             style={{ transitionDelay: !isMobile && hasEntered ? "370ms" : "0ms" }}
           >
-            <div className="flex items-center justify-between w-full">
-              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-[#fef08a] dark:bg-[#ca8a04]/40 flex items-center justify-center text-lg sm:text-xl shadow-xs group-hover:rotate-12 group-hover:scale-115 group-hover:shadow-md transition-all duration-300">
-                🙂
-              </div>
-              <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5 text-[#2563eb] dark:text-[#60a5fa] group-hover:translate-x-1.5 group-hover:-translate-y-1.5 group-hover:text-[#1d4ed8] dark:group-hover:text-blue-400 transition-all duration-300" />
-            </div>
-
-            <div className="mt-3 sm:mt-6">
-              <div className="text-xs xs:text-sm sm:text-[13px] font-bold text-[#2563eb] dark:text-[#60a5fa] group-hover:tracking-wide transition-all duration-300">
-                Happy Clients
-              </div>
-              <div className="text-3xl xs:text-4xl sm:text-5xl font-black text-neutral-900 dark:text-white tracking-tight mt-0.5 sm:mt-1 group-hover:scale-105 inline-block origin-left transition-transform duration-300">
-                <AnimatedCounter target={150} start={card3Entered} />
-              </div>
-              <p className="text-[11px] xs:text-xs text-neutral-500 dark:text-neutral-400 mt-1 sm:mt-2 leading-snug sm:leading-relaxed">
-                Trusted growth partners.
-              </p>
-            </div>
-          </div>
-
-          {/* CARD 4: 50+ Orbiverse Team (Pastel Warm Yellow with Count-Up Counter) - 2x2 Grid Col 1 */}
-          <div
-            ref={card4Ref}
-            className={`col-span-1 rounded-2xl sm:rounded-3xl p-4 sm:p-7 flex flex-col justify-between min-h-[190px] xs:min-h-[220px] sm:min-h-[300px] bg-[#fefce8] dark:bg-[#232011] border border-[#fef08a]/70 dark:border-[#713f12]/50 shadow-xs hover:shadow-xl hover:-translate-y-2 hover:border-amber-300 dark:hover:border-amber-600 hover:bg-[#fef9c3] dark:hover:bg-[#2b2413] transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group cursor-pointer ${
-              card4Entered
-                ? "opacity-100 translate-y-0 scale-100"
-                : "opacity-0 translate-y-16 sm:translate-y-20 scale-[0.95]"
-            }`}
-            style={{ transitionDelay: !isMobile && hasEntered ? "480ms" : "0ms" }}
-          >
             <div>
               <div className="text-3xl xs:text-4xl sm:text-5xl font-black text-neutral-900 dark:text-white tracking-tight group-hover:text-amber-600 dark:group-hover:text-amber-400 group-hover:scale-105 inline-block origin-left transition-all duration-300">
-                <AnimatedCounter target={50} start={card4Entered} />
+                <AnimatedCounter target={25} start={card4Entered || hasEntered} />
               </div>
               <div className="text-xs xs:text-sm sm:text-[15px] font-bold text-[#2563eb] dark:text-[#60a5fa] mt-1 sm:mt-1.5 group-hover:tracking-wide transition-all duration-300">
-                Orbiverse Team
+                Growth Specialists
               </div>
             </div>
 
             <p className="text-[11px] xs:text-xs sm:text-[13px] text-neutral-600 dark:text-neutral-400 leading-snug sm:leading-relaxed mt-3 sm:mt-6">
-              Software architects &amp; AI engineers.
+              Performance media buyers, CRO specialists &amp; growth engineers.
             </p>
           </div>
 
-          {/* CARD 5: Get Started With Us (Rich Royal Blue Card with profiles.webp) - 2x2 Grid Col 2 */}
+          {/* CARD 4: Get Started With Us */}
           <button
             ref={card5Ref}
             type="button"
             onClick={() => openCtaModal("AboutCard5")}
-            className={`col-span-1 rounded-2xl sm:rounded-3xl p-4 sm:p-7 flex flex-col justify-between text-left min-h-[190px] xs:min-h-[220px] sm:min-h-[300px] bg-[#1e40af] border border-[#1d4ed8] shadow-sm hover:shadow-[0_20px_45px_rgba(30,64,175,0.45)] hover:-translate-y-2 hover:border-blue-400 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] text-white group cursor-pointer ${
+            className={`col-span-2 lg:col-span-1 rounded-2xl sm:rounded-3xl p-4 sm:p-7 flex flex-col justify-between text-left min-h-[190px] xs:min-h-[220px] sm:min-h-[290px] bg-[#1e40af] border border-[#1d4ed8] shadow-sm hover:shadow-[0_20px_45px_rgba(30,64,175,0.45)] hover:-translate-y-2 hover:border-blue-400 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] text-white group cursor-pointer ${
               card5Entered
                 ? "opacity-100 translate-y-0 scale-100"
                 : "opacity-0 translate-y-16 sm:translate-y-20 scale-[0.95]"
             }`}
-            style={{ transitionDelay: !isMobile && hasEntered ? "590ms" : "0ms" }}
+            style={{ transitionDelay: !isMobile && hasEntered ? "480ms" : "0ms" }}
           >
             {/* Team Profiles Cluster (profiles.webp) */}
             <div className="relative h-9 sm:h-12 w-28 sm:w-36 group-hover:scale-105 origin-left transition-transform duration-300">
